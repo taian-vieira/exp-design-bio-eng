@@ -50,7 +50,7 @@ book:
         - chapters/35_two_groups.qmd
         - chapters/36_anova.qmd
         - chapters/37_linear_regression.qmd
-    - part: "Part 3"
+    - part: "Part 4: Bibliography"
       chapters:
         - chapters/references.qmd
   appendices:
