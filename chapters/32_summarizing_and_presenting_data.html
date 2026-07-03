@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Summarizing and Presenting Data – Experimental Design in Biomedical Engineering</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/33_population_sample_data_distribution.html" rel="next">
+<link href="../chapters/31_understanding_study_designs.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2c8d71db4d056fff4a87fcadc2b2ddaf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
+
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+<link href="../site_libs/dt-ext-fixedheader-1.13.6/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+
+<script src="../site_libs/dt-ext-fixedheader-1.13.6/js/dataTables.fixedHeader.min.js"></script>
+
+<script type="text/javascript">
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../include/cssfiles/bootstrap.css">
+<link rel="stylesheet" href="../include/cssfiles/webex.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/31_understanding_study_designs.html">Part 3: The Theory Behind Experimental Design</a></li><li class="breadcrumb-item"><a href="../chapters/32_summarizing_and_presenting_data.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Experimental Design in Biomedical Engineering</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/0_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Experimental Design</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 1: Smart Posture</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11_physiology_of_posture_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12_stabilometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13_phyphox_posture_experiment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">PhyPhox SmartPosture Tutorial</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 2: R Tutorial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21_example_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Example Data: Postural Sways</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22_getting_started_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/23_basics_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Basics with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/24_plotting_and_processing_raw_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/25_automating_raw_data_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 3: The Theory Behind Experimental Design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/31_understanding_study_designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/32_summarizing_and_presenting_data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/33_population_sample_data_distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Population, Sample, and Data Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/34_one_group.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inference, Error, Power, and Sample Size - One Group</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/35_two_groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference, Power, and Sample Size - Two Group</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/36_anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Balanced and Unbalanced Designs over Two Groups</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/37_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Predicting Outcomes with Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/a1_ethical_considerations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#raw-and-processed-data" id="toc-raw-and-processed-data" class="nav-link active" data-scroll-target="#raw-and-processed-data"><span class="header-section-number">10.1</span> Raw and Processed Data</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">10.2</span> Descriptive Statistics</a>
+  <ul>
+  <li><a href="#sec-nominal" id="toc-sec-nominal" class="nav-link" data-scroll-target="#sec-nominal">Nominal Scale</a></li>
+  <li><a href="#sec-ordinal" id="toc-sec-ordinal" class="nav-link" data-scroll-target="#sec-ordinal">Ordinal Scale</a></li>
+  <li><a href="#interval-scale" id="toc-interval-scale" class="nav-link" data-scroll-target="#interval-scale">Interval Scale</a></li>
+  <li><a href="#ratio-scale" id="toc-ratio-scale" class="nav-link" data-scroll-target="#ratio-scale">Ratio Scale</a></li>
+  </ul></li>
+  <li><a href="#summarizing-data-on-numerical-scales" id="toc-summarizing-data-on-numerical-scales" class="nav-link" data-scroll-target="#summarizing-data-on-numerical-scales"><span class="header-section-number">10.3</span> Summarizing Data on Numerical Scales</a></li>
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency"><span class="header-section-number">10.4</span> Measures of Central Tendency</a>
+  <ul>
+  <li><a href="#sec-mean" id="toc-sec-mean" class="nav-link" data-scroll-target="#sec-mean">The Mean</a></li>
+  <li><a href="#sec-median" id="toc-sec-median" class="nav-link" data-scroll-target="#sec-median">The Median</a></li>
+  <li><a href="#sec-mode" id="toc-sec-mode" class="nav-link" data-scroll-target="#sec-mode">The Mode</a></li>
+  <li><a href="#their-relationship" id="toc-their-relationship" class="nav-link" data-scroll-target="#their-relationship">Their Relationship</a></li>
+  </ul></li>
+  <li><a href="#sec-dispersion-measures" id="toc-sec-dispersion-measures" class="nav-link" data-scroll-target="#sec-dispersion-measures"><span class="header-section-number">10.5</span> Measures of Dispersion</a>
+  <ul>
+  <li><a href="#sec-range" id="toc-sec-range" class="nav-link" data-scroll-target="#sec-range">The Range</a></li>
+  <li><a href="#sec-std" id="toc-sec-std" class="nav-link" data-scroll-target="#sec-std">The Standard Deviation</a></li>
+  <li><a href="#the-coefficient-of-variation" id="toc-the-coefficient-of-variation" class="nav-link" data-scroll-target="#the-coefficient-of-variation">The Coefficient of Variation</a></li>
+  <li><a href="#sec-iqr" id="toc-sec-iqr" class="nav-link" data-scroll-target="#sec-iqr">The InterQuartile Range</a></li>
+  </ul></li>
+  <li><a href="#which-measures-to-use" id="toc-which-measures-to-use" class="nav-link" data-scroll-target="#which-measures-to-use"><span class="header-section-number">10.6</span> Which Measures to Use?</a></li>
+  <li><a href="#displaying-numerical-data" id="toc-displaying-numerical-data" class="nav-link" data-scroll-target="#displaying-numerical-data"><span class="header-section-number">10.7</span> Displaying Numerical Data</a>
+  <ul>
+  <li><a href="#stem-and-leaf-plot" id="toc-stem-and-leaf-plot" class="nav-link" data-scroll-target="#stem-and-leaf-plot">Stem and Leaf Plot</a></li>
+  <li><a href="#histograms" id="toc-histograms" class="nav-link" data-scroll-target="#histograms">Histograms</a></li>
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot">Box plot</a></li>
+  <li><a href="#sec-errorplot" id="toc-sec-errorplot" class="nav-link" data-scroll-target="#sec-errorplot">Error Plot</a></li>
+  </ul></li>
+  <li><a href="#summarizing-nominal-and-ordinal-data" id="toc-summarizing-nominal-and-ordinal-data" class="nav-link" data-scroll-target="#summarizing-nominal-and-ordinal-data"><span class="header-section-number">10.8</span> Summarizing Nominal and Ordinal Data</a>
+  <ul>
+  <li><a href="#proportions" id="toc-proportions" class="nav-link" data-scroll-target="#proportions">Proportions</a></li>
+  <li><a href="#rates" id="toc-rates" class="nav-link" data-scroll-target="#rates">Rates</a></li>
+  <li><a href="#prevalence-vs-incidence" id="toc-prevalence-vs-incidence" class="nav-link" data-scroll-target="#prevalence-vs-incidence">Prevalence vs Incidence</a></li>
+  </ul></li>
+  <li><a href="#displaying-nominal-and-ordinal-data" id="toc-displaying-nominal-and-ordinal-data" class="nav-link" data-scroll-target="#displaying-nominal-and-ordinal-data"><span class="header-section-number">10.9</span> Displaying Nominal and Ordinal Data</a></li>
+  <li><a href="#sec-scatterplot" id="toc-sec-scatterplot" class="nav-link" data-scroll-target="#sec-scatterplot"><span class="header-section-number">10.10</span> Relationship Between Numerical Data</a>
+  <ul>
+  <li><a href="#correlation-coefficients" id="toc-correlation-coefficients" class="nav-link" data-scroll-target="#correlation-coefficients">Correlation Coefficients</a></li>
+  <li><a href="#sec-pearson-r" id="toc-sec-pearson-r" class="nav-link" data-scroll-target="#sec-pearson-r">The Pearson Correlation Coefficient</a></li>
+  <li><a href="#sec-spearman-rho" id="toc-sec-spearman-rho" class="nav-link" data-scroll-target="#sec-spearman-rho">The Spearman Correlation Coefficient</a></li>
+  </ul></li>
+  <li><a href="#mistakes-when-presenting-data" id="toc-mistakes-when-presenting-data" class="nav-link" data-scroll-target="#mistakes-when-presenting-data"><span class="header-section-number">10.11</span> Mistakes When Presenting Data</a>
+  <ul>
+  <li><a href="#inappropriate-axes-scaling" id="toc-inappropriate-axes-scaling" class="nav-link" data-scroll-target="#inappropriate-axes-scaling">Inappropriate Axes Scaling</a></li>
+  <li><a href="#compromised-readability" id="toc-compromised-readability" class="nav-link" data-scroll-target="#compromised-readability">Compromised Readability</a></li>
+  <li><a href="#missing-labels-and-units-of-measurement" id="toc-missing-labels-and-units-of-measurement" class="nav-link" data-scroll-target="#missing-labels-and-units-of-measurement">Missing Labels and Units of Measurement</a></li>
+  <li><a href="#inappropriate-unit-of-measurement" id="toc-inappropriate-unit-of-measurement" class="nav-link" data-scroll-target="#inappropriate-unit-of-measurement">Inappropriate Unit of Measurement</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/31_understanding_study_designs.html">Part 3: The Theory Behind Experimental Design</a></li><li class="breadcrumb-item"><a href="../chapters/32_summarizing_and_presenting_data.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ch32" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Biomedical Engineering</div>
+    <div class="quarto-category">Applied Statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Regardless of the <strong>study design</strong>, all studies involve data collection. <em>Ideally, these data come from a well-planned experiment motivated by a clear and relevant objective</em>. The <a href="31_understanding_study_designs.html">previous chapter</a> discusses the different study designs, while the course <a href="0_introduction.html">Introduction</a> addresses the steps necessary for conducting a well-designed study. By following these steps, the process of analyzing data is greatly simplified. For example, if the study is conceived upon a well-defined hypothesis, the processing pipelines can be established beforehand—we know what and how to process even before collecting data.</p>
+<p>In some cases, however, data collection begins without a clearly stated hypothesis. In these situations, the analysis becomes exploratory, with the researcher examining the data to identify potentially useful patterns. This practice may be helpful when the intent is to learn a new technique or to get acquainted with a given instrument. For example, if your master dissertation or doctoral thesis requires the collection of surface electromyograms and you have no experience with the instruments available for that, it would seem reasonable to collect data for the simple purpose of getting familiar with the technique. <em>However, when the goal is to conduct a study, it is difficult to overstate the importance of</em> <strong><em>planning all procedural steps</em></strong> <em>before data collection begins</em>. Even if the study is exploratory in nature, data collection and analysis should follow a well-structured plan.</p>
+<p>Regardless of the context motivating data collection, data analysis generally serves two main purposes: to characterize the distribution of observed values and to test a specific hypothesis.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="This chapter...">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>This chapter…
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>… deals with the characterization of data, discussing statistics for summarizing the data and graphical techniques for representing the data.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+<section id="raw-and-processed-data" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="raw-and-processed-data"><span class="header-section-number">10.1</span> Raw and Processed Data</h2>
+<p>The term <strong>data collection</strong> refers to <strong>data</strong> in a broad sense. For instance, data may correspond to the electrocardiogram (<em>raw data</em>) collected from a subject as shown in <a href="#fig-3-2-1" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>, or the beat-by-beat heart rate (<em>processed data</em>) computed from this same signal. Except for the [R Tutorial Chapter][Example Data: Postural Sways], where raw smartphone data is used to process postural sway data, <em>the concepts discussed in this course apply to processed data</em>. For clarity, below are two key terms used in the context of experimental design:</p>
+<ul>
+<li><strong>Observation</strong>: a single data point, or a set of measurements, collected from one individual, often a participant in a biomedical study.</li>
+<li><strong>Variable</strong>: a characteristic measured in the study; each observation represents one recorded value of a variable.</li>
+</ul>
+<div id="fig-3-2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-1_ecg.jpg" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: Example of electrocardiogram from a healthy subject. Heart rate on a beat-by-beat basis can be computed from the time elapsed between consecutive R waves (RR intervals), identifed based on a given threshold.
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">10.2</span> Descriptive Statistics</h2>
+<p>Typically, many are the individuals tested and many are the variables measured in a study, yielding a high number of observations. <em>The term <strong>descriptive statistics</strong> is used interchangeably to indicate either the method or the quantity used to summarize observations into a clear and meaningful way</em>.</p>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><img src="..\include/images/part_3/ch_2/3-2-2_anthropometrics.png" class="img-fluid" style="width:100.0%"></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:40%;">
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>Can you tell how many variables are illustrated in this figure?</em></p>
+<div id="webex-3a68c01f4989fd37a63ff27f7146f25d" class="webex-radiogroup" data-answer="aFEaCE8BHVZp">
+<label><input type="radio" autocomplete="off" name="3a68c01f4989fd37a63ff27f7146f25d"><span>three</span></label><label><input type="radio" autocomplete="off" name="3a68c01f4989fd37a63ff27f7146f25d"><span>four</span></label><label><input type="radio" autocomplete="off" name="3a68c01f4989fd37a63ff27f7146f25d"><span>five</span></label><label><input type="radio" autocomplete="off" name="3a68c01f4989fd37a63ff27f7146f25d"><span>six</span></label>
+</div>
+</div>
+<div class="webex-solution">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><em>Which descriptive statistic to use for summarizing and presenting the data depends on the scale with which variables are measured</em>. In the figure above, four numerical variables are shown—body height, and chest, waist, and hip circumferences. Sex is another, non-numeric variable. While the mean value can be computed for body height values measured from a number of subjects, for example, no mean value can be computed for sex. Sex can be counted though (e.g.&nbsp;the number of female subjects taller than 180 cm).</p>
+<p>Based on the nature of the variable to be measured, <em>there are four <strong>scales of measurement</strong></em>.</p>
+<p><br>
+</p>
+<section id="sec-nominal" class="level3">
+<h3 class="anchored" data-anchor-id="sec-nominal">Nominal Scale</h3>
+<p><em>Variables measured on a nominal scale qualify the experimental unit under study</em>. Emotions (happy, sad), the colors a person sees (red, green), and anatomical planes (sagittal, frontal) are examples of nominal variables.</p>
+<p>Nominal variables may be dichotomous (or binary), assuming either of two possible values (e.g.&nbsp;absence or presence of a clinical condition).</p>
+<p>A nominal variable may also be used to qualify a category of persons (or things), instead of a single individual. For example, we may define <em>team sports</em> and <em>individual sports</em>. Rugby, basketball, and volleyball fall into the team sports category, while swimming, archery, and weightlifting are examples of individual sports. What about rowing? And tennis?</p>
+<p><br>
+</p>
+</section>
+<section id="sec-ordinal" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ordinal">Ordinal Scale</h3>
+<p>Unlike nominal variables, <em>ordinal variables can be ordered</em>. Ordering is possible because a hierarchy exists between values of a variable measured on an ordinal scale—that is, values of an ordinal variable can be ranked in a meaningful order, determining importance, size, severity of a disease, or education level, for example.</p>
+<p>Similarly to variables measured on a nominal scale, standard arithmetic operations do not apply to variables measured on an ordinal scale.</p>
+<p>Many are the examples of ordinal variables in health science, like the:</p>
+<ul>
+<li><strong>A</strong>ppearance (skin color), <strong>P</strong>ulse (heart rate), <strong>G</strong>rimace (reflex activity), <strong>R</strong>espiration (APGAR) score for assessing the health of a newborn.</li>
+<li>Stages of rheumatoid arthritis, ranging from 1 (less severe), with mild pain and tissue edema, to 4 (most severe), with loss of mobility and bony fusion.</li>
+<li><strong>I</strong>nternational <strong>P</strong>hysical <strong>A</strong>ctivity <strong>Q</strong>uestionnaire, which may be adminstered in a short or long format to assess how physically active a person is.</li>
+<li>McGill Pain Questionnaire, relying on sensory, affective, and evaluative components to assess the intensity of experienced pain.</li>
+</ul>
+<p>Even though values of an ordinal variable can be ranked, the difference between ranks is not consistent or measurable. For example, the difference between the first and second place is not comparable to that between the second and third place. Likewise, the gap between <em>strongly motivated</em> and <em>motivated</em> is not comparable to that between <em>demotivated</em> and <em>strongly demotivated</em>.</p>
+<p><br>
+</p>
+</section>
+<section id="interval-scale" class="level3">
+<h3 class="anchored" data-anchor-id="interval-scale">Interval Scale</h3>
+<p>Variables measured on an interval scale have the same properties as ordinal variables. The main distinction between both is that variables measured on an interval scale are numerical, with a unit of measurement, and the difference between any pairs of values is meaningful.</p>
+<p>Examples are dates, time of day, <strong>I</strong>ntelligence <strong>Q</strong>uotient (IQ) score, and location in Cartesian space. The difference between 3:00 PM and 2:00 PM, which is one hour, is consistent with the difference between 10:00 AM and 9:00 AM. That is, the interval between hours are equal. A difference of 20 points in the IQ score, from 70 to 90, indicates the same cognitive distance for a 20-point difference measured from 90 to 110. However, it is not possible to say that 10:00 AM is twice 5:00 AM, or that an IQ score of 90 is three times an IQ score of 30—ratios are not meaningful.</p>
+<p><br>
+</p>
+</section>
+<section id="ratio-scale" class="level3">
+<h3 class="anchored" data-anchor-id="ratio-scale">Ratio Scale</h3>
+<p>This is the most precise and quantitative scale of measurement. In addition to being added and subtracted, ratio-scale variables may be multiplied and divided.</p>
+<p>There is a <strong>true zero</strong> point for ratio-scale variables, indicating the absence of the measured quantity. Just like 0 kg indicates the absence of mass, 0 m/s indicates the absence of motion. It is therefore possible to state that the weight of a 100-kg person is twice as that of person with 50 kg body mass, or that a person running at 12 km/h is moving twice as fast as another person running at 6 km/h.</p>
+<p>Most physical quantities (mass, height, distance, volume) are (or can be) measured on a ratio scale, just like time (duration: hours required for studying) and frequency (cycling cadence: revolutions per minute).</p>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>Temperature may be measured on a ratio scale, depending on</em></p>
+<div id="webex-1a287155b70334d14d9acb5a580f7d8d" class="webex-radiogroup" data-answer="alEeCRsBaA==">
+<label><input type="radio" autocomplete="off" name="1a287155b70334d14d9acb5a580f7d8d"><span>where it is meaasured</span></label><label><input type="radio" autocomplete="off" name="1a287155b70334d14d9acb5a580f7d8d"><span>the unit of measurement</span></label><label><input type="radio" autocomplete="off" name="1a287155b70334d14d9acb5a580f7d8d"><span>the number of measurements</span></label>
+</div>
+</div>
+<div class="webex-solution">
+
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="summarizing-data-on-numerical-scales" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="summarizing-data-on-numerical-scales"><span class="header-section-number">10.3</span> Summarizing Data on Numerical Scales</h2>
+<p>As discussed in the <a href="0_introduction.html">Introduction</a> and in the <a href="31_understanding_study_designs.html">previous Chapter</a>, well-designed studies are motivated by a justified hypothesis. Testing the study’s hypothesis requires collecting data from a number of individuals, yielding a number of observations.</p>
+<p>Suppose the height of 100 students is measured, resulting in 100 observations of a ratio-scale variable. All 100 measured would be distributed within a given range, from the minimum to the maximum value—from the lowest to the tallest student. <a href="#fig-3-2-3" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> illustrates three possible distributions for the 100 values obtained. For the three possible scenarios, observations span the range from about 125 cm to about 165 cm. There is a clearly appreciable difference between the three distributions. While height values appear to be equally distributed within the whole range for the left distribution, observations tend to be concentrated in the middle of the range of values for the the right distribution.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Data distribution">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data distribution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The characterization of these distributions is the main topic of this Chapter. To this end, measures of</em> <strong>central tendency</strong> <em>and</em> <strong>dispersion</strong> <em>will be used</em>.</p>
+</div>
+</div>
+<div id="fig-3-2-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-3_height-distributions.jpg" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Three possible distributions for height values measured on 100 individuals
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="measures-of-central-tendency" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="measures-of-central-tendency"><span class="header-section-number">10.4</span> Measures of Central Tendency</h2>
+<p><strong>Measures of central tendency</strong> are used to characterize the center of the distribution. Depending on the shape of the distribution, its center may also coincide with the most frequent value. Three are the main central descriptors covered in this seciton.</p>
+<p><br>
+</p>
+<section id="sec-mean" class="level3">
+<h3 class="anchored" data-anchor-id="sec-mean">The Mean</h3>
+<p>Different types of mean values could be computed—geometric, harmonic, trimmed, and quadratic means are some examples. In statistical analysis, the <strong>arithmetic mean</strong> is most often considered:</p>
+<p><span id="eq-arithmetic-mean"><span class="math display">\[
+  {\color{blue}\mu} = \frac{1}{n}(x_1 + x_2 + \cdots + x_n) = \frac{1}{{\color{green}n}} \sum_{i=1}^{n} {\color{orange}x_i}
+\tag{10.1}\]</span></span></p>
+<p>where <span class="math inline">\(\color{green}{n}\)</span> and <span class="math inline">\(\color{orange}{x_i}\)</span> respectively stand for the <strong><span style="color: green;">total number of observations</span></strong> and the <strong><span style="color: orange;">value of the <span class="math inline">\(i\)</span>-th observation</span></strong>. <span class="math inline">\(\color{blue}{\mu}\)</span> corresponds to the <strong><span style="color: blue;">Population Mean</span></strong>, that is , the average value computed over all possible observations of a well defined group of individuals<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Suppose you work for a care provider, requesting you to assess how autonomous the patients attending to its clinical facilities are in taking care of themselves. After a literature search you find the <strong>Patient Activation Measure</strong> metric, proposed and validated by <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1475-6773.2005.00438.x">Hibbard and colleagues</a> <span class="citation" data-cites="hibbard05">[<a href="references.html#ref-hibbard05" role="doc-biblioref">1</a>]</span>. PAM is a 13-item survey assessing the ability of self-management of health and healthcare. Scores range from 0 to 100, indicating a progression from a passive to an active self-manager.</p>
+<div class="columns">
+<div class="column dataTable-wrapper" style="width:47.5%;">
+<div style="font-size: 80%;">
+<div class="cell">
+<div id="tbl-3-2-1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: PAM scores
+</figcaption>
+<div aria-describedby="tbl-3-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-64dcf6a67406db5fe25f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-64dcf6a67406db5fe25f">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[36,49,60,32,59,56,57,77,31,80,40,32,41,60,58,49,36,42,79,59]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>patient<\/th>\n      <th>PAM ($x_i$)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"searching":false,"lengthChange":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"patient","targets":0},{"name":"PAM","targets":1}],"drawCallback":"function(settings) {\n              MathJax.typeset(); \n            }","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p>This table provides a simulated set of PAM scores obtained for <span class="math inline">\(n=20\)</span> patients, showing 5 observations at a time. Different observations can be inspected by clicking on the interactive options at the bottom of the table, from the first to the last set of 5 entries.</p>
+<p>Applying <a href="#eq-arithmetic-mean" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> on the 20 observations included in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a> we obtain the mean PAM value: <span class="math inline">\(\mu = 51.6\)</span></p>
+</div>
+</div>
+<p>If the <span class="math inline">\(n=20\)</span> PAM scores reported in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a> were distributed as shown in the right panel of <a href="#fig-3-2-3" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>, the mean value would represent the most frequent entry among the 20 observations. In general, this is the case—<em>the mean value is expected to represent the most likely value to be observed when any sample of individual is assessed</em>.</p>
+<div id="frequency-table">
+<p>You then decide to pool the PAM survey results obtained for samples of 20 patients for each of the 10 different clinical facilities owned by the care provider. Instead of representing all observations in a single table, which would be difficult to inspect, you group them together in a more compact table.</p>
+<p>In this compact table—also termed <strong>Frequency Table</strong>—you represent counts of observations falling within predefined PAM ranges. For example, you count how many PAM scores fall within the 0-10 <strong>bin</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (i.e.,<span class="math inline">\(0\leq x_i &lt;10\)</span>) and represent these counts as if their PAM score was halfway this interval (i.e., for all occurrences <span class="math inline">\(0\leq x_i &lt;10\)</span>, <span class="math inline">\(x_i=5\)</span>). You then repeat the process for each of the ten consecutive bins, yielding <a href="#tbl-3-2-2" class="quarto-xref">Table&nbsp;<span>10.2</span></a>.</p>
+</div>
+<div style="font-size: 80%;">
+<div class="dataTable-wrapper">
+<div id="tbl-3-2-2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: Counts of PAM scores within intervals (bins)
+</figcaption>
+<div aria-describedby="tbl-3-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-92c2156bd48752985679" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-92c2156bd48752985679">{"x":{"filter":"none","vertical":false,"data":[["0 $ \\le x_i < $ 10","10 $ \\le x_i < $ 20","20 $ \\le x_i < $ 30","30 $ \\le x_i < $ 40","40 $ \\le x_i < $ 50","50 $ \\le x_i < $ 60","60 $ \\le x_i < $ 70","70 $ \\le x_i < $ 80","80 $ \\le x_i < $ 90","90 $ \\le x_i \\le $ 100"],[5,15,25,35,45,55,65,75,85,95],[2,3,16,29,35,37,32,31,8,7],[0.01,0.015,0.08,0.145,0.175,0.185,0.16,0.155,0.04,0.035]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>intervals<\/th>\n      <th>PAM ($x_i$)<\/th>\n      <th>counts<\/th>\n      <th>$p(x_i)$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"intervals","targets":0},{"name":"PAM","targets":1},{"name":"counts","targets":2},{"name":"px","targets":3}],"drawCallback":"function(settings) {\n              MathJax.typeset(); \n            }","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>The fourth column of <a href="#tbl-3-2-2" class="quarto-xref">Table&nbsp;<span>10.2</span></a> illustrates the relative number of occurrences within each bin. More specifically,</p>
+<p><span class="math display">\[
+p\left(x_i\right)=P\left(X=x_i\right)
+\]</span></p>
+<p>is the <strong>probability mass function</strong>, also termed <strong>frequency function</strong>, determining how often the <strong>random variable</strong> <span class="math inline">\(X\)</span> would match <span class="math inline">\(x_i\)</span>.</p>
+<p>The concept of random variable will be treated in the <a href="33_population_sample_data_distribution.html">next Chapter</a>, but given PAM score could assume any value from 0 to 100 for any new patient assessed, it seems conceivable to treat it as a random variable. <span class="math inline">\(p(x_i)\)</span> gives the relative frequency with which PAM assumes a value equal to <span class="math inline">\(x_i\)</span>.</p>
+<p>The mean value can be computed from <a href="#tbl-3-2-2" class="quarto-xref">Table&nbsp;<span>10.2</span></a>, without relying on the 200 PAM scores obtained. To this end, the ten PAM scores defined by the middle value within each bin is weighted by their relative frequencies and summed:</p>
+<p><span id="eq-weighted-mean"><span class="math display">\[
+\mu = \sum_{i=1}^{10} x_i p(x_i)=54.1
+\tag{10.2}\]</span></span></p>
+<p>If computed directly over the 200 values, <span class="math inline">\(\mu = 55.2\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="CAUTION: Extreme observations affect the mean">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>CAUTION: Extreme observations affect the mean
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>One important point to consider is how sensitive the mean value is to an</em> <strong>extreme observation</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a><em>. Complete the exercise below and check by how much the mean value computed over the first sample of 20 patients (<a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>) would change when a single value changes dramatically.</em></p>
+</div>
+</div>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>If the first observation in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a> was 95 instead of 36, what would be the new mean value?</em> <input class="webex-solveme nospaces" id="webex-a0e62e8b9cc92d551175461d4a48c8d7" data-tol="0.1" size="20" data-answer="OhJQAhxTGj8="></p>
+<p><em>Is it necessary to know all 20 values to recompute the mean with the new entry?</em> <select class="webex-select" id="webex-d3e0469ba754ba1e01fa18d2ac925498" data-answer="PwNJAWk="><option value="blank"></option><option>yes</option><option>no</option></select></p>
+</div>
+<div class="webex-solution">
+<p>Given the <span class="math inline">\(\mu = 51.6\)</span> computed over the 20 values in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>, to compute the updated mean (<span class="math inline">\(\mu_u\)</span>) with the new entry it would be sufficient to: <span class="math inline">\(\mu_u=(\mu \times n - 36 + 95)/n = 54.6\)</span></p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-median" class="level3">
+<h3 class="anchored" data-anchor-id="sec-median">The Median</h3>
+<p>Like the arithmetic mean, the <strong>median</strong> is a central tendency measure. <em>It separates the distribution of observations into two halves</em>, the higher half and the lower half. The median is the middle value in the set of observations arranged in increasing order.</p>
+<p>Mathematically, the definition of the median value depends on whether the number of observations is odd or even:</p>
+<p><span id="eq-median"><span class="math display">\[
+\left\{
+\begin{aligned}
+\eta &amp;= x_{r_{(n+1)/2}}, &amp; n \text{ is odd} \\
+\eta &amp;= \frac{x_{r_{(n/2)}} + x_{r_{(n/2+1)}}}{2}, &amp; n \text{ is even}
+\end{aligned}
+\right.
+\tag{10.3}\]</span></span></p>
+<p>where <span class="math inline">\(x_{r_i}\)</span> corresponds to the individual observations (<span class="math inline">\(x_i\)</span>), ordered from the smallest to the largest value.</p>
+<p><span class="math inline">\(\eta\)</span> can be computed directly from the data in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>. Just click on the up arrow to the right of PAM (<span class="math inline">\(x_i\)</span>). By doing so, PAM scores will be ordered from the smallest to the largest. Given there are 20 observations in that table, we consider the case <span class="math inline">\(n\)</span> is even in <a href="#eq-median" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>. Therfore, the median is given by the average between <span class="math inline">\(x_{10}\)</span> and <span class="math inline">\(x_{11}\)</span>. That is:</p>
+<p><span class="math display">\[
+\eta=(x_{11}+x_{10})/2=(49+56)/2=52.5
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Mean and median">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Mean and median
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Note how close the median (<span class="math inline">\(\eta = 52.5\)</span>) is to the mean value (<span class="math inline">\(\mu=51.6\)</span>) computed over the 20 entries in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-mode" class="level3">
+<h3 class="anchored" data-anchor-id="sec-mode">The Mode</h3>
+<p>The Mode (<span class="math inline">\(M\)</span>) central tendency measure is defined as the most frequent value. It is therefore used to assess the most common observation in the data set. Depending on the distribution of values, there may be a single, multiple or no mode at all.</p>
+<p>Distributions are therefore classified as:</p>
+<ul>
+<li><strong>Unimodal</strong> when only a single mode is defined (middle and right panels in <a href="#fig-3-2-3" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>).</li>
+<li><strong>Bimodal</strong> <em>or</em> <strong>Multimodal</strong> when two or more modes are respectively defined.</li>
+<li><strong>No mode</strong> when the occurrence of the different observations are equally likely (left panel in <a href="#fig-3-2-3" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>).</li>
+</ul>
+<p><br>
+</p>
+</section>
+<section id="their-relationship" class="level3">
+<h3 class="anchored" data-anchor-id="their-relationship">Their Relationship</h3>
+<p>The relationship between the <a href="#sec-mean"><strong>mean</strong></a>, the <a href="#sec-median"><strong>median</strong></a>, and the <a href="#sec-mode"><strong>mode</strong></a> depends on the distribution. Mainly on whether the distribution is symmetric or not.</p>
+<p>As illustrated in <a href="#fig-3-2-4" class="quarto-xref">Figure&nbsp;<span>10.3</span></a>, the three central tendency measures may match when the distribution is symmetric<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>When the distribution is asymmetric, the three measures tend to differ depending on the degree of <strong>Skewness</strong>—statistics describing the asymmetry of a distribution in relation to its mean. When the distribution is negatively skewed, most observations are concentrated on the right side. In this case the distribution is characterized by a tail towards the left side, where rare observations are found. The opposite holds for positively skewed distributions (<a href="#fig-3-2-4" class="quarto-xref">Figure&nbsp;<span>10.3</span></a>).</p>
+<div id="fig-3-2-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-4_distributions.jpg" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: The relationship between the three central tendency measures (mean, median, mode)
+</figcaption>
+</figure>
+</div>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><img src="..\include/images/part_3/ch_2/3-2-5_mean-median-mode.png" class="img-fluid" style="width:100.0%"></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:38%;">
+<p><em>A survey with 750 participants provided this distribution for how many cups of coffee were taken on a daily basis.</em> <em>What would be the most likely relationship between the mean (<span class="math inline">\(\mu\)</span>), the median (<span class="math inline">\(\eta\)</span>), and the mode (<span class="math inline">\(M\)</span>)</em></p>
+<p><select class="webex-select" id="webex-729593f41287c7080968b5f431f8e837" data-answer="bAIVBRUCSgRs"><option value="blank"></option><option>\(\mu = \eta = M\)</option><option>\(M &lt; \mu = \eta\)</option><option>\(M &lt; \eta &lt; \mu\)</option><option>\(\eta &lt; \mu = M\)</option></select></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="sec-dispersion-measures" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-dispersion-measures"><span class="header-section-number">10.5</span> Measures of Dispersion</h2>
+<p>While central tendency statistics are informative of the center of the distribution, they do not provide any information about how scattered observations are. <strong>Measures of disperion</strong> therefore complement the measures of central tendency in characterizing the data distribution, indicating how scattered the observations are with respect to the central tendency measure—<em>measures of dispersion quantify the variability in the data set</em>.</p>
+<p>Measures of dispersion may be absolute, assessing variability in the same unit of measurement of the variable measured, or in relative (unitless) terms. The most widely used measures of dispersion are presented in the following sections.</p>
+<p><br>
+</p>
+<section id="sec-range" class="level3">
+<h3 class="anchored" data-anchor-id="sec-range">The Range</h3>
+<p>The <strong>range</strong> is the simplest measure of dispersion, being defined as the difference between the largest and the smalles observation in the data set:</p>
+<p><span id="eq-range"><span class="math display">\[
+\kappa = \max(x_{1}, \dots, x_{n}) - \min(x_{1}, \dots, x_{n})
+\tag{10.4}\]</span></span></p>
+<p>The computation of <span class="math inline">\(\kappa\)</span> is straightforward, after ordering observations from the smallest to the largest.</p>
+<p>By clicking on the up arrow (<img src="..\include/images/icons/sort_table.png" style="height:1.5em">) in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>, PAM scores are arranged in increasing order, with the smallest (first) observation being 31 and the largest (last) being 80. For example, the range of PAM scores for the 20 entries in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>, the range is given by:</p>
+<p><span class="math display">\[
+\kappa = 80 - 31=49
+\]</span></p>
+<p><br>
+</p>
+</section>
+<section id="sec-std" class="level3">
+<h3 class="anchored" data-anchor-id="sec-std">The Standard Deviation</h3>
+<p>The <strong>standard deviation</strong> <em>measures how spread the observations are with respect to the distribution</em> <a href="#sec-mean">mean</a>. The larger the standard deviation is the more scattered from the mean the observations are. It is represented with the Greek letter <span class="math inline">\(\sigma\)</span> and is defined by taking the square root of the data <strong>variance</strong> (i.e., the average of squared residuals with respect to the mean):</p>
+<p><span id="eq-std"><span class="math display">\[
+\begin{aligned}
+\sigma^2 &amp;= \frac{(x_1 - \mu)^2 + \cdots + (x_n - \mu)^2}{n} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2 \\
+\sigma &amp;= \sqrt{\sigma^2}
+\end{aligned}
+\tag{10.5}\]</span></span></p>
+<p>where <span class="math inline">\(x_i\)</span> corresponds to individual observations, from the first (<span class="math inline">\(i=1\)</span>) to the last (<span class="math inline">\(i=n\)</span>).</p>
+<p><span class="math inline">\(\sigma\)</span> stands for the <strong>population standard deviation</strong>, just like <span class="math inline">\(\mu\)</span> corresponds to the <strong>population mean</strong>. The importance of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, and (<span class="math inline">\(\sigma^2\)</span>) will be discussed later in this course, when addressing the statistical techniques for testing the study’s hypothesis.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="CAUTION: $\sigma$ and bell-shape">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>CAUTION: <span class="math inline">\(\sigma\)</span> and bell-shape
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Regardless of the data distribution, <span class="math inline">\(\sigma\)</span> reflects how variable observations are. However, when the distribution is bell-shaped, like that in the right panel of <a href="#fig-3-2-3" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>, <span class="math inline">\(\sigma\)</span> earns a precise meaning—approximately 68% of the observations fall within <span class="math inline">\(\pm1\sigma\)</span> from <span class="math inline">\(\mu\)</span>.</em></p>
+</div>
+</div>
+<p>&nbsp;</p>
+</section>
+<section id="the-coefficient-of-variation" class="level3">
+<h3 class="anchored" data-anchor-id="the-coefficient-of-variation">The Coefficient of Variation</h3>
+<p>Sometimes, interest may lie in comparing data variability between different conditions, subjects, or even variables (e.g.&nbsp;body mass vs height). Both range and standard deviation, as much as the measures of dispersion presented below, may be not appropriate for such purpose. The metric most often considered in these circumstances is the <strong>coefficient of variation</strong>, <em>as it provide a relative, unitless measure of disperion</em>:</p>
+<p><span id="eq-cov"><span class="math display">\[
+CoV = \frac{\sigma}{\mu} \times 100
+\tag{10.6}\]</span></span></p>
+<p>where <span class="math inline">\(\sigma\)</span> corresponds to the standard deviation (<a href="#eq-std" class="quarto-xref">Equation&nbsp;<span>10.5</span></a>) and <span class="math inline">\(\mu\)</span> stands for the mean value (<a href="#eq-arithmetic-mean" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>).</p>
+<div style="font-size: 85%;">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><img src="..\include/images/part_3/ch_2/3-2-6_cov.png" class="img-fluid" style="width:100.0%"> <em>The figure above illustrates the elbow flexion force measured while two stroke patients were contracting their biceps brachii muscle at a constant level.</em> <em>Mean and standard deviation value for the steady-state force region (plateau) are indicated.</em> <em>Patient A exhibits </em> <select class="webex-select" id="webex-6747e077197ec485bc6b7eb1b7695aef" data-answer="bQYYB0kAag=="><option value="blank"></option><option>more stable</option><option>less stable</option><option>comparable</option></select> <em>force control when compared to Patient B.</em></p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-iqr" class="level3">
+<h3 class="anchored" data-anchor-id="sec-iqr">The InterQuartile Range</h3>
+<p>The <strong>I</strong>nter<strong>Q</strong>uartile <strong>I</strong>nterval (<strong>IQR</strong>) is defined based on <em>the difference between two</em> <strong>percentiles</strong>.</p>
+<p>A percentile is the value below which a given percentage of all observations in the data set falls. That is, the <span class="math inline">\(i\)</span>-th percentile of a distribution is the value that encloses <span class="math inline">\(i\%\)</span> of all observations. For example, according to the World Health Organization, the body mass of about 15% of 38-month boys <a href="https://cdn.who.int/media/docs/default-source/child-growth/child-growth-standards/indicators/weight-for-age/cht-wfa-boys-p-0-5.pdf?sfvrsn=7a899731_12">is nearly 13 kg</a>. This means that 13 kg is the 15-th percentile of body mass distribution for boys at this age.</p>
+<p>There are three percentiles that earn particular importance in describing the distribution of observations. The first one, discussed above, is the 50-th percentile or the <a href="#sec-median">median</a>, enclosing 50% of all observations. The other two are the 25-th and the 75-th percentiles, also known as the the first (<span class="math inline">\(q_1\)</span>) and the third (<span class="math inline">\(q_3\)</span>) <strong>quartiles</strong>, respectively. The difference between both defines the IQR measure of dispersion:</p>
+<p><span id="eq-iqr"><span class="math display">\[
+IQR = q_3-q_1
+\tag{10.7}\]</span></span></p>
+<p>An example of IQR computation is given in <a href="#fig-3-2-7" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>, for a distribution of 100 observation of body height values.</p>
+<div id="fig-3-2-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-7_iqr.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: <strong>I</strong>nter<strong>Q</strong>uartile <strong>I</strong>nterval computed over 100 obsrevations of body height values
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="which-measures-to-use" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="which-measures-to-use"><span class="header-section-number">10.6</span> Which Measures to Use?</h2>
+<div class="columns">
+<div class="column card card-text" style="width:49%;">
+<p><br>
+<img src="..\include/images/part_3/ch_2/3-2-8-1_central_tendency.png" class="img-fluid quarto-figure quarto-figure-center" style="width:100.0%"> <strong>Central Tendency</strong></p>
+<ul>
+<li>The mean is used for numerical data and for symmetric (not skewed) distributions.</li>
+<li>The median is used for ordinal data or for numerical data if the distribution is heavily skewed</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column card card-text" style="width:49%;">
+<p><br>
+<img src="..\include/images/part_3/ch_2/3-2-8-2_dispersion.png" class="img-fluid" style="width:100.0%"> <strong>Dispersion</strong></p>
+<ul>
+<li>The standard deviation (<span class="math inline">\(\sigma\)</span>) is used when the mean is used</li>
+<li>Percentiles are used when the mean is used to compare individual observations with a set of norms</li>
+<li>The interquartile range (IQR) is used to describe the central 50% of a distribution.</li>
+<li>The range is used when the purpose is to emphasize extreme values.</li>
+<li>The coefficient of variation is used for relative comparisons or for comparing variability on different units of meaasurement</li>
+</ul>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="displaying-numerical-data" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="displaying-numerical-data"><span class="header-section-number">10.7</span> Displaying Numerical Data</h2>
+<p>After identifying the appropriate measures to summarize the data set, as discussed in the previous sections, the next step is to communicate the data and the results. Communication is as important as all steps planed and conducted for data collection and processing. Sometimes, the most-well-conducted study may reach a very limited audience because results are presented inappropriately.</p>
+<p>A good exercise to ascertain the clarity of presentation is to ask a colleague, possibly not so familiar with your field of study, to describe the results presented. If your colleague reports the exact message that you intended to transmit, the presentation of results is likely effective.</p>
+<p>Data presentation mainly resumes to the use of <strong>Tables</strong> or <strong>Figures</strong>. Tables are particularly indicated when data should be communicated precisely, or when the number of variables to report is large. One example is the table reported by <a href="https://ieeexplore.ieee.org/document/532130">Prieto and colleagues</a> <span class="citation" data-cites="prieto96">[<a href="references.html#ref-prieto96" role="doc-biblioref">2</a>]</span>, summarizing a large number of descriptors of postural sways—i.e., <em>stabilometric descriptors</em>. A similar table, created with simulated postural data, is reported below (<a href="#tbl-3-2-3" class="quarto-xref">Table&nbsp;<span>10.3</span></a>).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="When possible, use figures">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>When possible, use figures
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Notwithstanding the value of tables, figures allow for the readily inspection and comparison of summarized data—a figure is worth a thousand words. The following sections present the most common charts considered for the visualization of numerical data.</em></p>
+</div>
+</div>
+<div style="font-size: 80%;">
+<div class="cell">
+<div id="tbl-3-2-3" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.3: Comparative Postural Sway Metrics: Young vs.&nbsp;Elderly Adults across visual conditions (EO: eyes open; EC: eyes closed).
+</figcaption>
+<div aria-describedby="tbl-3-2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-56d10ff05c2becd74537" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-56d10ff05c2becd74537">{"x":{"filter":"none","vertical":false,"data":[["mean distance (mm)","mean distance-AP (mm)","mean distance-ML (mm)","rms distance (mm)","rms distance-AP (mm)","rms distance-ML (mm)","range (mm)","range-AP (mm)","range-ML (mm)","mean velocity (mm/s)","mean velocity-AP (mm/s)","mean velocity-ML (mm/s)","95% conf. circle area (mm²)","95% conf. ellipse area (mm²)","sway area (mm²/s)","mean frequency (Hz)","mean frequency-AP (Hz)","mean frequency-ML (Hz)","fractal dimension-PD","fractal dimension-CC","fractal dimension-CE","total power-RD","total power-AP","total power-ML","50% power freq.-RD (Hz)","50% power freq.-AP (Hz)","50% power freq.-ML (Hz)","95% power freq.-RD (Hz)","95% power freq.-AP (Hz)","95% power freq.-ML (Hz)","centroidal freq.-RD (Hz)","centroidal freq.-AP (Hz)"],["3.24 ± 1.15","2.51 ± 0.99","1.56 ± 0.82","3.65 ± 1.25","3.04 ± 1.12","1.92 ± 0.95","14.8 ± 4.45","13.7 ± 4.35","8.64 ± 3.98","7.12 ± 1.85","5.12 ± 1.42","3.94 ± 1.25","124 ± 71.5","102 ± 68.2","7.34 ± 4.41","0.38 ± 0.09","0.41 ± 0.15","0.54 ± 0.22","1.44 ± 0.07","1.49 ± 0.07","1.53 ± 0.07","6.82 ± 3.75","9.12 ± 5.25","4.48 ± 3.55","0.29 ± 0.08","0.28 ± 0.09","0.36 ± 0.15","0.94 ± 0.19","0.94 ± 0.21","1.01 ± 0.34","0.54 ± 0.10","0.52 ± 0.10"],["3.92 ± 1.71","3.22 ± 1.34","1.72 ± 0.98","4.48 ± 1.88","3.91 ± 1.59","2.14 ± 1.22","18.6 ± 7.31","18.2 ± 7.12","10.1 ± 5.62","9.12 ± 2.95","6.95 ± 2.25","4.58 ± 1.72","198 ± 149","168 ± 145","11.8 ± 8.32","0.41 ± 0.13","0.43 ± 0.15","0.58 ± 0.23","1.45 ± 0.08","1.51 ± 0.09","1.56 ± 0.11","10.8 ± 9.95","17.2 ± 12.1","6.32 ± 5.42","0.33 ± 0.11","0.31 ± 0.10","0.39 ± 0.15","1.07 ± 0.31","1.01 ± 0.32","1.12 ± 0.35","0.58 ± 0.14","0.55 ± 0.14"],["4.31 ± 1.29","3.24 ± 1.05","2.11 ± 1.08","4.94 ± 1.48","4.05 ± 1.28","2.61 ± 1.38","22.1 ± 6.98","20.8 ± 6.18","12.9 ± 7.65","12.5 ± 4.62","10.1 ± 3.75","5.45 ± 2.65","231 ± 131","198 ± 129","16.8 ± 12.5","0.48 ± 0.14","0.58 ± 0.20","0.52 ± 0.17","1.48 ± 0.07","1.57 ± 0.08","1.61 ± 0.10","13.4 ± 7.62","21.1 ± 13.5","9.62 ± 10.4","0.36 ± 0.16","0.36 ± 0.15","0.36 ± 0.15","1.31 ± 0.38","1.32 ± 0.36","1.09 ± 0.32","0.68 ± 0.18","0.68 ± 0.17"],["4.62 ± 1.58","3.75 ± 1.21","2.01 ± 1.05","5.21 ± 1.76","4.58 ± 1.48","2.52 ± 1.28","23.2 ± 7.62","21.9 ± 7.15","12.8 ± 7.02","16.8 ± 6.55","14.1 ± 5.42","6.45 ± 3.85","258 ± 162","212 ± 158","22.1 ± 17.9","0.59 ± 0.14","0.68 ± 0.18","0.61 ± 0.18","1.56 ± 0.06","1.64 ± 0.08","1.68 ± 0.09","18.8 ± 12.9","28.9 ± 15.5","9.82 ± 11.5","0.41 ± 0.14","0.39 ± 0.13","0.41 ± 0.14","1.49 ± 0.45","1.48 ± 0.45","1.22 ± 0.38","0.78 ± 0.19","0.77 ± 0.18"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th>Stabilometric variables<\/th>\n      <th>Young EO<\/th>\n      <th>Young EC<\/th>\n      <th>Elderly EO<\/th>\n      <th>Elderly EC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":32,"scrollX":true,"columnDefs":[{"className":"dt-center","targets":[1,2,3,4]},{"name":"Measure","targets":0},{"name":"Young_EO","targets":1},{"name":"Young_EC","targets":2},{"name":"Elderly_EO","targets":3},{"name":"Elderly_EC","targets":4}],"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,32,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<section id="stem-and-leaf-plot" class="level3">
+<h3 class="anchored" data-anchor-id="stem-and-leaf-plot">Stem and Leaf Plot</h3>
+<p>This visual, tabular representation is mostly suited when presenting a few observations. The plot is created based on the leading digit (or digits) and the trailing digits. To illustrate the procedure, consider the 20 PAM scores reported in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>.</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><span style="background-color: #2A621A; color: white"><strong>The leading digits, from 3 to 8, define the stem</strong></span>, while the <span style="background-color:#74B056; color: white"><strong>trailing digits form the leafs</strong>,</span> <span style="background-color:#89BE6D; color: white"><strong>one for each of the leading digits</strong>.</span></p>
+<p>The extreme values, smallest and largest, can be readily inspected in the plot, yielding the <a href="#sec-range">range</a> measure of dispersion. The shape of the distribution may be assessed as well, determined by the number of values within each leaf.</p>
+</div><div class="column" style="width:51%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="..\include/images/part_3/ch_2/3-2-9_stem_and_leaf.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Bins, or the stem levels, should be defined on equal intervals (every 10 scores in this example) while avoiding empty bins (no counts).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Unsuitable for large samples">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Unsuitable for large samples
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>When the number of observations is large, stem and leaf plots are not effective. In such case, other visual representations would be more appropriate.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="histograms" class="level3">
+<h3 class="anchored" data-anchor-id="histograms">Histograms</h3>
+<p><strong>Histograms</strong> <em>illustrate counts for intervals (bins) of a continuous, numerical variable</em>—it represents the frequency distribution of numerical data. Histograms can be created directly from <a href="#frequency-table">frequency tables</a>.</p>
+<p>Consider the histogram shown in <a href="#fig-3-2-10-1" class="quarto-xref">Figure&nbsp;<span>10.11 (a)</span></a>, created with the PAM scores reported in <a href="#tbl-3-2-2" class="quarto-xref">Table&nbsp;<span>10.2</span></a>. The <span class="math inline">\(x\)</span> axis displays the variable of interest—the PAM scores in this case—split into bins. Ten bins are defined in <a href="#tbl-3-2-2" class="quarto-xref">Table&nbsp;<span>10.2</span></a>. Bars (rectangles) are used to display the number of occurrences—counts (height of bars)—obtained for each bin on.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Absolute and relative counts">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Absolute and relative counts
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The sum of counts (bars) correspond to the total number of observations. Alternatively, histograms may report relative counts, with the total sum of relative counts equaling 1 or 100%.</em></p>
+</div>
+</div>
+<p>Histograms should not be confused with bar charts. The main distinction is the nature of the variable displayed on the <span class="math inline">\(x\)</span> axis. Bar charts (<a href="#fig-3-2-10-2" class="quarto-xref">Figure&nbsp;<span>10.11 (b)</span></a>) are used for counts of nominal variable while histograms show counts within ranges of numerical data.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Histograms $\ne$ Bar charts">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Histograms <span class="math inline">\(\ne\)</span> Bar charts
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>There are two rules of thumb for distinguishing bar charts from histograms. For bar charts the order of bars is not critical (rearranging bars in <a href="#fig-3-2-10-2" class="quarto-xref">Figure&nbsp;<span>10.11 (b)</span></a> would not matter). Also, there is typically a gap between bars in bar charts.</em></p>
+</div>
+</div>
+<div id="fig-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="columns">
+<div class="column" style="width:49%;">
+<div style="text-align: center;">
+<div id="fig-3-2-10-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-2-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-10-1_histogram.png" class="img-fluid figure-img" data-ref-parent="fig-comparison">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-2-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) histogram
+</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div style="text-align: center;">
+<div id="fig-3-2-10-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-2-10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-10-2_barchart.png" class="img-fluid figure-img" data-ref-parent="fig-comparison">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-2-10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) bar chart
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: Two graphical representation for counts
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="box-plot" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot">Box plot</h3>
+<p><strong>Box plot</strong>, also known as <strong>box-and-whisker plot</strong>, <em>is a graphical representation summarizing the data distribution</em>. It shows five statistical values, including the three <a href="#sec-iqr">quartiles</a> and two extreme values.</p>
+<p><a href="#fig-3-2-11" class="quarto-xref">Figure&nbsp;<span>10.6</span></a> show an example of box plot, created by taking 18 out of the 200 values simulated for the PAM scores. The first (<span class="math inline">\(q_1\)</span>) and the third (<span class="math inline">\(q_3\)</span>) quartiles define the box, while the second quartile—the median—is represented somewhere inside the box. For symmetric distributions, with close-to-zero skewness (c.f. <a href="#fig-3-2-4" class="quarto-xref">Figure&nbsp;<span>10.3</span></a>), the median falls in the middle of the box. The whiskers denote the minimum and the maximum values (the <a href="#sec-range">range</a>) or the <strong>non-outlier limit</strong><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, whichever is closer to the nearest quartile:</p>
+<p><span id="eq-whiskers"><span class="math display">\[
+\begin{aligned}
+L_W &amp;= \max(\min(x_{1}, \dots, x_{n}), q_1-1.5IQR)\\
+U_W &amp;= \min(\max(x_{1}, \dots, x_{n}), q_3+1.5IQR)
+\end{aligned}
+\tag{10.8}\]</span></span></p>
+<p>In <a href="#fig-3-2-11" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>, for example, the lower (left) whisker is defined by the minimum PAM score, whereas the upper (right) whisker is defined by the non-outlier limit, given by <span class="math inline">\(q_3+1.5IQR\)</span>. This is so because the right non-outlier limit is closer to <span class="math inline">\(q_3\)</span> than the largest observation in the data set.</p>
+<p>Box plots are particularly useful for comparing distributions, identifying outliers, and checking the degree of skewness.</p>
+<div id="fig-3-2-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-11-boxplot.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.6: Box plot or box-and-whisker plot
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-errorplot" class="level3">
+<h3 class="anchored" data-anchor-id="sec-errorplot">Error Plot</h3>
+<p>Error plots <em>are composed of three statistics, one central value and two values defining the error bounds</em>.</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p>Typically, the central value is given by the average across all observations (the <a href="#seg-mean">mean</a>). It is represented as either the height of a bar, in such case the plot is termed <strong>error bar plot</strong>, or a symbol (circle, dot, square, etc). The error bounds may be defined in different ways. Most commonly the lower and upper bounds are respectively given by the mean minus the standard deviation (<span class="math inline">\(\mu-\sigma\)</span>) and the mean plus the standard deviation (<span class="math inline">\(\mu+\sigma\)</span>).</p>
+</div><div class="column" style="width:51%;">
+<div id="fig-3-2-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-12-error-plot.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.7: Box plot or box-and-whisker plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Different error bounds">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Different error bounds
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Other error bounds that are often considered for creating error plots are the <strong>standard error of the mean</strong> and the <strong>95% confidence interval</strong>. These two statistics will be discussed later in the course.</em></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="CAUTION: Box plot vs Error plot">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>CAUTION: Box plot vs Error plot
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Error plots will always show a symmetric representation in relation to the central (mean) value, given the two error intervals are the same. Most scientific journals require authors to use box plots and, when possible, with the single observations overlaid (cf. <a href="#fig-3-2-11" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>), allowing readers to ascertain whether the data distribution is bell-shaped or not. This is because this bell-shape format is one of the assumption for a set of parametric techniques for testing hypothesis, as treated later in the course.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="summarizing-nominal-and-ordinal-data" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="summarizing-nominal-and-ordinal-data"><span class="header-section-number">10.8</span> Summarizing Nominal and Ordinal Data</h2>
+<p>When dealing with variables measured on the <a href="#sec-nominal">nominal</a> or the <a href="#sec-ordinal">ordinal</a> scale, we are dealing with counts. That is, the number of occurrences a given event is observed, like the number of smokers and non-smokers with and without lung cancer (cf. <a href="#tbl-3-2-4" class="quarto-xref">Table&nbsp;<span>10.4</span></a>). In addition to representing nominal and ordinal data with raw counts, two other metrics are often computed—proportions and rates.</p>
+<p><br>
+</p>
+<section id="proportions" class="level3">
+<h3 class="anchored" data-anchor-id="proportions">Proportions</h3>
+<p><strong>Proportions</strong> <em>are defined as the ratio between the number of observations with characteristic (<span class="math inline">\(n_w\)</span>) and the total number of observations (<span class="math inline">\(n\)</span>)</em>.</p>
+<p>Taking the example of <a href="#tbl-3-2-4" class="quarto-xref">Table&nbsp;<span>10.4</span></a>, the proportion of smokers with lung cancer is 0.429 (or 42.9%), whereas the proportion of non smokers with lung cancer is 14.3%. The ratio between these two proportions yields the <strong>relative risk</strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. In the smoking example, the relative risk indicates that smokers are three times more likely to have lung cancer when compared with non-smokers.</p>
+<p><br>
+</p>
+</section>
+<section id="rates" class="level3">
+<h3 class="anchored" data-anchor-id="rates">Rates</h3>
+<p><strong>Rates</strong> <em>are computed from ratios, with the number of events in the numerator and the number of individuals at risk over a given period in the denominator</em>. <a href="#tbl-3-2-5" class="quarto-xref">Table&nbsp;<span>10.5</span></a> provides an example of rates computed based on 1,000 persons developing cardiovascular disease over one year, separately for people with physically inactive and active lifestyle.</p>
+<div class="columns small-text">
+<div class="column dataTable-wrapper" style="width:49%;">
+<div class="cell">
+<div id="tbl-3-2-4" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.4: Observed Frequencies and proportions of Smoking Habit and Lung Cancer
+</figcaption>
+<div aria-describedby="tbl-3-2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-92bf6da4126b4af8f473" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-92bf6da4126b4af8f473">{"x":{"filter":"none","vertical":false,"data":[["Smoker","Non-Smoker","Total"],["150 (42.9%)","50 (14.3%)","200 (28.6%)"],["200 (57.1%)","300 (85.7%)","500 (71.4%)"],["350 (100%)","350 (100%)","700 (100%)"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Exposure Group<\/th>\n      <th>Lung Cancer<br>$n$ (%)<\/th>\n      <th>No Cancer<br>$n$ (%)<\/th>\n      <th>Total<br>$n$ (%)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Status","targets":0},{"name":"Lung_Cancer","targets":1},{"name":"No_Lung_Cancer","targets":2},{"name":"Row_Total","targets":3}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div id="tbl-3-2-5" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.5: Incidence Rates of CVD by Physical Activity Group (per 1,000 Person-Years)
+</figcaption>
+<div aria-describedby="tbl-3-2-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7c5135bfd556fedc3ee4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c5135bfd556fedc3ee4">{"x":{"filter":"none","vertical":false,"data":[["Physically \n Inactive","Physically \n Active","Total \n (Marginal)"],[80,30,110],[2000,3000,5000],[40,10,22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Group<\/th>\n      <th>New Cases ($n$)<\/th>\n      <th>Person-Time (Years)<\/th>\n      <th>Incidence Rate&lt;br&gt;(per 1k)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Group","targets":0},{"name":"Cases","targets":1},{"name":"Person_Years","targets":2},{"name":"Incidence_Rate_per_1k","targets":3}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Two common rates reported in biomedical studies are the <strong>Mortality Rate</strong> and the <strong>Morbidity Rate</strong>. The former is defined based on the number of all deaths (the <strong>crude mortality rate</strong>) or of deaths due to a specific event or disease (e.g.&nbsp;cancer; <strong>specific mortality rate</strong>) in the population (numerator), in relation to the total number of persons at risky of dying (denominator). The latter is given by the number of persons with a disease (numerator) in relation to the total number of persons at risk. Both rates are typically expressed per 1,000 or 10,000 individuals over a year.</p>
+<p>Often, rates are adjusted to eliminate the distortion effect of some extraneous factors on the relationship between exposure and outcome. One examples is that given in <a href="#tbl-3-2-6" class="quarto-xref">Table&nbsp;<span>10.6</span></a>, illustrating the number of patients showing complications due to the intake of <em>drug A</em> and <em>drug B</em>. Patients are classified based on the severity of the disease, between <em>mild</em> and <em>severe</em>. Inspecting the columns three (<em>Drug A complications</em>) and five (<em>Drug B complications</em>) of <a href="#tbl-3-2-6" class="quarto-xref">Table&nbsp;<span>10.6</span></a>, it appears that Drug B leads to a greater number of complications than Drug A. It is also true, however, that most of the sickest patients received Drug B.</p>
+<p>To remove any potential confounding effect of disease severity, the number of complications is computed assuming an equal number of patients have been treated with both drugs.</p>
+<p>This can be achieved by projecting the proportions of complications on the number of patients treated with either drug or on a standard number of patients. For example, the proportion of complications observed for Drug B is 1% for <em>mild patients</em> and 15% for <em>severe patients</em>. When projecting these proportions on the number of patients treated with Drug A, the number of complications changes as indicated in the last column of <a href="#tbl-3-2-6" class="quarto-xref">Table&nbsp;<span>10.6</span></a>—the rate of complication due to Drug B turns to be smaller than that due to Drug A.</p>
+<div style="font-size: 80%;">
+<div class="cell">
+<div id="tbl-3-2-6" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.6: Comparison of Mortality Rates - Drug A vs Drug B
+</figcaption>
+<div aria-describedby="tbl-3-2-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-240d5c810a05760904a7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-240d5c810a05760904a7">{"x":{"filter":"none","vertical":false,"data":[["Mild","Severe","TOTAL","Rates ($\\times$ 1,000)"],["8000","2000","10,000",""],["80","400","480","48"],["2000","8000","10,000",""],["20","1200","1220","122"],["80","300","380","38"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Disease Severity<\/th>\n      <th>Patients treated with drug A<\/th>\n      <th>Drug A complications<\/th>\n      <th>Patients treated with drug B<\/th>\n      <th>Drug B complications<\/th>\n      <th>Drug B projected complications<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":[1,2,3,4]},{"className":"dt-left","targets":0},{"name":"Disease_Severity","targets":0},{"name":"Drug_A_Patients","targets":1},{"name":"Drug_A_Complications","targets":2},{"name":"Drug_B_Patients","targets":3},{"name":"Drug_B_Complications","targets":4},{"name":"Drug_B_ProjectedComplications","targets":5}],"drawCallback":"function(settings) {\n          MathJax.typeset(); \n        }","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(row).css({'font-weight':value == \"TOTAL\" ? \"bold\" : value == \"Rates ($\\\\times$ 1,000)\" ? \"bold\" : null});\n}"}},"evals":["options.drawCallback","options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div style="font-size: 85%;">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>What statements would be correct considering the information presented in </em> <a href="#tbl-3-2-4" class="quarto-xref">Table&nbsp;<span>10.4</span></a> <em>and</em> <a href="#tbl-3-2-5" class="quarto-xref">Table&nbsp;<span>10.5</span></a></p>
+<div id="webex-bfb2cdb48fae4cb8bdff95423f61df25" class="webex-checkboxgroup" data-answer="OVdOA09UTgUUVzw=">
+<label><input type="checkbox" autocomplete="off" name="bfb2cdb48fae4cb8bdff95423f61df25"><span><em>571 out of 1,000 smokers have no lung cancer</em></span></label><label><input type="checkbox" autocomplete="off" name="bfb2cdb48fae4cb8bdff95423f61df25"><span><em>The proportion of lung cancer is 28.6%</em></span></label><label><input type="checkbox" autocomplete="off" name="bfb2cdb48fae4cb8bdff95423f61df25"><span><em>4% persons with CVD are inactive</em></span></label><label><input type="checkbox" autocomplete="off" name="bfb2cdb48fae4cb8bdff95423f61df25"><span><em>100 per 10,000 active people develop CVD over a year</em></span></label><label><input type="checkbox" autocomplete="off" name="bfb2cdb48fae4cb8bdff95423f61df25"><span><em>110 case of CVD are registered over a year</em></span></label>
+</div>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="prevalence-vs-incidence" class="level3">
+<h3 class="anchored" data-anchor-id="prevalence-vs-incidence">Prevalence vs Incidence</h3>
+<p>Both can be computed in terms of rates or proportions and have different meanings.</p>
+<p>Mainly, <strong>prevalence</strong> provides a snapshot of a given outcome (e.g.&nbsp;COVID-19), being computed as the number of individuals with the outcome divided by the total number of individuals. For example, if the number of COVID-19 affected persons in Turin was 3,500 in the third week of December in 2022, out of 800,000 inhabitants, COVID prevalence was 43.75 per 10,000 persons at risk. Prevalence is a highly dynamic measure, as it increases with new cases and decreases as individuals pass away or recovery from the outcome. A common analogy to illustrate this concept is that of a bathtub (<a href="#fig-3-2-13" class="quarto-xref">Figure&nbsp;<span>10.8</span></a>). Prevalence provides an indication on the burden of a disease on the health care system.</p>
+<p><strong>Incidence</strong>, unlike prevalence, takes into account only the number of new cases with the outcome, over a given period (the numerator). That is, the amount of water entering into the bathtub per unit of time. The denominator of incidence is given by the population at risk at the start of the period. Given the COVID-19 example above, if the number of persons affected by COVID-19 from December 2022 to December 2023 was 2000, then COVID-19 incidence would be 25 cases per 10,000 person-year. Incidence is useful for monitoring how fast an outcome spreads, helpful for planning strategies to contend with the spread of the disease.</p>
+<div id="fig-3-2-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-13-bathtub.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.8: The epidemiologist’s bathtub
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="displaying-nominal-and-ordinal-data" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="displaying-nominal-and-ordinal-data"><span class="header-section-number">10.9</span> Displaying Nominal and Ordinal Data</h2>
+<p>Data measured on the nominal and ordinal scales are counts, proportions, and rates. Examples of which are provided in Tables <a href="#tbl-3-2-4" class="quarto-xref"><span>10.4</span></a>, <a href="#tbl-3-2-5" class="quarto-xref"><span>10.5</span></a>, and <a href="#tbl-3-2-6" class="quarto-xref"><span>10.6</span></a>. These tables are known as <strong>contingency tables</strong>—<em>a tabular representation of the frequency distribution of at least two nominal and ordinal variables</em>. Another possibility would be creating a table listing every single observation, indicating when it presents the outcome or not. This would however result in a dramatically long table with limited practical use.</p>
+<p>Nominal and ordinal data may be represented graphically as well. The two most often considered charts for that are the Pie Chart <a href="#fig-3-2-14-1" class="quarto-xref">Figure&nbsp;<span>10.11 (a)</span></a> and the Bar Chart <a href="#fig-3-2-14-2" class="quarto-xref">Figure&nbsp;<span>10.11 (b)</span></a>.</p>
+<div id="fig-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="columns">
+<div class="column" style="width:49%;">
+<div style="text-align: center;">
+<div id="fig-3-2-14-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-2-14-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-14-1_piechart.png" class="img-fluid figure-img" data-ref-parent="fig-comparison">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-2-14-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) pie chart
+</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+<!-- Spacer -->
+</div><div class="column" style="width:49%;">
+<div style="text-align: center;">
+<div id="fig-3-2-14-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-2-14-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-14-2_barchart.png" class="img-fluid figure-img" data-ref-parent="fig-comparison">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-2-14-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) bar chart
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.9: Counting of smoker and non-smokers, with and without lung cancer
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-scatterplot" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="sec-scatterplot"><span class="header-section-number">10.10</span> Relationship Between Numerical Data</h2>
+<p>In health sciences, it is often of interest to assess whether a variable is related to another variable. Ideally, the experimenter should be able to hypothesize the nature of the relationship expected for the two variables—it may be linear, quadratic, or exponential, for instance.</p>
+<p>Sometimes no initial guess can be made on the relationship between variables, leaving it open for inspection.</p>
+<p><strong>Scatter plots</strong>, created by plotting different numerical variables in different axes, provide the most appropriate graphical visualization for qualitatively assessing the relationship between variables. Examples of scatter plots are shown in <a href="#fig-3-2-15" class="quarto-xref">Figure&nbsp;<span>10.10</span></a></p>
+<div id="fig-3-2-15" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-15_scatterplots.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.10: Scatter plots indicating the <em>strength of the relationship</em> betwen two variables
+</figcaption>
+</figure>
+</div>
+<p>Clearly, each of the four plots shown in <a href="#fig-3-2-15" class="quarto-xref">Figure&nbsp;<span>10.10</span></a> indicates whether there is a relationship between the two variables or not, and with which <em>strength</em>. For example, in the first plot the coordinates representing the two variables fall on a line with a positive slope. This indicates a perfect, linear dependence between the two variables. For the second plot, the coordinates (circles) still fall on a line with negative, and with some scattering—that is, the linear dependence is weaker when compared with the first plot. The spread of the data further increases in the third and fourth plots, indicating the linear dependence between the two variables becomes progressively weaker—no relationship would seem to exist for the last plot.</p>
+<p><br>
+</p>
+<section id="correlation-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-coefficients">Correlation Coefficients</h3>
+<p>Even though the scatter plot is useful for readily inspecting the relationship between variables, it does not provide an objective measure for assessing the relationship strength. Correlation coefficients are computed with this purpose—to measure the strength of the relationship between variables.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="An introduction to correlation coefficients">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>An introduction to correlation coefficients
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>In this chapter, the two most used correlation coefficients are defined. The testing for significance of correlation coefficients will be dealt with later in the course.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-pearson-r" class="level3">
+<h3 class="anchored" data-anchor-id="sec-pearson-r">The Pearson Correlation Coefficient</h3>
+<p>It provides a <em>normalized measure of the linear relationship between two variables</em>. As an example, consider the data reported in <a href="#tbl-3-2-7" class="quarto-xref">Table&nbsp;<span>10.7</span></a> for the height and body mass variables—standard anthropometric variables in biomedical and epidemiologic studies. The Pearson Correlation Coefficient is mathematically defined as:</p>
+<p><span id="eq-pearson"><span class="math display">\[
+\rho_p=\frac{\sum_{i=1}^{n} (x_i - \mu_x)(y_i - \mu_y)}{\sqrt{\sum_{i=1}^{n} (x_i - \mu_x)^2 \sum_{i=1}^{n} (y_i - \mu_y)^2}}
+\tag{10.9}\]</span></span></p>
+<p>where <span class="math inline">\(\mu_x\)</span> and <span class="math inline">\(\mu_y\)</span> respectively denote the mean value across all <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> observations (body mass and height values in Table <a href="#tbl-3-2-7" class="quarto-xref"><span>10.7</span></a>). The numerator corresponds to the sum of products of residuals with respect to the means, while the denominator corresponds to the product of the sum of squared residuals.</p>
+<div style="font-size: 80%;">
+<div class="cell">
+<div id="tbl-3-2-7" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.7: Height (x, cm) and body mass (y, kg) values
+</figcaption>
+<div aria-describedby="tbl-3-2-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-036aa055e83bb188e869" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-036aa055e83bb188e869">{"x":{"filter":"none","vertical":false,"data":[["1","3","5","7","9","11","13","15","17","Sum"],[75.3,68.5,56.4,52.9,52.9,52.9,60,38.7,36,493.6],[190.8,186.3,170.8,171.3,168.8,166.3,170.4,164.2,161.3,1550.2],[418.4,186.5,2.4,3.8,3.8,3.8,26.6,260.6,355.1,1261],[344.3,197.6,2.1,0.9,11.9,35.3,3.4,64.7,119.8,780],[379.6,191.9,-2.2,1.8,6.7,11.6,-9.5,129.9,206.2,916]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Patient<\/th>\n      <th>$x_i$<\/th>\n      <th>$y_i$<\/th>\n      <th>$(x_i-\\mu_x)^2$<\/th>\n      <th>$(y_i-\\mu_y)^2$<\/th>\n      <th>$(x_i-\\mu_x)(y_i-\\mu_y)$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-center","targets":[1,2,3,4]},{"className":"dt-left","targets":0},{"className":"dt-right","targets":5},{"name":"Patient","targets":0},{"name":"x","targets":1},{"name":"y","targets":2},{"name":"x_dev2","targets":3},{"name":"y_dev2","targets":4},{"name":"xy_dev","targets":5}],"drawCallback":"function(settings) {\n          MathJax.typeset(); \n        }","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(row).css({'font-weight':value == \"Sum\" ? \"bold\" : null});\n}"}},"evals":["options.drawCallback","options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>For the body mass and height example, <span class="math inline">\(\rho_p\)</span> can be computed directly from the <strong>Sum</strong> values reported in the last row of the table above.</p>
+<p>It turns out that:</p>
+<p><span class="math display">\[
+\rho_p=916 / (35.5 \times 27.9) = 0.92
+\]</span></p>
+<p>But what does a <span class="math inline">\(\rho_p = 0.92\)</span> mean?</p>
+<p>Judging from the scatter plot <a href="#fig-3-2-16-1" class="quarto-xref">Figure&nbsp;<span>10.11 (a)</span></a> created with the data from <a href="#tbl-3-2-7" class="quarto-xref">Table&nbsp;<span>10.7</span></a>, intuition suggests that body mass and height are linearly related, with a somewhat strong relationship. Pearson <span class="math inline">\(\rho_p\)</span> can be used as an objective measure in support of this intuition. The closer that <span class="math inline">\(|\rho_p|\)</span> is to <span class="math inline">\(1.0\)</span> the stronger the relationship is, with <span class="math inline">\(\rho_p=\pm1.0\)</span> indicating perfect linear relationship and <span class="math inline">\(\rho_p=0\)</span> indicating there is no linear relationship between variables.</p>
+<p><br>
+</p>
+</section>
+<section id="sec-spearman-rho" class="level3">
+<h3 class="anchored" data-anchor-id="sec-spearman-rho">The Spearman Correlation Coefficient</h3>
+<p>There are mainly three occasions in which the Pearson Correlation Coefficient is not appropriate to assess the relationship between variables:</p>
+<ul>
+<li>when the distribution is highly skewed,</li>
+<li>when ordinal data is used, or</li>
+<li>when the relationship between variables is not linear.</li>
+</ul>
+<p>For the first case, a transformation of the data may help (e.g.&nbsp;taking the logarithm or the square root). For the other two cases, the <strong>Spearman Correlation Coefficient</strong> would be appropriate, as it assesses whether the relationship between the variables is <strong>monotonic</strong>.</p>
+<p>This means that the ordering of <span class="math inline">\(x\)</span> and the ordering of <span class="math inline">\(y\)</span> observations are consistent:</p>
+<ul>
+<li>monotonically increasing: <span class="math inline">\(x_i &lt; x_j \;\Rightarrow\; y_i \leq y_j \quad \forall i,j\)</span></li>
+<li>monotonically decreasing: <span class="math inline">\(x_i &lt; x_j \;\Rightarrow\; y_i \geq y_j \quad \forall i,j\)</span></li>
+</ul>
+<p>The Spearman Correlation Coefficient is based on the rank of observations, making it suitable to assess the relationship between variables measured on the ordinal scale as well.</p>
+<p>An example is given in <a href="#tbl-3-2-8" class="quarto-xref">Table&nbsp;<span>10.8</span></a>, reporting how long climbers with different expertise were able to hold themselves in suspension. It may be reasonable to ask whether more experienced climbers have better endurance—that is, are able to hold their body in suspension for longer duration. Expertise is measured on the <a href="http://aac-publications.s3.amazonaws.com/articles/aaj-13201212386-1380661619.jpg">french scale</a>, from 1 (<em>less experienced</em>) to 9b+ (<em>most experienced</em>). By visually inspecting the scatter plot created with the suspension (<span class="math inline">\(y\)</span> axis) and grade data (<span class="math inline">\(x\)</span> axis), the relationship between both seems evident (<a href="#fig-3-2-16-2" class="quarto-xref">Figure&nbsp;<span>10.11 (b)</span></a>).</p>
+<div style="font-size: 80%;">
+<div class="cell">
+<div id="tbl-3-2-8" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.8: Failure time as a function of climber expertise
+</figcaption>
+<div aria-describedby="tbl-3-2-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4e2784997e398d8d3587" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4e2784997e398d8d3587">{"x":{"filter":"none","vertical":false,"extensions":["FixedHeader"],"data":[[1,2,3,4,5,6,7,8,9],["6b+","5c","7a+","6b","7b","6a+","7a","6c","6a"],[39,22,49,31,85,24,47,41,29],[5,1,8,4,9,3,7,6,2],[5,1,8,4,9,2,7,6,3],[0,0,0,0,0,1,0,0,-1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Climber<\/th>\n      <th>French<br>grade ($x_i$)<\/th>\n      <th>Suspension<br>time ($y_i$)<\/th>\n      <th>Ranked $x$<br>($x_{r_i}$)<\/th>\n      <th>Ranked $y$<br>($y_{r_i}$)<\/th>\n      <th>$d_i=$<br>$x_{r_i}-y_{r_i}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","columnDefs":[{"className":"dt-center","targets":[0,1,2,3,4,5]},{"className":"dt-left","targets":0},{"name":"Climber","targets":0},{"name":"x","targets":1},{"name":"y","targets":2},{"name":"Rank_x","targets":3},{"name":"Rank_y","targets":4},{"name":"d","targets":5}],"drawCallback":"function(settings) {\n          MathJax.typeset(); \n        }","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>First, the ordinal data (<strong>French grade</strong> (<span class="math inline">\(x_i\)</span>) in <a href="#tbl-3-2-8" class="quarto-xref">Table&nbsp;<span>10.8</span></a>) is converted to integers in increasing order, from the lowest grade (5c) to the largest (7a+) (cf.&nbsp;column <strong>Ranked</strong> <span class="math inline">\(x\)</span> (<span class="math inline">\(x_{r_i}\)</span>) in <a href="#tbl-3-2-8" class="quarto-xref">Table&nbsp;<span>10.8</span></a>).</p>
+<p>Likewise, suspension time (<span class="math inline">\(y_i\)</span>) and the difference (<span class="math inline">\(d_i\)</span>) between the two ranked variables is computed for each individual. Given <span class="math inline">\(d_i\)</span> and the number <span class="math inline">\(n=9\)</span> of observations, the Spearman Correlation Coefficient is computed as:</p>
+<p><span id="eq-spearman"><span class="math display">\[
+\rho_s = 1 - \frac{6}{n(n^2 - 1)} \sum_{i=1}^{n} d_i^2
+\tag{10.10}\]</span></span></p>
+<p>By applying <a href="#eq-spearman" class="quarto-xref">Equation&nbsp;<span>10.10</span></a> to the data in <a href="#tbl-3-2-8" class="quarto-xref">Table&nbsp;<span>10.8</span></a> (last column), we obtain:</p>
+<p><span class="math display">\[
+\rho_s=1-\frac{6}{9\times80}2=0.98
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Pearson vs Spearman">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Pearson vs Spearman
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>If the Pearson Correlation Coefficient was computed from data in columns 4 and 5 of <a href="#tbl-3-2-8" class="quarto-xref">Table&nbsp;<span>10.8</span></a>, we would have obtained that <span class="math inline">\(\rho_p=0.88\)</span>. This is smaller than <span class="math inline">\(\rho_s\)</span>, as Pearson’s <span class="math inline">\(\rho_p\)</span> is sensitive to the extreme suspension time observed for the most experienced climber (cf <a href="#fig-3-2-16-2" class="quarto-xref">Figure&nbsp;<span>10.11 (b)</span></a>). These differences will be dealt with later in the course.</em></p>
+</div>
+</div>
+<div id="fig-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="columns">
+<div class="column" style="width:49%;">
+<div style="text-align: center;">
+<div id="fig-3-2-16-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-2-16-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-16-1_pearson.png" class="img-fluid figure-img" data-ref-parent="fig-comparison">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-2-16-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) anthropometrics
+</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div style="text-align: center;">
+<div id="fig-3-2-16-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-2-16-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-16-2_spearman.png" class="img-fluid figure-img" data-ref-parent="fig-comparison">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-2-16-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) anthropometrics
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.11: Examples of relationship between variables measured on different scales
+</figcaption>
+</figure>
+</div>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><img src="..\include/images/part_3/ch_2/3-2-17_spearman_vs_pearson.png" class="img-fluid" style="width:100.0%"></p>
+<p><em>Based on the figure above, complete the empty boxes below with the correct plot number</em></p>
+<p><select class="webex-select" id="webex-8548f5a3661ada758e7d849f8890256a" data-answer="YwUYCEoEPA=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>When the data are roughly elliptically distributed and there are no prominent outliers, the Spearman correlation and Pearson correlation give similar values.</em></p>
+<p><select class="webex-select" id="webex-03937ca949531ca4ed0067e0f9399231" data-answer="awIVAxtTPA=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>A unit Spearman correlation results when the two variables being compared are monotonically related, even if their relationship is not linear.</em></p>
+<p><select class="webex-select" id="webex-924e7428d830e70d3f42a8de50b07a5f" data-answer="YgIYVBsEbw=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>Spearman <span class="math inline">\(\rho_s\)</span> is less sensitive than Pearson <span class="math inline">\(\rho_p\)</span> to strong outliers in the samples’ tails. That is because Spearman coefficient limits the outlier to its rank.</em></p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="mistakes-when-presenting-data" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="mistakes-when-presenting-data"><span class="header-section-number">10.11</span> Mistakes When Presenting Data</h2>
+<p>When presenting data or results, the goal is to ensure the desired message is transmitted effectively. That is, ensuring a broad audience understands the message as intended. To achieve this goal, it is imperative that figures are prepared with the highest aesthetic standards, from their labels to the scaling of axes.</p>
+<p>Examples illustrating issues with data presentation are provided below. Some of these figures were taken from the MSc dissertation of students in our laboratory, before they could fix these issues for their MSc defense.</p>
+<p><br>
+</p>
+<section id="inappropriate-axes-scaling" class="level3">
+<h3 class="anchored" data-anchor-id="inappropriate-axes-scaling">Inappropriate Axes Scaling</h3>
+<p>When axes are not scaled properly, equivocal conclusions may be reached by inspecting the plots. Two examples are provided below.</p>
+<ul>
+<li><p><a href="#fig-3-2-18" class="quarto-xref">Figure&nbsp;<span>10.12</span></a> (panel a) shows the rate of an adverse event arising due to the standard care and to the administration of a new drug. In the <em>Misleading scaling</em> (top), a tiny absolute difference (2.1% vs 2.4%) looks dramatic because of y-axis truncation. The difference is better judged when starting the y axis from 0 (<em>Appropriate scaling</em>).</p></li>
+<li><p><a href="#fig-3-2-18" class="quarto-xref">Figure&nbsp;<span>10.12</span></a> (panel b) illustrates the accumulation of <em>Troponin I</em><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> following a damage of heart cells (heart attack). In the <em>Misleading scaling</em> example (top plot), the broad <span class="math inline">\(y\)</span> axis flatten the increase in Troponin after the symptom onset. Conversely, the timing and magnitude of Troponin accumulation is more clearly appreciated when matching <span class="math inline">\(y\)</span> axis to the observed data (<em>Appropriate scaling</em>).</p></li>
+</ul>
+<div id="fig-3-2-18" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-18_scaling.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.12: Importance of scaling axes properly
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="compromised-readability" class="level3">
+<h3 class="anchored" data-anchor-id="compromised-readability">Compromised Readability</h3>
+<p><a href="#fig-3-2-19" class="quarto-xref">Figure&nbsp;<span>10.13</span></a> was supposed to illustrate the effect of electrode position on the synergies extracted from the lower limb muscles during treadmill walking. There are many issues with this figure.</p>
+<ul>
+<li>First, the figure could be split into different figures, as the comparison between electromyographic envelopes (left most and right most columns) does not contribute to transmitting the intended message.</li>
+<li>Font size is too small, severely compromising understanding. Not always there is the possibility to enlarge the image for reading. Sometimes, by enlarging the figure, resolution and thus readability may be lost. <em>Always ensure the font size is proportional to the size of the plot</em>.</li>
+<li>Synergies could be grouped, using traces of different colors and/or thickness, reducing the number of rows in the middle plot to four instead of eight (for example, data in the first and fifth rows could be put together).</li>
+</ul>
+<div id="fig-3-2-19" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-19_readability.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.13: Severely compromised readability
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="missing-labels-and-units-of-measurement" class="level3">
+<h3 class="anchored" data-anchor-id="missing-labels-and-units-of-measurement">Missing Labels and Units of Measurement</h3>
+<p><a href="#fig-3-2-20" class="quarto-xref">Figure&nbsp;<span>10.14</span></a> illustrates changes in torque and in the region where muscle was excited during a maximal voluntary contraction, before and after a fatiguing protocol. Left panel shows the torque, whereas the right panel shows the average of the coordinates of 64 electrodes (<span class="math inline">\(8 \times 8\)</span> arrangement) placed over the skin, weighted by the amplitude of the recorded electromyograms.</p>
+<p>Two are the main issues here:</p>
+<ul>
+<li>What is actually shown in the left panel? It could be torque, as it could be mechanical work. For which joint were these torque profiles obtained?</li>
+<li>What is the unit of measurements in the right panel? Is it centimeters? Or is it a relative measure, obtained by normalizing the weighted average by e.g.&nbsp;the length of the segment (or muscle) under study?</li>
+<li>Comparing pre-post (prima-dopo) differences in the weighted average position for each individual is difficult in two separate axes. It would be much clearer if the pre-post average positions were shown in the same plot.</li>
+</ul>
+<div id="fig-3-2-20" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-20_labels-and-units.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.14: Important information is missing
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="inappropriate-unit-of-measurement" class="level3">
+<h3 class="anchored" data-anchor-id="inappropriate-unit-of-measurement">Inappropriate Unit of Measurement</h3>
+<p><a href="#fig-3-2-21" class="quarto-xref">Figure&nbsp;<span>10.15</span></a> show kinematic (left) and electromyographic (right) data collected during dynamic contractions (i.e., during movement). As in the previous examples above, font size could be increased in these plots to improve readability.</p>
+<p>Two are the most critical issues in <a href="#fig-3-2-21" class="quarto-xref">Figure&nbsp;<span>10.15</span></a>:</p>
+<ul>
+<li><p>The left plot likely shows the input signal digitized by the A/D converter<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, not the effective joint angle. Otherwise numbers would have been represented in degrees. Even though the time profile of the signal shown may accurately reflect that of the joint angle under measurement, the lack of a proper unit of measurement dramatically affects the inspection of the trial validity. What if, for example, this was the knee joint angle during a task in which subjects were requested to flex and extend their knee by 90 deg? By looking at this figure it is not possible to ascertain that this requirement has been met. Likewise, there is no information about movement direction—does an increase in voltage correspond to flexion or extension?</p></li>
+<li><p>The right plot shows an example of surface electromyogram, presumably collected from a muscle contributing to the kinematics shown in the left plot. There is mismatch of colors, so that readers cannot ascertain what is the <em>window start</em> and the <em>window end</em> in the figure. Also, there is no clue about what is <em>VLp</em> and <em>series number 1</em>. Ideally, figures should be self-explicative, without the need of relying on their caption for understanding. The main issue in this right plot though is with the unit of measurement reported for the electromyogram—<strong>can you guess what the problem is?</strong></p></li>
+</ul>
+<div id="fig-3-2-21" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_2/3-2-21_angle-and-emgs.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.15: Inappropriate unit of measurement and innacurate information
+</figcaption>
+</figure>
+</div>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-hibbard05" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Hibbard JH, Mahoney ER, Stockard J, Tusler M. Development and <span>Testing</span> of a <span>Short Form</span> of the <span>Patient Activation Measure</span>. Health Services Research 2005;40:1918–30. <a href="https://doi.org/10.1111/j.1475-6773.2005.00438.x">https://doi.org/10.1111/j.1475-6773.2005.00438.x</a>.</div>
+</div>
+<div id="ref-prieto96" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Prieto TE, Myklebust JB, Hoffmann RG, Lovett EG, Myklebust BM. Measures of postural steadiness: Differences between healthy young and elderly adults. IEEE Transactions on Biomedical Engineering 1996;43:956–66. <a href="https://doi.org/10.1109/10.532130">https://doi.org/10.1109/10.532130</a>.</div>
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><em>will get back to this point later. For now, the population values (mean and other metrics treated below) are assumed to be known</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><em>bins are contiguous, non-overlapping intervals in a numeric scale</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><em>differing substantially from all other observations of the dataset</em><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><em>an exception is when all values are equally likely to occur (left panel in <a href="#fig-3-2-3" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>). In this case the mode is not defined</em><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><em>outlier is an observation far away from the distribution. Far away is typicaly measured as <span class="math inline">\(1.5IQR\)</span> away from the nearest quartile</em><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><em>it measures how likely an event may occur in exposed individuals in relation to non exposed individuals</em><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><em>protein controlling the contraction of the heart muscle</em><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><em>electronic device that translates continuous physical analog signals—like angle, force, etc—into discrete numbers to be stored in memory</em><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
+
+/* definition of content for the buttons */
+
+const webex_buttons = {check_hidden:          "<b>&check;</b>",
+
+                       check_hidden_alt:      "Check answer",
+
+                       check_shown:           "<b>&lsh;</b>",
+
+                       check_shown_alt:       "Hide check",
+
+                       check_of_total:        "/",
+
+                       solution:              "<b>&quest;</b>",
+
+                       solution_alt:          "Correct solution",
+
+                       question_next:         "<b>&#8634;</b>",
+
+                       question_next_alt:     "Next question",
+
+                       question_previous:     "",
+
+                       question_previous_alt: ""}
+
+
+
+
+
+/* update total correct if #webex-total_correct exists */
+
+update_total_correct = function() {
+
+  console.log("webex: update total_correct");
+
+
+
+  document.querySelectorAll(".webex-total_correct").forEach(total => {
+
+    p = total.closest(".webex-box");
+
+    var correct = p.getElementsByClassName("webex-correct").length;
+
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    /* no specific class on input node, thus searching via query selector */
+
+    var checkboxgroups = p.querySelectorAll("div[class=webex-checkboxgroup] input[type=checkbox]").length
+
+
+
+    /* show number of correct / total number of answers */
+
+    total.innerHTML = correct + "&nbsp;" + webex_buttons.check_of_total + "&nbsp;" + (solvemes + radiogroups + checkboxgroups + selects);
+
+  });
+
+}
+
+
+
+/* check answers */
+
+check_func = function() {
+
+  console.log("webex: check answer");
+
+
+
+  //var cl = elem.parentElement.classList;
+
+  var cl = this.closest(".webex-box").classList;
+
+  if (cl.contains("unchecked")) {
+
+    cl.remove("unchecked");
+
+    this.innerHTML = webex_buttons.check_shown; //"Hide check";
+
+    if (webex_buttons.check_shown_alt.length > 0) this.setAttribute("title", webex_buttons.check_shown_alt);
+
+  } else {
+
+    cl.add("unchecked");
+
+    this.innerHTML = webex_buttons.check_hidden; //"Check answer";
+
+    if (webex_buttons.check_hidden_alt.length > 0) this.setAttribute("title", webex_buttons.check_hidden_alt);
+
+  }
+
+}
+
+
+
+/* helper functions for checking the webex ID */
+
+const id_checker = {"fmt": new RegExp("[g-zG-Z]"),
+
+                    "load": function(e) { return e.getAttribute("id").match("(?<=(-)).*$")[0]; },
+
+                    "eval": new TextEncoder(),
+
+                    "dval": new TextDecoder()}
+
+
+
+/* Show/hide correct solution */
+
+solution_func = function() {
+
+  console.log("webex: show/hide solution");
+
+
+
+  var div = this.closest(".webex-question").querySelector(".webex-solution");
+
+  var cl = div.classList;
+
+
+
+  if (cl.contains("visible")) {
+
+    cl.remove("visible");
+
+  } else {
+
+    cl.add("visible");
+
+  }
+
+}
+
+
+
+/* function to check if the real answer is numeric */
+
+convert_to_numeric = function(x) {
+
+  if (typeof x == "string") {
+
+    /* do nothing */
+
+  } else if (x.length == 1) {
+
+    /* take first element */
+
+    x = x[0]
+
+  } else {
+
+    return NaN;
+
+  }
+
+
+
+  /* remove spaces for easier parsing */
+
+  x = x.replace(/\s/g, "");
+
+
+
+  /* Define patterns for different formats, note that spaces have been removed above */
+
+  const patterns = [
+
+    {regex: /^[+-]?\d+(\.\d{3})*,\d+$/, decimal: ",", thousand: "." },  // Format: "1.100.100.100,3"
+
+    {regex: /^[+-]?\d+(,\d{3})*\.\d+$/, decimal: ".", thousand: "," },  // Format: "1,100,100,100.3"
+
+    {regex: /^[+-]?\d+(\.|\.\d+)?$/, decimal: "." },                    // Format: "1100100100.5" or "1100100100."
+
+    {regex: /^[+-]?\d+(,|,\d+)$/, decimal: "," }                        // Format: "1100100100,5" or "1100100100,"
+
+  ];
+
+
+
+
+
+  /* testing all regular expressions, convert to float if possible */
+
+  for (const { regex, decimal, thousand } of patterns) {
+
+    if (regex.test(x)) {
+
+      let numeric = x;
+
+      if (thousand) numeric = numeric.replace(new RegExp(`\\${thousand}`, "g"), "");
+
+      numeric = numeric.replace(decimal, ".");
+
+      return parseFloat(numeric);
+
+    }
+
+  }
+
+
+
+  /* input of length 1 but none of the known formats, return NaN */
+
+  return NaN;
+
+}
+
+
+
+/* Checking webex ID, returns formalsol */
+
+check_id = function(e) {
+
+  /* loading webex ID */
+
+  var id = id_checker["load"](e);
+
+
+
+  /* extracting answer */
+
+  let answer = e.dataset.answer;
+
+
+
+  /* checking unique id, prepare and return array */
+
+  if (!id_checker["fmt"].test(id)) {
+
+    const a = id_checker["eval"].encode(atob(answer));
+
+    const b = id_checker["eval"].encode(id);
+
+    const res = a.map((byte, index) => byte^b[index % b.length]);
+
+    answer = id_checker["dval"].decode(res);
+
+    /* Replacing &amp; with ' before parsing */
+
+    answer = answer.replaceAll("&apos;", "'");
+
+  }
+
+
+
+  return JSON.parse(answer);
+
+}
+
+
+
+/* function for checking solveme answers */
+
+solveme_func = function(e) {
+
+  /* avoid that keyup and keychange twice execute this function within nms = 10
+
+   * ms, clearing inputTimer and add timeout */
+
+  console.log("webex: check solveme");
+
+
+
+  /* float, precision for checking numeric answers */
+
+  const eps = 0.00000000000001;
+
+
+
+  /* get last checked user answer */
+
+  const question = this.closest(".webex-question")
+
+
+
+  /* extracting classes */
+
+  var cl = this.classList;
+
+  var my_answer = this.value;
+
+
+
+  /* extracting classes */
+
+  var cl = this.classList;
+
+
+
+  /* empty answer? Job done */
+
+  if (my_answer == "") {
+
+    cl.remove("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+    return false;
+
+  }
+
+
+
+  /* Find closest (parent) webex-question */
+
+  let formalsols = check_id(this)
+
+
+
+  /* by default we assume the users' answer is incorrect */
+
+  var user_answer_correct = false;
+
+
+
+  /* check if the correct answer is numeric, i.e. if 
+
+   * formalsols is of length 1 containing one single numeric
+
+   * value in a known format, else, NaN is returned */
+
+  const num_formalsol = convert_to_numeric(formalsols);
+
+  const num_my_answer = convert_to_numeric(my_answer);
+
+
+
+  /* if the correct answer is numeric (float), the user's answer
+
+   * must also be numeric. If not, it is wrong. Else we can
+
+   * compare floating point numbers */
+
+  if (!isNaN(num_formalsol) && !isNaN(num_my_answer)) {
+
+    /* check if the real answer and the user input are numerically the same;
+
+     * adding 'delta' to avoid precision issues */
+
+    var diff = Math.abs(num_formalsol - num_my_answer);
+
+    if (diff < parseFloat(this.dataset.tol) + eps) { user_answer_correct = true; }
+
+
+
+  /* if the question contains regex, a regular expression is used
+
+   * to evaluate the users answer. Allows for multiple regular expressions */
+
+  } else if (cl.contains("regex")) {
+
+    for (let i = 0; i < formalsols.length; i++) {
+
+        let regex = new RegExp(formalsols[i], cl.contains("ignorecase") ? "i" : "");
+
+        if (regex.test(my_answer)) { user_answer_correct = true; break; }
+
+    }
+
+
+
+  /* else we evaluate on 'string level', considering the creators preferences
+
+   * regarding set options */
+
+  } else {
+
+    /* modify/prepare answer */
+
+    if (cl.contains("ignorecase")) { my_answer = my_answer.toLowerCase(); }
+
+    if (cl.contains("nospaces"))   { my_answer = my_answer.replace(/ /g, ""); }
+
+
+
+    /* if the real answer includes user input - correct */
+
+    if (formalsols.includes(my_answer)) {
+
+      user_answer_correct = true;
+
+  
+
+      // added regex bit
+
+      if (cl.contains("regex")) {
+
+        answer_regex = RegExp(formalsols.join("|"))
+
+        if (answer_regex.test(my_answer)) {
+
+          cl.add("webex-correct");
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
+  if (user_answer_correct) {
+
+      cl.add("webex-correct");
+
+      cl.remove("webex-incorrect");
+
+  } else {
+
+      cl.add("webex-incorrect");
+
+      cl.remove("webex-correct");
+
+  }
+
+
+
+  update_total_correct();
+
+
+
+}
+
+
+
+/* function for checking select answers */
+
+select_func = function(e) {
+
+  console.log("webex: check select");
+
+
+
+  var options   = [];
+
+  Array.from(this.querySelectorAll("option")).forEach((option, index) => {
+
+    if (!option.hasAttribute("value") || !option.getAttribute("value") === "blank") {
+
+      options.push(option);
+
+    }
+
+  });
+
+
+
+  /* get selected option */
+
+  function get_selected(options) { return options.findIndex(option => option.selected); }
+
+  var option_index = get_selected(options)
+
+
+
+  /* loading webex ID */
+
+  var formalsol = check_id(this)
+
+
+
+  /* add class for current selection */
+
+  this.classList.remove("webex-incorrect");
+
+  this.classList.remove("webex-correct");
+
+  if (option_index >= 0) {
+
+    this.classList.add(formalsol[option_index] === 1 ? "webex-correct" : "webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking radiogroups answers */
+
+radiogroups_func = function(e) {
+
+  console.log("webex: check radiogroups");
+
+
+
+  /* get real answer (binary integer array) */
+
+  var id = e.target.getAttribute("name");
+
+  var group = document.querySelector(".webex-radiogroup[id='webex-" + id + "']");
+
+  var formalsol = check_id(group)
+
+
+
+  /* check which radiobuttion is selected (user answer) */
+
+  function get_checked(radios) {
+
+    return radios.findIndex(radios => radios.checked);
+
+  }
+
+  var radios = Array.from(group.querySelectorAll("input[type='radio']"))
+
+  var radio_index = get_checked(radios);
+
+
+
+  /* remove existing classes */
+
+  radios.forEach(radio => {
+
+    let cl = radio.closest("label").classList
+
+    cl.remove("webex-incorrect");
+
+    cl.remove("webex-correct");
+
+  });
+
+
+
+  /* add class for current selection */
+
+  let cl = radios[radio_index].closest("label").classList
+
+  if (formalsol[radio_index] === 1) {
+
+      cl.add("webex-correct");
+
+  } else {
+
+      cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+
+
+/* function for checking checkboxgroups answers */
+
+checkboxgroups_func = function(e) {
+
+  console.log("webex: check checkboxgroups");
+
+
+
+  /* get real answer (binary integer array) */
+
+  var group = document.querySelector(".webex-checkboxgroup[id='" + this.id + "']");
+
+  var formalsol = check_id(group);
+
+
+
+  /* check which checkbox is checked (user answer) */
+
+  function get_checked(group) {
+
+      const checkboxes = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
+      return checkboxes.reduce((indices, checkbox, index) => {
+
+          if (checkbox.checked) indices.push(index);
+
+          return indices;
+
+      }, []);
+
+  }
+
+  var checks = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
+  var check_index = get_checked(group);
+
+
+
+  checks.forEach((e, index) => {
+
+    var label = e.parentNode;
+
+    var ans = formalsol[index];
+
+    if ((e.checked && ans === 1) || (!e.checked && ans === 0)) {
+
+        label.setAttribute("class", "webex-correct")
+
+    } else {
+
+        label.setAttribute("class", "webex-incorrect")
+
+    }
+
+  });
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* shuffling array (thanks to stack overflow)
+
+ * If argument x is an integer we create an integer sequence
+
+ * from 0, 1, ..., (x - 1) and return a shuffled version. If
+
+ * the input is an array, we simply shuffle it */
+
+shuffle_array = function(x) {
+
+   if (Number.isInteger(x) && !isNaN(x)) {
+
+     x = Array.from({length: x}, (v, i) => i);
+
+   }
+
+   let shuffled = x.map(value => ({ value, sort: Math.random() }))
+
+        .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+
+   return shuffled;
+
+}
+
+
+
+/* ---------------------------------------------------------
+
+ * ---------------------------------------------------------
+
+ * --------------------------------------------------------- */
+
+window.onload = function() {
+
+  //console.log("webex: onload");
+
+
+
+  /* setting up buttons and actions to show/hide answers */
+
+  document.querySelectorAll(".webex-check").forEach(section => {
+
+    section.classList.add("unchecked");
+
+
+
+    /* ul to take up the list items with buttons */
+
+    let button_ul = document.createElement("ul");
+
+    button_ul.setAttribute("class", "webex-button-list");
+
+    section.appendChild(button_ul);
+
+
+
+    /* button to _check_ if answers given are correct */
+
+    let li_check = document.createElement("li");
+
+    button_ul.appendChild(li_check); /* add list item to ul */
+
+    let btn_check = document.createElement("button");
+
+    btn_check.innerHTML = webex_buttons.check_hidden;  // "Check answer";
+
+    btn_check.setAttribute("class", "webex-button webex-button-check");
+
+    if (webex_buttons.check_hidden_alt.length > 0) btn_check.setAttribute("title", webex_buttons.check_hidden_alt);
+
+    btn_check.onclick = check_func;
+
+    li_check.appendChild(btn_check);
+
+
+
+    /* span to show current number of points (when _check_ active) */
+
+    let spn = document.createElement("span");
+
+    spn.classList.add("webex-total_correct");
+
+    li_check.appendChild(spn);
+
+
+
+    /* button to show the _solution_ if there is one */
+
+    var has_solution = section.parentNode.querySelectorAll(".webex-solution").length > 0;
+
+    if (has_solution) {
+
+      let li_solution = document.createElement("li");
+
+      button_ul.appendChild(li_solution); /* add list item to ul */
+
+      let btn_solution = document.createElement("button");
+
+      btn_solution.innerHTML = webex_buttons.solution; // "Correct answer";
+
+      btn_solution.setAttribute("class", "webex-button webex-button-solution");
+
+      if (webex_buttons.solution_alt.length > 0) btn_solution.setAttribute("title", webex_buttons.solution_alt);
+
+      btn_solution.onclick = solution_func;
+
+      li_solution.appendChild(btn_solution);
+
+    }
+
+
+
+  });
+
+
+
+  /* set up webex-solveme inputs */
+
+  document.querySelectorAll(".webex-solveme").forEach(solveme => {
+
+    solveme.setAttribute("autocomplete","off");
+
+    solveme.setAttribute("autocorrect", "off");
+
+    solveme.setAttribute("autocapitalize", "off");
+
+    solveme.setAttribute("spellcheck", "false");
+
+    solveme.value = "";
+
+
+
+    /* adjust answer for 'no spaces' (ignore spaces) */
+
+    if (solveme.classList.contains("nospaces")) {
+
+      solveme.dataset.answer = solveme.dataset.answer.replace(/ /g, "");
+
+    }
+
+
+
+    /* attach checking function, triggered on key up, change, and when
+
+     * elemnt is out of focus. Only evaluated once by tracking changes
+
+     * via variable solveme_last_user_answer */
+
+    solveme.addEventListener("keyup",  solveme_func);
+
+    solveme.addEventListener("change", solveme_func);
+
+    solveme.addEventListener("blur",   solveme_func);
+
+
+
+    /* adding span to show correct/incorrect icon */
+
+    solveme.insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  });
+
+
+
+  /* set up radiogroups (single choice questions with display = "buttons") */
+
+  document.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
+    radiogroup.onchange = radiogroups_func;
+
+  });
+
+
+
+  /* set up checkboxgroups (multiple choice questions with display = "buttons") */
+
+  document.querySelectorAll(".webex-checkboxgroup").forEach(checkboxgroup => {
+
+    checkboxgroup.onchange = checkboxgroups_func;
+
+  });
+
+
+
+  /* set up selects (dropdown menus) */
+
+  document.querySelectorAll(".webex-select").forEach(select => {
+
+    select.onchange = select_func;
+
+    /* append webex-icon for correct/incorrect icons */
+
+    var elem = document.createElement("span")
+
+    elem.classList.add("webex-icon")
+
+    select.parentNode.appendChild(elem)
+
+  });
+
+
+
+  /* change to next/previous question if multiple are available */
+
+  function handleQuestionClick(group, questions, step) {
+
+    return async function() {
+
+      /* get question order as integer vector */
+
+      let questionOrder = group.dataset.questionOrder.split(",").map(str => parseInt(str));
+
+
+
+      /* current question/position */
+
+      let currentPosition = parseInt(group.dataset.currentPosition);
+
+
+
+      /* Hide the current question */
+
+      questions.forEach(question => { question.classList.remove("active"); });
+
+
+
+      /* Move to the next question index */
+
+      currentPosition = (currentPosition + step) % questionOrder.length;
+
+      if (currentPosition < 0) currentPosition = currentPosition + questionOrder.length
+
+
+
+      /* Display the new question */
+
+      questions[questionOrder[currentPosition]].classList.add("active");
+
+
+
+      // Update the currentPosition data attribute on the group div
+
+      group.dataset.currentPosition = currentPosition;
+
+    };
+
+  }
+
+
+
+  document.querySelectorAll(".webex-group").forEach(group => {
+
+    const questions = Array.from(group.querySelectorAll(".webex-question"));
+
+
+
+    /* Create vector with question order. If the webex-group does
+
+     * not have class '.noshuffle' we will randomly shuffle the order */
+
+    let questionOrder = Array.from({length: questions.length}, (v, i) => i);
+
+    if (!group.classList.contains("noshuffle")) {
+
+      questionOrder = shuffle_array(questionOrder);
+
+    }
+
+
+
+    /* take start position (if set) or start at 0 */
+
+    const currentPosition = parseInt(group.getAttribute("data-start-position")) || 0;
+
+
+
+    /* show the default question for each group */
+
+    questions[questionOrder[currentPosition]].classList.add("active");
+
+
+
+    /* store random order of questions as well as current position */
+
+    group.dataset.questionOrder   = questionOrder;
+
+    group.dataset.currentPosition = currentPosition;
+
+
+
+    /* find all webex-questions, search for .webex-button-list and
+
+     * populate the list with necessary <li><button>...</button></li> elements */
+
+    questions.forEach(question => {
+
+        let button_ul = question.querySelector("ul.webex-button-list");
+
+
+
+        let li_next = document.createElement("li");
+
+        let nextButton = document.createElement("button");
+
+        nextButton.setAttribute("class", "webex-button webex-button-next");
+
+        if (webex_buttons.question_next_alt.length > 0) nextButton.setAttribute("title", webex_buttons.question_next_alt);
+
+        nextButton.innerHTML = webex_buttons.question_next; // "Next question";
+
+        nextButton.addEventListener("click", handleQuestionClick(group, questions, 1));
+
+        li_next.appendChild(nextButton);
+
+
+
+        let li_previous = document.createElement("li");
+
+        let previousButton = document.createElement("button");
+
+        previousButton.setAttribute("class", "webex-button webex-button-previous");
+
+        if (webex_buttons.question_previous_alt.length > 0) previousButton.setAttribute("title", webex_buttons.question_previous_alt);
+
+        previousButton.innerHTML = webex_buttons.question_previous; // "Previous question";
+
+        previousButton.addEventListener("click", handleQuestionClick(group, questions, -1));
+
+        li_previous.appendChild(previousButton);
+
+
+
+        if (webex_buttons.question_previous.length > 0) button_ul.appendChild(li_previous);
+
+        if (webex_buttons.question_next.length > 0) button_ul.appendChild(li_next);
+
+    });
+
+  });
+
+
+
+  /* Development options */
+
+  document.querySelectorAll(".webex-question.check").forEach(question => {
+
+      question.querySelector(".webex-button-check").click()
+
+  });
+
+  document.querySelectorAll(".webex-question.solution").forEach(question => {
+
+      let btn = question.querySelector(".webex-button-solution");
+
+      if (btn !== null) { btn.click(); }
+
+  });
+
+
+
+  /* Pre-filling <input> fields */
+
+  document.querySelectorAll(".webex-question.prefill").forEach(question => {
+
+      question.querySelectorAll("input.webex-solveme").forEach(solveme => {
+
+          let x = JSON.parse(solveme.dataset.answer);
+
+          solveme.value = x[0];
+
+          /* Trigger the on change event */
+
+          solveme.dispatchEvent(new Event("change"));
+
+      });
+
+
+
+      /* Pre-filling radiogroups, that is for schoice questions */
+
+      question.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
+          let x = JSON.parse(radiogroup.dataset.answer);
+
+          let idx = x.indexOf(1);
+
+          let radios = radiogroup.querySelectorAll('input[type="radio"]');
+
+          radios[idx].checked = true;
+
+          /* Trigger the on change event */
+
+          radios[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+
+
+      /* Pre-filling checkboxgroups, that is for schoice questions w/ dropdown menus */
+
+      question.querySelectorAll(".webex-select").forEach(dropdown => {
+
+          let x = JSON.parse(dropdown.dataset.answer);
+
+          let idx = x.indexOf(1) + 1; /* +1 to skip the first blank option */
+
+          let options = dropdown.querySelectorAll("option");
+
+          options[idx].selected = true;
+
+          /* Trigger the on change event */
+
+          options[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+
+
+      /* Pre-filling checkboxgroups, that is for mchoice questions */
+
+      question.querySelectorAll(".webex-checkboxgroup").forEach(radiogroup => {
+
+          let x = JSON.parse(radiogroup.dataset.answer);
+
+          let checkboxes = radiogroup.querySelectorAll('input[type="checkbox"]');
+
+          for (let i = 0; i < checkboxes.length; i++) {
+
+              checkboxes[i].checked = x[i];
+
+          }
+
+          /* Trigger the on change event */
+
+          checkboxes[0].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+  });
+
+
+
+  /* Show set tolerance (devel option) */
+
+  function calc_width(x, txt, offset = 20) {
+
+      /* We do the following:
+
+       * Create a new span, insert the value we need in the .tolerance
+
+       * input node, and calculate its offsetWidth. Then remove it
+
+       * again; this is just used to calculate the required width. */
+
+      var cwtmp = document.createElement("span");
+
+      x.appendChild(cwtmp);
+
+      cwtmp.innerHTML = txt || "";
+
+      var w = parseInt(cwtmp.getBoundingClientRect().width) + offset;
+
+      cwtmp.remove();
+
+      return w;
+
+  }
+
+
+
+  /* If tolerance should be shown (devel option) we calculate:
+
+   * - the width required to properly display the solution
+
+   * - the width required to properly display the tolerance
+
+   * - add a new element to display the tolerance
+
+   * - reduce the width of the solution input box. */
+
+  document.querySelectorAll(".webex-question.tolerance").forEach(question => {
+
+      question.querySelectorAll("input[data-tol]").forEach(elem => {
+
+          var w = null;
+
+
+
+          /* Add new element showing the tolerance */
+
+          let tol = document.createElement("input");
+
+          tol.type = "text"; // <inpyt type="text">
+
+          tol.disabled = true; // Disable input element
+
+          tol.classList.add("tolerance"); // Appending class
+
+          tol.value = "Â± " + elem.getAttribute("data-tol");
+
+
+
+          /* Add new node */
+
+          elem.parentNode.insertBefore(tol, elem)
+
+
+
+          var body     = document.querySelector("body");
+
+          //tol.value = "Â± " + "0.0000007";
+
+          //tol.value = "Â± " + "0.07";
+
+          w    = calc_width(body, tol.value);
+
+          wold = parseInt(elem.getBoundingClientRect().width);
+
+          wmin = calc_width(body, elem.value);
+
+
+
+          /* Calculate required width of the 'tolerance' node, and the
+
+           * reduction of the original 'input' node */
+
+          let wnew = Math.max(wmin, wold - w);
+
+          tol.style.width  = w + "px";
+
+          elem.style.width = wnew + "px";
+
+      });
+
+  });
+
+
+
+  update_total_correct();
+
+}
+
+
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/31_understanding_study_designs.html" class="pagination-link" aria-label="Understanding Study Designs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/33_population_sample_data_distribution.html" class="pagination-link" aria-label="Population, Sample, and Data Distribution">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Population, Sample, and Data Distribution</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Taian Martins Vieira • <a href="https://creativecommons.org">CC BY-NC 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Built with <strong>R</strong>, <strong>OJS</strong>, &amp; <a href="https://quarto.org/">Quarto</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/">
+      <i class="bi bi-github" role="img" aria-label="View Source Code">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/issues">
+      <i class="bi bi-bug" role="img" aria-label="Report a Bug or Typo">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

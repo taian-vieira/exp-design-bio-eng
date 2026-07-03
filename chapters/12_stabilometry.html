@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Stabilometry – Experimental Design in Biomedical Engineering</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/13_phyphox_posture_experiment.html" rel="next">
+<link href="../chapters/11_physiology_of_posture_control.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2c8d71db4d056fff4a87fcadc2b2ddaf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="text/javascript">
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../include/cssfiles/bootstrap.css">
+<link rel="stylesheet" href="../include/cssfiles/webex.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/11_physiology_of_posture_control.html">Part 1: Smart Posture</a></li><li class="breadcrumb-item"><a href="../chapters/12_stabilometry.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Experimental Design in Biomedical Engineering</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/0_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Experimental Design</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 1: Smart Posture</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11_physiology_of_posture_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12_stabilometry.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13_phyphox_posture_experiment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">PhyPhox SmartPosture Tutorial</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 2: R Tutorial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21_example_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Example Data: Postural Sways</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22_getting_started_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/23_basics_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Basics with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/24_plotting_and_processing_raw_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/25_automating_raw_data_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 3: The Theory Behind Experimental Design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/31_understanding_study_designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/32_summarizing_and_presenting_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/33_population_sample_data_distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Population, Sample, and Data Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/34_one_group.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inference, Error, Power, and Sample Size - One Group</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/35_two_groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference, Power, and Sample Size - Two Group</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/36_anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Balanced and Unbalanced Designs over Two Groups</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/37_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Predicting Outcomes with Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/a1_ethical_considerations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-orthostatic-posture" id="toc-the-orthostatic-posture" class="nav-link active" data-scroll-target="#the-orthostatic-posture"><span class="header-section-number">2.1</span> The Orthostatic Posture</a></li>
+  <li><a href="#measuring-postural-sways" id="toc-measuring-postural-sways" class="nav-link" data-scroll-target="#measuring-postural-sways"><span class="header-section-number">2.2</span> Measuring Postural Sways</a>
+  <ul>
+  <li><a href="#cog-vs-cop" id="toc-cog-vs-cop" class="nav-link" data-scroll-target="#cog-vs-cop">CoG vs CoP</a></li>
+  <li><a href="#the-stabilometry-technique" id="toc-the-stabilometry-technique" class="nav-link" data-scroll-target="#the-stabilometry-technique">The Stabilometry Technique</a></li>
+  <li><a href="#computing-cop-position" id="toc-computing-cop-position" class="nav-link" data-scroll-target="#computing-cop-position">Computing CoP Position</a></li>
+  <li><a href="#sec-stabilometric-representation" id="toc-sec-stabilometric-representation" class="nav-link" data-scroll-target="#sec-stabilometric-representation">Stabilogram and Statokinesigram</a></li>
+  <li><a href="#sec-copmetrics" id="toc-sec-copmetrics" class="nav-link" data-scroll-target="#sec-copmetrics">CoP Metrics</a>
+  <ul class="collapse">
+  <li><a href="#sec-sv" id="toc-sec-sv" class="nav-link" data-scroll-target="#sec-sv">Stabilogram Metrics (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(v\)</span>)</a></li>
+  <li><a href="#sec-ea" id="toc-sec-ea" class="nav-link" data-scroll-target="#sec-ea">Statokinesigram Metric (<span class="math inline">\(EA\)</span>)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#from-theory-to-practice-smart-posture" id="toc-from-theory-to-practice-smart-posture" class="nav-link" data-scroll-target="#from-theory-to-practice-smart-posture"><span class="header-section-number">2.3</span> From Theory to Practice (Smart Posture)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/11_physiology_of_posture_control.html">Part 1: Smart Posture</a></li><li class="breadcrumb-item"><a href="../chapters/12_stabilometry.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-stabilometry" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Biomedical Engineering</div>
+    <div class="quarto-category">Applied Statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The objective assessment of postural control provides insights into deficits and improvements in balance performance. Clinicians and health scientists, for example, may use this information to guide rehabilitation programs aimed at preserving or restoring the control of orientation and stability. As discussed in the previous chapter, inadequate postural control compromises the successful execution of virtually all motor tasks.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="This chapter...">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>This chapter…
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>… has a twofold goal. First, the technique most commonly used to study postural control will be discussed. Second, the traditional metrics used to provide an objective evaluation of postural sway will be presented.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+<section id="the-orthostatic-posture" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="the-orthostatic-posture"><span class="header-section-number">2.1</span> The Orthostatic Posture</h2>
+<p>The orthostatic posture is achieved by standing upright and quietly—it is often referred to as the <em>quiet standing posture</em>. While postural perturbations may provide valuable information about compensatory mechanisms, studying postural control during quiet standing allows us to probe the <em>status quo</em> of the systems involved in posture control.</p>
+<p>Maintaining a stable quiet standing posture is the result of a complex sensory-motor integration process, the mechanisms of which are still debated. This apparently simple task imposes substantial stabilization demands that, if not met, may lead to a fall. The complexity arises from the need to keep the body center of gravity (<strong>CoG</strong>)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> above the relatively small base of support defined by the contact between the feet and the ground. Because of internal mechanical perturbations, such as respiration and the cardiac cycle, controlling CoG position is inherently a dynamic task. Indeed, as early as the 1930s, <a href="https://journals.physiology.org/doi/abs/10.1152/ajplegacy.1938.121.2.471">Hellebrandt</a> <span class="citation" data-cites="hellebrandt38">[<a href="references.html#ref-hellebrandt38" role="doc-biblioref">1</a>]</span> defined quiet standing as:</p>
+<blockquote class="blockquote">
+<p><em>movement upon a stationary base.</em></p>
+</blockquote>
+<p>In the upright stance, the body CoG projects near most of the body joints. The vertical projection of the body CoG relative to the different joints is represented by the vertical line shown in the left panel of <a href="#fig-1-2-1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>. This vertical line defines the action of gravity relative to the joints and is referred to as the <strong>gravity line of action</strong>.</p>
+<div id="fig-1-2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-1_quiet-standing.gif" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: The human quiet standing posture and a key muscle involved in standing stabilization—the gastrocnemius.
+</figcaption>
+</figure>
+</div>
+<p>Stabilization is achieved by maintaining this line within the theoretical limits of the base of support. Close inspection of <a href="#fig-1-2-1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> reveals that gravity produces a forward moment about most body joints, particularly the ankle joint, since the gravity line of action generally passes through or slightly anterior to them. Although the proximity of the gravity line to the joints minimizes torque demands, the CoG is not stationary during quiet standing. The gravity line continuously shifts forward, backward, and laterally, requiring the active regulation of muscle activity. The muscles most frequently involved in quiet-standing stabilization are shown in <a href="#fig-1-2-1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
+<p>Possibly because the gravity line is, on average, farther from the ankle joint than from any other major joint, the calf muscles are among the most extensively studied muscles during quiet standing. Composed primarily of the gastrocnemius and soleus, the calf musculature is a powerful muscle group responsible for generating plantar-flexion torque. In other words, it generates an extension moment about the ankle, either moving the toes downward or moving the body backward (cf.&nbsp;animation in <a href="#fig-1-2-1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>).</p>
+<p>Completing the exercise below will help understand why plantar-flexor muscles are actively recruited to counteract the forward movement of the CoG in response to gravity.</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img src="..\include/images/part_1/ch_2/flexors-or-extensors.gif" class="img-fluid"></p>
+</div><div class="column small-text" style="width:40%;">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>Can we readily tell which muscles are active and when?</em></p>
+<div id="webex-ecddf4a5b0dba9f5c9b11667c546a76b" class="webex-radiogroup" data-answer="PlJIVEoETQVOADk=">
+<label><input type="radio" autocomplete="off" name="ecddf4a5b0dba9f5c9b11667c546a76b"><span><em>it is not possible to say</em></span></label><label><input type="radio" autocomplete="off" name="ecddf4a5b0dba9f5c9b11667c546a76b"><span><em>flexors (<span class="math inline">\(\downarrow\)</span>), extensors (<span class="math inline">\(\uparrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="ecddf4a5b0dba9f5c9b11667c546a76b"><span><em>only extensors (<span class="math inline">\(\uparrow\)</span> and <span class="math inline">\(\downarrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="ecddf4a5b0dba9f5c9b11667c546a76b"><span><em>only flexors (<span class="math inline">\(\uparrow\)</span> and <span class="math inline">\(\downarrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="ecddf4a5b0dba9f5c9b11667c546a76b"><span><em>flexors (<span class="math inline">\(\uparrow\)</span>), extensors (<span class="math inline">\(\downarrow\)</span>)</em></span></label>
+</div>
+</div>
+<div class="webex-solution">
+<p>It is not possible to say, given no information is provided about the gravity vector with respect to the segments shown.</p>
+<p>If gravity vector was in the downward direction in the figure, the correct answer would be that elbow flexor muscles are contracting both in the up and down phase. In the up phase they would be producing positive work, moving the limb against gravity. In the down phase they would be producing negative work, obsorbing gravity work as the limb is moved down.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The first evidence of the importance of assessing postural control during quiet standing likely stems from the observations of Romberg, a German neurologist. When deprived of vision, Romberg observed that some patients were unable to maintain a stable standing posture. This instability, characterized by exaggerated postural sway when standing with the eyes closed, was recognized as a manifestation of sensory ataxia<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Although subjective, the Romberg test remains clinically relevant for the assessment of balance disorders.</p>
+<p>The orthostatic posture is therefore a dynamic task, characterized by the timely coordination of muscle activity to prevent falls. This process results in postural sway that, under normal conditions, is typically of millimetric magnitude. In pathological conditions, postural sway increases and may become visually apparent.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Assessing postural sways">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Assessing postural sways
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>It is therefore conceivable that any approach capable of quantifying postural sway, or of providing metrics derived from postural sway, would be of major importance for the objective assessment of postural control.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="measuring-postural-sways" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="measuring-postural-sways"><span class="header-section-number">2.2</span> Measuring Postural Sways</h2>
+<p>From a simple plumb line hanging from the waist to sophisticated motion-capture systems, several techniques can be used to quantify postural sway. The most widely adopted approach relies on the measurement of ground reaction forces using dedicated force plates. Before detailing this technique, it is important to distinguish between the center of pressure (<strong>CoP</strong>) and the center of gravity (<strong>CoG</strong>).</p>
+<p><br>
+</p>
+<section id="cog-vs-cop" class="level3">
+<h3 class="anchored" data-anchor-id="cog-vs-cop">CoG vs CoP</h3>
+<p>Consider the simple challenge of balancing a broom on the palm of the hand (<a href="#fig-1-2-2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>). The CoP, that is, the point where the broom force is applied to the support surface, is located on the palm where contact occurs between the broom handle and the hand. Although contact occurs over a finite area, the CoP is represented as a single point. The CoG, whose location depends on how mass is distributed within the broom, is located near the brush, where most of the broom mass is concentrated.</p>
+<p>Balancing the broom requires continuously moving the CoP so that the motion of the CoG can be controlled. In the example shown in <a href="#fig-1-2-2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, moving the hand rapidly forward would reverse the net moment acting on the broom, slowing its forward fall and initiating a backward movement. Similarly, moving the hand backward would reverse the direction of motion once again. By repeatedly adjusting the position of the hand, the CoG can be maintained within a limited range. The size of this range depends on how effectively CoP movements compensate for CoG movements.</p>
+<div id="fig-1-2-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-2_cog-vs-cop.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Distinguishing center of gravity (CoG) from center of pressure (CoP)
+</figcaption>
+</figure>
+</div>
+<p>A similar representation can be applied to the standing human body (<a href="#fig-1-2-2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>). During quiet standing, body motion can be reasonably approximated by an inverted pendulum pivoted around the ankle joint <span class="citation" data-cites="winter98">[<a href="references.html#ref-winter98" role="doc-biblioref">2</a>]</span> <span class="citation" data-cites="morasso19">[<a href="references.html#ref-morasso19" role="doc-biblioref">3</a>]</span>. Within this framework, gravity produces a forward moment about the ankle joint, which is counteracted by the extension torque generated by the plantar-flexor muscles (see <a href="#fig-1-2-1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>).</p>
+<p>Contraction of the plantar-flexor muscles moves the CoP forward. Because the feet remain fixed to the ground, it can be shown that CoP displacement is proportional to ankle plantar-flexion torque <span class="citation" data-cites="morasso99">[<a href="references.html#ref-morasso99" role="doc-biblioref">4</a>]</span>. If plantar-flexion torque exceeds the gravitational torque, determined by body weight (<span class="math inline">\(W_b\)</span>) and by the horizontal position of the CoG relative to the ankle (<span class="math inline">\(y_{\text{cog}}\)</span>), the CoG accelerates backward and a backward sway eventually begins. Conversely, reversing a backward sway requires moving the CoP behind the CoG. Interestingly, this may be achieved simply by reducing plantar-flexion torque. Contrary to common intuition, an active dorsiflexion torque may not be necessary to pull the body forward, as gravity alone may provide the required acceleration.</p>
+<p>Consequently, stabilization of the body CoG results from a continuous modulation of CoP position. During quiet standing, a biomechanical constraint imposes a strong coupling between the displacement of these two quantities. As the CoG moves forward, the CoP also moves forward; as the CoG moves backward, the CoP follows in the same direction. Therefore, CoG and CoP displacements are strongly coupled and generally move in the same direction.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="CoG vs CoP">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>CoG vs CoP
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>It is clear that CoP and CoG are distinct but closely related constructs. This relationship justifies the measurement of CoP as an indirect approach for studying and evaluating postural control during quiet standing.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="the-stabilometry-technique" class="level3">
+<h3 class="anchored" data-anchor-id="the-stabilometry-technique">The Stabilometry Technique</h3>
+<p>Stabilometry is an objective technique used to quantify CoP position during quiet standing. It relies on computerized methods that process force signals measured at the support surface.</p>
+<p>Two main systems can be used to compute CoP position: pressure insoles and force plates. Pressure insoles consist of a grid of pressure sensors embedded within shoe insoles. From the pressure distribution beneath the feet, the position of the CoP on the support surface can be estimated. Force plates, in contrast, consist of a rigid platform mounted on force-sensing elements. Force plates are generally preferred because they allow both vertical and horizontal force components to be considered in the computation of CoP position.</p>
+<p>An example of a force plate, including the force-sensing elements, the measured forces, the resulting moments, and the reference system used for CoP computation, is illustrated in <a href="#fig-1-2-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>. The resultant force applied to the force-plate surface is represented by the vector <span class="math inline">\(F\)</span>. The CoP corresponds to the location at which this resultant force acts on the plate.</p>
+<p>Four force sensors are shown, one at each corner of the force plate. Each sensor provides a force vector (<span class="math inline">\(f_i, \, i=1,2,3,4\)</span>), representing the <strong>ground reaction force</strong> measured at that location. Together, the four force vectors must reproduce the resultant force <span class="math inline">\(F\)</span> and the moments generated by its point of application. Consequently, the magnitude and direction of the individual ground reaction forces depend on the magnitude, direction, and location of <span class="math inline">\(F\)</span>.</p>
+<div id="fig-1-2-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-3_forceplate.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Example of a stabilometric trial (left) and of the quantities involved in the computation of CoP position (right).
+</figcaption>
+</figure>
+</div>
+<p>In static equilibrium, the sum of all forces is equal to zero:</p>
+<p><span id="eq-grfs"><span class="math display">\[
+\mathbf{F} + \mathbf{f_1}+\mathbf{f_2} + \mathbf{f_3} + \mathbf{f_4} = 0
+\tag{2.1}\]</span></span></p>
+<p>The physical principle used to measure force is generally based on either piezoelectric or strain-gauge technology. In the former case, the accumulation of electrical charge within each sensor is proportional to the force applied to it. In the latter case, force is inferred from changes in the electrical resistance of strain gauges. These changes result from deformation (strain) of the sensing element, which is proportional to the applied force.</p>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>Different force-plate manufacturers exist, and their systems typically provide direct access to the measured forces and moments.</em></p>
+<p><em>Supposing the force plate you are using provides the three (<span class="math inline">\(x,y,z\)</span>) components of each of the four force vectors shown in <a href="#fig-1-2-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>, how would you compute the body weight (<span class="math inline">\(W_{\text{b}}\)</span>) from these quantities?</em></p>
+<div id="webex-7268773643e7c557c5b10525c6be06c9" class="webex-radiogroup" data-answer="bAMaCBsHbg==">
+<label><input type="radio" autocomplete="off" name="7268773643e7c557c5b10525c6be06c9"><span><em>by summing the four vertical force components and taking the magnitude of the result</em></span></label><label><input type="radio" autocomplete="off" name="7268773643e7c557c5b10525c6be06c9"><span><em>by summing the magnitudes of the four force vectors</em></span></label><label><input type="radio" autocomplete="off" name="7268773643e7c557c5b10525c6be06c9"><span><em>not possible to compute because the body mass is not known</em></span></label>
+</div>
+</div>
+<div class="webex-solution">
+<p>During quiet standing, the body is approximately in static equilibrium. Therefore, the sum of all external forces acting in the vertical direction must be equal to zero.</p>
+<p>Let</p>
+<p><span class="math display">\[
+f_{z_i}, \, i=1,2,3,4
+\]</span></p>
+<p>be the vertical components of the four ground reaction forces measured by the force plate.</p>
+<p>The only external forces acting in the vertical direction are:</p>
+<ul>
+<li>the body weight (<span class="math inline">\(W_{\text{b}}\)</span>), acting downward;</li>
+<li>the vertical components of the ground reaction forces, acting upward.</li>
+</ul>
+<p>Consequently,</p>
+<p><span class="math display">\[
+W_{\text{b}} + f_{z_1} + f_{z_2} + f_{z_3} + f_{z_4} = 0
+\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[
+W_{\text{b}} =
+|-(f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4})|
+\]</span></p>
+<p>Thus, body weight can be computed from the sum of the vertical components of the ground reaction forces.</p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="computing-cop-position" class="level3">
+<h3 class="anchored" data-anchor-id="computing-cop-position">Computing CoP Position</h3>
+<p>The CoP position is computed from the ground reaction forces measured by the force plate (see <a href="#fig-1-2-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). The computation procedure is detailed below for the anterior-posterior direction (<span class="math inline">\(y_{\text{cop}}\)</span>), that is, in the sagittal plane.</p>
+<p>Figure <a href="#fig-1-2-4" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> illustrates a parasagittal view of a person standing on a force plate, including the measured vertical ground reaction forces and the resultant force. During quiet standing, and under the assumption that horizontal accelerations are negligible, the resultant vertical force can be approximated by the body weight:</p>
+<p><span id="eq-fwb"><span class="math display">\[
+\mathbf{F} \approx \mathbf{W_{\text{b}}}.
+\tag{2.2}\]</span></span></p>
+<div id="fig-1-2-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-4_cop-computation.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: CoP computation in the anterior-posterior direction.
+</figcaption>
+</figure>
+</div>
+<p>Given this approximation, the computation can be introduced by considering only the vertical components of the ground reaction forces:</p>
+<p><span class="math display">\[
+f_{z_i}, \, i=1,2,3,4.
+\]</span></p>
+<p>The figure illustrates <span class="math inline">\(f_{z_3}\)</span> and <span class="math inline">\(f_{z_4}\)</span> with greater magnitude than <span class="math inline">\(f_{z_1}\)</span> and <span class="math inline">\(f_{z_2}\)</span> only to make the four vertical forces visually clear. Depending on the CoP position, the opposite configuration may occur. For example, <span class="math inline">\(f_{z_1}\)</span> may be greater than <span class="math inline">\(f_{z_3}\)</span>, just as <span class="math inline">\(f_{z_2}\)</span> may be greater than <span class="math inline">\(f_{z_4}\)</span>.</p>
+<p>By considering only vertical forces, the computation of CoP position becomes relatively simple. First, a reference system for representing the CoP coordinates must be defined. In Figures <a href="#fig-1-2-3" class="quarto-xref"><span>2.3</span></a> and <a href="#fig-1-2-4" class="quarto-xref"><span>2.4</span></a>, the center of the force-plate surface is taken as the origin of the reference system, with the <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> axes directed respectively to the right, anteriorly, and upward.</p>
+<p>Mathematically, <span class="math inline">\(y_{\text{cop}}\)</span> is determined from the balance of moments around the medio-lateral axis. In static equilibrium, the sum of the moments is equal to zero:</p>
+<p><span id="eq-sumofmoments"><span class="math display">\[
+\mathbf{M_x} + \mathbf{M_1} + \mathbf{M_2} + \mathbf{M_3} + \mathbf{M_4} = 0
+\tag{2.3}\]</span></span></p>
+<p>where <span class="math inline">\(\mathbf{M_x}\)</span> is the moment produced by the resultant force <span class="math inline">\(\mathbf{F}\)</span> around the medio-lateral axis (<span class="math inline">\(x\)</span> axis in <a href="#fig-1-2-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>), and <span class="math inline">\(\mathbf{M_i}\)</span>, with <span class="math inline">\(i=1,2,3,4\)</span>, is the moment produced by each ground reaction force about the same axis.</p>
+<p>Each moment is given by the cross product between the position vector and the corresponding force vector. For the four vertical forces measured by the sensors, we have:</p>
+<p><span id="eq-fzmoments"><span class="math display">\[
+\begin{aligned}
+M_1 &amp;= (-\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_1}} = -\Delta_y f_{z_1}\hat{\mathbf{u}}_x\\
+M_2 &amp;= (+\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_2}} = +\Delta_y f_{z_2}\hat{\mathbf{u}}_x\\
+M_3 &amp;= (-\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_3}} = -\Delta_y f_{z_3}\hat{\mathbf{u}}_x\\
+M_4 &amp;= (+\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_4}} = +\Delta_y f_{z_4}\hat{\mathbf{u}}_x,
+\end{aligned}
+\tag{2.4}\]</span></span></p>
+<p>where <span class="math inline">\(\Delta_y\)</span> is the distance between each sensor measuring point and the origin of the reference system, projected on the <span class="math inline">\(y\)</span> axis. The vectors <span class="math inline">\(\hat{\mathbf{u}}_x\)</span> and <span class="math inline">\(\hat{\mathbf{u}}_y\)</span> are unit vectors in the corresponding axes, while <span class="math inline">\(f_{z_i}\)</span> denotes the magnitude of the vertical reaction force measured by the <span class="math inline">\(i\)</span>-th sensor.</p>
+<p>In an analogous way, the moment produced by the body weight in the sagittal plane is given by:</p>
+<p><span id="eq-copxmoment"><span class="math display">\[
+\mathbf{M_x} = \mathbf{y}_{\text{cop}} \times \mathbf{W_{\text{b}}} = -y_{\text{cop}}W_{\text{b}}\hat{\mathbf{u}}_x,
+\tag{2.5}\]</span></span></p>
+<p>where <span class="math inline">\(y_{\text{cop}}\)</span> is the anterior-posterior coordinate of the point of application of <span class="math inline">\(\mathbf{W_{\text{b}}}\)</span> on the support surface, and <span class="math inline">\(W_{\text{b}}\)</span> is the magnitude of the body weight vector.</p>
+<p>Substituting the expressions above into the moment equilibrium equation <a href="#eq-sumofmoments" class="quarto-xref"><span>2.3</span></a> and rearranging terms yields:</p>
+<p><span class="math display">\[
+y_{\text{cop}} = \Delta_y\frac{f_{z_2}+f_{z_4}-f_{z_1}-f_{z_3}}{W_{\text{b}}}.
+\]</span></p>
+<p>Because, under static equilibrium, body weight can be estimated from the sum of the vertical reaction forces, <span class="math inline">\(W_{\text{b}}\)</span> can be replaced by:</p>
+<p><span class="math display">\[
+W_{\text{b}} = f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4}.
+\]</span></p>
+<p>Therefore, the anterior-posterior CoP coordinate is computed as:</p>
+<p><span id="eq-ycop"><span class="math display">\[
+y_{\text{cop}} = \Delta_y\frac{f_{z_2}+f_{z_4}-f_{z_1}-f_{z_3}}{f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4}}.
+\tag{2.6}\]</span></span></p>
+<p>Likewise, the CoP position in the frontal plane is defined as:</p>
+<p><span id="eq-xcop"><span class="math display">\[
+x_{\text{cop}} = \Delta_x\frac{-f_{z_2}+f_{z_4}-f_{z_1}+f_{z_3}}{f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4}},
+\tag{2.7}\]</span></span></p>
+<p>where <span class="math inline">\(\Delta_x\)</span> is the projection of the distance between each sensor and the origin of the reference system on the <span class="math inline">\(x\)</span> axis.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="What about the horizontal reaction forces?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What about the horizontal reaction forces?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The CoP equations presented above neglect the horizontal ground reaction forces. This approximation is generally adequate during quiet standing because horizontal forces are relatively small.</em></p>
+<p><em>When greater accuracy is required, however, the horizontal force components can be incorporated into the computation. The correction depends on the horizontal reaction forces and on the vertical distance between the force sensors and the surface on which the subject stands (i.e.&nbsp;the force-plate thickness).</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-stabilometric-representation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-stabilometric-representation">Stabilogram and Statokinesigram</h3>
+<p>The animation in <a href="#fig-1-2-5" class="quarto-xref">Figure&nbsp;<span>2.5</span></a> provides a representation of the excursion of the CoP over the force plate during quiet standing—a <strong>stabilometric trial</strong>. Green circles correspond to the CoP coordinates <span class="math inline">\((x_{\text{cop}}, y_{\text{cop}})\)</span> computed from the ground reaction forces. The distance between consecutive positions depends on both the sampling frequency of the acquisition system and the CoP speed. In stabilometric recordings, sampling frequencies are typically greater than 20 Hz <span class="citation" data-cites="vieira09">[<a href="references.html#ref-vieira09" role="doc-biblioref">5</a>]</span>.</p>
+<div id="fig-1-2-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-5_cop-excursion.gif" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Example of a stabilometric trial, showing the CoP excursion during quiet standing.
+</figcaption>
+</figure>
+</div>
+<p>Stabilometric systems often provide users with the time series of the CoP position in both the medio-lateral (<span class="math inline">\(x\)</span>) and anterior-posterior (<span class="math inline">\(y\)</span>) axes. Otherwise, CoP position must be computed from ground reaction forces or from moments. Some systems provide the forces measured by each sensor, whereas others provide the three components of the resultant force (cf.&nbsp;vector <span class="math inline">\(F\)</span> in <a href="#fig-1-2-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>) and the moments it produces.</p>
+<p>Once a stabilometric trial is collected, the CoP profile may be inspected either in time or in space. These two forms of representation are shown in <a href="#fig-1-2-6" class="quarto-xref">Figure&nbsp;<span>2.6</span></a>.</p>
+<p><strong>Stabilograms</strong> correspond to the temporal representation of CoP position during a stabilometric trial. Two stabilograms are obtained from each trial: one associated with CoP position in the medio-lateral direction and the other associated with CoP position in the anterior-posterior direction.</p>
+<p><strong>Statokinesigrams</strong> combine the CoP excursion in both axes into a single Cartesian plot. Even though the statokinesigram provides a spatial representation of the CoP samples, it depends on the recording duration. The longer the recording duration, the greater the number of CoP samples used to create the statokinesigram.</p>
+<div id="fig-1-2-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-6_stabilogram-statokinesigram.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.6: Two possible representations of CoP excursion. The statokinesigram represents CoP displacement in space, whereas the stabilograms represent the medio-lateral and anterior-posterior CoP coordinates over time.
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="sec-copmetrics" class="level3">
+<h3 class="anchored" data-anchor-id="sec-copmetrics">CoP Metrics</h3>
+<p>In any field of study, metrics of interest should be extracted from the specific signal collected (e.g., ECG, EMG, stabilograms). These metrics should be physiologically meaningful or, at least, provide a tangible interpretation of the process under investigation.</p>
+<p>Several metrics may be computed from both stabilograms and statokinesigrams. Traditional, or classic, metrics rely mainly on basic statistics. More than 30 commonly used classic metrics are listed by <a href="https://ieeexplore.ieee.org/document/532130">Prieto et al.</a> <span class="citation" data-cites="prieto96">[<a href="references.html#ref-prieto96" role="doc-biblioref">6</a>]</span>. Other metrics are based on more advanced signal-processing techniques, such as the sway density curve <span class="citation" data-cites="jacono04">[<a href="references.html#ref-jacono04" role="doc-biblioref">7</a>]</span> or fractional Brownian motion <span class="citation" data-cites="collins93">[<a href="references.html#ref-collins93" role="doc-biblioref">8</a>]</span>.</p>
+<p>For the purposes of this course, three classic metrics will be considered. Two metrics will be computed from stabilograms: the CoP standard deviation and the CoP mean speed. Both are computed separately for the medio-lateral and anterior-posterior axes. A third metric, the elliptical area, will be computed from the statokinesigram.</p>
+<p><br>
+</p>
+<section id="sec-sv" class="level4">
+<h4 class="anchored" data-anchor-id="sec-sv">Stabilogram Metrics (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(v\)</span>)</h4>
+<p>The CoP standard deviation is defined by:</p>
+<p><span id="eq-copstdx"><span class="math display">\[
+\sigma_x = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\left(x_{\text{cop}}(i)-\bar{x}_{\text{cop}}\right)^2}
+\tag{2.8}\]</span></span></p>
+<p>and</p>
+<p><span id="eq-copstdy"><span class="math display">\[
+\sigma_y = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\left(y_{\text{cop}}(i)-\bar{y}_{\text{cop}}\right)^2}
+\tag{2.9}\]</span></span></p>
+<p>where <span class="math inline">\(N\)</span> is the total number of samples, and <span class="math inline">\(\bar{x}_{\text{cop}}\)</span> and <span class="math inline">\(\bar{y}_{\text{cop}}\)</span> are the mean CoP positions on the two anatomical axes:</p>
+<p><span class="math display">\[
+\bar{x}_{\text{cop}} = \frac{1}{N}\sum_{i=1}^{N}x_{\text{cop}}(i)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\bar{y}_{\text{cop}} = \frac{1}{N}\sum_{i=1}^{N}y_{\text{cop}}(i).
+\]</span></p>
+<p>The mean speed is computed from consecutive CoP displacements, separately for the medio-lateral and anterior-posterior axes:</p>
+<p><span id="eq-copvx"><span class="math display">\[
+v_x = \frac{1}{T}\sum_{i=1}^{N-1}\left|x_{\text{cop}}(i+1)-x_{\text{cop}}(i)\right|
+\tag{2.10}\]</span></span></p>
+<p>and</p>
+<p><span id="eq-copvy"><span class="math display">\[
+v_y = \frac{1}{T}\sum_{i=1}^{N-1}\left|y_{\text{cop}}(i+1)-y_{\text{cop}}(i)\right|
+\tag{2.11}\]</span></span></p>
+<p>where <span class="math inline">\(T\)</span> is the duration of the stabilometric trial. The absolute value is used because, otherwise, forward and backward displacements, or leftward and rightward displacements, would cancel each other.</p>
+<p>These two metrics have distinct interpretations. The CoP standard deviation quantifies the average size of the region in the horizontal plane within which postural sway occurs. The CoP mean speed provides an indication of how rapidly corrections to postural sway are made—for example, how rapidly the hand moves when balancing the broom in <a href="#fig-1-2-2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. Biomechanically, CoP standard deviation reflects how much ankle torque is modulated, whereas CoP mean speed reflects how rapidly ankle torque changes.</p>
+<p><br>
+</p>
+</section>
+<section id="sec-ea" class="level4">
+<h4 class="anchored" data-anchor-id="sec-ea">Statokinesigram Metric (<span class="math inline">\(EA\)</span>)</h4>
+<p>While CoP standard deviation assesses the size of postural sway separately along each anatomical direction, the area of the statokinesigram combines the medio-lateral and anterior-posterior excursions into a single global measure of sway size.</p>
+<p>The idea is to compute the size of the region containing the CoP samples. Because CoP displacement during quiet standing is irregular, computing the boundary of this region analytically is not straightforward. A practical alternative is to approximate the statokinesigram using a geometric shape and then compute the area of that shape. The question is which shape should be used.</p>
+<p>Using a circle or a non-rotated rectangle to approximate the statokinesigram is generally not appropriate. As shown in the left panel of <a href="#fig-1-2-7" class="quarto-xref">Figure&nbsp;<span>2.7</span></a>, these shapes may substantially overestimate the region actually occupied by the CoP samples. Rotating a rectangle according to the direction along which CoP displacement is mainly distributed provides a more representative approximation. However, the area is still overestimated, because large empty regions, especially near the corners of the rectangle, are included in the computation.</p>
+<p>In 1996, <a href="http://dx.doi.org/10.1088/0967-3334/17/4/008">Oliveira and coworkers</a> <span class="citation" data-cites="oliveira96">[<a href="references.html#ref-oliveira96" role="doc-biblioref">9</a>]</span> proposed a statistical approach to compute the area of the statokinesigram. The method is based on identifying two principal axes defining an ellipse that contains a large fraction of the CoP samples. An example is provided in the right panel of <a href="#fig-1-2-7" class="quarto-xref">Figure&nbsp;<span>2.7</span></a>. Compared with circular or rectangular approximations, the ellipse adapts both to the orientation and to the anisotropy of the CoP cloud.</p>
+<div id="fig-1-2-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-2-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_1/ch_2/1-2-7_cop-areas.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-2-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.7: Different approaches for computing the CoP area. The left panel compares circular and rectangular approximations, whereas the right panel illustrates the elliptic area based on the principal axes of CoP displacement.
+</figcaption>
+</figure>
+</div>
+<p>The statistical ellipse is obtained from the covariance matrix of the CoP samples:</p>
+<p><span class="math display">\[
+\Sigma =
+\begin{pmatrix}
+\sigma_x^2 &amp; \sigma_{x,y} \\
+\sigma_{y,x} &amp; \sigma_y^2
+\end{pmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(\sigma_x^2\)</span> and <span class="math inline">\(\sigma_y^2\)</span> are the CoP variances in the medio-lateral and anterior-posterior directions, respectively, and <span class="math inline">\(\sigma_{x,y}=\sigma_{y,x}\)</span> is the covariance between CoP positions in the two directions.</p>
+<p>The eigenvalues of this covariance matrix, denoted by <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span>, define the variance of the CoP samples along the two principal axes of the ellipse. They are computed as:</p>
+<p><span class="math display">\[
+\lambda_{1,2} = \frac{\sigma_x^2 + \sigma_y^2}{2}
+\pm
+\sqrt{\left(\frac{\sigma_x^2 - \sigma_y^2}{2}\right)^2 + \sigma_{x,y}^2}.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Variance, covariance, and eigenvalues">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Variance, covariance, and eigenvalues
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The concepts of variance and covariance will be addressed in more detail later in the course. They are introduced here only to explain how the major and minor axes of the ellipse are computed from the statokinesigram.</em></p>
+</div>
+</div>
+<p>The square roots of the eigenvalues provide the standard deviations of the CoP distribution along the principal axes of the ellipse. Following the convention represented in <a href="#fig-1-2-7" class="quarto-xref">Figure&nbsp;<span>2.7</span></a>, the semi-axis lengths are obtained by multiplying these standard deviations by 1.96:</p>
+<p><span class="math display">\[
+a = 1.96\sqrt{\lambda_1}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+b = 1.96\sqrt{\lambda_2},
+\]</span></p>
+<p>where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the semi-major and semi-minor axes of the ellipse, respectively. The elliptic area is then computed as the area of an ellipse:</p>
+<p><span id="eq-copea"><span class="math display">\[
+EA = \pi ab = \pi1.96^2\sqrt{\lambda_1\lambda_2}
+\tag{2.12}\]</span></span></p>
+<p>The elliptic area provides a compact descriptor of the global spatial dispersion of CoP samples. Larger values indicate that the CoP explored a larger region of the support surface during quiet standing. In this sense, <span class="math inline">\(EA\)</span> complements the stabilogram metrics: while <span class="math inline">\(\sigma_x\)</span>, <span class="math inline">\(\sigma_y\)</span>, <span class="math inline">\(v_x\)</span>, and <span class="math inline">\(v_y\)</span> describe sway separately along each anatomical direction, <span class="math inline">\(EA\)</span> summarizes the overall size of the statokinesigram in the horizontal plane.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Why 1.96?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why 1.96?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>As will become clear later in the course, the factor 1.96 corresponds to the 95% confidence interval of a normally distributed variable. Multiplying the principal-axis standard deviations (<span class="math inline">\(\sqrt{\lambda_1}\)</span> and <span class="math inline">\(\sqrt{\lambda_2}\)</span>) by 1.96 therefore defines the major and minor axes of a 95% confidence interval.</em></p>
+<p><em>Because both directions are considered simultaneously, the resulting ellipse encloses approximately 85% of the CoP samples <span class="citation" data-cites="oliveira96">[<a href="references.html#ref-oliveira96" role="doc-biblioref">9</a>]</span>.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+</section>
+<section id="from-theory-to-practice-smart-posture" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="from-theory-to-practice-smart-posture"><span class="header-section-number">2.3</span> From Theory to Practice (Smart Posture)</h2>
+<p>At this point, we have developed an understanding of what postural sway is and how it can be quantified from CoP measurements. This information provides the basis for studying the physiology of postural control under a wide range of conditions, including motor training, environmental perturbations, pathological conditions, and quiet standing. Likewise, factors not directly related to the physiology of postural control can also be investigated, such as intention <span class="citation" data-cites="stoffregen00">[<a href="references.html#ref-stoffregen00" role="doc-biblioref">10</a>]</span>, stabilometric trial duration <span class="citation" data-cites="carpenter01">[<a href="references.html#ref-carpenter01" role="doc-biblioref">11</a>]</span>, and anthropometric characteristics <span class="citation" data-cites="chiari02">[<a href="references.html#ref-chiari02" role="doc-biblioref">12</a>]</span>.</p>
+<p>Although this course is not about posture control itself, stabilometry provides an excellent experimental paradigm for learning the principles of experimental design and statistical inference. Throughout the course, postural sway measurements will serve as the experimental data upon which the inferential methods introduced in later chapters will be applied. Consequently, data collection constitutes a fundamental component of the learning experience.</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img src="..\include/images/part_1/ch_2/1-2-8_smart-posture.png" class="img-fluid"></p>
+</div><div class="column" style="width:3%;">
+
+</div><div class="column" style="width:37%;">
+<p>Because collecting stabilometric trials from every student using a laboratory-grade force plate would be impractical, postural sway data will be collected using the inertial sensors embedded in modern smartphones.</p>
+</div>
+</div>
+<p>Unlike force plates, smartphones do not provide direct measurements of the CoP. Instead, they record body accelerations and angular velocities, from which orientation-related signals can be derived. For the purposes of this course, these signals will be assumed to provide a meaningful representation of postural sway, allowing students to collect, analyze, and interpret experimental data using readily available technology.</p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-hellebrandt38" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Hellebrandt FA. STANDING AS a GEOTROPIC REFLEX: T&lt;scp&gt;he&lt;/scp&gt; m&lt;scp&gt;echanism of the&lt;/scp&gt; a&lt;scp&gt;synchronous&lt;/scp&gt; r&lt;scp&gt;otation of&lt;/scp&gt; m&lt;scp&gt;otor&lt;/scp&gt; u&lt;scp&gt;nits&lt;/scp&gt;. American Journal of Physiology-Legacy Content 1938;121:471–4. <a href="https://doi.org/10.1152/ajplegacy.1938.121.2.471">https://doi.org/10.1152/ajplegacy.1938.121.2.471</a>.</div>
+</div>
+<div id="ref-winter98" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Winter DA, Patla AE, Prince F, Ishac M, Gielo-Perczak K. Stiffness control of balance in quiet standing. Journal of Neurophysiology 1998;80:1211–21. <a href="https://doi.org/10.1152/jn.1998.80.3.1211">https://doi.org/10.1152/jn.1998.80.3.1211</a>.</div>
+</div>
+<div id="ref-morasso19" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Morasso P, Cherif A, Zenzeri J. Quiet standing: The single inverted pendulum model is not so bad after all. PLOS ONE 2019;14:e0213870. <a href="https://doi.org/10.1371/journal.pone.0213870">https://doi.org/10.1371/journal.pone.0213870</a>.</div>
+</div>
+<div id="ref-morasso99" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Morasso PG, Schieppati M. Can muscle stiffness alone stabilize upright standing? Journal of Neurophysiology 1999;82:1622–6. <a href="https://doi.org/10.1152/jn.1999.82.3.1622">https://doi.org/10.1152/jn.1999.82.3.1622</a>.</div>
+</div>
+<div id="ref-vieira09" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Vieira TMM, Oliveira LF, Nadal J. Estimation procedures affect the center of pressure frequency analysis. Brazilian Journal of Medical and Biological Research 2009;42:665–73. <a href="https://doi.org/10.1590/s0100-879x2009000700012">https://doi.org/10.1590/s0100-879x2009000700012</a>.</div>
+</div>
+<div id="ref-prieto96" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Prieto TE, Myklebust JB, Hoffmann RG, Lovett EG, Myklebust BM. Measures of postural steadiness: Differences between healthy young and elderly adults. IEEE Transactions on Biomedical Engineering 1996;43:956–66. <a href="https://doi.org/10.1109/10.532130">https://doi.org/10.1109/10.532130</a>.</div>
+</div>
+<div id="ref-jacono04" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Jacono M, Casadio M, Morasso PG, Sanguineti V. The sway-density curve and the underlying postural stabilization process. Motor Control 2004;8:292–311. <a href="https://doi.org/10.1123/mcj.8.3.292">https://doi.org/10.1123/mcj.8.3.292</a>.</div>
+</div>
+<div id="ref-collins93" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Collins JJ, De Luca CJ. Open-loop and closed-loop control of posture: A random-walk analysis of center-of-pressure trajectories. Experimental Brain Research 1993;95:308–18. <a href="https://doi.org/10.1007/bf00229788">https://doi.org/10.1007/bf00229788</a>.</div>
+</div>
+<div id="ref-oliveira96" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Oliveira LF, Simpson DM, Nadal J. Calculation of area of stabilometric signals using principal component analysis. Physiological Measurement 1996;17:305–12. <a href="https://doi.org/10.1088/0967-3334/17/4/008">https://doi.org/10.1088/0967-3334/17/4/008</a>.</div>
+</div>
+<div id="ref-stoffregen00" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Stoffregen TA, Pagulayan RJ, Bardy BG, Hettinger LJ. Modulating postural control to facilitate visual performance. Human Movement Science 2000;19:203–20. <a href="https://doi.org/10.1016/s0167-9457(00)00009-9">https://doi.org/10.1016/s0167-9457(00)00009-9</a>.</div>
+</div>
+<div id="ref-carpenter01" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">Carpenter MG, Frank JS, Winter DA, Peysar GW. Sampling duration effects on centre of pressure summary measures. Gait &amp; Posture 2001;13:35–40. https://doi.org/<a href="https://doi.org/10.1016/S0966-6362(00)00093-X">https://doi.org/10.1016/S0966-6362(00)00093-X</a>.</div>
+</div>
+<div id="ref-chiari02" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">Chiari L, Rocchi L, Cappello A. Stabilometric parameters are affected by anthropometry and foot placement. Clinical Biomechanics 2002;17:666–77. <a href="https://doi.org/10.1016/s0268-0033(02)00107-9">https://doi.org/10.1016/s0268-0033(02)00107-9</a>.</div>
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><em>the theoretical balance point of the body</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><em>lack of motor coordination resulting from the loss of sensory input</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
+
+/* definition of content for the buttons */
+
+const webex_buttons = {check_hidden:          "<b>&check;</b>",
+
+                       check_hidden_alt:      "Check answer",
+
+                       check_shown:           "<b>&lsh;</b>",
+
+                       check_shown_alt:       "Hide check",
+
+                       check_of_total:        "/",
+
+                       solution:              "<b>&quest;</b>",
+
+                       solution_alt:          "Correct solution",
+
+                       question_next:         "<b>&#8634;</b>",
+
+                       question_next_alt:     "Next question",
+
+                       question_previous:     "",
+
+                       question_previous_alt: ""}
+
+
+
+
+
+/* update total correct if #webex-total_correct exists */
+
+update_total_correct = function() {
+
+  console.log("webex: update total_correct");
+
+
+
+  document.querySelectorAll(".webex-total_correct").forEach(total => {
+
+    p = total.closest(".webex-box");
+
+    var correct = p.getElementsByClassName("webex-correct").length;
+
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    /* no specific class on input node, thus searching via query selector */
+
+    var checkboxgroups = p.querySelectorAll("div[class=webex-checkboxgroup] input[type=checkbox]").length
+
+
+
+    /* show number of correct / total number of answers */
+
+    total.innerHTML = correct + "&nbsp;" + webex_buttons.check_of_total + "&nbsp;" + (solvemes + radiogroups + checkboxgroups + selects);
+
+  });
+
+}
+
+
+
+/* check answers */
+
+check_func = function() {
+
+  console.log("webex: check answer");
+
+
+
+  //var cl = elem.parentElement.classList;
+
+  var cl = this.closest(".webex-box").classList;
+
+  if (cl.contains("unchecked")) {
+
+    cl.remove("unchecked");
+
+    this.innerHTML = webex_buttons.check_shown; //"Hide check";
+
+    if (webex_buttons.check_shown_alt.length > 0) this.setAttribute("title", webex_buttons.check_shown_alt);
+
+  } else {
+
+    cl.add("unchecked");
+
+    this.innerHTML = webex_buttons.check_hidden; //"Check answer";
+
+    if (webex_buttons.check_hidden_alt.length > 0) this.setAttribute("title", webex_buttons.check_hidden_alt);
+
+  }
+
+}
+
+
+
+/* helper functions for checking the webex ID */
+
+const id_checker = {"fmt": new RegExp("[g-zG-Z]"),
+
+                    "load": function(e) { return e.getAttribute("id").match("(?<=(-)).*$")[0]; },
+
+                    "eval": new TextEncoder(),
+
+                    "dval": new TextDecoder()}
+
+
+
+/* Show/hide correct solution */
+
+solution_func = function() {
+
+  console.log("webex: show/hide solution");
+
+
+
+  var div = this.closest(".webex-question").querySelector(".webex-solution");
+
+  var cl = div.classList;
+
+
+
+  if (cl.contains("visible")) {
+
+    cl.remove("visible");
+
+  } else {
+
+    cl.add("visible");
+
+  }
+
+}
+
+
+
+/* function to check if the real answer is numeric */
+
+convert_to_numeric = function(x) {
+
+  if (typeof x == "string") {
+
+    /* do nothing */
+
+  } else if (x.length == 1) {
+
+    /* take first element */
+
+    x = x[0]
+
+  } else {
+
+    return NaN;
+
+  }
+
+
+
+  /* remove spaces for easier parsing */
+
+  x = x.replace(/\s/g, "");
+
+
+
+  /* Define patterns for different formats, note that spaces have been removed above */
+
+  const patterns = [
+
+    {regex: /^[+-]?\d+(\.\d{3})*,\d+$/, decimal: ",", thousand: "." },  // Format: "1.100.100.100,3"
+
+    {regex: /^[+-]?\d+(,\d{3})*\.\d+$/, decimal: ".", thousand: "," },  // Format: "1,100,100,100.3"
+
+    {regex: /^[+-]?\d+(\.|\.\d+)?$/, decimal: "." },                    // Format: "1100100100.5" or "1100100100."
+
+    {regex: /^[+-]?\d+(,|,\d+)$/, decimal: "," }                        // Format: "1100100100,5" or "1100100100,"
+
+  ];
+
+
+
+
+
+  /* testing all regular expressions, convert to float if possible */
+
+  for (const { regex, decimal, thousand } of patterns) {
+
+    if (regex.test(x)) {
+
+      let numeric = x;
+
+      if (thousand) numeric = numeric.replace(new RegExp(`\\${thousand}`, "g"), "");
+
+      numeric = numeric.replace(decimal, ".");
+
+      return parseFloat(numeric);
+
+    }
+
+  }
+
+
+
+  /* input of length 1 but none of the known formats, return NaN */
+
+  return NaN;
+
+}
+
+
+
+/* Checking webex ID, returns formalsol */
+
+check_id = function(e) {
+
+  /* loading webex ID */
+
+  var id = id_checker["load"](e);
+
+
+
+  /* extracting answer */
+
+  let answer = e.dataset.answer;
+
+
+
+  /* checking unique id, prepare and return array */
+
+  if (!id_checker["fmt"].test(id)) {
+
+    const a = id_checker["eval"].encode(atob(answer));
+
+    const b = id_checker["eval"].encode(id);
+
+    const res = a.map((byte, index) => byte^b[index % b.length]);
+
+    answer = id_checker["dval"].decode(res);
+
+    /* Replacing &amp; with ' before parsing */
+
+    answer = answer.replaceAll("&apos;", "'");
+
+  }
+
+
+
+  return JSON.parse(answer);
+
+}
+
+
+
+/* function for checking solveme answers */
+
+solveme_func = function(e) {
+
+  /* avoid that keyup and keychange twice execute this function within nms = 10
+
+   * ms, clearing inputTimer and add timeout */
+
+  console.log("webex: check solveme");
+
+
+
+  /* float, precision for checking numeric answers */
+
+  const eps = 0.00000000000001;
+
+
+
+  /* get last checked user answer */
+
+  const question = this.closest(".webex-question")
+
+
+
+  /* extracting classes */
+
+  var cl = this.classList;
+
+  var my_answer = this.value;
+
+
+
+  /* extracting classes */
+
+  var cl = this.classList;
+
+
+
+  /* empty answer? Job done */
+
+  if (my_answer == "") {
+
+    cl.remove("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+    return false;
+
+  }
+
+
+
+  /* Find closest (parent) webex-question */
+
+  let formalsols = check_id(this)
+
+
+
+  /* by default we assume the users' answer is incorrect */
+
+  var user_answer_correct = false;
+
+
+
+  /* check if the correct answer is numeric, i.e. if 
+
+   * formalsols is of length 1 containing one single numeric
+
+   * value in a known format, else, NaN is returned */
+
+  const num_formalsol = convert_to_numeric(formalsols);
+
+  const num_my_answer = convert_to_numeric(my_answer);
+
+
+
+  /* if the correct answer is numeric (float), the user's answer
+
+   * must also be numeric. If not, it is wrong. Else we can
+
+   * compare floating point numbers */
+
+  if (!isNaN(num_formalsol) && !isNaN(num_my_answer)) {
+
+    /* check if the real answer and the user input are numerically the same;
+
+     * adding 'delta' to avoid precision issues */
+
+    var diff = Math.abs(num_formalsol - num_my_answer);
+
+    if (diff < parseFloat(this.dataset.tol) + eps) { user_answer_correct = true; }
+
+
+
+  /* if the question contains regex, a regular expression is used
+
+   * to evaluate the users answer. Allows for multiple regular expressions */
+
+  } else if (cl.contains("regex")) {
+
+    for (let i = 0; i < formalsols.length; i++) {
+
+        let regex = new RegExp(formalsols[i], cl.contains("ignorecase") ? "i" : "");
+
+        if (regex.test(my_answer)) { user_answer_correct = true; break; }
+
+    }
+
+
+
+  /* else we evaluate on 'string level', considering the creators preferences
+
+   * regarding set options */
+
+  } else {
+
+    /* modify/prepare answer */
+
+    if (cl.contains("ignorecase")) { my_answer = my_answer.toLowerCase(); }
+
+    if (cl.contains("nospaces"))   { my_answer = my_answer.replace(/ /g, ""); }
+
+
+
+    /* if the real answer includes user input - correct */
+
+    if (formalsols.includes(my_answer)) {
+
+      user_answer_correct = true;
+
+  
+
+      // added regex bit
+
+      if (cl.contains("regex")) {
+
+        answer_regex = RegExp(formalsols.join("|"))
+
+        if (answer_regex.test(my_answer)) {
+
+          cl.add("webex-correct");
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
+  if (user_answer_correct) {
+
+      cl.add("webex-correct");
+
+      cl.remove("webex-incorrect");
+
+  } else {
+
+      cl.add("webex-incorrect");
+
+      cl.remove("webex-correct");
+
+  }
+
+
+
+  update_total_correct();
+
+
+
+}
+
+
+
+/* function for checking select answers */
+
+select_func = function(e) {
+
+  console.log("webex: check select");
+
+
+
+  var options   = [];
+
+  Array.from(this.querySelectorAll("option")).forEach((option, index) => {
+
+    if (!option.hasAttribute("value") || !option.getAttribute("value") === "blank") {
+
+      options.push(option);
+
+    }
+
+  });
+
+
+
+  /* get selected option */
+
+  function get_selected(options) { return options.findIndex(option => option.selected); }
+
+  var option_index = get_selected(options)
+
+
+
+  /* loading webex ID */
+
+  var formalsol = check_id(this)
+
+
+
+  /* add class for current selection */
+
+  this.classList.remove("webex-incorrect");
+
+  this.classList.remove("webex-correct");
+
+  if (option_index >= 0) {
+
+    this.classList.add(formalsol[option_index] === 1 ? "webex-correct" : "webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking radiogroups answers */
+
+radiogroups_func = function(e) {
+
+  console.log("webex: check radiogroups");
+
+
+
+  /* get real answer (binary integer array) */
+
+  var id = e.target.getAttribute("name");
+
+  var group = document.querySelector(".webex-radiogroup[id='webex-" + id + "']");
+
+  var formalsol = check_id(group)
+
+
+
+  /* check which radiobuttion is selected (user answer) */
+
+  function get_checked(radios) {
+
+    return radios.findIndex(radios => radios.checked);
+
+  }
+
+  var radios = Array.from(group.querySelectorAll("input[type='radio']"))
+
+  var radio_index = get_checked(radios);
+
+
+
+  /* remove existing classes */
+
+  radios.forEach(radio => {
+
+    let cl = radio.closest("label").classList
+
+    cl.remove("webex-incorrect");
+
+    cl.remove("webex-correct");
+
+  });
+
+
+
+  /* add class for current selection */
+
+  let cl = radios[radio_index].closest("label").classList
+
+  if (formalsol[radio_index] === 1) {
+
+      cl.add("webex-correct");
+
+  } else {
+
+      cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+
+
+/* function for checking checkboxgroups answers */
+
+checkboxgroups_func = function(e) {
+
+  console.log("webex: check checkboxgroups");
+
+
+
+  /* get real answer (binary integer array) */
+
+  var group = document.querySelector(".webex-checkboxgroup[id='" + this.id + "']");
+
+  var formalsol = check_id(group);
+
+
+
+  /* check which checkbox is checked (user answer) */
+
+  function get_checked(group) {
+
+      const checkboxes = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
+      return checkboxes.reduce((indices, checkbox, index) => {
+
+          if (checkbox.checked) indices.push(index);
+
+          return indices;
+
+      }, []);
+
+  }
+
+  var checks = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
+  var check_index = get_checked(group);
+
+
+
+  checks.forEach((e, index) => {
+
+    var label = e.parentNode;
+
+    var ans = formalsol[index];
+
+    if ((e.checked && ans === 1) || (!e.checked && ans === 0)) {
+
+        label.setAttribute("class", "webex-correct")
+
+    } else {
+
+        label.setAttribute("class", "webex-incorrect")
+
+    }
+
+  });
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* shuffling array (thanks to stack overflow)
+
+ * If argument x is an integer we create an integer sequence
+
+ * from 0, 1, ..., (x - 1) and return a shuffled version. If
+
+ * the input is an array, we simply shuffle it */
+
+shuffle_array = function(x) {
+
+   if (Number.isInteger(x) && !isNaN(x)) {
+
+     x = Array.from({length: x}, (v, i) => i);
+
+   }
+
+   let shuffled = x.map(value => ({ value, sort: Math.random() }))
+
+        .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+
+   return shuffled;
+
+}
+
+
+
+/* ---------------------------------------------------------
+
+ * ---------------------------------------------------------
+
+ * --------------------------------------------------------- */
+
+window.onload = function() {
+
+  //console.log("webex: onload");
+
+
+
+  /* setting up buttons and actions to show/hide answers */
+
+  document.querySelectorAll(".webex-check").forEach(section => {
+
+    section.classList.add("unchecked");
+
+
+
+    /* ul to take up the list items with buttons */
+
+    let button_ul = document.createElement("ul");
+
+    button_ul.setAttribute("class", "webex-button-list");
+
+    section.appendChild(button_ul);
+
+
+
+    /* button to _check_ if answers given are correct */
+
+    let li_check = document.createElement("li");
+
+    button_ul.appendChild(li_check); /* add list item to ul */
+
+    let btn_check = document.createElement("button");
+
+    btn_check.innerHTML = webex_buttons.check_hidden;  // "Check answer";
+
+    btn_check.setAttribute("class", "webex-button webex-button-check");
+
+    if (webex_buttons.check_hidden_alt.length > 0) btn_check.setAttribute("title", webex_buttons.check_hidden_alt);
+
+    btn_check.onclick = check_func;
+
+    li_check.appendChild(btn_check);
+
+
+
+    /* span to show current number of points (when _check_ active) */
+
+    let spn = document.createElement("span");
+
+    spn.classList.add("webex-total_correct");
+
+    li_check.appendChild(spn);
+
+
+
+    /* button to show the _solution_ if there is one */
+
+    var has_solution = section.parentNode.querySelectorAll(".webex-solution").length > 0;
+
+    if (has_solution) {
+
+      let li_solution = document.createElement("li");
+
+      button_ul.appendChild(li_solution); /* add list item to ul */
+
+      let btn_solution = document.createElement("button");
+
+      btn_solution.innerHTML = webex_buttons.solution; // "Correct answer";
+
+      btn_solution.setAttribute("class", "webex-button webex-button-solution");
+
+      if (webex_buttons.solution_alt.length > 0) btn_solution.setAttribute("title", webex_buttons.solution_alt);
+
+      btn_solution.onclick = solution_func;
+
+      li_solution.appendChild(btn_solution);
+
+    }
+
+
+
+  });
+
+
+
+  /* set up webex-solveme inputs */
+
+  document.querySelectorAll(".webex-solveme").forEach(solveme => {
+
+    solveme.setAttribute("autocomplete","off");
+
+    solveme.setAttribute("autocorrect", "off");
+
+    solveme.setAttribute("autocapitalize", "off");
+
+    solveme.setAttribute("spellcheck", "false");
+
+    solveme.value = "";
+
+
+
+    /* adjust answer for 'no spaces' (ignore spaces) */
+
+    if (solveme.classList.contains("nospaces")) {
+
+      solveme.dataset.answer = solveme.dataset.answer.replace(/ /g, "");
+
+    }
+
+
+
+    /* attach checking function, triggered on key up, change, and when
+
+     * elemnt is out of focus. Only evaluated once by tracking changes
+
+     * via variable solveme_last_user_answer */
+
+    solveme.addEventListener("keyup",  solveme_func);
+
+    solveme.addEventListener("change", solveme_func);
+
+    solveme.addEventListener("blur",   solveme_func);
+
+
+
+    /* adding span to show correct/incorrect icon */
+
+    solveme.insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  });
+
+
+
+  /* set up radiogroups (single choice questions with display = "buttons") */
+
+  document.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
+    radiogroup.onchange = radiogroups_func;
+
+  });
+
+
+
+  /* set up checkboxgroups (multiple choice questions with display = "buttons") */
+
+  document.querySelectorAll(".webex-checkboxgroup").forEach(checkboxgroup => {
+
+    checkboxgroup.onchange = checkboxgroups_func;
+
+  });
+
+
+
+  /* set up selects (dropdown menus) */
+
+  document.querySelectorAll(".webex-select").forEach(select => {
+
+    select.onchange = select_func;
+
+    /* append webex-icon for correct/incorrect icons */
+
+    var elem = document.createElement("span")
+
+    elem.classList.add("webex-icon")
+
+    select.parentNode.appendChild(elem)
+
+  });
+
+
+
+  /* change to next/previous question if multiple are available */
+
+  function handleQuestionClick(group, questions, step) {
+
+    return async function() {
+
+      /* get question order as integer vector */
+
+      let questionOrder = group.dataset.questionOrder.split(",").map(str => parseInt(str));
+
+
+
+      /* current question/position */
+
+      let currentPosition = parseInt(group.dataset.currentPosition);
+
+
+
+      /* Hide the current question */
+
+      questions.forEach(question => { question.classList.remove("active"); });
+
+
+
+      /* Move to the next question index */
+
+      currentPosition = (currentPosition + step) % questionOrder.length;
+
+      if (currentPosition < 0) currentPosition = currentPosition + questionOrder.length
+
+
+
+      /* Display the new question */
+
+      questions[questionOrder[currentPosition]].classList.add("active");
+
+
+
+      // Update the currentPosition data attribute on the group div
+
+      group.dataset.currentPosition = currentPosition;
+
+    };
+
+  }
+
+
+
+  document.querySelectorAll(".webex-group").forEach(group => {
+
+    const questions = Array.from(group.querySelectorAll(".webex-question"));
+
+
+
+    /* Create vector with question order. If the webex-group does
+
+     * not have class '.noshuffle' we will randomly shuffle the order */
+
+    let questionOrder = Array.from({length: questions.length}, (v, i) => i);
+
+    if (!group.classList.contains("noshuffle")) {
+
+      questionOrder = shuffle_array(questionOrder);
+
+    }
+
+
+
+    /* take start position (if set) or start at 0 */
+
+    const currentPosition = parseInt(group.getAttribute("data-start-position")) || 0;
+
+
+
+    /* show the default question for each group */
+
+    questions[questionOrder[currentPosition]].classList.add("active");
+
+
+
+    /* store random order of questions as well as current position */
+
+    group.dataset.questionOrder   = questionOrder;
+
+    group.dataset.currentPosition = currentPosition;
+
+
+
+    /* find all webex-questions, search for .webex-button-list and
+
+     * populate the list with necessary <li><button>...</button></li> elements */
+
+    questions.forEach(question => {
+
+        let button_ul = question.querySelector("ul.webex-button-list");
+
+
+
+        let li_next = document.createElement("li");
+
+        let nextButton = document.createElement("button");
+
+        nextButton.setAttribute("class", "webex-button webex-button-next");
+
+        if (webex_buttons.question_next_alt.length > 0) nextButton.setAttribute("title", webex_buttons.question_next_alt);
+
+        nextButton.innerHTML = webex_buttons.question_next; // "Next question";
+
+        nextButton.addEventListener("click", handleQuestionClick(group, questions, 1));
+
+        li_next.appendChild(nextButton);
+
+
+
+        let li_previous = document.createElement("li");
+
+        let previousButton = document.createElement("button");
+
+        previousButton.setAttribute("class", "webex-button webex-button-previous");
+
+        if (webex_buttons.question_previous_alt.length > 0) previousButton.setAttribute("title", webex_buttons.question_previous_alt);
+
+        previousButton.innerHTML = webex_buttons.question_previous; // "Previous question";
+
+        previousButton.addEventListener("click", handleQuestionClick(group, questions, -1));
+
+        li_previous.appendChild(previousButton);
+
+
+
+        if (webex_buttons.question_previous.length > 0) button_ul.appendChild(li_previous);
+
+        if (webex_buttons.question_next.length > 0) button_ul.appendChild(li_next);
+
+    });
+
+  });
+
+
+
+  /* Development options */
+
+  document.querySelectorAll(".webex-question.check").forEach(question => {
+
+      question.querySelector(".webex-button-check").click()
+
+  });
+
+  document.querySelectorAll(".webex-question.solution").forEach(question => {
+
+      let btn = question.querySelector(".webex-button-solution");
+
+      if (btn !== null) { btn.click(); }
+
+  });
+
+
+
+  /* Pre-filling <input> fields */
+
+  document.querySelectorAll(".webex-question.prefill").forEach(question => {
+
+      question.querySelectorAll("input.webex-solveme").forEach(solveme => {
+
+          let x = JSON.parse(solveme.dataset.answer);
+
+          solveme.value = x[0];
+
+          /* Trigger the on change event */
+
+          solveme.dispatchEvent(new Event("change"));
+
+      });
+
+
+
+      /* Pre-filling radiogroups, that is for schoice questions */
+
+      question.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
+          let x = JSON.parse(radiogroup.dataset.answer);
+
+          let idx = x.indexOf(1);
+
+          let radios = radiogroup.querySelectorAll('input[type="radio"]');
+
+          radios[idx].checked = true;
+
+          /* Trigger the on change event */
+
+          radios[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+
+
+      /* Pre-filling checkboxgroups, that is for schoice questions w/ dropdown menus */
+
+      question.querySelectorAll(".webex-select").forEach(dropdown => {
+
+          let x = JSON.parse(dropdown.dataset.answer);
+
+          let idx = x.indexOf(1) + 1; /* +1 to skip the first blank option */
+
+          let options = dropdown.querySelectorAll("option");
+
+          options[idx].selected = true;
+
+          /* Trigger the on change event */
+
+          options[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+
+
+      /* Pre-filling checkboxgroups, that is for mchoice questions */
+
+      question.querySelectorAll(".webex-checkboxgroup").forEach(radiogroup => {
+
+          let x = JSON.parse(radiogroup.dataset.answer);
+
+          let checkboxes = radiogroup.querySelectorAll('input[type="checkbox"]');
+
+          for (let i = 0; i < checkboxes.length; i++) {
+
+              checkboxes[i].checked = x[i];
+
+          }
+
+          /* Trigger the on change event */
+
+          checkboxes[0].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+  });
+
+
+
+  /* Show set tolerance (devel option) */
+
+  function calc_width(x, txt, offset = 20) {
+
+      /* We do the following:
+
+       * Create a new span, insert the value we need in the .tolerance
+
+       * input node, and calculate its offsetWidth. Then remove it
+
+       * again; this is just used to calculate the required width. */
+
+      var cwtmp = document.createElement("span");
+
+      x.appendChild(cwtmp);
+
+      cwtmp.innerHTML = txt || "";
+
+      var w = parseInt(cwtmp.getBoundingClientRect().width) + offset;
+
+      cwtmp.remove();
+
+      return w;
+
+  }
+
+
+
+  /* If tolerance should be shown (devel option) we calculate:
+
+   * - the width required to properly display the solution
+
+   * - the width required to properly display the tolerance
+
+   * - add a new element to display the tolerance
+
+   * - reduce the width of the solution input box. */
+
+  document.querySelectorAll(".webex-question.tolerance").forEach(question => {
+
+      question.querySelectorAll("input[data-tol]").forEach(elem => {
+
+          var w = null;
+
+
+
+          /* Add new element showing the tolerance */
+
+          let tol = document.createElement("input");
+
+          tol.type = "text"; // <inpyt type="text">
+
+          tol.disabled = true; // Disable input element
+
+          tol.classList.add("tolerance"); // Appending class
+
+          tol.value = "Â± " + elem.getAttribute("data-tol");
+
+
+
+          /* Add new node */
+
+          elem.parentNode.insertBefore(tol, elem)
+
+
+
+          var body     = document.querySelector("body");
+
+          //tol.value = "Â± " + "0.0000007";
+
+          //tol.value = "Â± " + "0.07";
+
+          w    = calc_width(body, tol.value);
+
+          wold = parseInt(elem.getBoundingClientRect().width);
+
+          wmin = calc_width(body, elem.value);
+
+
+
+          /* Calculate required width of the 'tolerance' node, and the
+
+           * reduction of the original 'input' node */
+
+          let wnew = Math.max(wmin, wold - w);
+
+          tol.style.width  = w + "px";
+
+          elem.style.width = wnew + "px";
+
+      });
+
+  });
+
+
+
+  update_total_correct();
+
+}
+
+
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/11_physiology_of_posture_control.html" class="pagination-link" aria-label="The Physiology of Human Standing Posture">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/13_phyphox_posture_experiment.html" class="pagination-link" aria-label="PhyPhox SmartPosture Tutorial">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">PhyPhox SmartPosture Tutorial</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Taian Martins Vieira • <a href="https://creativecommons.org">CC BY-NC 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Built with <strong>R</strong>, <strong>OJS</strong>, &amp; <a href="https://quarto.org/">Quarto</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/">
+      <i class="bi bi-github" role="img" aria-label="View Source Code">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/issues">
+      <i class="bi bi-bug" role="img" aria-label="Report a Bug or Typo">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

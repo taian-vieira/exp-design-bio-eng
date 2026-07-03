@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Understanding Study Designs – Experimental Design in Biomedical Engineering</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/32_summarizing_and_presenting_data.html" rel="next">
+<link href="../chapters/25_automating_raw_data_processing.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2c8d71db4d056fff4a87fcadc2b2ddaf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+<script type="text/javascript">
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../include/cssfiles/bootstrap.css">
+<link rel="stylesheet" href="../include/cssfiles/webex.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/31_understanding_study_designs.html">Part 3: The Theory Behind Experimental Design</a></li><li class="breadcrumb-item"><a href="../chapters/31_understanding_study_designs.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Experimental Design in Biomedical Engineering</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/0_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Experimental Design</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 1: Smart Posture</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11_physiology_of_posture_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12_stabilometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13_phyphox_posture_experiment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">PhyPhox SmartPosture Tutorial</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 2: R Tutorial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21_example_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Example Data: Postural Sways</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22_getting_started_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/23_basics_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Basics with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/24_plotting_and_processing_raw_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/25_automating_raw_data_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 3: The Theory Behind Experimental Design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/31_understanding_study_designs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/32_summarizing_and_presenting_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/33_population_sample_data_distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Population, Sample, and Data Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/34_one_group.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inference, Error, Power, and Sample Size - One Group</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/35_two_groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference, Power, and Sample Size - Two Group</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/36_anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Balanced and Unbalanced Designs over Two Groups</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/37_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Predicting Outcomes with Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/a1_ethical_considerations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#observational-studies" id="toc-observational-studies" class="nav-link active" data-scroll-target="#observational-studies"><span class="header-section-number">9.1</span> Observational Studies</a>
+  <ul>
+  <li><a href="#case-series" id="toc-case-series" class="nav-link" data-scroll-target="#case-series">Case-Series</a></li>
+  <li><a href="#case-control" id="toc-case-control" class="nav-link" data-scroll-target="#case-control">Case-Control</a></li>
+  <li><a href="#cross-sectional" id="toc-cross-sectional" class="nav-link" data-scroll-target="#cross-sectional">Cross-Sectional</a></li>
+  <li><a href="#cohort" id="toc-cohort" class="nav-link" data-scroll-target="#cohort">Cohort</a></li>
+  </ul></li>
+  <li><a href="#experimental-studies" id="toc-experimental-studies" class="nav-link" data-scroll-target="#experimental-studies"><span class="header-section-number">9.2</span> Experimental Studies</a>
+  <ul>
+  <li><a href="#placebo-effect" id="toc-placebo-effect" class="nav-link" data-scroll-target="#placebo-effect">Placebo Effect</a></li>
+  <li><a href="#blinding" id="toc-blinding" class="nav-link" data-scroll-target="#blinding">Blinding</a></li>
+  <li><a href="#subjects-assignment" id="toc-subjects-assignment" class="nav-link" data-scroll-target="#subjects-assignment">Subjects’ Assignment</a></li>
+  <li><a href="#sec-rct" id="toc-sec-rct" class="nav-link" data-scroll-target="#sec-rct">Randomized Controlled Trials</a></li>
+  <li><a href="#definition-of-controls" id="toc-definition-of-controls" class="nav-link" data-scroll-target="#definition-of-controls">Definition of Controls</a>
+  <ul class="collapse">
+  <li><a href="#sec-placebo-control" id="toc-sec-placebo-control" class="nav-link" data-scroll-target="#sec-placebo-control">Placebo Concurrent and No-Treatment Control</a></li>
+  <li><a href="#active-control" id="toc-active-control" class="nav-link" data-scroll-target="#active-control">Active Control</a></li>
+  <li><a href="#self-controlled-and-cross-over" id="toc-self-controlled-and-cross-over" class="nav-link" data-scroll-target="#self-controlled-and-cross-over">Self-Controlled and Cross-Over</a></li>
+  <li><a href="#dose-response-and-historical-control" id="toc-dose-response-and-historical-control" class="nav-link" data-scroll-target="#dose-response-and-historical-control">Dose-Response and Historical Control</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#testing-your-skill" id="toc-testing-your-skill" class="nav-link" data-scroll-target="#testing-your-skill"><span class="header-section-number">9.3</span> Testing Your Skill</a></li>
+  <li><a href="#pros-and-cons" id="toc-pros-and-cons" class="nav-link" data-scroll-target="#pros-and-cons"><span class="header-section-number">9.4</span> Pros and Cons</a></li>
+  <li><a href="#review-and-meta-analysis" id="toc-review-and-meta-analysis" class="nav-link" data-scroll-target="#review-and-meta-analysis"><span class="header-section-number">9.5</span> Review and Meta-Analysis</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/31_understanding_study_designs.html">Part 3: The Theory Behind Experimental Design</a></li><li class="breadcrumb-item"><a href="../chapters/31_understanding_study_designs.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-p3-c1" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Biomedical Engineering</div>
+    <div class="quarto-category">Applied Statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Designing a study involves planning the methodological and procedural steps necessary to collect and process data in order to address a relevant question</em>. Aspects such as participant recruitment, allocation to different groups, and the timing and type of measurements, among others, should be considered when planning a study.</p>
+<p>Studies may be classified according to different schemes. The two main branches for classification of studies are:</p>
+<ul>
+<li><p><strong>Observational</strong>: studies in which participants are simply observed, at a given instant or over a period of time.</p></li>
+<li><p><strong>Experimental</strong> in this case some form of intervention is administered to participants</p></li>
+</ul>
+<p>Each category has its pros and cons, ranging from the cost of the study to the validity of results.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="This chapter...">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>This chapter…
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>… defines and discusses the pros and cons of the different types of observational and experimental studies.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+<section id="observational-studies" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="observational-studies"><span class="header-section-number">9.1</span> Observational Studies</h2>
+<p>In this type of study, the examiner does not apply any intervention and the <strong>variables</strong> of interest are measured or collected directly from participants. There are <em>different ways to classify</em> <strong>observational studies</strong>, depending on whether the aim is limited to <em>describing the data</em> and on the <em>period of observation</em>.</p>
+<p><br>
+</p>
+<section id="case-series" class="level3">
+<h3 class="anchored" data-anchor-id="case-series">Case-Series</h3>
+<p>This first type of study does not involve any hypothesis to be tested. No <strong>inferential statistics</strong> is applied. <em>These studies are limited to reporting the characteristics of a</em> <strong>group</strong> <em>of</em> <strong>cases</strong><em>, most often patients with a common exposure, treatment, or disease</em>. The level of evidence provided by these studies is low, as no <strong>control group</strong> is analyzed. Nevertheless, these studies contribute to generating new knowledge, in particular when the <strong>cases</strong> are exposed to or present rare conditions.</p>
+<p>One example of a case-series study is that published by <a href="https://pubmed.ncbi.nlm.nih.gov/27842335/">Glazer and colleagues</a> <span class="citation" data-cites="glazer16">[<a href="references.html#ref-glazer16" role="doc-biblioref">1</a>]</span>. They analyzed patients with <strong>acinar cell carcinoma</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Of interest was the <strong>survival probability</strong>—the probability that persons affected by <strong>acinar cell carcinoma</strong> would survive past a specific time. This probability is computed based on the survival function <span class="math inline">\(S(t)\)</span>:</p>
+<p><span id="eq-survival"><span class="math display">\[
+  S(t) = \prod_{i: t_i \le t} \left( 1 - \frac{d_i}{n_i} \right)
+\tag{9.1}\]</span></span></p>
+<p>where <span class="math inline">\(n_i\)</span> and <span class="math inline">\(d_i\)</span> respectively denote the number of subjects at risk (with <strong>acinar cell carcinoma</strong> in this case) and the number of events (deaths), both at time <span class="math inline">\(t_i\)</span>. <span class="math inline">\(n_i\)</span> is updated for every evaluation time <span class="math inline">\(t_i\)</span>, by subtracting subjects that have died and those that have been censored or lost before <span class="math inline">\(t_i\)</span>. This curve yields the probability of surviving over specific time intervals.</p>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>The figure below reports the <strong>survival probability</strong> for patients with <strong>acinar cell carcinoma</strong> over 80 months, receiving and not receiving radiotherapy treatment.</em></p>
+<div class="columns">
+<div class="column" style="width:59%;">
+<p><img src="..\include/images/part_3/ch_1/3-1-1_survival_probability.jpg" class="img-fluid" style="width:100.0%"></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:39%;">
+<p>Stylized <strong>Kaplan–Meier curve</strong> (<a href="#eq-survival" class="quarto-xref">Equation&nbsp;<span>9.1</span></a>) created according to the trend reported in <a href="https://pubmed.ncbi.nlm.nih.gov/27842335/">Glazer and colleagues</a> <span class="citation" data-cites="glazer16">[<a href="references.html#ref-glazer16" role="doc-biblioref">1</a>]</span></p>
+</div>
+</div>
+<p><em>Which of the following statements provides a more accurate interpretation for this figure?</em></p>
+<div id="webex-2154b545b47523c0e893213894134829" class="webex-radiogroup" data-answer="aQEZBU4FGAU/">
+<label><input type="radio" autocomplete="off" name="2154b545b47523c0e893213894134829"><span>Survival probability is the same regardless of the treatment received</span></label><label><input type="radio" autocomplete="off" name="2154b545b47523c0e893213894134829"><span>At least 50% of patients with acinar carcinoma survive over 12 months</span></label><label><input type="radio" autocomplete="off" name="2154b545b47523c0e893213894134829"><span>Younger patients with acinar cell carcinoma have higher probability of survival</span></label><label><input type="radio" autocomplete="off" name="2154b545b47523c0e893213894134829"><span>Radiotherapy prolongs survival by 40 months</span></label>
+</div>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="case-control" class="level3">
+<h3 class="anchored" data-anchor-id="case-control">Case-Control</h3>
+<p>Differently from <strong>case series</strong>, <strong>case-control studies</strong> <em>are designed to identify the relationship between risk factors and the outcome of interest (disease, death, or any specific condition)</em>. The study starts with the recruitment of <em>two groups of subjects</em>, <strong>cases</strong> (with the outcome of interest) and <strong>controls</strong> (without the outcome). Based on the clinical data available, the investigator looks back in time to assess which subjects, in both groups, were and were not exposed to potential risk factors (<a href="#fig-figure-3-1-2" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>). <strong>Case-control studies</strong> are often known as <strong>retrospective study</strong>, owing to interest lying in a time period preceding the study itself.</p>
+<div id="fig-figure-3-1-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-figure-3-1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-2_case_control.jpg" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figure-3-1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: Schematic representation of the time line and structure of a case-control study
+</figcaption>
+</figure>
+</div>
+<p>With this approach, the relative probability of manifesting the outcome given exposure to a risk factor can be calculated using the <strong>odds ratio</strong>. It is computed as the ratio of two sets of <strong>odds</strong>, related to the outcome in the exposed and not exposed groups. Based on the illustration in <a href="#fig-figure-3-1-2" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>, we may create the following table:</p>
+<div class="cell" data-tbl-cap-location="top">
+<div id="tbl-3-1-1" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-cap-location="top">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: Number of occurrences for each combination of exposure and outcome manifestation.
+</figcaption>
+<div aria-describedby="tbl-3-1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table table-striped table-hover cell caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">EXPOSED</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">UNEXPOSED</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">WITH outcome</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">WITHOUT outcome</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The <strong>odds ratio</strong> is computed as:</p>
+<p><span id="eq-oddratio"><span class="math display">\[
+  OR =\frac{ex_\text{with}un_\text{without}}{ex_\text{without}un_\text{with}}
+\tag{9.2}\]</span></span></p>
+<p>where <span class="math inline">\(ex\)</span> and <span class="math inline">\(un\)</span> respectively stand for exposed and unexposed subjects, and <span class="math inline">\(\text{with}\)</span> and <span class="math inline">\(\text{without}\)</span> indicate the presence or absence of the outcome. For <span class="math inline">\(OR&gt;1\)</span>, it is more likely that people exposed to the risk factor considered may manifest the outcome.</p>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>For the example data provided in <a href="#tbl-3-1-1" class="quarto-xref">Table&nbsp;<span>9.1</span></a> above, the odds ratio is</em></p>
+<p><input class="webex-solveme nospaces" id="webex-ef19b56e9a5ec3cc7e95c1c8374a3a73" data-tol="0" size="20" data-answer="PkQDGz8="></p>
+</div>
+<div class="webex-solution">
+<p>Given that:</p>
+<p><span class="math display">\[
+ex_\text{with} = 2 \qquad un_\text{without} = 4 \qquad ex_\text{without} = 2 \qquad un_\text{with} = 2
+\]</span></p>
+<p>the <strong>odds ratio</strong> is:</p>
+<p><span class="math display">\[
+OR = \frac{2 \times 4}{2 \times 2} = 2
+\]</span></p>
+</div>
+</div>
+</div>
+<p>An important point to consider in <strong>case-control studies</strong> is the <strong>matching</strong> between groups. <em>To prevent age or sex from affecting results, investigators often</em> <strong>match</strong> <em>subjects in</em> <strong>case</strong> <em>and</em> <strong>control</strong> <em>groups</em>, ensuring both groups are comparable. This technique is used when specific traits are so influential that any imbalance between the groups could compromise results. <em>Matching</em> protects the study from these potential distractions.</p>
+<p><br>
+</p>
+</section>
+<section id="cross-sectional" class="level3">
+<h3 class="anchored" data-anchor-id="cross-sectional">Cross-Sectional</h3>
+<p>This is perhaps the simplest type of <strong>observational study</strong>, as it is often conducted over a short time period. <em>It provides a snapshot of what is going on, showing how things are at the moment the study is conducted</em>. Subjects are recruited and split into groups based on who manifests the outcome and who does not (<a href="#fig-figure-3-1-3" class="quarto-xref">Figure&nbsp;<span>9.2</span></a>).</p>
+<p>However, <strong>cross-sectional studies</strong> may last long, as the screening of different subjects may be conducted over a period of time rather than at a given instant. The point is when subjects are assessed—in <strong>cross-sectional studies</strong> subjects are assessed at a single instant. For example, <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0193050">Anderson et al</a> <span class="citation" data-cites="anderson18">[<a href="references.html#ref-anderson18" role="doc-biblioref">2</a>]</span> screened over 4,000 patients from 2009 to 2014, with the goal of identifying predictors of influenza. Even though the study was conducted over five years, patients were screened as they presented to the hospital.</p>
+<div id="fig-figure-3-1-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-figure-3-1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-3_cross_sectional.jpg" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figure-3-1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.2: Snapshot of what is going on in the population of interest
+</figcaption>
+</figure>
+</div>
+<p><strong>Cross-sectional studies</strong> are mostly useful for <strong>establishing norms</strong>. When performing any clinical exam, like collecting a blood sample to assess the level of blood biomarkers (e.g.&nbsp;white blood cells, hemoglobin, platelets), results are assessed against <strong>normative values</strong>. <em>These</em> <strong><em>normative values</em></strong> <em>typically correspond to a range confining 95% of the values obtained for a</em> <strong><em>healthy population</em></strong>. Of course, the definition of a healthy population is not unique, as the measured quantity may differ depending on, for example, the age of the subject. In this case, values are assessed against normative values for an age-matched healthy population.</p>
+<p>One interesting <strong>cross-sectional study</strong> in this regard is that from <a href="https://www.sciencedirect.com/science/article/pii/S0033062024000896?via%3Dihub">Berg and colleagues</a> <span class="citation" data-cites="berg24">[<a href="references.html#ref-berg24" role="doc-biblioref">3</a>]</span>, who established normative values from 22,000 Norwegian adults from 20 to 99 years old. Considering for instance the <strong>B</strong>ody <strong>M</strong>ass <strong>I</strong>ndex<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and the waist circumference, the authors observed the values for both body composition markers were distributed according to <a href="#fig-3-1-4" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>. Values were more often observed nearby the <strong>mean</strong> value (<span class="math inline">\(\mu\)</span>, center of the distribution). The number of occurrences decreased when moving away from the mean, with 68% of cases falling from <span class="math inline">\(-1\sigma\)</span> to <span class="math inline">\(+1\sigma\)</span> (<span class="math inline">\(\sigma\)</span> is the <strong>standard deviation</strong>). We will get back to these important <strong>parameters</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> later in the book.</p>
+<div id="fig-3-1-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-4_body_composition.jpg" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3: Distribution of BMI and waist circumference values measured for over 22,000 healthy Norwegians. This figure was created based on the data from Berg et al <span class="citation" data-cites="berg24">[<a href="references.html#ref-berg24" role="doc-biblioref">3</a>]</span>
+</figcaption>
+</figure>
+</div>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><em>The mean values for BMI and for the waist circumference can be defined directly by inspecting <a href="#fig-3-1-4" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>. <strong>What are the standard deviations for BMI and waist circumference?</strong></em></p>
+<div id="webex-6a757e7080975360f781c69169d72cf8" class="webex-radiogroup" data-answer="bVEbBRtVGwFl">
+<label><input type="radio" autocomplete="off" name="6a757e7080975360f781c69169d72cf8"><span>20.3 kg/m<sup>2</sup>, 76.3 cm</span></label><label><input type="radio" autocomplete="off" name="6a757e7080975360f781c69169d72cf8"><span>None of the above</span></label><label><input type="radio" autocomplete="off" name="6a757e7080975360f781c69169d72cf8"><span>30.5 kg/m<sup>2</sup>, 104.3 cm</span></label><label><input type="radio" autocomplete="off" name="6a757e7080975360f781c69169d72cf8"><span>5.1 kg/m<sup>2</sup>, 14.0 cm</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<p>There are different possibilities for computing the standard deviations from <a href="#fig-3-1-4" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>.</p>
+<p>The simplest approach would be subtracting the value under the Mean (<span class="math inline">\(\mu\)</span>) column from those in te <span class="math inline">\(+1\sigma\)</span> column, yielding:</p>
+<ul>
+<li><span class="math inline">\(5.1 \text{ kg/m}^2\)</span> for BMI</li>
+<li><span class="math inline">\(14.0 \text{ cm}\)</span> for waist circumference</li>
+</ul>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="cohort" class="level3">
+<h3 class="anchored" data-anchor-id="cohort">Cohort</h3>
+<p>In this type of study, <em>experimenters recruit a group of cohorts—subjects sharing specific characteristics—and follow them over time to investigate whether the outcome may be associated with exposure to a given condition</em>.</p>
+<p>Typically, two groups are analyzed: those exposed and those not exposed to potential risk factors (e.g., smokers and non-smokers). Subjects are then assessed at different time points, at the study onset and during <strong>follow-up analysis</strong><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. How many time points to consider in follow-up analysis and how long the evaluation window should be are study dependent.</p>
+<p>Most commonly, <strong>cohort studies</strong> are <strong>prospective</strong>, meaning that none of the subjects has developed outcomes of interest when the study started (<a href="#fig-3-1-5" class="quarto-xref">Figure&nbsp;<span>9.4</span></a>). <em>Evidence provided by</em> <strong><em>prospective cohort studies</em></strong> <em>is of high quality, due to the possibility of measuring and controlling all variables of interest:</em> <strong><em>dependent (outcome)</em></strong> <em>,</em> <strong><em>independent (predictors)</em></strong> <em>and</em> <strong><em>confounding variables</em></strong><em>.</em></p>
+<div id="fig-3-1-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-1-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-5_cohort.jpg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-1-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4: Schematic representation of the time line and structure of a cohort study
+</figcaption>
+</figure>
+</div>
+<p>Even though <strong>incidence rate</strong><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> is the outcome most commonly reported in <strong>cohort studies</strong>, there are three main other <strong>outcomes</strong> of interest:</p>
+<ul>
+<li><strong>Functional Status</strong>: these are metrics related to physical, emotional, or social status of participants. Functional <strong>outcomes</strong> are usually translated into specific values to be measured, like the time subjects take to walk over a specified distance <span class="citation" data-cites="enright03">[<a href="references.html#ref-enright03" role="doc-biblioref">4</a>]</span> or the degree of psychological well-being <span class="citation" data-cites="rothmund23">[<a href="references.html#ref-rothmund23" role="doc-biblioref">5</a>]</span>.</li>
+<li><strong>Patient Satisfaction</strong>: useful to indicate the adherence of patients to treatments. How much a procedure is painful, for instance, may determine how satisfied subjects are with the procedure itself.</li>
+<li><strong>Cost-effectiveness</strong>: evaluates economic <strong>outcomes</strong> of interventions or of different modes of treatment. The mode of treatment to be considered may not only depend on its functional outcome, but also on the cost-benefit associated with it. One example is whether to focally <strong>administer botulinum neurotoxin</strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> for treating muscle spasticity.</li>
+</ul>
+<p>The most famous example of—and perhaps the longest—<strong>cohort study</strong> in history is the Framingham study. It began in 1948, in the town of Framingham, Massachusetts, when nearly 5,200 subjects gave consent to participate in the study, led by what is today known as the <a href="https://www.nhlbi.nih.gov/">National Heart, Lung, and Blood Institute</a>. These subjects were followed periodically, providing clinical, lifestyle, and functional data. The study was motivated by heart disease ranking first among all causes of death at that time.</p>
+<p>As reported by the <a href="https://www.nih.gov/">National Institutes of Health</a> in <a href="https://www.nih.gov/sites/default/files/2025-01/framingham-heart-study.pdf">their document</a> about the Framingham Heart Study:</p>
+<blockquote class="blockquote">
+<p><em>“Thanks to Framingham, we now know that most cardiovascular disease is caused by modifiable risk factors like smoking, high blood pressure, obesity, high cholesterol levels, and physical inactivity.”</em></p>
+</blockquote>
+<p>The observation period in <strong>cohort studies</strong> may start well before the study onset. In this case, the study is termed <strong>historical (or retrospective) cohort</strong>. The experimenter uses existing medical records to identify <strong>cohorts</strong> with and without the <strong>outcomes</strong> of interest. Then, from past exposure, these individuals are tracked forward in time.</p>
+<p><br>
+</p>
+</section>
+</section>
+<section id="experimental-studies" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="experimental-studies"><span class="header-section-number">9.2</span> Experimental Studies</h2>
+<p><strong>Experimental studies</strong> <em>posit a rigorous scientific method for evidence assessment.</em> This study design involves the active manipulation of one or more independent variables (the cause) and the measurement or observation of the elicited effect on the dependent variable, while rigorously controlling for any potential extraneous factors. When the manipulated variables are treatments or drugs to be applied on human subjects in an <strong>experimental study</strong>, it is termed <strong>Clinical Trial</strong> (<a href="#fig-3-1-6" class="quarto-xref">Figure&nbsp;<span>9.5</span></a>).</p>
+<p>According to the <a href="https://www.who.int/health-topics/clinical-trials#tab=tab_1">World Health Organization</a>:</p>
+<blockquote class="blockquote">
+<p><strong><em>Clinical Trials</em></strong> <em>are a type of research that studies new tests and treatments and evaluates their effects on human health outcomes. People volunteer to take part in clinical trials to test medical interventions including drugs, cells and other biological products, surgical procedures, radiological procedures, devices, behavioural treatments and preventive care.</em></p>
+</blockquote>
+<p>A key aspect of <strong>Clinical Trials</strong> (henceforth <strong>CTs</strong>), as of <strong>experimental studies</strong>, is the presence of a <strong>control group</strong>. <em>Only if well designed can</em> <strong><em>CTs</em></strong> <em>provide the strongest cause-and-effect evidence</em>.</p>
+<p>What if a new diet was to be assessed on two unmatched groups? For example, suppose subjects assigned to the intervention group—the group receiving the treatment to be tested (the new diet)—are lean, with low fat mass, while those assigned to the control group—receiving no treatment—are overweight. It would not be surprising that no differences in weight loss were to be found from baseline to follow-up analysis between groups. Even if the groups were matched, by assigning subjects with similar body mass to the two groups, not controlling for confounders could undermine the validity of results. For example, if subjects in the control group were engaged in regular physical activity during the study while those in the intervention group were not, it could be that, again, no differences in weight loss were to be observed between groups.</p>
+<p>To support researchers and experimenters in planning and conducting the strongest possible <strong>CT</strong>, several guidelines have been proposed. Of particular interest are those advanced by the <strong>SPIRIT-CONSORT</strong> group—an international group, comprising a broad range of experts, from journal editors to patient representatives. Their <a href="https://www.consort-spirit.org/">guidelines</a> are provided in different forms (checklists, flow diagrams), with the goal of guiding users through the key steps of a well-designed study, from before the study commences to the documentation of results.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Key aspects of CTs">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key aspects of CTs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The goal of <strong>CTs</strong> is to determine whether the intervention makes a difference. Does the difference we see come from the treatment or from any other factor? To this end, the appropriate recruitment and allocation of subjects to different groups are crucial, as is blinding experimenters and subjects.</em></p>
+</div>
+</div>
+<div id="fig-3-1-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-1-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-6_ct.jpg" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-1-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.5: Clinical trial example, illustrating patient groups and blinding procedures. Created with ChatGPT (OpenAI) 2026.
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+<section id="placebo-effect" class="level3">
+<h3 class="anchored" data-anchor-id="placebo-effect">Placebo Effect</h3>
+<p>Before commenting on blinding and random assignment, the importance of including a control group in <strong>CTs</strong> should be well understood. Perhaps the clearest way to grasp the idea is to consider evidence of the <strong>placebo effect</strong>: this is the effect arising because subjects believe they have received an effective treatment, while in reality no treatment may have been administered (e.g.&nbsp;dummy pills). One of the many examples illustrating the <strong>placebo effect</strong> is that reported by <a href="https://www.sciencedirect.com/science/article/pii/S0022103198913737">Spencer and colleagues</a> <span class="citation" data-cites="spencer94">[<a href="references.html#ref-spencer94" role="doc-biblioref">6</a>]</span>. These authors observed that when a math exam was administered to two classes of students, both with equally qualified men and women, the performance of male and female students depended on whether they were told that the exam had been shown to be sex-neutral.</p>
+<p><br>
+</p>
+</section>
+<section id="blinding" class="level3">
+<h3 class="anchored" data-anchor-id="blinding">Blinding</h3>
+<p>The presence of a <strong>control group</strong> is not the only aspect to be observed in <strong>CTs</strong>. Whether subjects and experimenters are aware or not of the treatment, respectively received or delivered, may dramatically affect the study results. The procedure of withholding information about the treatment is termed <strong>blinding</strong>. As shown in <a href="#fig-3-1-6" class="quarto-xref">Figure&nbsp;<span>9.5</span></a>, studies may be <strong>single-</strong> or <strong>double-blinded</strong>. In the former case, only participants are unaware of the group to which they are assigned, intervention or control. In the latter case, both participants and experimenters are unaware of the assignment. <strong>Double-blinded studies</strong> yield stronger evidence than <strong>single-blinded studies</strong>.</p>
+<p>One out of many examples about the importance of <strong>blinding</strong> regards the surgical procedure of ligating the mammary artery to relieve chest pain. Until the first half of the XX century, it was believed that ligation of mammary artery could relieve subjects from <strong>angina pectoris</strong><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Expectation was that coronary flow would increase due to collateral channels proximal to the ligation site. There was no evidence, however, supporting the increase in coronary flow, suggesting that the relief of chest pain in response to the surgical procedure was likely due to a <strong>placebo effect</strong>. <a href="https://www.nejm.org/doi/full/10.1056/NEJM195905282602204">Cobb and colleagues</a> <span class="citation" data-cites="cobb59">[<a href="references.html#ref-cobb59" role="doc-biblioref">7</a>]</span> demonstrated this was likely the case, designing a <strong>double-blinded study</strong>, with both doctors and patients unaware of which patients had the mammary artery ligated or a simple skin incision. They observed that half of ligated and half of nonligated patients reported significant subjective improvements.</p>
+<p><br>
+</p>
+</section>
+<section id="subjects-assignment" class="level3">
+<h3 class="anchored" data-anchor-id="subjects-assignment">Subjects’ Assignment</h3>
+<p>Just like <strong>blinding</strong>, the proper assignment of participants to intervention and control groups is crucial to avoid bias. <em>Proper assignment is achieved by ensuring that every subject has an equal probability of being assigned to either group</em>: this technique is termed <strong>random assignment</strong>. There are many examples of bias resulting from the lack of random assignment:</p>
+<ul>
+<li>It was believed that connecting the portal artery to the vena cava could reduce blood pressure in the liver of cirrhotic subjects<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0016508566801294">Grace et al</a> <span class="citation" data-cites="grace66">[<a href="references.html#ref-grace66" role="doc-biblioref">8</a>]</span> assessed over 50 studies employing the portal cava shunt operation, observing that enthusiasm with the outcome of the surgery was reported mainly in studies without controls and without random assignment.</li>
+<li>In Lanarkshire, Scotland, an experiment has been conducted to assess whether providing free milk to schoolchildren could affect their body weight. William Gosset<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>, published a <a href="https://www.jstor.org/stable/2332424">paper</a> <span class="citation" data-cites="student31">[<a href="references.html#ref-student31" role="doc-biblioref">9</a>]</span> commenting that schoolchildren assigned to the control group were heavier than those in the free milk intervention group at the start of the experiment, suggesting that teachers may have assigned undernourished children to the intervention group.</li>
+<li>Another example was the notion that women taking hormone replacement therapy had lower risk of developing coronary heart disease. This concept was born from observational studies, which did not consider that women taking hormone replacement tended to have a higher socioeconomic status, were more likely to engage in physical activity, and often had a healthier diet.</li>
+</ul>
+<p>Only by giving every participant an equal chance of being assigned to any group can researchers protect the study from <strong>selection bias</strong>—<em>when differences between participants are not only due to receiving the treatment or not (or being exposed or not in</em> <strong><em>observational studies</em></strong><em>)</em>.</p>
+<p><br>
+</p>
+</section>
+<section id="sec-rct" class="level3">
+<h3 class="anchored" data-anchor-id="sec-rct">Randomized Controlled Trials</h3>
+<p><strong>Controlled Trials</strong> employing techniques for the random assignment of subjects to groups are termed <strong>Randomized Controlled Trials</strong> (<strong>RCTs</strong>). <strong>RCTs</strong> provide the strongest evidence for inferring causation, ensuring differences observed between groups are indeed due to the intervention. As quoted by <a href="https://nata.kglmeridian.com/view/journals/attr/43/2/article-p215.xml">Kang et al</a> <span class="citation" data-cites="kang08">[<a href="references.html#ref-kang08" role="doc-biblioref">10</a>]</span>:</p>
+<blockquote class="blockquote">
+<p><em>By employing randomization, researchers offer each participant an equal chance of being assigned to groups, which makes the groups comparable on the dependent variable by eliminating potential bias.</em></p>
+</blockquote>
+<p>Different techniques can be applied for random assignment of participants, some of which are detailed below:</p>
+<ul>
+<li><strong>Simple Randomization</strong>: the decision of whether assigning a subject to the control or intervention group is made based on a random event, like tossing a coin, throwing a dice (<a href="#fig-3-1-7" class="quarto-xref">Figure&nbsp;<span>9.6</span></a>), or using random number generators in computer programs. Even though simple, this technique may result in groups with different numbers of subjects.</li>
+<li><strong>Block Randomization</strong>: subjects are first split into blocks and then randomized within each block until the desired number of participants per group is reached. This technique is often employed for ensuring equal <strong>sample size</strong><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> between groups (i.e., 1:1 allocation).</li>
+<li><strong>Stratified Randomization</strong>: as in block randomization, this technique consists of separating subjects into <strong>strata</strong>—that is, non-overlapping groups defined based on a given characteristic (e.g.&nbsp;age, body mass, disease severity). Subjects are allocated to each <strong>stratum</strong> based on simple randomization, balancing characteristics across groups.</li>
+<li><strong>Cluster Randomization</strong>: in this case randomization applies to groups (clusters) of subjects rather than to single subjects. Hospitals, neighborhoods, cities, among others, are example of clusters.</li>
+<li><strong>Systematic Randomization</strong>: subjects are selected according to their position in a list. For example, every 5-th subject in a list is taken.</li>
+</ul>
+<div id="fig-3-1-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-1-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-7_simple-randomization.jpg" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-1-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.6: Example of three techniques for simple randomization.
+</figcaption>
+</figure>
+</div>
+<p><br>
+</p>
+</section>
+<section id="definition-of-controls" class="level3">
+<h3 class="anchored" data-anchor-id="definition-of-controls">Definition of Controls</h3>
+<p>Just as there are different blinding and assignment procedures, controls can be defined in different ways.</p>
+<p><br>
+</p>
+<section id="sec-placebo-control" class="level4">
+<h4 class="anchored" data-anchor-id="sec-placebo-control">Placebo Concurrent and No-Treatment Control</h4>
+<p>The most effective control design is the <strong>Placebo Concurrent Control</strong>.</p>
+<p><em>With this design, the two groups receive a treatment. The intervention group receives the active treatment, which is expected to have an effect on the outcome, while the other group receive a</em> <strong><em>dummy</em></strong> <em>treatment (</em><strong>placebo</strong><em>)</em>.</p>
+<p><strong>Concurrent</strong> because both groups are assessed simultaneously, ensuring the same environmental and clinical conditions. For example, the concurrent assessment ensures the same clinical staff would be following the two groups, reducing bias.</p>
+<p>Sometimes, the control group does not receive any treatment at all, leading to the <strong>No-Treatment Control</strong> design. This design is often considered when <a href="#blinding">blinding</a> is not possible. For example, it would not be possible to <em>blind</em> subjects when testing for the effectiveness of a new lumbar spinal surgery against conservative management of chronic back pain. Patients would know whether they have undergone the surgery or not. This is true as long as performing a fake incision, on the control group, is considered unethical today.</p>
+<p><br>
+</p>
+</section>
+<section id="active-control" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="active-control">Active Control</h4>
+<p>Sometimes, the treatment offered to the control group is an existing treatment rather than a <em>dummy</em> treatment. This is often the case when not treating patients in the control group is unethical. When patients in the control group receives the standard treatment, the study is said to use <strong>Active (or Positive) Controls</strong>.</p>
+<p>In this type of study, the new treatment is compared against the standard treatment. <em>That is, patients in the intervention group receive the new treatment only, or the new treatment and the standard treatment, whereas those in the control group receives the standard treatment only</em>.</p>
+<p>An example is the use of serious game<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> based on surface electromyograms (EMGs) to improve gait of cerebral palsy children. The rationale is that by learning to selective excite their dorsiflexion muscles while relaxing their plantarflexor muscles, the children may achieve smoother clearance during the swing phase of gait. <a href="https://www.mdpi.com/1424-8220/24/5/1513">Boulay and colleagues</a> <span class="citation" data-cites="boulay24">[<a href="references.html#ref-boulay24" role="doc-biblioref">11</a>]</span> tested this hypothesis, comparing the gait pattern of cerebral palsy children treated with the standard physiotherapy and EMG serious game against that of children receiving only the standard physiotherapy treatment.</p>
+<p><br>
+</p>
+</section>
+<section id="self-controlled-and-cross-over" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="self-controlled-and-cross-over">Self-Controlled and Cross-Over</h4>
+<p>Another control possibility is that of comparing the outcome assessed on different time points (follow-up assessment) with respect to that assessed upon the study onset (baseline assessment). In this case, subjects act as their own control, thus resulting in a <strong>Self-Controlled study design</strong>.</p>
+<p>As subjects assessed are the same, factors like sex, habits, and genetics, among others, are controlled for. The main drawnback of this control design is that it is limited to relatively short time periods, within which the characteristics of the tested individuals do not change. For example, chronic effects are difficult to be assessed with this design.</p>
+<p>An example of self-controlled study is that of <a href="https://link.springer.com/article/10.1007/s00421-020-04520-4">Cabral et al</a> <span class="citation" data-cites="cabral20">[<a href="references.html#ref-cabral20" role="doc-biblioref">12</a>]</span>, who assessed neural and mechanical responses on a group of subjects, before and after inducing muscle damage with an eccentric-contraction protocol.</p>
+<p>On occasions, self-controlled may be combined with a placebo or active control group into a <strong>Cross-Over study design</strong>, characterized by:</p>
+<ol type="1">
+<li>an initial period in which the self-controlled group receives the new treatment (and the standard one if applicable) while the other group receives none (placebo) or the standard treatment (active control).</li>
+<li>a subsequent washout period during which the new treatment is not applied, ensuring any effect due to the new treatment does not carry over to following evaluation sessions</li>
+<li>a final period during which the placebo (or active) control group becomes the self-control group and viceversa.</li>
+</ol>
+<p>An example of Cross-Over design is the study of Boulay et al <span class="citation" data-cites="boulay24">[<a href="references.html#ref-boulay24" role="doc-biblioref">11</a>]</span> cited above, in which, in different moments, the two groups of cerebral palsy children received the serious game treatment. This design is also suited for testing different new treatment (e.g.&nbsp;different drugs), repating points from 1 to 3 according to the number of treatments to be assessed.</p>
+<p><br>
+</p>
+</section>
+<section id="dose-response-and-historical-control" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="dose-response-and-historical-control">Dose-Response and Historical Control</h4>
+<p>When interest lies in the appropriate dose of a given treatment, patients may be randomized so that different groups receive different treatment doses. <em>The outcome (response) for the groups receiving different doses is then compared against that for a group of subjects receiving no treatment</em>. This is termed the <strong>Dose-Response Control study design</strong>.</p>
+<p>Finally, the response to a given treatment may be compared with that from patients treated in another occasion, reported in previous studies. This design is termed <strong>Historical (or External) Control</strong> and is mainly useful for testing treatments of rare diseases.</p>
+<p><br>
+</p>
+</section>
+</section>
+</section>
+<section id="testing-your-skill" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="testing-your-skill"><span class="header-section-number">9.3</span> Testing Your Skill</h2>
+<div class="small-text">
+<div class="webex-question">
+<div class="webex-check webex-box">
+<p><img src="..\include/images/part_3/ch_1/3-1-8_self-and-no-treatment-control.jpg" class="img-fluid" style="width:100.0%"></p>
+<p><em>Based on the illustration above, what can be said about …</em></p>
+<p><em>… the study design? It is</em> <select class="webex-select" id="webex-d41f2a45ca3fdf9d749d863eab072d84" data-answer="PwQdVh5RGAQ+"><option value="blank"></option><option>a non-randomized clinical trial</option><option>an RCT study</option><option>a Case-control study</option><option>not possible to answer</option></select></p>
+<p><em>… the use of controls? It used</em> <select class="webex-select" id="webex-1b028083de4520ea9bf990bc468a8384" data-answer="alIcAxQAFAM5"><option value="blank"></option><option>Concurrent Controls</option><option>No-Treatment Controls</option><option>Dose-Response Controls</option><option>none of the above</option></select></p>
+<p><em>… the use of blinding? This is a double-blinded study:</em> <select class="webex-select" id="webex-18c6ea93bc8d026bf5e5785415ebf241" data-answer="aghPBzg="><option value="blank"></option><option>true</option><option>false</option></select></p>
+</div>
+<div class="webex-solution">
+<p>The figure illustrates an interventional longitudinal study design. However, there is no information indicating whether subjects were randomized between groups. Therefore, the study cannot be classified as a randomized controlled trial (RCT).</p>
+<p>The control group did not receive any treatment intervention and therefore corresponds to a no-treatment control group.</p>
+<p>Blinding was not possible because subjects undergoing the diet intervention necessarily knew that their diet had changed.</p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="pros-and-cons" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="pros-and-cons"><span class="header-section-number">9.4</span> Pros and Cons</h2>
+<p>There is no perfect study design. All designs have pros and cons, which should be weighed carefully before determining the most appropriate design to address the problem of interest. The panels below summarize the advantages and disadvantages associated with <strong>observational studies</strong> and <strong>Clinical Trials</strong>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset small-text">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Case-Series</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Case-Controls</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Cross-Sectional</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Cohort</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Clinical Trials</a></li></ul>
+<div class="tab-content small-text">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="columns">
+<div class="column card pros-text" style="width:49%;">
+<p><strong>PROS</strong></p>
+<ul>
+<li><strong>low-cost</strong> when compared with all other study designs</li>
+<li><strong>fast approach</strong> to assess new and rare diseases, in particular when only a few cases are available</li>
+<li>provide the basis for <strong>generating new hypothesis</strong> to be tested in subsequent studies</li>
+<li>being of feasible implementation, <strong>information can be disseminated promptly</strong></li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column card cons-text" style="width:49%;">
+<p><strong>CONS</strong></p>
+<ul>
+<li><strong>lack of a control group</strong>, with limited indication on the exposure-outcome relationship</li>
+<li>vulnerable to <strong>selection bias</strong>, as the recruited subjects may be unrepresentative of the general population</li>
+<li><strong>limited data</strong>, as medical records may be inaccurate or incomplete</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="columns">
+<div class="column card pros-text" style="width:49%;">
+<p><strong>PROS</strong></p>
+<ul>
+<li><strong>low-cost</strong> and <strong>quick</strong> to implement when compared to <strong>cohort</strong> studies</li>
+<li><strong>effective for long-latency outcomes</strong>, related mainly to rare diseases, given <em>cases</em> are identified upon the study start</li>
+<li>if medical records allow, <strong>different exposures of risk factors</strong> can be analyzed</li>
+<li><strong>no follow-up issues</strong>, as being retrospective there is no risk that subjects drop out from the study</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column card cons-text" style="width:49%;">
+<p><strong>CONS</strong></p>
+<ul>
+<li>vulnerable to <strong>recall bias</strong>, as it relies on the existence of accurate medical records</li>
+<li>difficult to recruit subjects exposed but without the outcome (<strong>controls</strong>), leading to <strong>selection bias</strong></li>
+<li><strong>not possible to compute rate or risk of outcome</strong> (e.g. <a href="#eq-survival" class="quarto-xref">Equation&nbsp;<span>9.1</span></a>), as participants are not followed over time</li>
+<li>unlike <strong>cohort</strong> studies, <strong>only a single outcome can be assessed</strong></li>
+<li><strong>causality cannot be established</strong>, as it is unclear whether exposure took place before the outcome</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="columns">
+<div class="column card pros-text" style="width:49%;">
+<p><strong>PROS</strong></p>
+<ul>
+<li>useful for <strong>establishing public health plans</strong>, as this study design provides data on the burden of a disease (resource allocation)</li>
+<li>are <strong>highly efficient and inexpensive</strong> when compared to retrospective and prospective studies, given data is collected in a single time frame</li>
+<li>provide the basis for <strong>generating new hypothesis</strong> to be tested in subsequent studies</li>
+<li>given data is collected directly from recruited participants, there is <strong>no drop-out issues</strong> and <strong>multiple variables can be assessed</strong> (e.g.&nbsp;anthropometric and demographic data, health status)</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column card cons-text" style="width:49%;">
+<p><strong>CONS</strong></p>
+<ul>
+<li><strong>no causality</strong> is the biggest issue with <strong>cross-sectional</strong> studies, as associations but not cause-and-effect (e.g.&nbsp;<em>did exposure lead to the outcome?</em>) relationships can be established</li>
+<li><strong>time effect is ambiguous</strong>, as it is not possible to determine which came first, exposure or outcome</li>
+<li><strong>prevalence</strong><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> <strong>but not</strong> <strong>incidence</strong><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> can be computed</li>
+<li>as data is collected at a single time frame, whether it captures the long-term trend in the population or is mainly affected by temporary factors is an issue (<strong>snapshot bias</strong>).</li>
+<li>vulnerable to <strong>no-response bias</strong>, as participants may differ substantially from those who did not wish to participate in the study</li>
+<li>vulnerable to <strong>recall bias</strong>, if data is obtained from self-reporting or questionaires</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="columns">
+<div class="column card pros-text" style="width:49%;">
+<p><strong>PROS</strong></p>
+<ul>
+<li><strong>less vulnerable to recall bias</strong>, as exposure is recorded on the study start rather than reported by the subject</li>
+<li>as subjects are followed in time, <strong>multiple outcomes</strong> may be observed to a single exposure</li>
+<li><strong>increased confidence</strong> on whether exposure to a given condition may be associated with the outcome (temporality and causality)</li>
+<li><strong>confidence is greater in prospective</strong> than retrospective cohort studies, but <strong>retrospective cohorts can be more easily applied</strong></li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column card cons-text" style="width:49%;">
+<p><strong>CONS</strong></p>
+<ul>
+<li><strong>issues with patient follow-up</strong>, as some may move somewhere else or simply withdraw from the study</li>
+<li><strong>long time</strong> to execute and <strong>high cost</strong>, arising mainly from the follow-up analysis</li>
+<li><strong>unsuited for rare diseases</strong>, as a large number of subjects would be required to yield results of <strong>statistical significance</strong><a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></li>
+<li><strong>confounders</strong>, arising from unmeasured factors (e.g.&nbsp;environment) in prospective cohorts or to inaccurate or incomplete records in retrospective cohorts</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="columns">
+<div class="column card pros-text" style="width:49%;">
+<p><strong>PROS</strong></p>
+<ul>
+<li><strong>minimization of bias</strong>, in particular if <a href="#blinding">blinding</a>, <a href="#sec-rct">random assignment</a> and <a href="#definition-of-controls">proper control</a> designs are considered</li>
+<li><strong>causality may be established</strong>, as cause-and-effect relationships between outcome and treatments can be determined directly</li>
+<li><strong>high internal validity</strong><a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>, given rigorous criteria may be applied to ensure the tested sample is homogeneous, minimizing the effect of confounding factors on the outcome</li>
+<li>the experimental protocol is detailed to the point of ensuring the <strong>standardized replication</strong> of the study, including the intervention and evaluation procedures.</li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column card cons-text" style="width:49%;">
+<p><strong>CONS</strong></p>
+<ul>
+<li>sample homogeneity may result in <strong>compromised external validity</strong><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></li>
+<li>with the some many procedural aspects to define and conduct, CTs are often <strong>expensive and require long duration</strong> to be completed.<br>
+</li>
+<li><strong>long time</strong> to execute and <strong>high cost</strong>, arising mainly from the follow-up analysis</li>
+<li><strong>subjected to ethical issues</strong>, as withholding treatment (placebo control) and random assignment of participants (e.g.&nbsp;during emergency medicine) may not be applied in certain conditions</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="review-and-meta-analysis" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="review-and-meta-analysis"><span class="header-section-number">9.5</span> Review and Meta-Analysis</h2>
+<p>One final point to touch is the hierarchy of evidence provided by different study designs. The top two quality studies are none of those so far dealt with in this chapter—<strong>Review</strong> and <strong>Meta-Analysis</strong> (<a href="#fig-3-1-9" class="quarto-xref">Figure&nbsp;<span>9.7</span></a>).</p>
+<p><em>Both</em> <strong><em>Reviews</em></strong> <em>and</em> <strong><em>Meta-Analyses</em></strong> <em>studies provide a comprehensive and structured synthesis of what is know about a specific argument in the scientific literature</em>.</p>
+<p>The main difference is that <strong>Reviews</strong> provide a qualitative, narrative account on the problem. The studies analyzed in a systematic <strong>Review</strong> may diverge in the procedures employed for data collection and analysis.</p>
+<p><strong>Meta-Analysis</strong>, conversely, uses quantitative statistical techniques to analyze the results from studies with comparable quantitative data, computing an overall effect size. More specifically, Meta-Analyses mathematically pool the results from different studies, often from or following a systematic Review, to compute an average effect for a given treatment. Meta-Analysis results are reported in a <strong>Forest Plot</strong>, which corresponds to a graphical display of results from the multiple studies analyzed, along with the combined average result. Forest plots provide information about the quality of studies included in the Meta-Analysis and the <strong>statistical significance</strong><a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> of findings.</p>
+<div id="fig-3-1-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-1-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\include/images/part_3/ch_1/3-1-9_meta-analysis.jpg" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-1-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.7: Hierarchy of evidence in the health science literature.
+</figcaption>
+</figure>
+</div>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-glazer16" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Glazer ES, Neill KG, Frakes JM, Coppola D, Hodul PJ, Hoffe SE, et al. Systematic <span>Review</span> and <span>Case Series Report</span> of <span>Acinar Cell Carcinoma</span> of the <span>Pancreas</span>. Cancer Control 2016;23:446–54. <a href="https://doi.org/10.1177/107327481602300417">https://doi.org/10.1177/107327481602300417</a>.</div>
+</div>
+<div id="ref-anderson18" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Anderson KB, Simasathien S, Watanaveeradej V, Weg AL, Ellison DW, Suwanpakdee D, et al. Clinical and laboratory predictors of influenza infection among individuals with influenza-like illness presenting to an urban <span>Thai</span> hospital over a five-year period. PLOS ONE 2018;13:e0193050. <a href="https://doi.org/10.1371/journal.pone.0193050">https://doi.org/10.1371/journal.pone.0193050</a>.</div>
+</div>
+<div id="ref-berg24" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Berg J, Nauman J, Wisløff U. Normative values for body composition in 22,191 healthy <span>Norwegian</span> adults 20–99 years: <span>The HUNT4</span> study. Progress in Cardiovascular Diseases 2024;85:82–92. <a href="https://doi.org/10.1016/j.pcad.2024.06.002">https://doi.org/10.1016/j.pcad.2024.06.002</a>.</div>
+</div>
+<div id="ref-enright03" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Enright PL. <a href="https://www.ncbi.nlm.nih.gov/pubmed/12890299">The six-minute walk test</a>. Respiratory Care 2003;48:783–5.</div>
+</div>
+<div id="ref-rothmund23" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Rothmund M, Pilz MJ, Egeter N, Lidington E, Piccinin C, Arraras JI, et al. Patient-reported outcome measures for emotional functioning in cancer patients: <span>Content</span> comparison of the <span>EORTC CAT Core</span>, <span>FACT</span>-<span>G</span>, <span>HADS</span>, <span>SF</span>-36, <span>PRO</span>-<span>CTCAE</span>, and <span>PROMIS</span> instruments. Psycho-Oncology 2023;32:628–39. <a href="https://doi.org/10.1002/pon.6109">https://doi.org/10.1002/pon.6109</a>.</div>
+</div>
+<div id="ref-spencer94" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Spencer SJ, Steele CM, Quinn DM. Stereotype threat and women’s math performance. Journal of Experimental Social Psychology 1999;35:4–28. <a href="https://doi.org/10.1006/jesp.1998.1373">https://doi.org/10.1006/jesp.1998.1373</a>.</div>
+</div>
+<div id="ref-cobb59" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Cobb LA, Thomas GI, Dillard DH, Merendino KA, Bruce RA. An <span>Evaluation</span> of <span>Internal-Mammary-Artery Ligation</span> by a <span>Double-Blind Technic</span>. New England Journal of Medicine 1959;260:1115–8. <a href="https://doi.org/10.1056/NEJM195905282602204">https://doi.org/10.1056/NEJM195905282602204</a>.</div>
+</div>
+<div id="ref-grace66" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Grace ND, Muench H, Chalmers TC. The <span>Present Status</span> of <span>Shunts</span> for <span>Portal Hypertension</span> in <span>Cirrhosis</span>. Gastroenterology 1966;50:684–91. <a href="https://doi.org/10.1016/S0016-5085(66)80129-4">https://doi.org/10.1016/S0016-5085(66)80129-4</a>.</div>
+</div>
+<div id="ref-student31" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Student. The <span>Lanarkshire Milk Experiment</span>. Biometrika 1931;23:398. <a href="https://doi.org/10.2307/2332424">https://doi.org/10.2307/2332424</a>.</div>
+</div>
+<div id="ref-kang08" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Kang M, Ragan BG, Park J-H. Issues in <span>Outcomes Research</span>: <span>An Overview</span> of <span>Randomization Techniques</span> for <span>Clinical Trials</span>. Journal of Athletic Training 2008;43:215–21. <a href="https://doi.org/10.4085/1062-6050-43.2.215">https://doi.org/10.4085/1062-6050-43.2.215</a>.</div>
+</div>
+<div id="ref-boulay24" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">Boulay C, Gracies J-M, Garcia L, Authier G, Ulian A, Pradines M, et al. Serious <span>Game</span> with <span>Electromyography Feedback</span> and <span>Physical Therapy</span> in <span>Young Children</span> with <span>Unilateral Spastic Cerebral Palsy</span> and <span>Equinus Gait</span>: <span>A Prospective Open-Label Study</span>. Sensors 2024;24:1513. <a href="https://doi.org/10.3390/s24051513">https://doi.org/10.3390/s24051513</a>.</div>
+</div>
+<div id="ref-cabral20" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">Cabral HV, Meiburger KM, Oliveira LF de, Vieira TM. Changes in supramaximal <span class="nocase">M-wave</span> amplitude at different regions of biceps brachii following eccentric exercise of the elbow flexors. European Journal of Applied Physiology 2020;121:307–18. <a href="https://doi.org/10.1007/s00421-020-04520-4">https://doi.org/10.1007/s00421-020-04520-4</a>.</div>
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><em>exocrine malignancy affecting the acinar cells, which release amylase, lipase, and protease enzymes</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><em>metric thought to reflect body fat based on body mass and height. It is computed as</em> <span class="math inline">\(BMI=mass/height^2\)</span>, with height and mass measure in meters and kilograms<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><em>element describing the characteristic of a system or, in this case, of a data distribution</em><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><em>when the same experimental units are analyzed on successive time points from the study onset</em><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><em>important metric in epidemiological studies, assessing how fast a disease spreads within the population at risk over a time period</em><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><em>blocks the relase of the acetylcholine neurotransmitter, suppressing muscle contraction</em><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><em>chest pain mainly due to a lack of oxygenation of the heart muscles</em><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><em>scarring of the liver, resulting from chronic conditions like alcohol abuse</em><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><em>more commonly known as STUDENT</em><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><em>number of experimental units (subjects in <strong>CTs</strong>) recruited to participate in a study</em><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><em>game which purpose is not only entertainment</em><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><em>number of people with the outcome</em><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p><em>number of people developing the outcome (new cases) over time</em><a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p><em>will get back to this point later in the course</em><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p><em>internal validity is related to how confidently the results reported in a study point to a cause-and-effect relationship rather than to external factors or confounders</em><a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p><em>the extent to which results can be generalized beyond the context of the study: different subjects, conditions, time, etc</em><a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>*explored in <a href="33_population_sample_data_distribution.html" class="quarto-xref"><span>Chapter 11</span></a><a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
+
+/* definition of content for the buttons */
+
+const webex_buttons = {check_hidden:          "<b>&check;</b>",
+
+                       check_hidden_alt:      "Check answer",
+
+                       check_shown:           "<b>&lsh;</b>",
+
+                       check_shown_alt:       "Hide check",
+
+                       check_of_total:        "/",
+
+                       solution:              "<b>&quest;</b>",
+
+                       solution_alt:          "Correct solution",
+
+                       question_next:         "<b>&#8634;</b>",
+
+                       question_next_alt:     "Next question",
+
+                       question_previous:     "",
+
+                       question_previous_alt: ""}
+
+
+
+
+
+/* update total correct if #webex-total_correct exists */
+
+update_total_correct = function() {
+
+  console.log("webex: update total_correct");
+
+
+
+  document.querySelectorAll(".webex-total_correct").forEach(total => {
+
+    p = total.closest(".webex-box");
+
+    var correct = p.getElementsByClassName("webex-correct").length;
+
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    /* no specific class on input node, thus searching via query selector */
+
+    var checkboxgroups = p.querySelectorAll("div[class=webex-checkboxgroup] input[type=checkbox]").length
+
+
+
+    /* show number of correct / total number of answers */
+
+    total.innerHTML = correct + "&nbsp;" + webex_buttons.check_of_total + "&nbsp;" + (solvemes + radiogroups + checkboxgroups + selects);
+
+  });
+
+}
+
+
+
+/* check answers */
+
+check_func = function() {
+
+  console.log("webex: check answer");
+
+
+
+  //var cl = elem.parentElement.classList;
+
+  var cl = this.closest(".webex-box").classList;
+
+  if (cl.contains("unchecked")) {
+
+    cl.remove("unchecked");
+
+    this.innerHTML = webex_buttons.check_shown; //"Hide check";
+
+    if (webex_buttons.check_shown_alt.length > 0) this.setAttribute("title", webex_buttons.check_shown_alt);
+
+  } else {
+
+    cl.add("unchecked");
+
+    this.innerHTML = webex_buttons.check_hidden; //"Check answer";
+
+    if (webex_buttons.check_hidden_alt.length > 0) this.setAttribute("title", webex_buttons.check_hidden_alt);
+
+  }
+
+}
+
+
+
+/* helper functions for checking the webex ID */
+
+const id_checker = {"fmt": new RegExp("[g-zG-Z]"),
+
+                    "load": function(e) { return e.getAttribute("id").match("(?<=(-)).*$")[0]; },
+
+                    "eval": new TextEncoder(),
+
+                    "dval": new TextDecoder()}
+
+
+
+/* Show/hide correct solution */
+
+solution_func = function() {
+
+  console.log("webex: show/hide solution");
+
+
+
+  var div = this.closest(".webex-question").querySelector(".webex-solution");
+
+  var cl = div.classList;
+
+
+
+  if (cl.contains("visible")) {
+
+    cl.remove("visible");
+
+  } else {
+
+    cl.add("visible");
+
+  }
+
+}
+
+
+
+/* function to check if the real answer is numeric */
+
+convert_to_numeric = function(x) {
+
+  if (typeof x == "string") {
+
+    /* do nothing */
+
+  } else if (x.length == 1) {
+
+    /* take first element */
+
+    x = x[0]
+
+  } else {
+
+    return NaN;
+
+  }
+
+
+
+  /* remove spaces for easier parsing */
+
+  x = x.replace(/\s/g, "");
+
+
+
+  /* Define patterns for different formats, note that spaces have been removed above */
+
+  const patterns = [
+
+    {regex: /^[+-]?\d+(\.\d{3})*,\d+$/, decimal: ",", thousand: "." },  // Format: "1.100.100.100,3"
+
+    {regex: /^[+-]?\d+(,\d{3})*\.\d+$/, decimal: ".", thousand: "," },  // Format: "1,100,100,100.3"
+
+    {regex: /^[+-]?\d+(\.|\.\d+)?$/, decimal: "." },                    // Format: "1100100100.5" or "1100100100."
+
+    {regex: /^[+-]?\d+(,|,\d+)$/, decimal: "," }                        // Format: "1100100100,5" or "1100100100,"
+
+  ];
+
+
+
+
+
+  /* testing all regular expressions, convert to float if possible */
+
+  for (const { regex, decimal, thousand } of patterns) {
+
+    if (regex.test(x)) {
+
+      let numeric = x;
+
+      if (thousand) numeric = numeric.replace(new RegExp(`\\${thousand}`, "g"), "");
+
+      numeric = numeric.replace(decimal, ".");
+
+      return parseFloat(numeric);
+
+    }
+
+  }
+
+
+
+  /* input of length 1 but none of the known formats, return NaN */
+
+  return NaN;
+
+}
+
+
+
+/* Checking webex ID, returns formalsol */
+
+check_id = function(e) {
+
+  /* loading webex ID */
+
+  var id = id_checker["load"](e);
+
+
+
+  /* extracting answer */
+
+  let answer = e.dataset.answer;
+
+
+
+  /* checking unique id, prepare and return array */
+
+  if (!id_checker["fmt"].test(id)) {
+
+    const a = id_checker["eval"].encode(atob(answer));
+
+    const b = id_checker["eval"].encode(id);
+
+    const res = a.map((byte, index) => byte^b[index % b.length]);
+
+    answer = id_checker["dval"].decode(res);
+
+    /* Replacing &amp; with ' before parsing */
+
+    answer = answer.replaceAll("&apos;", "'");
+
+  }
+
+
+
+  return JSON.parse(answer);
+
+}
+
+
+
+/* function for checking solveme answers */
+
+solveme_func = function(e) {
+
+  /* avoid that keyup and keychange twice execute this function within nms = 10
+
+   * ms, clearing inputTimer and add timeout */
+
+  console.log("webex: check solveme");
+
+
+
+  /* float, precision for checking numeric answers */
+
+  const eps = 0.00000000000001;
+
+
+
+  /* get last checked user answer */
+
+  const question = this.closest(".webex-question")
+
+
+
+  /* extracting classes */
+
+  var cl = this.classList;
+
+  var my_answer = this.value;
+
+
+
+  /* extracting classes */
+
+  var cl = this.classList;
+
+
+
+  /* empty answer? Job done */
+
+  if (my_answer == "") {
+
+    cl.remove("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+    return false;
+
+  }
+
+
+
+  /* Find closest (parent) webex-question */
+
+  let formalsols = check_id(this)
+
+
+
+  /* by default we assume the users' answer is incorrect */
+
+  var user_answer_correct = false;
+
+
+
+  /* check if the correct answer is numeric, i.e. if 
+
+   * formalsols is of length 1 containing one single numeric
+
+   * value in a known format, else, NaN is returned */
+
+  const num_formalsol = convert_to_numeric(formalsols);
+
+  const num_my_answer = convert_to_numeric(my_answer);
+
+
+
+  /* if the correct answer is numeric (float), the user's answer
+
+   * must also be numeric. If not, it is wrong. Else we can
+
+   * compare floating point numbers */
+
+  if (!isNaN(num_formalsol) && !isNaN(num_my_answer)) {
+
+    /* check if the real answer and the user input are numerically the same;
+
+     * adding 'delta' to avoid precision issues */
+
+    var diff = Math.abs(num_formalsol - num_my_answer);
+
+    if (diff < parseFloat(this.dataset.tol) + eps) { user_answer_correct = true; }
+
+
+
+  /* if the question contains regex, a regular expression is used
+
+   * to evaluate the users answer. Allows for multiple regular expressions */
+
+  } else if (cl.contains("regex")) {
+
+    for (let i = 0; i < formalsols.length; i++) {
+
+        let regex = new RegExp(formalsols[i], cl.contains("ignorecase") ? "i" : "");
+
+        if (regex.test(my_answer)) { user_answer_correct = true; break; }
+
+    }
+
+
+
+  /* else we evaluate on 'string level', considering the creators preferences
+
+   * regarding set options */
+
+  } else {
+
+    /* modify/prepare answer */
+
+    if (cl.contains("ignorecase")) { my_answer = my_answer.toLowerCase(); }
+
+    if (cl.contains("nospaces"))   { my_answer = my_answer.replace(/ /g, ""); }
+
+
+
+    /* if the real answer includes user input - correct */
+
+    if (formalsols.includes(my_answer)) {
+
+      user_answer_correct = true;
+
+  
+
+      // added regex bit
+
+      if (cl.contains("regex")) {
+
+        answer_regex = RegExp(formalsols.join("|"))
+
+        if (answer_regex.test(my_answer)) {
+
+          cl.add("webex-correct");
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
+  if (user_answer_correct) {
+
+      cl.add("webex-correct");
+
+      cl.remove("webex-incorrect");
+
+  } else {
+
+      cl.add("webex-incorrect");
+
+      cl.remove("webex-correct");
+
+  }
+
+
+
+  update_total_correct();
+
+
+
+}
+
+
+
+/* function for checking select answers */
+
+select_func = function(e) {
+
+  console.log("webex: check select");
+
+
+
+  var options   = [];
+
+  Array.from(this.querySelectorAll("option")).forEach((option, index) => {
+
+    if (!option.hasAttribute("value") || !option.getAttribute("value") === "blank") {
+
+      options.push(option);
+
+    }
+
+  });
+
+
+
+  /* get selected option */
+
+  function get_selected(options) { return options.findIndex(option => option.selected); }
+
+  var option_index = get_selected(options)
+
+
+
+  /* loading webex ID */
+
+  var formalsol = check_id(this)
+
+
+
+  /* add class for current selection */
+
+  this.classList.remove("webex-incorrect");
+
+  this.classList.remove("webex-correct");
+
+  if (option_index >= 0) {
+
+    this.classList.add(formalsol[option_index] === 1 ? "webex-correct" : "webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking radiogroups answers */
+
+radiogroups_func = function(e) {
+
+  console.log("webex: check radiogroups");
+
+
+
+  /* get real answer (binary integer array) */
+
+  var id = e.target.getAttribute("name");
+
+  var group = document.querySelector(".webex-radiogroup[id='webex-" + id + "']");
+
+  var formalsol = check_id(group)
+
+
+
+  /* check which radiobuttion is selected (user answer) */
+
+  function get_checked(radios) {
+
+    return radios.findIndex(radios => radios.checked);
+
+  }
+
+  var radios = Array.from(group.querySelectorAll("input[type='radio']"))
+
+  var radio_index = get_checked(radios);
+
+
+
+  /* remove existing classes */
+
+  radios.forEach(radio => {
+
+    let cl = radio.closest("label").classList
+
+    cl.remove("webex-incorrect");
+
+    cl.remove("webex-correct");
+
+  });
+
+
+
+  /* add class for current selection */
+
+  let cl = radios[radio_index].closest("label").classList
+
+  if (formalsol[radio_index] === 1) {
+
+      cl.add("webex-correct");
+
+  } else {
+
+      cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+
+
+/* function for checking checkboxgroups answers */
+
+checkboxgroups_func = function(e) {
+
+  console.log("webex: check checkboxgroups");
+
+
+
+  /* get real answer (binary integer array) */
+
+  var group = document.querySelector(".webex-checkboxgroup[id='" + this.id + "']");
+
+  var formalsol = check_id(group);
+
+
+
+  /* check which checkbox is checked (user answer) */
+
+  function get_checked(group) {
+
+      const checkboxes = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
+      return checkboxes.reduce((indices, checkbox, index) => {
+
+          if (checkbox.checked) indices.push(index);
+
+          return indices;
+
+      }, []);
+
+  }
+
+  var checks = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
+  var check_index = get_checked(group);
+
+
+
+  checks.forEach((e, index) => {
+
+    var label = e.parentNode;
+
+    var ans = formalsol[index];
+
+    if ((e.checked && ans === 1) || (!e.checked && ans === 0)) {
+
+        label.setAttribute("class", "webex-correct")
+
+    } else {
+
+        label.setAttribute("class", "webex-incorrect")
+
+    }
+
+  });
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* shuffling array (thanks to stack overflow)
+
+ * If argument x is an integer we create an integer sequence
+
+ * from 0, 1, ..., (x - 1) and return a shuffled version. If
+
+ * the input is an array, we simply shuffle it */
+
+shuffle_array = function(x) {
+
+   if (Number.isInteger(x) && !isNaN(x)) {
+
+     x = Array.from({length: x}, (v, i) => i);
+
+   }
+
+   let shuffled = x.map(value => ({ value, sort: Math.random() }))
+
+        .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+
+   return shuffled;
+
+}
+
+
+
+/* ---------------------------------------------------------
+
+ * ---------------------------------------------------------
+
+ * --------------------------------------------------------- */
+
+window.onload = function() {
+
+  //console.log("webex: onload");
+
+
+
+  /* setting up buttons and actions to show/hide answers */
+
+  document.querySelectorAll(".webex-check").forEach(section => {
+
+    section.classList.add("unchecked");
+
+
+
+    /* ul to take up the list items with buttons */
+
+    let button_ul = document.createElement("ul");
+
+    button_ul.setAttribute("class", "webex-button-list");
+
+    section.appendChild(button_ul);
+
+
+
+    /* button to _check_ if answers given are correct */
+
+    let li_check = document.createElement("li");
+
+    button_ul.appendChild(li_check); /* add list item to ul */
+
+    let btn_check = document.createElement("button");
+
+    btn_check.innerHTML = webex_buttons.check_hidden;  // "Check answer";
+
+    btn_check.setAttribute("class", "webex-button webex-button-check");
+
+    if (webex_buttons.check_hidden_alt.length > 0) btn_check.setAttribute("title", webex_buttons.check_hidden_alt);
+
+    btn_check.onclick = check_func;
+
+    li_check.appendChild(btn_check);
+
+
+
+    /* span to show current number of points (when _check_ active) */
+
+    let spn = document.createElement("span");
+
+    spn.classList.add("webex-total_correct");
+
+    li_check.appendChild(spn);
+
+
+
+    /* button to show the _solution_ if there is one */
+
+    var has_solution = section.parentNode.querySelectorAll(".webex-solution").length > 0;
+
+    if (has_solution) {
+
+      let li_solution = document.createElement("li");
+
+      button_ul.appendChild(li_solution); /* add list item to ul */
+
+      let btn_solution = document.createElement("button");
+
+      btn_solution.innerHTML = webex_buttons.solution; // "Correct answer";
+
+      btn_solution.setAttribute("class", "webex-button webex-button-solution");
+
+      if (webex_buttons.solution_alt.length > 0) btn_solution.setAttribute("title", webex_buttons.solution_alt);
+
+      btn_solution.onclick = solution_func;
+
+      li_solution.appendChild(btn_solution);
+
+    }
+
+
+
+  });
+
+
+
+  /* set up webex-solveme inputs */
+
+  document.querySelectorAll(".webex-solveme").forEach(solveme => {
+
+    solveme.setAttribute("autocomplete","off");
+
+    solveme.setAttribute("autocorrect", "off");
+
+    solveme.setAttribute("autocapitalize", "off");
+
+    solveme.setAttribute("spellcheck", "false");
+
+    solveme.value = "";
+
+
+
+    /* adjust answer for 'no spaces' (ignore spaces) */
+
+    if (solveme.classList.contains("nospaces")) {
+
+      solveme.dataset.answer = solveme.dataset.answer.replace(/ /g, "");
+
+    }
+
+
+
+    /* attach checking function, triggered on key up, change, and when
+
+     * elemnt is out of focus. Only evaluated once by tracking changes
+
+     * via variable solveme_last_user_answer */
+
+    solveme.addEventListener("keyup",  solveme_func);
+
+    solveme.addEventListener("change", solveme_func);
+
+    solveme.addEventListener("blur",   solveme_func);
+
+
+
+    /* adding span to show correct/incorrect icon */
+
+    solveme.insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  });
+
+
+
+  /* set up radiogroups (single choice questions with display = "buttons") */
+
+  document.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
+    radiogroup.onchange = radiogroups_func;
+
+  });
+
+
+
+  /* set up checkboxgroups (multiple choice questions with display = "buttons") */
+
+  document.querySelectorAll(".webex-checkboxgroup").forEach(checkboxgroup => {
+
+    checkboxgroup.onchange = checkboxgroups_func;
+
+  });
+
+
+
+  /* set up selects (dropdown menus) */
+
+  document.querySelectorAll(".webex-select").forEach(select => {
+
+    select.onchange = select_func;
+
+    /* append webex-icon for correct/incorrect icons */
+
+    var elem = document.createElement("span")
+
+    elem.classList.add("webex-icon")
+
+    select.parentNode.appendChild(elem)
+
+  });
+
+
+
+  /* change to next/previous question if multiple are available */
+
+  function handleQuestionClick(group, questions, step) {
+
+    return async function() {
+
+      /* get question order as integer vector */
+
+      let questionOrder = group.dataset.questionOrder.split(",").map(str => parseInt(str));
+
+
+
+      /* current question/position */
+
+      let currentPosition = parseInt(group.dataset.currentPosition);
+
+
+
+      /* Hide the current question */
+
+      questions.forEach(question => { question.classList.remove("active"); });
+
+
+
+      /* Move to the next question index */
+
+      currentPosition = (currentPosition + step) % questionOrder.length;
+
+      if (currentPosition < 0) currentPosition = currentPosition + questionOrder.length
+
+
+
+      /* Display the new question */
+
+      questions[questionOrder[currentPosition]].classList.add("active");
+
+
+
+      // Update the currentPosition data attribute on the group div
+
+      group.dataset.currentPosition = currentPosition;
+
+    };
+
+  }
+
+
+
+  document.querySelectorAll(".webex-group").forEach(group => {
+
+    const questions = Array.from(group.querySelectorAll(".webex-question"));
+
+
+
+    /* Create vector with question order. If the webex-group does
+
+     * not have class '.noshuffle' we will randomly shuffle the order */
+
+    let questionOrder = Array.from({length: questions.length}, (v, i) => i);
+
+    if (!group.classList.contains("noshuffle")) {
+
+      questionOrder = shuffle_array(questionOrder);
+
+    }
+
+
+
+    /* take start position (if set) or start at 0 */
+
+    const currentPosition = parseInt(group.getAttribute("data-start-position")) || 0;
+
+
+
+    /* show the default question for each group */
+
+    questions[questionOrder[currentPosition]].classList.add("active");
+
+
+
+    /* store random order of questions as well as current position */
+
+    group.dataset.questionOrder   = questionOrder;
+
+    group.dataset.currentPosition = currentPosition;
+
+
+
+    /* find all webex-questions, search for .webex-button-list and
+
+     * populate the list with necessary <li><button>...</button></li> elements */
+
+    questions.forEach(question => {
+
+        let button_ul = question.querySelector("ul.webex-button-list");
+
+
+
+        let li_next = document.createElement("li");
+
+        let nextButton = document.createElement("button");
+
+        nextButton.setAttribute("class", "webex-button webex-button-next");
+
+        if (webex_buttons.question_next_alt.length > 0) nextButton.setAttribute("title", webex_buttons.question_next_alt);
+
+        nextButton.innerHTML = webex_buttons.question_next; // "Next question";
+
+        nextButton.addEventListener("click", handleQuestionClick(group, questions, 1));
+
+        li_next.appendChild(nextButton);
+
+
+
+        let li_previous = document.createElement("li");
+
+        let previousButton = document.createElement("button");
+
+        previousButton.setAttribute("class", "webex-button webex-button-previous");
+
+        if (webex_buttons.question_previous_alt.length > 0) previousButton.setAttribute("title", webex_buttons.question_previous_alt);
+
+        previousButton.innerHTML = webex_buttons.question_previous; // "Previous question";
+
+        previousButton.addEventListener("click", handleQuestionClick(group, questions, -1));
+
+        li_previous.appendChild(previousButton);
+
+
+
+        if (webex_buttons.question_previous.length > 0) button_ul.appendChild(li_previous);
+
+        if (webex_buttons.question_next.length > 0) button_ul.appendChild(li_next);
+
+    });
+
+  });
+
+
+
+  /* Development options */
+
+  document.querySelectorAll(".webex-question.check").forEach(question => {
+
+      question.querySelector(".webex-button-check").click()
+
+  });
+
+  document.querySelectorAll(".webex-question.solution").forEach(question => {
+
+      let btn = question.querySelector(".webex-button-solution");
+
+      if (btn !== null) { btn.click(); }
+
+  });
+
+
+
+  /* Pre-filling <input> fields */
+
+  document.querySelectorAll(".webex-question.prefill").forEach(question => {
+
+      question.querySelectorAll("input.webex-solveme").forEach(solveme => {
+
+          let x = JSON.parse(solveme.dataset.answer);
+
+          solveme.value = x[0];
+
+          /* Trigger the on change event */
+
+          solveme.dispatchEvent(new Event("change"));
+
+      });
+
+
+
+      /* Pre-filling radiogroups, that is for schoice questions */
+
+      question.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
+          let x = JSON.parse(radiogroup.dataset.answer);
+
+          let idx = x.indexOf(1);
+
+          let radios = radiogroup.querySelectorAll('input[type="radio"]');
+
+          radios[idx].checked = true;
+
+          /* Trigger the on change event */
+
+          radios[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+
+
+      /* Pre-filling checkboxgroups, that is for schoice questions w/ dropdown menus */
+
+      question.querySelectorAll(".webex-select").forEach(dropdown => {
+
+          let x = JSON.parse(dropdown.dataset.answer);
+
+          let idx = x.indexOf(1) + 1; /* +1 to skip the first blank option */
+
+          let options = dropdown.querySelectorAll("option");
+
+          options[idx].selected = true;
+
+          /* Trigger the on change event */
+
+          options[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+
+
+      /* Pre-filling checkboxgroups, that is for mchoice questions */
+
+      question.querySelectorAll(".webex-checkboxgroup").forEach(radiogroup => {
+
+          let x = JSON.parse(radiogroup.dataset.answer);
+
+          let checkboxes = radiogroup.querySelectorAll('input[type="checkbox"]');
+
+          for (let i = 0; i < checkboxes.length; i++) {
+
+              checkboxes[i].checked = x[i];
+
+          }
+
+          /* Trigger the on change event */
+
+          checkboxes[0].dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+
+  });
+
+
+
+  /* Show set tolerance (devel option) */
+
+  function calc_width(x, txt, offset = 20) {
+
+      /* We do the following:
+
+       * Create a new span, insert the value we need in the .tolerance
+
+       * input node, and calculate its offsetWidth. Then remove it
+
+       * again; this is just used to calculate the required width. */
+
+      var cwtmp = document.createElement("span");
+
+      x.appendChild(cwtmp);
+
+      cwtmp.innerHTML = txt || "";
+
+      var w = parseInt(cwtmp.getBoundingClientRect().width) + offset;
+
+      cwtmp.remove();
+
+      return w;
+
+  }
+
+
+
+  /* If tolerance should be shown (devel option) we calculate:
+
+   * - the width required to properly display the solution
+
+   * - the width required to properly display the tolerance
+
+   * - add a new element to display the tolerance
+
+   * - reduce the width of the solution input box. */
+
+  document.querySelectorAll(".webex-question.tolerance").forEach(question => {
+
+      question.querySelectorAll("input[data-tol]").forEach(elem => {
+
+          var w = null;
+
+
+
+          /* Add new element showing the tolerance */
+
+          let tol = document.createElement("input");
+
+          tol.type = "text"; // <inpyt type="text">
+
+          tol.disabled = true; // Disable input element
+
+          tol.classList.add("tolerance"); // Appending class
+
+          tol.value = "Â± " + elem.getAttribute("data-tol");
+
+
+
+          /* Add new node */
+
+          elem.parentNode.insertBefore(tol, elem)
+
+
+
+          var body     = document.querySelector("body");
+
+          //tol.value = "Â± " + "0.0000007";
+
+          //tol.value = "Â± " + "0.07";
+
+          w    = calc_width(body, tol.value);
+
+          wold = parseInt(elem.getBoundingClientRect().width);
+
+          wmin = calc_width(body, elem.value);
+
+
+
+          /* Calculate required width of the 'tolerance' node, and the
+
+           * reduction of the original 'input' node */
+
+          let wnew = Math.max(wmin, wold - w);
+
+          tol.style.width  = w + "px";
+
+          elem.style.width = wnew + "px";
+
+      });
+
+  });
+
+
+
+  update_total_correct();
+
+}
+
+
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/25_automating_raw_data_processing.html" class="pagination-link" aria-label="Automating Raw Data Processing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/32_summarizing_and_presenting_data.html" class="pagination-link" aria-label="Summarizing and Presenting Data">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Taian Martins Vieira • <a href="https://creativecommons.org">CC BY-NC 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Built with <strong>R</strong>, <strong>OJS</strong>, &amp; <a href="https://quarto.org/">Quarto</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/">
+      <i class="bi bi-github" role="img" aria-label="View Source Code">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/issues">
+      <i class="bi bi-bug" role="img" aria-label="Report a Bug or Typo">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
