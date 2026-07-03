@@ -105,13 +105,20 @@ exams2forms("../include/exercises/1-2-2_forces.md")
 
 The CoP position is computed from the ground reaction forces measured by the force plate (see @fig-1-2-3). The computation procedure is detailed below for the anterior-posterior direction ($y_{\text{cop}}$), that is, in the sagittal plane.
 
+:::: {.columns}
+::: {.column width="58%"}
+![CoP computation in the anterior-posterior direction.](/include/images/part_1/ch_2/1-2-4_cop-computation.png){#fig-1-2-4 width=90%}
+:::
+::: {.column width="2%"}
+:::
+::: {.column width="40%"}
 Figure @fig-1-2-4 illustrates a parasagittal view of a person standing on a force plate, including the measured vertical ground reaction forces and the resultant force. During quiet standing, and under the assumption that horizontal accelerations are negligible, the resultant vertical force can be approximated by the body weight:
 
 $$
 \mathbf{F} \approx \mathbf{W_{\text{b}}}.
 $$ {#eq-fwb}
-
-![CoP computation in the anterior-posterior direction.](/include/images/part_1/ch_2/1-2-4_cop-computation.png){#fig-1-2-4 width=90%}
+:::
+::::
 
 Given this approximation, the computation can be introduced by considering only the vertical components of the ground reaction forces:
 
@@ -190,7 +197,7 @@ where $\Delta_x$ is the projection of the distance between each sensor and the o
 
 The animation in @fig-1-2-5 provides a representation of the excursion of the CoP over the force plate during quiet standing---a **stabilometric trial**. Green circles correspond to the CoP coordinates $(x_{\text{cop}}, y_{\text{cop}})$ computed from the ground reaction forces. The distance between consecutive positions depends on both the sampling frequency of the acquisition system and the CoP speed. In stabilometric recordings, sampling frequencies are typically greater than 20 Hz @vieira09.
 
-![Example of a stabilometric trial, showing the CoP excursion during quiet standing.](/include/images/part_1/ch_2/1-2-5_cop-excursion.gif){#fig-1-2-5 width=90%}
+![Example of a stabilometric trial, showing the CoP excursion during quiet standing.](/include/images/part_1/ch_2/1-2-5_cop-movie.gif){#fig-1-2-5 width=70%}
 
 Stabilometric systems often provide users with the time series of the CoP position in both the medio-lateral ($x$) and anterior-posterior ($y$) axes. Otherwise, CoP position must be computed from ground reaction forces or from moments. Some systems provide the forces measured by each sensor, whereas others provide the three components of the resultant force (cf. vector $F$ in @fig-1-2-3) and the moments it produces.
 
@@ -200,7 +207,7 @@ Once a stabilometric trial is collected, the CoP profile may be inspected either
 
 **Statokinesigrams** combine the CoP excursion in both axes into a single Cartesian plot. Even though the statokinesigram provides a spatial representation of the CoP samples, it depends on the recording duration. The longer the recording duration, the greater the number of CoP samples used to create the statokinesigram.
 
-![Two possible representations of CoP excursion. The statokinesigram represents CoP displacement in space, whereas the stabilograms represent the medio-lateral and anterior-posterior CoP coordinates over time.](/include/images/part_1/ch_2/1-2-6_stabilogram-statokinesigram.png){#fig-1-2-6 width=100%}
+![Two possible representations of CoP excursion. The statokinesigram represents CoP displacement in space, whereas the stabilograms represent the medio-lateral and anterior-posterior CoP coordinates over time.](/include/images/part_1/ch_2/1-2-6_cop-representation.png){#fig-1-2-6 width=100%}
 
 \
 
@@ -268,7 +275,7 @@ Using a circle or a non-rotated rectangle to approximate the statokinesigram is 
 
 In 1996, [Oliveira and coworkers](http://dx.doi.org/10.1088/0967-3334/17/4/008) @oliveira96 proposed a statistical approach to compute the area of the statokinesigram. The method is based on identifying two principal axes defining an ellipse that contains a large fraction of the CoP samples. An example is provided in the right panel of @fig-1-2-7. Compared with circular or rectangular approximations, the ellipse adapts both to the orientation and to the anisotropy of the CoP cloud.
 
-![Different approaches for computing the CoP area. The left panel compares circular and rectangular approximations, whereas the right panel illustrates the elliptic area based on the principal axes of CoP displacement.](/include/images/part_1/ch_2/1-2-7_cop-areas.png){#fig-1-2-7 width=100%}
+![Different approaches for computing the CoP area. The left panel compares circular and rectangular approximations, whereas the right panel illustrates the elliptic area based on the principal axes of CoP displacement.](/include/images/part_1/ch_2/1-2-7_cop-areas.png){#fig-1-2-7 width=80%}
 
 The statistical ellipse is obtained from the covariance matrix of the CoP samples:
 

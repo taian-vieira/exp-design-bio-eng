@@ -23,7 +23,7 @@ While falls may result from environmental factors, there also appears to be a su
 
 Importantly, this evidence does not imply a direct causal effect of age. Aging alone does not appear to reduce postural stability below the threshold associated with falling (@fig-1-1-1). [Shupert and Horak](https://journals.humankinetics.com/view/journals/jab/15/1/article-p64.xml) @shupert99 proposed that aging accounts for only a modest decline in postural stability. However, pathological conditions affecting the sensory-motor system^[*it comprises physiological receptors for sensing and neuromuscular actutators, motor units, for force production.*] may accelerate this decline and substantially increase fall risk.
 
-![Plausible model explaining how pathologies may accelerate the decline of postural stability with age. Figure created based on the age-model reported by Shuppert and Horak @shupert99 ](/include/images/part_1/ch_1/1-1-1_age-and-balance.png){#fig-1-1-1 width=100%}
+![Plausible model explaining how pathologies may accelerate the decline of postural stability with age. Figure created based on the age-model reported by Shuppert and Horak @shupert99 ](/include/images/part_1/ch_1/1-1-1_age-and-balance.png){#fig-1-1-1 width=80%}
 
 Understanding the mechanisms underlying falls is not the only reason for studying posture control. Postural control is a ubiquitous requirement of daily life. Without it, we would be unable to perform actions as simple as sitting, standing, walking, catching a ball, swimming, or reading a book. Unlike voluntary movements of the upper limbs, however, postural control operates largely outside conscious awareness. We rarely think about the postural requirements imposed by a task, yet these requirements must constantly be met.
 
@@ -39,7 +39,7 @@ The need for postural control lies at the foundation of motor development. Follo
 
 Thus, the development of posture can be viewed as a progressive maturation of both segmental control and inter-segmental coordination.
 
-![Maturation of the inter-segmental control of posture. AI-generated illustration created with ChatGPT (OpenAI), 2026.](/include/images/part_1/ch_1/1-1-2_posture-development.png){#fig-1-1-2 width=100%}
+![Maturation of the inter-segmental control of posture. AI-generated illustration created with ChatGPT (OpenAI), 2026.](/include/images/part_1/ch_1/1-1-2_posture-development.png){#fig-1-1-2 width=80%}
 
 \
 
@@ -123,7 +123,7 @@ Before discussing the sensory systems involved in postural control, it is useful
 
 The child then releases the doll and observes whether it remains standing. If the doll falls, the posture must be adjusted and the process repeated. In this way, achieving a stable standing posture becomes a trial-and-error process. Visual information allows the child to determine whether the desired posture has been maintained, while the hands provide the forces required to modify the orientation of the doll's segments.
 
-![Analogy for understanding the key aspects involved in posture control, from sensing to acting. AI-generated illustration created with ChatGPT (OpenAI), 2026.](/include/images/part_1/ch_1/1-1-6_doll-analogy.png){#fig-1-1-6 width=80%}
+![Analogy for understanding the key aspects involved in posture control, from sensing to acting. AI-generated illustration created with ChatGPT (OpenAI), 2026.](/include/images/part_1/ch_1/1-1-6_doll-analogy.png){#fig-1-1-6 width=70%}
 
 Although human postural control is vastly more sophisticated, the same fundamental principles apply. The nervous system must 
 

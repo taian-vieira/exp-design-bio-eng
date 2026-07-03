@@ -135,7 +135,7 @@ for learning the processing of stabilometric data and statistical analysis.*
 ::: {.column width="60%"}
 ![How to hold the
 smartphone.](/include/images/part_1/ch_3/1-3-2_holding-smartphone.png){#fig-1-3-2
-width="95%"}
+width="80%"}
 :::
 
 ::: {.column width="40%"}
@@ -259,7 +259,7 @@ experiment collection.
 
 :::::: columns
 ::: {.column width="40%"}
-![](/include/images/part_1/ch_3/smartposture-in-collection.png)
+![](/include/images/part_1/ch_3/smartposture-in-collection.png){width=80%}
 :::
 
 ::: {.column width="3%"}
@@ -283,7 +283,7 @@ providing a different representation of the stabilometric data (see
 
 ![The two screens of the SmartPosture
 experiment.](/include/images/part_1/ch_3/1-3-4_smart-posture-screens.png){#fig-1-3-4
-width="80%"}
+width="60%"}
 
 ##### **Graphs**
 
@@ -396,6 +396,8 @@ the protocol below.
 ::: {.column width="40%"}
 
 :::{.small-text}
+
+\
 
 **a**: Launch the **SmartPosture** experiment.
 

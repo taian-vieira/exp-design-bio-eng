@@ -38,7 +38,6 @@ Another example concerns testing a new drug for weight loss. In this case, you w
 
 **How confident can you be that the observed effect was due to the new drug?** If the drug was tested on subjects in the Northern hemisphere, from January to May, a similar weight loss effect might also be observed in people not taking the drug (**controls**^[*group of subjects not receiving the new treatment being studied, according to the [NIH cancer institute](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/control-group)*]): people tend to prepare themselves for the summer.
 
-
 \
 
 ## Definition of Experimental Design
@@ -118,8 +117,6 @@ When communicating results, two points should be emphasized:
 
 ![AI-generated illustration created with ChatGPT (OpenAI), 2026.](/include/images/introduction/descriptive_inferential_statistics.jpeg){width="100%"} *AI-generated illustration created with ChatGPT (OpenAI), 2026*
 
-------------------------------------------------------------------------
-
 \
 
 ## Why the Trouble of Studying Statistics?
@@ -166,8 +163,6 @@ Consider, for example, the data shown in @fig-intro-2, illustrating the relation
 Based on this information, try to address the questions: **Does maximal peak power depend on pedaling rate? Does fatigue affect peak power?**
 
 ![This figure was created with ChatGPT (OpenAI), based on simulated data according to [Beelen and Sargeant 1991](https://journals.physiology.org/doi/abs/10.1152/jappl.1991.71.6.2332?journalCode=jappl)  @beelen91. Circles and whiskers correspond to mean and standard deviation, respectively. * denote statistical significance at *p* < 0.05"](/include/images/introduction/intro-2_power_and_cycling.jpg){#fig-intro-2 width=80%}
-
----
 
 \
 
