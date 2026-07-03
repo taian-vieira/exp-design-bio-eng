@@ -1,0 +1,61 @@
+# Example Data: Postural Sways {#sec-ch21}
+
+All concepts dealt with during this course apply to the design of experiments involving biomedical data. **This tutorial, and all practical exercises, are structured to provide an overview on the** [R programming language](https://www.r-project.org/) **within one of the many contexts of relevance in biomedical studies:** ***the control of the human standing posture.***
+
+In dedicated lectures we briefly went through some techniques for assessing posture control, with stabilometry being the gold standard. This technique consists in the use of a force plate to measure ground reaction forces, from which the CoP coordinates are calculated.  From the CoP coordinates we then compute some metrics that are expected to be informative on the integrity of the posture control system: see @sec-stabilometry for an overview.
+
+It is unfeasible to obtain CoP data for all students in this course. However, benefiting from the *virtual sensor*^[*virtual because the orientation output is obtained by merging the readings from physical sensors: accelerometer, gyroscope, and magnetometer*] present in our smartphones, all students will have the opportunity to collect orientation data associated with their postural sways.  #sec-ch13 provides detailed guidelines on the experimental procedures.
+
+:::{.callout-note title="Smart posture data"}
+*Briefly, from smartphone orientation data we will assess the displacement of the projection of the body **C**enter **o**f **G**ravity in the horizontal plane.  From CoG displacement data, variables will be computed and used to apply the concepts to be dealt with during this course.*
+:::
+
+\
+
+The **Part 2** of this book (**R Tutorial**) is structured according to the following Chapters:
+
+\
+
+## Getting Started with R {.unnumbered}
+
+Instructions on how to install and to start using R are given.
+
+\
+
+## The Basics with R {-}
+
+A brief, though exhaustive, overview is provided on how R works.  Pieces of R code introduced in this Chapter are based on arbitrary values of CoG mean speed $v_x$ in the lateral direction (left-right; see @eq-copvx). In particular, we suppose to have obtained $v_x$ values on five fictitious subjects, according to the @tbl-2-1-1.
+
+
+```{r}
+#| echo: FALSE
+df <- data.frame( list(sub = c("Sarah", "Rob", "Ted", "Jessica", "John"), gen = factor(c("female", "male", "male", "female", "male")), age = c(31, 25, 28, 47, 30), cog = c(6.1, 5.2, 5.7, 7.1, 6.3), park = c(FALSE, FALSE, FALSE, TRUE, FALSE)))
+```
+
+:::{.styled-table .small-text}
+: Fictitious data for a group of subjects. {#tbl-2-1-1}
+
+| Subject | Gender | Age | $v_x \text{ (m/s)}$ | Parkinsonian^[*Person affected by Parkinson's disease. Tremor and slow movements are main phenotypes of this syndrome.*] |
+|:-------:|:------:|:---:|:-----------------:|:-----------:|
+| Sarah   | female | 31  | 6.1               | FALSE       |
+| Rob     | male   | 25  | 5.2               | FALSE       |
+| Ted     | male   | 28  | 5.7               | FALSE       |
+| Jessica | female | 47  | 7.1               | TRUE        |
+| John    | male   | 30  | 6.3               | FALSE       |
+:::
+
+\
+
+### Plotting and Processing Raw Data
+
+It may be that we download or obtain the variables directly from a repository, from previously collected data, or by any other means.  However, it is often the case that we need to compute these metrics from raw data, collected by ourselves or by the team we work with.  In this Chapter we see how R can be used to process raw postural sway data to compute three variables (see @sec-copmetrics):
+
+- ***Elliptic Area*** ($EA$). Indicates how largely our body moves in the horizontal plane.
+- ***Mean Speed*** ($v_{x,y}$). How fast the our body moves, separately along the frontal (medio-lateral direction) and sagittal (anterior-posterio direction) planes.
+- ***Standard Deviation*** ($\sigma_{x,y}$). Reflects how large the postural sways are, separately in the frontal and sagittal planes.
+
+\
+
+### Automating Raw Data Processing
+
+Regardless of the problem we are dealing with, we will need to obtain variables for a number of experimental units (typically subjects in biomedical studies), often in different conditions. If processing raw data is required to obtain the variables, we therefore would need to do that for every single experimental unit and condition. In this case, it is advisable to automate the processing of raw data. First because it saves time and second because it minimizes errors due to manual processing.  In this Chapter, we see how to automate the processing of postural sway raw data in R.

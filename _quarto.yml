@@ -1,0 +1,84 @@
+project:
+  type: book
+
+book:
+  title: "Experimental Design in Biomedical Engineering"
+  author: "Taian Martins Vieira"
+  date: last-modified
+  search: true
+  #repo-url: https://github.com/jjallaire/hopr/
+  #repo-actions: [edit]
+  downloads: [pdf, epub]
+  sharing: [twitter, facebook]
+  sidebar:
+    style: docked
+    background: light
+  page-footer:
+    left: "© 2026 Taian Martins Vieira • [CC BY-NC 4.0](https://creativecommons.org)"
+    center: "Built with **R**, **OJS**, & [Quarto](https://quarto.org/)"
+    right: 
+      - icon: github
+        href: https://github.com/
+        aria-label: "View Source Code"
+      - icon: bug
+        href: https://github.com/issues
+        aria-label: "Report a Bug or Typo"
+    background: light
+    border: true
+
+  chapters:
+    - index.qmd
+    - chapters/0_introduction.qmd
+    - part: "Part 1: Smart Posture"
+      chapters:
+      - chapters/11_physiology_of_posture_control.qmd
+      - chapters/12_stabilometry.qmd
+      - chapters/13_phyphox_posture_experiment.qmd
+    - part: "Part 2: R Tutorial"
+      chapters:
+        - chapters/21_example_data.qmd
+        - chapters/22_getting_started_with_r.qmd
+        - chapters/23_basics_with_r.qmd
+        - chapters/24_plotting_and_processing_raw_data.qmd
+        - chapters/25_automating_raw_data_processing.qmd
+    - part: "Part 3: The Theory Behind Experimental Design"
+      chapters:
+        - chapters/31_understanding_study_designs.qmd
+        - chapters/32_summarizing_and_presenting_data.qmd
+        - chapters/33_population_sample_data_distribution.qmd
+        - chapters/34_one_group.qmd
+        - chapters/35_two_groups.qmd
+        - chapters/36_anova.qmd
+        - chapters/37_linear_regression.qmd
+    - part: "Part 3"
+      chapters:
+        - chapters/references.qmd
+  appendices:
+    - chapters/a1_ethical_considerations.qmd
+
+bibliography: book.bib
+csl: elsevier-vancouver.csl
+
+format:
+  html:
+    footnotes-hover: true
+    number-sections: true
+    number-depth: 2
+    toc: true
+    toc-depth: 4
+    css: [include/cssfiles/bootstrap.css, include/cssfiles/webex.css]
+    include-after-body: include/cssfiles/webex.js
+    include-in-header: 
+      text: |
+        <script type="text/javascript">
+          MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+          };
+        </script>
+
+categories:
+  - Biomedical Engineering
+  - Applied Statistics
+  
+editor: source
+  

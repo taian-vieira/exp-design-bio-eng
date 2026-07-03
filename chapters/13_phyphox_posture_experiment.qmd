@@ -1,0 +1,440 @@
+# PhyPhox SmartPosture Tutorial {#sec-ch13}
+
+This part of the course provides students with the opportunity to work
+with their own experimental data. The selected experimental paradigm is
+postural control. Briefly, postural sway data will be collected under
+different standing conditions and subsequently used as a benchmark for
+applying the statistical methods presented later in the course.
+
+As discussed in @sec-stabilometry, stabilometry is considered the gold
+standard technique for assessing postural sway. Stabilometric analysis
+is based on changes in the position of the body's center of pressure
+(CoP), which are estimated from ground reaction forces.
+
+Collecting stabilometric data during class would be impractical,
+particularly for a large group of students. Therefore, taking advantage
+of the widespread availability of smartphones, this course adopts a
+smartphone-based approach for acquiring postural sway data.
+
+Although students are free to use any application they consider
+appropriate, all practical activities in this course will rely on the
+PhyPhox initiative.
+
+::: {.callout-note title="This chapter ..."}
+*... provides a brief tutorial on using PhyPhox to collect postural sway
+data. Step-by-step instructions are provided for installing the app,
+running the SmartPosture experiment, and saving and exporting the
+collected data.*
+:::
+
+\
+
+## What is PhyPhox?
+
+[PhyPhox](https://phyphox.org/) is an educational application developed
+at RWTH Aachen University, Germany. It was designed to enable students
+to perform scientific experiments using their smartphones, effectively
+transforming the device into a portable physics laboratory.
+
+> **PhyPhox** stands for *physical phone experiments*.
+
+With PhyPhox, it is possible to investigate a wide variety of physical
+phenomena, including:
+
+-   *energy dissipated during collisions;*
+-   *centripetal acceleration;*
+-   *the acceleration due to gravity;*
+-   *the frequency and period of a spring oscillator;*
+-   *among many other applications.*
+
+PhyPhox operates through
+[**experiments**](https://phyphox.org/experiments/), which correspond to
+predefined sets of instructions governing data acquisition. Users may
+either select one of the built-in experiments or create custom
+experiments using the PhyPhox
+[web editor](https://phyphox.org/editor/).
+
+\
+
+## PhyPhox and Postural Sways
+
+For the purposes of this course, a custom PhyPhox experiment---named the
+**SmartPosture Experiment**---was developed specifically for measuring
+postural sway.
+
+The **SmartPosture** experiment provides an indirect estimate of
+postural sway based on signals acquired from three smartphone sensors:
+the accelerometer, gyroscope, and magnetometer. Body sway is estimated
+from changes in smartphone orientation about its $x$ and $y$ axes.
+According to the reference system illustrated in @fig-1-3-1, the
+following convention applies:
+
+-   Sway in the sagittal plane is estimated from smartphone rotation
+    about the $x$ axis. Thus, *pitch* reflects the
+    antero-posterior displacement ($y_{cog}$) of the body's center of
+    gravity (CoG).
+
+-   Sway in the frontal plane is estimated from smartphone rotation
+    about the $y$ axis. Accordingly, *roll* reflects the
+    medio-lateral displacement ($x_{cog}$) of the body CoG.
+
+![Reference system for measuring postural
+sways](/include/images/part_1/ch_3/1-3-1_smartphone-reference-system.png){#fig-1-3-1
+width="60%"}
+
+More specifically, smartphone rotations about the $x$ and $y$ axes are
+estimated using the orientation *virtual sensor*^[*signals from the physical sensors are combined using sensor-fusion techniques to estimate device orientation, effectively emulating a dedicated orientation sensor*].
+
+Rotations in the sagittal plane are represented by $\theta$ (*pitch*),
+whereas rotations in the frontal plane are represented by $\gamma$
+(*roll*). The coordinates of the body center of gravity (CoG) projected
+onto the horizontal plane are therefore given by
+
+$$
+\begin{aligned}
+x_{cog}(t) &= \gamma(t) \times h \\
+y_{cog}(t) &= -\theta(t) \times h 
+\end{aligned}
+$$ {#eq-cog-from-smartphone}
+
+The negative sign ensures that a counterclockwise rotation about the
+$x$ axis corresponds to a forward body sway. The parameter $h$
+represents the height of the body CoG above the ground (see
+@fig-1-2-2), estimated from the anthropometric data reported by
+[Winter](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470549148)
+@winter09:
+
+$$
+h \approx 0.55 \times b_\text{h}
+$$
+
+where $b_\text{h}$ denotes total body height.
+
+::: {.callout-note title="Beware of the assumptions"}
+*Two important assumptions underlie the use of
+@eq-cog-from-smartphone to estimate postural sway from smartphone
+orientation.*
+
+*First, body rotations are assumed to be sufficiently small for the
+approximation* $sin \theta \approx \theta$ *to remain valid.*
+
+*Second, the smartphone must be held in portrait orientation, with its
+$z$ axis aligned with the direction of gravity (see @fig-1-3-2).*
+:::
+
+::: {.callout-important title="Validity of the assumptions"}
+*During quiet standing, body movements are typically small enough for
+both assumptions to be considered valid.*
+
+*For the educational purposes of this course, the postural sway data
+estimated from @eq-cog-from-smartphone provide an appropriate framework
+for learning the processing of stabilometric data and statistical analysis.*
+:::
+
+::::: columns
+::: {.column width="60%"}
+![How to hold the
+smartphone.](/include/images/part_1/ch_3/1-3-2_holding-smartphone.png){#fig-1-3-2
+width="95%"}
+:::
+
+::: {.column width="40%"}
+During quiet standing, the arms should hang naturally alongside the
+body, while the head should remain in a neutral position (neither
+flexed nor extended).
+
+Although the posture illustrated in @fig-1-3-2 does not exactly
+correspond to that adopted during a standard stabilometric assessment,
+it is presented solely to facilitate data acquisition without requiring
+assistance from another person.
+
+*Hold the smartphone firmly and avoid moving any body segment
+immediately after starting data acquisition* (see the experimental
+protocol below).
+:::
+:::::
+
+\
+
+## Installing PhyPhox and the SmartPosture Experiment
+
+To download the PhyPhox app, use the appropriate link below according
+to the operating system installed on your smartphone.
+
+::::: columns
+::: {.column width="30%"}
+[![](/include/images/part_1/ch_3/phyphox-android.png){height="3em"}](https://play.google.com/store/apps/details?id=de.rwth_aachen.phyphox&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+:::
+::: {.column width="10%"}
+:::
+::: {.column width="30%"}
+[![](/include/images/part_1/ch_3/phyphox-ios.png){height="3em"}](https://apps.apple.com/us/app/phyphox/id1127319693?ls=1)
+:::
+:::::
+
+The next step is to import the **SmartPosture** experiment into
+PhyPhox. To do so, follow the four steps illustrated in @fig-1-3-3 and
+described below.
+
+![Steps for importing the SmartPosture experiment into the PhyPhox
+collection.](/include/images/part_1/ch_3/1-3-3_load-experiment.png){#fig-1-3-3
+width="100%"}
+
+\
+
+:::::::::: panel-tabset
+
+### Step 1: Run
+
+#### Launch the PhyPhox App
+
+When you launch PhyPhox, the home screen displays a list of the
+built-in experiments available in the application. Because
+**SmartPosture** is a custom experiment, it must first be imported.
+Press the **$+$** icon located in the upper-right corner of the screen
+(see panel 1 in @fig-1-3-3).
+
+### Step 2: Add
+
+#### Import the SmartPosture Experiment
+
+::::: columns
+::: {.column width="70%"}
+
+PhyPhox provides three different methods for importing experiments, all
+illustrated in panel 2 of @fig-1-3-3. The simplest approach is to scan
+the QR code shown in panel 3 and reproduced here for convenience.
+
+:::
+
+::: {.column width="30%"}
+![](/include/images/part_1/ch_3/qrcode.png)
+:::
+:::::
+
+### Step 3: Save
+
+#### Save the Experiment to Your Collection
+
+After scanning the QR code, PhyPhox will automatically download and load
+the **SmartPosture** experiment.
+
+:::::: columns
+::: {.column width="30%"}
+![](/include/images/part_1/ch_3/save-to-collection.png)
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="66%"}
+
+Because this is the first time the experiment has been loaded, PhyPhox
+will display a prompt asking whether the remotely hosted experiment
+should be added to your collection. Select **Save to collection** so
+that the experiment becomes permanently available from the home screen.
+
+:::
+::::::
+
+::::::::::
+
+After the **SmartPosture** experiment has been successfully added to
+your collection, it will appear in the PhyPhox home screen and will be
+ready for use.
+
+\
+
+## Running the SmartPosture Experiment
+
+This section introduces the basic features of the **SmartPosture** experiment and explains how to use the application to collect postural sway data.
+
+\
+
+### Launching SmartPosture
+
+After completing the installation procedure described in the previous
+section, the **SmartPosture** experiment will appear in your PhyPhox
+experiment collection.
+
+:::::: columns
+::: {.column width="40%"}
+![](/include/images/part_1/ch_3/smartposture-in-collection.png)
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="57%"}
+Launch PhyPhox and open the **SmartPosture** experiment. It should be
+listed under the
+[**Biomedical**]{style="background-color:#38A2FF; color: white"} tab on
+the PhyPhox home screen, as illustrated in the figure.
+:::
+::::::
+
+\
+
+### SmartPosture Interface
+
+The **SmartPosture** experiment comprises two main screens, each
+providing a different representation of the stabilometric data (see
+@fig-1-2-6). These screens are illustrated in @fig-1-3-4.
+
+![The two screens of the SmartPosture
+experiment.](/include/images/part_1/ch_3/1-3-4_smart-posture-screens.png){#fig-1-3-4
+width="80%"}
+
+##### **Graphs**
+
+The *Stabilogram* screen displays two time-series graphs. The upper
+graph shows CoG displacement in the medio-lateral (frontal plane)
+direction, whereas the lower graph displays CoG displacement in the
+antero-posterior (sagittal plane) direction.
+
+The *Statokinesigram* screen displays a single graph showing the
+trajectory of the body CoG projected onto the horizontal plane.
+
+##### **Slider**
+
+The slider available on both screens should be adjusted according to the
+participant's height, expressed in centimeters. This value is used to
+scale the smartphone rotations, thereby estimating the horizontal
+projection of the body CoG according to
+@eq-cog-from-smartphone.
+
+##### **Dropdown Menus**
+
+Two dropdown menus allow the user to specify the base of support and the
+standing condition adopted during the stabilometric trial. Each menu
+provides three available options.
+
+:::::: columns
+::: {.column width="48%"}
+![](/include/images/part_1/ch_3/base-of-support.png)
+
+The **base of support** is defined according to foot position during the
+trial.
+
+-   **wide**: feet positioned approximately hip-width apart.
+-   **narrow**: feet positioned close together.
+-   **tandem**: one foot positioned directly in front of the other.
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+![](/include/images/part_1/ch_3/standing-condition.png)
+
+The **standing condition** specifies the experimental condition under
+which the trial is performed.
+
+-   **eyes open**: standing quietly with the eyes open.
+-   **eyes closed**: standing quietly with the eyes closed.
+-   **still**: standing while deliberately minimizing postural sway.
+:::
+::::::
+
+##### **Icon Buttons**
+
+Three icon buttons are available in the upper-right corner of the
+screen.
+
+-   ![](/include/images/icons/phyphox-play.png){height="1.5em"} **Play**:
+    starts and stops data acquisition. When pressed, the play icon
+    changes to a pause icon while data are being recorded.
+
+-   ![](/include/images/icons/phyphox-bin.png){height="1.5em"} **Clear**:
+    removes all CoG samples currently stored in memory.
+
+-   ![](/include/images/icons/phyphox-settings.png){height="1.5em"} **Settings**:
+    opens the configuration menu for the current PhyPhox experiment.
+
+\
+
+##### **Exporting Data** {#sec-phyphox-data-export}
+
+After completing a stabilometric trial with the **SmartPosture**
+experiment, the recorded CoG data can be exported and stored locally on
+your smartphone. The export procedure is illustrated in @fig-1-3-5.
+
+After stopping data acquisition, press the **Settings** button. A menu
+will appear containing several options, including **Export Data**.
+Select this option to open the export menu. Among the available export
+formats, choose **Excel**, and then press **Export Data** in the
+bottom-right corner of the screen. PhyPhox will then prompt you to
+choose where the exported file should be saved, either locally on the
+device or in a cloud storage service.
+
+![Exporting CoG data in
+SmartPosture.](/include/images/part_1/ch_3/1-3-5_export-data.png){#fig-1-3-5
+width="100%"}
+
+\
+
+## The Experimental Protocol {#sec-exp-protocol}
+
+After installing PhyPhox and importing the **SmartPosture** experiment
+into your PhyPhox collection, collect postural sway data according to
+the protocol below.
+
+1. Position yourself as illustrated in @fig-1-3-2 while holding the
+   smartphone.
+
+2. Collect postural sway data using the **SmartPosture** interface by
+   following the sequence of steps (**a** to **h**) described below and
+   illustrated in the accompanying video (@fig-1-3-6).
+
+3. Repeat the procedure for each combination of base of support
+   (*wide*, *narrow*, and *tandem*) and standing condition (*eyes
+   open*, *eyes closed*, and *still*).
+
+:::{.boxed}
+::::: columns
+
+::: {.column width="40%"}
+
+:::{.small-text}
+
+**a**: Launch the **SmartPosture** experiment.
+
+**b**: Select either the *Statokinesigram* or *Stabilogram*
+visualization.
+
+**c**: Set your height.
+
+**d**: Select the appropriate base of support.
+
+**e**: Select the standing condition.
+
+**f**: Assume the required posture and press the **Play**
+button.
+
+**g**: Maintain the standing position for 40 s under the selected base
+of support and standing condition.
+
+**h**: Export the data in **Excel** format **before performing any other
+action**.
+
+:::
+:::
+
+::: {.column width="60%"}
+![Steps for collecting postural sway data with
+SmartPosture.](/include/images/part_1/ch_3/smartposture-tutorial.mp4){#fig-1-3-6
+width="100%"}
+:::
+
+:::::
+:::
+
+:::{.callout-important title="What's next?"}
+
+*At the end of the experiment, you should have nine Excel files
+corresponding to the nine combinations of base of support (3) and
+standing condition (3).*
+
+*Upload all nine files to the Moodle platform. Instructions for the
+submission procedure will be provided during class.*
+:::

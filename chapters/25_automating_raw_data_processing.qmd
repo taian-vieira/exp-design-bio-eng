@@ -1,0 +1,616 @@
+# Automating Raw Data Processing {#sec-ch25}
+
+In @sec-ch24, we saw how to use R to compute metrics for assessing postural sway. From smartphone orientation data, we computed the CoG Elliptic Area, Mean CoG Speed, and CoG Standard Deviation.
+
+Briefly, this chapter covers:
+
+-   [Data Organization](@sec-organizing-cog-raw-data), discussing the importance of organizing files and scripts.
+-   [Looping Over Files](@sec-looping), processing raw data by iterating over all available files.
+-   [Creating R Scripts](@sec-rscripts), placing the complete code in a standalone text file (*R script*) that can be run in RStudio.
+-   [Custom Functions in R](@sec-rfunctions), making code simpler and more readable with custom functions.
+
+By the end of this chapter, students should be able to create a [data frame](@sec-dataframes) containing all *variables* of interest, including the test conditions and the *CoG-related variables*. @tbl-2-5-1 outlines the structure of the *data frame* to be created after processing the raw CoG data.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-2-5-1
+#| echo: false
+#| tbl-cap: Outline of the data frame we should create by the end of this Chapter.
+
+df <- data.frame(matrix(ncol = 8, nrow = 3))
+df[is.na(df)] <- "NA"
+datatable(df,
+          rownames = FALSE, 
+          escape = FALSE, 
+          colnames = c("Subject", "Eyes", "Standing on", "$EA$", "$v_x \\textrm{(cm/s)}$", "$v_y \\textrm{(cm/s)}$","$\\sigma_x \\textrm{(cm)}$", "$\\sigma_y \\textrm{(cm)}$"),
+          options = list(scrollX = TRUE,
+    dom = 't',ordering = FALSE, columnDefs = list(list(className = "dt-center", targets = "_all"), list(width = paste0(100 / 4, "%"), targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+
+[`NA`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/NA) indicates a missing value. Of course, the *data frame* we create after processing all `xls` files should not contain [`NA`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/NA) values.
+
+:::{.callout-important title="Material to work with"}
+*We strongly recommend working with the material provided in the compressed folder available [here](/include/download/working_data.zip){download="working_data.zip"} and illustrated in @fig-2-5-1.*
+:::
+
+
+\
+
+## Organizing CoG Raw Data {#sec-organizing-cog-raw-data}
+
+Data organization is as important as any other step in a project. By data organization, we do not mean only where files are stored, but also how the project is structured: how files are named, how folders are arranged, and how scripts refer to the data. *To illustrate the importance of data organization, we will use the structure of the shared files as an example.*
+
+Inside the compressed folder that can be downloaded from the link above, you should find two folders:
+
+-   `data`, which contains two subfolders:
+
+    -   `s_020966`, containing smartphone orientation data for the participant with registration number `020966`;
+    -   `s_111370`, containing smartphone orientation data for the participant with registration number `111370`.
+
+        Each of these folders contains four `xls` files. Their names explicitly indicate the experimental condition under which postural sway data were collected:
+
+        -   ***both legs***, with ***eyes open***;
+        -   ***both legs***, with ***eyes closed***;
+        -   ***single leg***, with ***eyes open***;
+        -   ***single leg***, with ***eyes closed***.
+
+-   `scripts`, where the R files used to process the raw data and analyze the processed data will be stored.
+
+After downloading these two folders, *place both inside any parent directory you prefer*. We will refer to this parent directory as the `project` directory. On my computer, as illustrated in @fig-2-5-1, the `project` directory is named `exp_design_bio_eng`.
+
+![Structure of the files in the compressed folder, which can be downloaded [here](/include/download/working_data.zip){download="working_data.zip"}.](/include/images/part_2/ch_5/2-5-1_data_organization.png){#fig-2-5-1 width=60%}
+
+The name of the `project` directory is not strictly important, as long as it is informative to you and to the colleagues working with you on the project.
+
+For example, you may often work on the same project as other colleagues. Even if you use a cloud storage or version control service to track changes across project files, the code written to process and analyze the data will likely run locally on your own machine. To ensure that your scripts run successfully on different computers, it is essential to use *relative paths*.
+
+\
+
+### Relative Paths with an R Project
+
+Absolute paths uniquely identify the location of files or directories on a computer. Because they depend on the directory structure of a particular machine, they differ from one computer to another. After downloading the shared data, the absolute path to the `data` folder on your computer will therefore differ from the corresponding path on mine. Consequently, any scripts you write and place in the `scripts` folder may fail when run on a different computer because the absolute paths stored in the scripts will no longer be valid (*or even on your own computer if the project is moved to another location in the future*).
+
+Ideally, the scripts we write should reference files and folders using paths that are *relative* to the `project` directory. We can achieve this by creating an **R Project**. To do so, click **File** → **New Project...** in the RStudio menu. This opens the **New Project Wizard**, shown in @fig-2-5-2.
+
+![Creating a new R Project.](/include/images/part_2/ch_5/2-5-2_r_project_wizard.png){#fig-2-5-2 width=70%}
+
+Select **Existing Directory** and then choose the `project` directory containing the `data` and `scripts` folders. RStudio will create an `.Rproj` file, named after the `project` directory, inside that directory (see Figures -@fig-2-5-1 and -@fig-2-5-3).
+
+![Project directory containing the newly created `.Rproj` file.](/include/images/part_2/ch_5/2-5-3_r_project_folder_with_rproj_file.png){#fig-2-5-3 width=95%}
+
+We will not discuss the details of an **R Project** here^[*For more information, see the Posit documentation available* [*here*](https://docs.posit.co/ide/user/ide/guide/code/projects.html).]. The important point is that *whenever you open the `.Rproj` file in RStudio, the corresponding project directory is automatically set as the current Working Directory* (see the [Files](@sec-files) section in @sec-ch22). You can verify this by querying the current Working Directory with the [`getwd()`](https://rdrr.io/r/base/getwd.html) function.
+
+```{r, results="hide"}
+getwd()
+```
+
+```{r, echo=FALSE}
+file.path("r_studio","tutorial","exp_design_bio_eng")
+```
+
+The last directory displayed should correspond to your `project` directory containing the `data` and `scripts` folders. In my case, this directory is `exp_design_bio_eng`.
+
+\
+
+### Accessing Files and Directories
+
+At this point, accessing files and directories within the `project` directory becomes straightforward. Since the Working Directory is the `project` directory, there is no need to refer to files using absolute paths.
+
+For example, we know that the `project` directory contains two subdirectories: `data` and `scripts`. We can verify this using the [`list.dirs()`](https://rdrr.io/r/base/list.files.html) function.
+
+```{r, results='hide'}
+list.dirs(recursive = FALSE, full.name = FALSE)
+```
+
+```{r, echo=FALSE}
+c("data", "scripts")
+```
+
+To list the subdirectories within the `data` folder, we use the same function, passing `data` as its first argument.
+
+```{r}
+list.dirs("data", recursive = FALSE, full.name = FALSE)
+```
+
+As expected (see @fig-2-5-1), the `data` directory contains two subdirectories: `s_020966` and `s_111370`.
+
+Going one step further, we can list the files contained in each of these folders. For brevity, we show only the contents of the `s_020966` directory using the [`list.files()`](https://rdrr.io/r/base/list.files.html) function.
+
+```{r}
+list.files(file.path("data", "s_020966"))
+```
+
+Notice that the [`file.path()`](https://rdrr.io/r/base/file.path.html) function is used to combine `data` and `s_020966`. This function automatically uses the correct path separator for the operating system on which the code is running, making the script portable across Windows, macOS, and Linux. As expected, four `xls` files are listed (see @fig-2-5-1).
+
+We are now ready to automate access to the four `xls` files generated according to the PhyPhox tutorial described in @sec-ch13. These files contain the raw CoG data, and each of them will be processed following the procedures introduced in the chapter [Plotting and Processing Raw Data](@sec-ch24).
+
+\
+
+## Looping over Directories and Files {#sec-looping}
+
+Given the organization of the CoG raw data shown in @fig-2-5-1, we can use **nested loops**^[*A loop contained within another loop.*] to process one file at a time for each participant.
+
+\
+
+### Nesting **for** Loops {#sec-nestingloops}
+
+In our case, two loops are required. The **outer loop** iterates over the participants—that is, over the folders `s_020966` and `s_111370`. The **inner loop** iterates over the four `xls` files contained within each participant's folder. One possible implementation is:
+
+```{r}
+# storing the folders of the two individuals in an R variable
+sub_folders <- c("s_020966", "s_111370") # subjects' folders
+# storing the four xls files into an R variable
+xls_files <- c("both_legs_eyes_closed.xls",
+              "both_legs_eyes_open.xls",
+              "single_leg_eyes_closed.xls",
+              "single_leg_eyes_open.xls")
+
+# outer loop (moving across subjects)
+for (i in 1:length(sub_folders)){
+  # inner loop (moving across xls files)
+  for (k in 1:length(xls_files)){
+    # here we have access to the i-th subject folder and the k-th xls file
+    
+    cat("i = ", i, ", k = ", k, ", subject folder: ", sub_folders[i], ", xls file: ", xls_files[k], "\n", sep = "")
+  }
+}
+```
+
+We first define two variables, `sub_folders` and `xls_files`, which store the names of the participant folders (see @fig-2-5-1) and the `xls` files contained in each folder, respectively.
+
+Next, we create two **for loops** using the syntax:
+
+```
+for (sequence to loop over){
+  statements
+}
+```
+
+Inside the **inner loop**, we use the [`cat()`](https://rdrr.io/r/base/cat.html) function to display the values of the iteration variables `i` and `k`, together with the corresponding elements of `sub_folders` and `xls_files`.
+
+This approach is not ideal because it requires manually specifying the names of all participant folders and files. Moreover, not every participant necessarily has four `xls` files. For example, data acquisition may have been interrupted or a participant may have withdrawn before completing all experimental conditions.
+
+A more robust approach is to obtain the folder and file names directly using the [`list.dirs()`](https://rdrr.io/r/base/list.files.html) and [`list.files()`](https://rdrr.io/r/base/list.files.html) functions, provided that the data are organized as described in [Organizing CoG Raw Data](@sec-organizing-cog-raw-data) (see @fig-2-5-1).
+
+```{r}
+sub_folders <- list.dirs("data", recursive = FALSE, full.names = FALSE) # directories inside the project folder
+
+for (i in sub_folders){ # outer loop
+  xls_files <- list.files(file.path("data", i)) # i is not a number, but an element of sub_folders variable
+  
+  for (k in xls_files){ # inner loop
+    cat("subject folder: ", i, ", xls file: ", k,  "\n", sep = "")
+  }
+}
+```
+
+In this version, the syntax of the **for loop** changes slightly. The iteration variables `i` and `k` no longer represent numeric indices; instead, they directly store the elements of `sub_folders` and `xls_files`, respectively. This makes the code simpler and easier to read. Moreover, if a participant folder contains fewer or more than four `xls` files, every available file will still be processed correctly^[*The **inner loop** iterates only over the files present in the current participant's folder.*].
+
+:::{.boxed}
+**CHALLENGE**
+
+Try to avoid using `file.path()` inside `list.files()` to retrieve the files contained in the `i`-th participant folder.
+:::
+
+\
+
+### Initializing the Output Data Frame
+
+The output *data frame* should follow the structure shown in @tbl-2-5-1. There are two common approaches:
+
+- initialize an empty *data frame* and add one row at a time while looping over participant folders and files;
+- initialize a *sufficiently large data frame* containing placeholder values (`NA`, `0`, `""`, etc.), update its rows as the files are processed, and remove any unused rows at the end.
+
+The second approach is generally more efficient because it preallocates memory for the *data frame*, potentially saving hundreds of milliseconds of execution time (see [this post](https://library.virginia.edu/data/articles/why-preallocate-memory-r-loops)). Although the exact number of *observations* may not be known *a priori*, we can usually define a reasonable upper bound, `n`, for the number of observations:
+
+```{r}
+n <- length(sub_folders) * 5 # total number of expected observations
+n
+```
+
+`length(sub_folders)` corresponds to the number of participant folders to be processed, which in our case is *```r length(sub_folders)```*. Since we expect four `xls` files in each folder, multiplying the number of participant folders by **five**, rather than **four**, ensures that the initialized *data frame* is sufficiently large. In our case, this corresponds to *`n = ` ```r n```* rows.
+
+We can now initialize the *data frame*:
+
+```{r}
+df_cog <- data.frame(
+  subject = character(n), 
+  eyes = factor(character(n), levels = c("open", "closed")), 
+  standing_on = factor(character(n), levels = c("single leg", "both legs")),
+  a_cog = double(n),    # elliptic area
+  v_x = double(n),      # mean speed in x direction
+  v_y = double(n),      # mean speed in y direction
+  sigma_x = double(n),  # st. deviation in x direction
+  sigma_y = double(n)   # st. deviation in y direction
+)
+str(df_cog)
+```
+
+The `subject` column is initialized by calling the [`character()`](https://rdrr.io/r/base/character.html) function with `n` elements. The `eyes` and `standing_on` columns are initialized as **factors** using the [`factor()`](https://rdrr.io/r/base/factor.html) function, with `n` missing entries and the appropriate factor levels (see the [**Factors**](@sec-factor) section). Finally, the five CoG-related variables are initialized as numeric vectors of type [`double()`](https://rdrr.io/r/base/double.html), each containing `n` zeros.
+
+Inside the **inner loop**, we can now populate `df_cog` as each file is processed. For every observation, we must determine the values of the eight variables (columns) listed in @tbl-2-5-1. We begin by extracting information about the participant and the experimental condition.
+
+\
+
+### Retrieving Participant IDs and Test Conditions
+
+The first column of `df_cog` should contain the registration number of each participant from whom smartphone orientation data were collected. Columns 2 and 3 should describe the experimental conditions, namely whether the participant performed the test with eyes open or closed, and whether they stood on one or both legs.
+
+In many research projects, this information is stored in a [README](https://en.wikipedia.org/wiki/README) file or in separate files containing [metadata](https://en.wikipedia.org/wiki/Metadata). In our example, however, the required metadata can be extracted directly from the names of the participant folders (`sub_folders`) and the corresponding `xls` files.
+
+:::{.callout-important title="Respecting naming conventions"}
+*For the approach presented here to work, folders and files must follow a consistent naming convention (see @sec-organizing-cog-raw-data).*
+
+*The experimental protocol considered for collecting postural sways data, for example, does not impose any convention for the name of files. However, it requires that the base of support and the standing condition are set appropriately in the SmartPosture experiment (see @sec-exp-protocol)*
+
+*Regardless of the convention adopted in a study, following it consistently greatly facilitates data processing.*
+:::
+
+There are two common approaches for extracting the required metadata. The first relies on the **if-else** statement:
+
+```
+if (expression to be tested){
+some statements
+} else {
+other statements
+}
+
+```
+
+```{r}
+for (i in sub_folders){
+  xls_files <- list.files(file.path("data", i)) 
+  subject <- sub(".*_","",i) # taking all characters after  underscore
+
+  for (k in xls_files){
+    
+    # is the current trial eyes open or eyes closed?
+    if (grepl("open", k)){
+      eyes <- "open"
+    } else {
+      eyes <- "closed"
+    }
+    
+    # is the current trial single leg or both legs?
+    if (grepl("single", k)){
+      standing_on <- "single leg"
+    } else {
+      standing_on <- "both legs"
+    }
+
+    cat("subject folder: ", i, ", xls file: ", k, ",\nsubject: ", subject, ", standing on: ", standing_on, ", eyes: ", eyes, "\n\n", sep = "")
+  }
+}
+```
+
+The [`grepl()`](https://rdrr.io/r/base/grep.html) function checks whether the strings `"open"` and `"single"` appear in the name of the current `xls` file. Depending on the outcome of these tests, the variables `eyes` and `standing_on` are assigned the appropriate values.
+
+The participant ID is extracted from the folder name by retaining all characters following the final underscore (`"_"`) using the [`sub()`](https://rdrr.io/r/base/grep.html) function^[*The first argument,* `".*_"`, *matches every character up to the last underscore and replaces it with the second argument,* `""` *(an empty string).*].
+
+```{r}
+eyes <- c("closed", "open") # possible entries
+standing_on <- c("both legs", "single leg") # possible entries
+
+for (i in sub_folders){
+  xls_files <- list.files(file.path("data", i)) 
+  
+  for (k in xls_files){
+    
+    info_required <- c(
+      sub(".*_","",i), # subject code (character after last underscore)
+      eyes[grepl("open", k)+1], # eyes open OR eyes closed
+      standing_on[grepl("single", k)+1] # single OR both legs
+    )
+    
+    print(info_required)
+  }
+}
+```
+
+A cleaner alternative is to use the logical output of [`grepl()`](https://rdrr.io/r/base/grep.html) directly as an index. This approach eliminates the **if-else** blocks altogether.
+
+Here, we use the logical value returned by [`grepl()`](https://rdrr.io/r/base/grep.html) to index the vectors `eyes` and `standing_on`. Since logical values are coerced to integers when used in arithmetic (`FALSE = 0`, `TRUE = 1`), adding `1` converts them into valid R indices (`1` or `2`).
+
+Both approaches produce the same result. The choice is largely a matter of style, although the indexing approach results in shorter and arguably more readable code. Using this syntax, we can now populate the first three columns of `df_cog` with the participant ID, visual condition, and standing condition.
+
+```{r}
+count <- 0 # used to index df_cog
+
+for (i in sub_folders){
+  xls_files <- list.files(file.path("data", i)) 
+  
+  for (k in xls_files){
+    count <- count + 1 # update count
+    df_cog[count, 1:3] <- c(
+      sub(".*_","",i), # subject code (character after last underscore)
+      c("closed", "open")[grepl("open", k)+1], # eyes open OR eyes closed
+      c("both legs", "single leg")[grepl("single", k)+1] # single OR both legs
+    )
+    
+  }
+}
+df_cog <- df_cog[1:count, ] # keeping only count observations
+df_cog
+```
+
+\
+
+## R Script (`main`) {#sec-rscripts}
+
+In the previous section, we populated the first three columns of the `df_cog` *data frame* shown in @tbl-2-5-1. We must now complete the remaining columns by computing the CoG metrics selected to characterize postural control.
+
+The procedures required to compute these variables from the smartphone orientation data were presented in detail in @sec-ch24. Inside the nested loops, we therefore need to perform the following processing steps:
+
+- **Pre-processing the sway data**
+    - [Trimming](@sec-trimming-sway-data): removing the initial transient and standardizing the number of CoG samples;
+    - [Demeaning](@sec-demeaning-sway-data): removing the mean CoG position, which is not of practical interest.
+
+- **Computing the CoG metrics**
+    - [Elliptic Area](@sec-compute-ea);
+    - [Mean CoG Speed](@sec-computing-v) in the frontal and sagittal planes;
+    - [CoG Standard Deviation](@sec-computing-sigma) in the frontal and sagittal planes.
+
+So far, we have entered our code directly in the **R Console**. We will now create an **R script**, where all processing steps required to compute the CoG variables will be stored.
+
+An **R script** is simply a plain text file containing R code. There are two common ways to create one:
+
+- from **File → New File → R Script** (see @fig-2-5-4);
+
+!["Exploring the *File* toolbar.](/include/images/part_2/ch_5/2-5-4_r_file_from_file_toolbar.png){#fig-2-5-4}
+
+- or by clicking the **New File** icon in the upper-left corner of the RStudio window (see @fig-2-5-5).
+
+![Creating a new R script from the **File** toolbar.](/include/images/part_2/ch_5/2-5-5_r_file_from_new_file_icon.png){#fig-2-5-5 width=30%}
+
+Either method creates a blank script named *Untitled1*. Save this file as `main.R` inside the `scripts` directory (see @fig-2-5-1). 
+
+The script developed below retrieves the participant metadata (registration number and test conditions) and computes the CoG Elliptic Area for each `xls` file.
+
+```{r, #sec-main-script}
+library(readxl) # for reading xls files
+
+dur <- 30  # (s) duration considered for processing
+sub_folders <- list.dirs("data", recursive = FALSE, full.names = FALSE) # directories inside the project folder
+n <- length(sub_folders) * 5 # number of expected observations
+
+# initializing data frame with all columns from Table 5.1
+df_cog <- data.frame(
+  subject = character(n), 
+  eyes = factor(character(n), levels = c("open", "closed")), 
+  standing_on = factor(character(n), levels = c("single leg", "both legs")),
+  a_cog = double(n),    # elliptic area
+  v_x = double(n),      # mean CoG speed in x direction
+  v_y = double(n),      # mean CoG speed in y direction
+  sigma_x = double(n),  # CoG st. deviation in x direction
+  sigma_y = double(n)   # CoG st. deviation in y direction
+)
+
+count <- 0 # used to index df_cog
+
+for (i in sub_folders){ # outer loop (over subjects' folders)
+  xls_files <- list.files(file.path("data", i)) # retrieving xls files
+
+  for (k in xls_files){ # inner loop (over xls files)
+    count <- count + 1 # update count
+    
+    # SUBJECT AND TEST CONDITIONS - updating df_cog with metadata
+    df_cog$subject[count] <- sub(".*_","",i) # subject code (character after last underscore)
+    df_cog$eyes[count] <- c("closed", "open")[grepl("open", k)+1] # eyes open OR eyes closed
+    df_cog$standing_on[count] <- c("both legs", "single leg")[grepl("single", k)+1] # single or both legs
+    
+    # loading raw data
+    df <- read_xls(file.path("data", i, k)) # data frame with smartphone orientation data
+
+    # COMPUTING COG VARIABLES, PART 1: PRE-PROCESSING STEPS
+
+    # trimming CoG coordinates
+    si <- diff(df$time)          # all sampling intervals
+    sf <- round(1/mean(si))      # mean sampling frequency (100 Hz)
+    y_cog <- head(df$y_cog[df$time>5], dur * sf) # 30 s of CoG samples in anterior-posterior (Y) direction
+    x_cog <- head(df$x_cog[df$time>5], dur * sf) # 30 s of CoG samples in medial-lateral (X) direction
+
+    # demeaning CoG coordinates
+    y_cog <- y_cog - mean(y_cog, na.rm = TRUE) # Y direction
+    x_cog <- x_cog - mean(x_cog, na.rm = TRUE) # X direction
+
+    # COMPUTING COG VARIABLES, PART 2: PROCESSING STEPS
+
+    # computing the elliptic area and updating df_cog
+    xy <- cbind(x_cog, y_cog) # matrix with N rows (sf * dur) and 2 cols
+    head(xy, 5)              # shows the first 5 rows of the xy matrix
+    E <- cov(xy)              # covariance matrix
+    xy_prime <- eigen(E)  # computing eigenvalues and eigenvectors
+    lambda <- sqrt(xy_prime$values) # square root of eigen values
+    eigvec <- xy_prime$vectors      # eigen vectors
+    df_cog$a_cog[count] <- pi * 1.96^2 * prod(lambda) # elliptic area (containing 85% of CoP samples)
+
+  }
+}
+
+df_cog <- df_cog[1:count, ] # keeping only count observations
+```
+
+\
+
+### Running R Scripts {#sec-source-scripts}
+
+*In R, running a script is commonly referred to as **sourcing** the script.* An R script can be sourced by clicking the **Source** button in the upper-right corner of the **Editor** pane, or by clicking the arrow immediately to its right (Figure @fig-2-5-6).
+
+![Sourcing (running) R Scripts.](/include/images/part_2/ch_5/2-5-6_sourcing_r_script.png){#fig-2-5-6}
+
+Clicking the arrow reveals two options: **Source** and **Source with Echo**. The latter first echoes (prints) every line of the script to the **Console** before executing it.
+
+Alternatively, you can source a script using keyboard shortcuts:
+
+- **Source** (`r knitr::asis_output("mac: \U2318 + \U21E7 + S; windows: Ctrl + Shift + S")`)
+- **Source with Echo** (`r knitr::asis_output("mac: \U2318 + \U21E7 + \U21B5; windows: Ctrl + Shift + Enter")`)
+
+Try it yourself. Source the `main.R` script after copying the code [provided above](@sec-main-script), then inspect the first six columns of `df_cog`:
+
+```{r}
+df_cog[, 1:6]
+```
+
+At this point, `df_cog` should contain the participant metadata and the CoG Elliptic Area values. The remaining metric columns should still contain zeros. Before completing the data frame with the remaining CoG variables, there is one more important concept to introduce.
+
+\
+
+## Creating R Functions {#sec-rfunctions}
+
+Code should be as clean, concise, and readable as possible. This makes it easier both for others to understand and maintain your code and for you to revisit it in the future. Numerous style guides for R programming are available; one example is [this guide](https://cran.r-project.org/web/packages/rockchalk/vignettes/Rstyle.pdf).
+
+Rather than allowing `main.R` to become long and difficult to read, we will move the computation of the CoG variables into a separate **R function**.
+
+The general syntax for defining a function in R is:
+
+```
+function_name <- function(parameter_1, parameter_2, ...) {
+  statements
+  return(value_to_be_returned)
+}
+```
+
+There are two common ways in which an R function can update `df_cog`: **by value** or **by reference**. The later approach is discouraged (see @tip-by-reference).
+
+\
+
+### Updating CoG Metrics by Value {#sec-update-by-value}
+
+With this approach, the function computes the desired metrics from the raw data and returns them to the calling code. The returned values are then assigned to the appropriate row of `df_cog`.
+
+To do this, we move the portion of code in `main.R` responsible for computing the CoG metrics into a new R script. Save this script as `cog_functions.R` inside the `functions` folder (see @fig-2-5-1).
+
+```{r}
+compute_cog_metrics <- function (df_raw_data) {
+
+  # COMPUTING COG VARIABLES, PART 1: PRE-PROCESSING STEPS
+  # trimming CoG coordinates
+  
+  si <- diff(df_raw_data$time)          # all sampling intervals
+  sf <- round(1/mean(si))      # mean sampling frequency (100 Hz)
+  y_cog <- head(df_raw_data$y_cog[df$time>5], dur * sf) # 30 s of pitch sample
+  x_cog <- head(df_raw_data$x_cog[df$time>5], dur * sf) # 30 s of yaw sample
+  
+  # demeaning CoG coordinates
+  y_cog <- y_cog - mean(y_cog, na.rm = TRUE) # demeaned pitch
+  x_cog <- x_cog - mean(x_cog, na.rm = TRUE) # demeaned yaw
+  
+  # COMPUTING COG VARIABLES, PART 2: PROCESSING STEPS
+  
+  # computing the elliptic area and updating df_cog
+  xy = cbind(x_cog, y_cog) # matrix with N rows (sf * dur) and 2 cols
+  head(xy, 5)              # shows the first 5 rows of the xy matrix
+  E <- cov(xy)              # covariance matrix
+  xy_prime <- eigen(E)  # computing eigenvalues and eigenvectors
+  lambda <- sqrt(xy_prime$values) # square root of eigen values
+  eigvec <- xy_prime$vectors      # eigen vectors
+  a_cog <- pi * 1.96^2 * prod(lambda) # elliptic area
+  
+  return(a_cog)
+}
+```
+
+Examining the function reveals that:
+
+- the CoG metrics are computed by the function `compute_cog_metrics()`;
+- the function has a single input parameter (`df_raw_data`), whose argument should be a data frame containing the raw CoG data;
+- the function contains essentially the same code previously included in `main.R`, with one important addition: the statement `return(a_cog)`, which returns the computed CoG Elliptic Area.
+
+Before this function can be used, the R script containing it must be sourced. Once this has been done, `compute_cog_metrics()` becomes available in the current R session and should appear in the **Environment** pane (or can be listed with the [`ls()`](https://rdrr.io/r/base/ls.html) function).
+
+![Sourcing R files with functions. All functions defined in these R files will be visible in the R Environment.](/include/images/part_2/ch_5/2-5-7_function_in_r_environment.png){#fig-2-5-7 width=98%}
+
+```{r}
+library(readxl) # for reading xls files
+source(file.path("scripts","functions","cog_functions.R"))
+
+dur <- 30  # duration of the
+sub_folders <- list.dirs("data", recursive = FALSE, full.names = FALSE) # directories inside the project folder
+n <- length(sub_folders) * 5 # number of expected observations
+
+# initializing data frame with all columns from Table 5.1
+df_cog <- data.frame(
+  subject = character(n), 
+  eyes = factor(character(n), levels = c("open", "closed")), 
+  standing_on = factor(character(n), levels = c("single leg", "both legs")),
+  a_cog = double(n),    # elliptic area
+  v_x = double(n),      # mean speed in x direction
+  v_y = double(n),      # mean speed in y direction
+  sigma_x = double(n),  # st. deviation in x direction
+  sigma_y = double(n)   # st. deviation in y direction
+)
+
+count = 0 # used to index df_cog
+
+for (i in sub_folders){ # outer loop (over subjects' folders)
+  xls_files <- list.files(file.path("data", i)) # retrieving xls files
+
+  for (k in xls_files){ # inner loop (over xls files)
+    count = count + 1 # update count
+    
+    # SUBJECT AND TEST CONDITIONS - updating df_cog with metadata
+    df_cog$subject[count] <- sub(".*_","",i) # subject code (character after last underscore)
+    df_cog$eyes[count] <- c("closed", "open")[grepl("open", k)+1] # eyes open OR eyes closed
+    df_cog$standing_on[count] = c("both legs", "single leg")[grepl("single", k)+1] # single or both legs
+    
+    # loading raw data
+    df <- read_xls(file.path("data", i, k)) # data frame with smartphone orientation data
+    
+    # call the function compute_cog_metrics
+    # update the df_cog row for the column with CoG elliptic area 
+    df_cog[count, 4] <- compute_cog_metrics(df)
+  }
+}
+
+df_cog <- df_cog[1:count, ] # keeping only count observations
+```
+
+To use `compute_cog_metrics()` in the [`main.R`](@sec-rscripts) script, we need to modify `main.R` accordingly.
+
+The resulting `main.R` script is shorter, cleaner, and easier to maintain. Notice that `cog_functions.R` must be sourced near the beginning of `main.R` so that the function used to compute the CoG metrics is loaded into the current R session before it is called.
+
+Many other approaches could be used to update `df_cog` after calling `compute_cog_metrics()`. Feel free to explore some of these alternatives.
+
+Finally, inspect the first four columns of `df_cog` to verify that both the participant metadata and the CoG Elliptic Area have been computed correctly.
+
+```{r}
+df_cog[, 1:4]
+```
+
+:::{#tip-by-reference .callout-warning title="About updating by reference"}
+*Although R allows functions to modify objects in parent environments using the `<<-` operator, this practice is generally discouraged because it makes code harder to understand, test, and debug. Throughout this course, we will prefer functions that explicitly return their results to the calling code.*
+:::
+
+\
+
+## Exercise: Putting It All Together
+
+Using the approach presented in this chapter---updating `df_cog` [by value](@sec-update-by-value)---modify the `compute_cog_metrics()`  function to:
+
+- compute the remaining four CoG variables (Mean CoG Speed and Standard Deviation in both the $x$ and $y$ directions);
+
+- save `df_cog` to a `csv` file using the [`write.csv()`](https://rdrr.io/r/utils/write.table.html) function. Set both the `row.names` and `quote` arguments to `FALSE`, and choose any suitable name for the output `csv` file.
+
+\
+
+After correctly processing the raw CoG data, @tbl-2-5-2 should resemble the table below.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-2-5-2
+#| echo: false
+#| tbl-cap: CoG variables, computed for the two example subjects.
+
+source(file.path("scripts","main.R"))
+
+datatable(df_cog,
+          rownames = FALSE, 
+          escape = FALSE, 
+          colnames = c("Subject", "Eyes", "Standing on", "$EA$", "$v_x \\textrm{(cm/s)}$", "$v_y \\textrm{(cm/s)}$","$\\sigma_x \\textrm{(cm)}$", "$\\sigma_y \\textrm{(cm)}$"),
+          options = list(scrollX = TRUE,
+    dom = 't',ordering = FALSE, columnDefs = list(list(className = "dt-center", targets = "_all"), list(width = paste0(100 / 4, "%"), targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+) |> formatRound(columns = seq(4,8), digits = 1)
+```
+:::

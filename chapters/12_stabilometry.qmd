@@ -1,0 +1,342 @@
+# Stabilometry {#sec-stabilometry}
+
+The objective assessment of postural control provides insights into deficits and improvements in balance performance. Clinicians and health scientists, for example, may use this information to guide rehabilitation programs aimed at preserving or restoring the control of orientation and stability. As discussed in the previous chapter, inadequate postural control compromises the successful execution of virtually all motor tasks.
+
+::: {.callout-note title="This chapter..."}
+*... has a twofold goal. First, the technique most commonly used to study postural control will be discussed. Second, the traditional metrics used to provide an objective evaluation of postural sway will be presented.*
+:::
+
+\
+
+## The Orthostatic Posture
+
+The orthostatic posture is achieved by standing upright and quietly---it is often referred to as the *quiet standing posture*. While postural perturbations may provide valuable information about compensatory mechanisms, studying postural control during quiet standing allows us to probe the *status quo* of the systems involved in posture control.
+
+Maintaining a stable quiet standing posture is the result of a complex sensory-motor integration process, the mechanisms of which are still debated. This apparently simple task imposes substantial stabilization demands that, if not met, may lead to a fall. The complexity arises from the need to keep the body center of gravity (**CoG**)^[*the theoretical balance point of the body*] above the relatively small base of support defined by the contact between the feet and the ground. Because of internal mechanical perturbations, such as respiration and the cardiac cycle, controlling CoG position is inherently a dynamic task. Indeed, as early as the 1930s, [Hellebrandt](https://journals.physiology.org/doi/abs/10.1152/ajplegacy.1938.121.2.471) @hellebrandt38 defined quiet standing as:
+
+> *movement upon a stationary base.*
+
+In the upright stance, the body CoG projects near most of the body joints. The vertical projection of the body CoG relative to the different joints is represented by the vertical line shown in the left panel of @fig-1-2-1. This vertical line defines the action of gravity relative to the joints and is referred to as the **gravity line of action**.
+
+![The human quiet standing posture and a key muscle involved in standing stabilization—the gastrocnemius.](/include/images/part_1/ch_2/1-2-1_quiet-standing.gif){#fig-1-2-1}
+
+Stabilization is achieved by maintaining this line within the theoretical limits of the base of support. Close inspection of @fig-1-2-1 reveals that gravity produces a forward moment about most body joints, particularly the ankle joint, since the gravity line of action generally passes through or slightly anterior to them. Although the proximity of the gravity line to the joints minimizes torque demands, the CoG is not stationary during quiet standing. The gravity line continuously shifts forward, backward, and laterally, requiring the active regulation of muscle activity. The muscles most frequently involved in quiet-standing stabilization are shown in @fig-1-2-1.
+
+Possibly because the gravity line is, on average, farther from the ankle joint than from any other major joint, the calf muscles are among the most extensively studied muscles during quiet standing. Composed primarily of the gastrocnemius and soleus, the calf musculature is a powerful muscle group responsible for generating plantar-flexion torque. In other words, it generates an extension moment about the ankle, either moving the toes downward or moving the body backward (cf. animation in @fig-1-2-1).
+
+Completing the exercise below will help understand why plantar-flexor muscles are actively recruited to counteract the forward movement of the CoG in response to gravity.
+
+:::: {.columns}
+::: {.column width="60%"}
+![](/include/images/part_1/ch_2/flexors-or-extensors.gif)
+:::
+::: {.column .small-text width=40%}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/1-2-1_flexors-vs-extensors.md")
+```
+:::
+::::
+
+The first evidence of the importance of assessing postural control during quiet standing likely stems from the observations of Romberg, a German neurologist. When deprived of vision, Romberg observed that some patients were unable to maintain a stable standing posture. This instability, characterized by exaggerated postural sway when standing with the eyes closed, was recognized as a manifestation of sensory ataxia^[*lack of motor coordination resulting from the loss of sensory input*]. Although subjective, the Romberg test remains clinically relevant for the assessment of balance disorders.
+
+The orthostatic posture is therefore a dynamic task, characterized by the timely coordination of muscle activity to prevent falls. This process results in postural sway that, under normal conditions, is typically of millimetric magnitude. In pathological conditions, postural sway increases and may become visually apparent.
+
+:::{.callout-note title="Assessing postural sways"}
+*It is therefore conceivable that any approach capable of quantifying postural sway, or of providing metrics derived from postural sway, would be of major importance for the objective assessment of postural control.*
+:::
+
+\
+
+## Measuring Postural Sways
+
+From a simple plumb line hanging from the waist to sophisticated motion-capture systems, several techniques can be used to quantify postural sway. The most widely adopted approach relies on the measurement of ground reaction forces using dedicated force plates. Before detailing this technique, it is important to distinguish between the center of pressure (**CoP**) and the center of gravity (**CoG**).
+
+\
+
+### CoG vs CoP
+
+Consider the simple challenge of balancing a broom on the palm of the hand (@fig-1-2-2). The CoP, that is, the point where the broom force is applied to the support surface, is located on the palm where contact occurs between the broom handle and the hand. Although contact occurs over a finite area, the CoP is represented as a single point. The CoG, whose location depends on how mass is distributed within the broom, is located near the brush, where most of the broom mass is concentrated.
+
+Balancing the broom requires continuously moving the CoP so that the motion of the CoG can be controlled. In the example shown in @fig-1-2-2, moving the hand rapidly forward would reverse the net moment acting on the broom, slowing its forward fall and initiating a backward movement. Similarly, moving the hand backward would reverse the direction of motion once again. By repeatedly adjusting the position of the hand, the CoG can be maintained within a limited range. The size of this range depends on how effectively CoP movements compensate for CoG movements.
+
+![Distinguishing center of gravity (CoG) from center of pressure (CoP)](/include/images/part_1/ch_2/1-2-2_cog-vs-cop.png){#fig-1-2-2}
+
+A similar representation can be applied to the standing human body (@fig-1-2-2). During quiet standing, body motion can be reasonably approximated by an inverted pendulum pivoted around the ankle joint @winter98 @morasso19. Within this framework, gravity produces a forward moment about the ankle joint, which is counteracted by the extension torque generated by the plantar-flexor muscles (see @fig-1-2-1).
+
+Contraction of the plantar-flexor muscles moves the CoP forward. Because the feet remain fixed to the ground, it can be shown that CoP displacement is proportional to ankle plantar-flexion torque @morasso99. If plantar-flexion torque exceeds the gravitational torque, determined by body weight ($W_b$) and by the horizontal position of the CoG relative to the ankle ($y_{\text{cog}}$), the CoG accelerates backward and a backward sway eventually begins. Conversely, reversing a backward sway requires moving the CoP behind the CoG. Interestingly, this may be achieved simply by reducing plantar-flexion torque. Contrary to common intuition, an active dorsiflexion torque may not be necessary to pull the body forward, as gravity alone may provide the required acceleration.
+
+Consequently, stabilization of the body CoG results from a continuous modulation of CoP position. During quiet standing, a biomechanical constraint imposes a strong coupling between the displacement of these two quantities. As the CoG moves forward, the CoP also moves forward; as the CoG moves backward, the CoP follows in the same direction. Therefore, CoG and CoP displacements are strongly coupled and generally move in the same direction.
+
+:::{.callout-important title="CoG vs CoP"}
+*It is clear that CoP and CoG are distinct but closely related constructs. This relationship justifies the measurement of CoP as an indirect approach for studying and evaluating postural control during quiet standing.*
+:::
+
+\
+
+### The Stabilometry Technique
+
+Stabilometry is an objective technique used to quantify CoP position during quiet standing. It relies on computerized methods that process force signals measured at the support surface.
+
+Two main systems can be used to compute CoP position: pressure insoles and force plates. Pressure insoles consist of a grid of pressure sensors embedded within shoe insoles. From the pressure distribution beneath the feet, the position of the CoP on the support surface can be estimated. Force plates, in contrast, consist of a rigid platform mounted on force-sensing elements. Force plates are generally preferred because they allow both vertical and horizontal force components to be considered in the computation of CoP position.
+
+An example of a force plate, including the force-sensing elements, the measured forces, the resulting moments, and the reference system used for CoP computation, is illustrated in @fig-1-2-3. The resultant force applied to the force-plate surface is represented by the vector $F$. The CoP corresponds to the location at which this resultant force acts on the plate.
+
+Four force sensors are shown, one at each corner of the force plate. Each sensor provides a force vector ($f_i, \, i=1,2,3,4$), representing the **ground reaction force** measured at that location. Together, the four force vectors must reproduce the resultant force $F$ and the moments generated by its point of application. Consequently, the magnitude and direction of the individual ground reaction forces depend on the magnitude, direction, and location of $F$.
+
+![Example of a stabilometric trial (left) and of the quantities involved in the computation of CoP position (right).](/include/images/part_1/ch_2/1-2-3_forceplate.png){#fig-1-2-3 width=85%}
+
+In static equilibrium, the sum of all forces is equal to zero:
+
+$$
+\mathbf{F} + \mathbf{f_1}+\mathbf{f_2} + \mathbf{f_3} + \mathbf{f_4} = 0
+$$ {#eq-grfs}
+
+The physical principle used to measure force is generally based on either piezoelectric or strain-gauge technology. In the former case, the accumulation of electrical charge within each sensor is proportional to the force applied to it. In the latter case, force is inferred from changes in the electrical resistance of strain gauges. These changes result from deformation (strain) of the sensing element, which is proportional to the applied force.
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/1-2-2_forces.md")
+```
+:::
+
+\
+
+### Computing CoP Position
+
+The CoP position is computed from the ground reaction forces measured by the force plate (see @fig-1-2-3). The computation procedure is detailed below for the anterior-posterior direction ($y_{\text{cop}}$), that is, in the sagittal plane.
+
+Figure @fig-1-2-4 illustrates a parasagittal view of a person standing on a force plate, including the measured vertical ground reaction forces and the resultant force. During quiet standing, and under the assumption that horizontal accelerations are negligible, the resultant vertical force can be approximated by the body weight:
+
+$$
+\mathbf{F} \approx \mathbf{W_{\text{b}}}.
+$$ {#eq-fwb}
+
+![CoP computation in the anterior-posterior direction.](/include/images/part_1/ch_2/1-2-4_cop-computation.png){#fig-1-2-4 width=90%}
+
+Given this approximation, the computation can be introduced by considering only the vertical components of the ground reaction forces:
+
+$$
+f_{z_i}, \, i=1,2,3,4.
+$$
+
+The figure illustrates $f_{z_3}$ and $f_{z_4}$ with greater magnitude than $f_{z_1}$ and $f_{z_2}$ only to make the four vertical forces visually clear. Depending on the CoP position, the opposite configuration may occur. For example, $f_{z_1}$ may be greater than $f_{z_3}$, just as $f_{z_2}$ may be greater than $f_{z_4}$.
+
+By considering only vertical forces, the computation of CoP position becomes relatively simple. First, a reference system for representing the CoP coordinates must be defined. In Figures -@fig-1-2-3 and -@fig-1-2-4, the center of the force-plate surface is taken as the origin of the reference system, with the $x$, $y$, and $z$ axes directed respectively to the right, anteriorly, and upward.
+
+Mathematically, $y_{\text{cop}}$ is determined from the balance of moments around the medio-lateral axis. In static equilibrium, the sum of the moments is equal to zero:
+
+$$
+\mathbf{M_x} + \mathbf{M_1} + \mathbf{M_2} + \mathbf{M_3} + \mathbf{M_4} = 0
+$$ {#eq-sumofmoments}
+
+where $\mathbf{M_x}$ is the moment produced by the resultant force $\mathbf{F}$ around the medio-lateral axis ($x$ axis in @fig-1-2-3), and $\mathbf{M_i}$, with $i=1,2,3,4$, is the moment produced by each ground reaction force about the same axis.
+
+Each moment is given by the cross product between the position vector and the corresponding force vector. For the four vertical forces measured by the sensors, we have:
+
+$$
+\begin{aligned}
+M_1 &= (-\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_1}} = -\Delta_y f_{z_1}\hat{\mathbf{u}}_x\\
+M_2 &= (+\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_2}} = +\Delta_y f_{z_2}\hat{\mathbf{u}}_x\\
+M_3 &= (-\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_3}} = -\Delta_y f_{z_3}\hat{\mathbf{u}}_x\\
+M_4 &= (+\Delta_y\hat{\mathbf{u}}_y) \times \mathbf{f_{z_4}} = +\Delta_y f_{z_4}\hat{\mathbf{u}}_x,
+\end{aligned}
+$$ {#eq-fzmoments}
+
+where $\Delta_y$ is the distance between each sensor measuring point and the origin of the reference system, projected on the $y$ axis. The vectors $\hat{\mathbf{u}}_x$ and $\hat{\mathbf{u}}_y$ are unit vectors in the corresponding axes, while $f_{z_i}$ denotes the magnitude of the vertical reaction force measured by the $i$-th sensor.
+
+In an analogous way, the moment produced by the body weight in the sagittal plane is given by:
+
+$$
+\mathbf{M_x} = \mathbf{y}_{\text{cop}} \times \mathbf{W_{\text{b}}} = -y_{\text{cop}}W_{\text{b}}\hat{\mathbf{u}}_x,
+$$ {#eq-copxmoment}
+
+where $y_{\text{cop}}$ is the anterior-posterior coordinate of the point of application of $\mathbf{W_{\text{b}}}$ on the support surface, and $W_{\text{b}}$ is the magnitude of the body weight vector.
+
+Substituting the expressions above into the moment equilibrium equation -@eq-sumofmoments and rearranging terms yields:
+
+$$
+y_{\text{cop}} = \Delta_y\frac{f_{z_2}+f_{z_4}-f_{z_1}-f_{z_3}}{W_{\text{b}}}.
+$$
+
+Because, under static equilibrium, body weight can be estimated from the sum of the vertical reaction forces, $W_{\text{b}}$ can be replaced by:
+
+$$
+W_{\text{b}} = f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4}.
+$$
+
+Therefore, the anterior-posterior CoP coordinate is computed as:
+
+$$
+y_{\text{cop}} = \Delta_y\frac{f_{z_2}+f_{z_4}-f_{z_1}-f_{z_3}}{f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4}}.
+$$ {#eq-ycop}
+
+Likewise, the CoP position in the frontal plane is defined as:
+
+$$
+x_{\text{cop}} = \Delta_x\frac{-f_{z_2}+f_{z_4}-f_{z_1}+f_{z_3}}{f_{z_1}+f_{z_2}+f_{z_3}+f_{z_4}},
+$$ {#eq-xcop}
+
+where $\Delta_x$ is the projection of the distance between each sensor and the origin of the reference system on the $x$ axis.
+
+:::{.callout-note title="What about the horizontal reaction forces?"}
+*The CoP equations presented above neglect the horizontal ground reaction forces. This approximation is generally adequate during quiet standing because horizontal forces are relatively small.*
+
+*When greater accuracy is required, however, the horizontal force components can be incorporated into the computation. The correction depends on the horizontal reaction forces and on the vertical distance between the force sensors and the surface on which the subject stands (i.e. the force-plate thickness).*
+:::
+
+\
+
+### Stabilogram and Statokinesigram {#sec-stabilometric-representation}
+
+The animation in @fig-1-2-5 provides a representation of the excursion of the CoP over the force plate during quiet standing---a **stabilometric trial**. Green circles correspond to the CoP coordinates $(x_{\text{cop}}, y_{\text{cop}})$ computed from the ground reaction forces. The distance between consecutive positions depends on both the sampling frequency of the acquisition system and the CoP speed. In stabilometric recordings, sampling frequencies are typically greater than 20 Hz @vieira09.
+
+![Example of a stabilometric trial, showing the CoP excursion during quiet standing.](/include/images/part_1/ch_2/1-2-5_cop-excursion.gif){#fig-1-2-5 width=90%}
+
+Stabilometric systems often provide users with the time series of the CoP position in both the medio-lateral ($x$) and anterior-posterior ($y$) axes. Otherwise, CoP position must be computed from ground reaction forces or from moments. Some systems provide the forces measured by each sensor, whereas others provide the three components of the resultant force (cf. vector $F$ in @fig-1-2-3) and the moments it produces.
+
+Once a stabilometric trial is collected, the CoP profile may be inspected either in time or in space. These two forms of representation are shown in @fig-1-2-6.
+
+**Stabilograms** correspond to the temporal representation of CoP position during a stabilometric trial. Two stabilograms are obtained from each trial: one associated with CoP position in the medio-lateral direction and the other associated with CoP position in the anterior-posterior direction.
+
+**Statokinesigrams** combine the CoP excursion in both axes into a single Cartesian plot. Even though the statokinesigram provides a spatial representation of the CoP samples, it depends on the recording duration. The longer the recording duration, the greater the number of CoP samples used to create the statokinesigram.
+
+![Two possible representations of CoP excursion. The statokinesigram represents CoP displacement in space, whereas the stabilograms represent the medio-lateral and anterior-posterior CoP coordinates over time.](/include/images/part_1/ch_2/1-2-6_stabilogram-statokinesigram.png){#fig-1-2-6 width=100%}
+
+\
+
+### CoP Metrics {#sec-copmetrics}
+
+In any field of study, metrics of interest should be extracted from the specific signal collected (e.g., ECG, EMG, stabilograms). These metrics should be physiologically meaningful or, at least, provide a tangible interpretation of the process under investigation.
+
+Several metrics may be computed from both stabilograms and statokinesigrams. Traditional, or classic, metrics rely mainly on basic statistics. More than 30 commonly used classic metrics are listed by [Prieto et al.](https://ieeexplore.ieee.org/document/532130) @prieto96. Other metrics are based on more advanced signal-processing techniques, such as the sway density curve @jacono04 or fractional Brownian motion @collins93.
+
+For the purposes of this course, three classic metrics will be considered. Two metrics will be computed from stabilograms: the CoP standard deviation and the CoP mean speed. Both are computed separately for the medio-lateral and anterior-posterior axes. A third metric, the elliptical area, will be computed from the statokinesigram.
+
+\
+
+#### Stabilogram Metrics ($\sigma$ and $v$) {#sec-sv}
+
+The CoP standard deviation is defined by:
+
+$$
+\sigma_x = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\left(x_{\text{cop}}(i)-\bar{x}_{\text{cop}}\right)^2}
+$$ {#eq-copstdx}
+
+and
+
+$$
+\sigma_y = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\left(y_{\text{cop}}(i)-\bar{y}_{\text{cop}}\right)^2}
+$$ {#eq-copstdy}
+
+where $N$ is the total number of samples, and $\bar{x}_{\text{cop}}$ and $\bar{y}_{\text{cop}}$ are the mean CoP positions on the two anatomical axes:
+
+$$
+\bar{x}_{\text{cop}} = \frac{1}{N}\sum_{i=1}^{N}x_{\text{cop}}(i)
+$$
+
+and
+
+$$
+\bar{y}_{\text{cop}} = \frac{1}{N}\sum_{i=1}^{N}y_{\text{cop}}(i).
+$$
+
+The mean speed is computed from consecutive CoP displacements, separately for the medio-lateral and anterior-posterior axes:
+
+$$
+v_x = \frac{1}{T}\sum_{i=1}^{N-1}\left|x_{\text{cop}}(i+1)-x_{\text{cop}}(i)\right|
+$$ {#eq-copvx}
+
+and
+
+$$
+v_y = \frac{1}{T}\sum_{i=1}^{N-1}\left|y_{\text{cop}}(i+1)-y_{\text{cop}}(i)\right|
+$$ {#eq-copvy}
+
+where $T$ is the duration of the stabilometric trial. The absolute value is used because, otherwise, forward and backward displacements, or leftward and rightward displacements, would cancel each other.
+
+These two metrics have distinct interpretations. The CoP standard deviation quantifies the average size of the region in the horizontal plane within which postural sway occurs. The CoP mean speed provides an indication of how rapidly corrections to postural sway are made---for example, how rapidly the hand moves when balancing the broom in @fig-1-2-2. Biomechanically, CoP standard deviation reflects how much ankle torque is modulated, whereas CoP mean speed reflects how rapidly ankle torque changes.
+
+\
+
+#### Statokinesigram Metric ($EA$) {#sec-ea}
+
+While CoP standard deviation assesses the size of postural sway separately along each anatomical direction, the area of the statokinesigram combines the medio-lateral and anterior-posterior excursions into a single global measure of sway size.
+
+The idea is to compute the size of the region containing the CoP samples. Because CoP displacement during quiet standing is irregular, computing the boundary of this region analytically is not straightforward. A practical alternative is to approximate the statokinesigram using a geometric shape and then compute the area of that shape. The question is which shape should be used.
+
+Using a circle or a non-rotated rectangle to approximate the statokinesigram is generally not appropriate. As shown in the left panel of @fig-1-2-7, these shapes may substantially overestimate the region actually occupied by the CoP samples. Rotating a rectangle according to the direction along which CoP displacement is mainly distributed provides a more representative approximation. However, the area is still overestimated, because large empty regions, especially near the corners of the rectangle, are included in the computation.
+
+In 1996, [Oliveira and coworkers](http://dx.doi.org/10.1088/0967-3334/17/4/008) @oliveira96 proposed a statistical approach to compute the area of the statokinesigram. The method is based on identifying two principal axes defining an ellipse that contains a large fraction of the CoP samples. An example is provided in the right panel of @fig-1-2-7. Compared with circular or rectangular approximations, the ellipse adapts both to the orientation and to the anisotropy of the CoP cloud.
+
+![Different approaches for computing the CoP area. The left panel compares circular and rectangular approximations, whereas the right panel illustrates the elliptic area based on the principal axes of CoP displacement.](/include/images/part_1/ch_2/1-2-7_cop-areas.png){#fig-1-2-7 width=100%}
+
+The statistical ellipse is obtained from the covariance matrix of the CoP samples:
+
+$$
+\Sigma =
+\begin{pmatrix}
+\sigma_x^2 & \sigma_{x,y} \\
+\sigma_{y,x} & \sigma_y^2
+\end{pmatrix},
+$$
+
+where $\sigma_x^2$ and $\sigma_y^2$ are the CoP variances in the medio-lateral and anterior-posterior directions, respectively, and $\sigma_{x,y}=\sigma_{y,x}$ is the covariance between CoP positions in the two directions.
+
+The eigenvalues of this covariance matrix, denoted by $\lambda_1$ and $\lambda_2$, define the variance of the CoP samples along the two principal axes of the ellipse. They are computed as:
+
+$$
+\lambda_{1,2} = \frac{\sigma_x^2 + \sigma_y^2}{2}
+\pm
+\sqrt{\left(\frac{\sigma_x^2 - \sigma_y^2}{2}\right)^2 + \sigma_{x,y}^2}.
+$$
+
+:::{.callout-note title="Variance, covariance, and eigenvalues"}
+*The concepts of variance and covariance will be addressed in more detail later in the course. They are introduced here only to explain how the major and minor axes of the ellipse are computed from the statokinesigram.*
+:::
+
+The square roots of the eigenvalues provide the standard deviations of the CoP distribution along the principal axes of the ellipse. Following the convention represented in @fig-1-2-7, the semi-axis lengths are obtained by multiplying these standard deviations by 1.96:
+
+$$
+a = 1.96\sqrt{\lambda_1}
+$$
+
+and
+
+$$
+b = 1.96\sqrt{\lambda_2},
+$$
+
+where $a$ and $b$ are the semi-major and semi-minor axes of the ellipse, respectively. The elliptic area is then computed as the area of an ellipse:
+
+$$
+EA = \pi ab = \pi1.96^2\sqrt{\lambda_1\lambda_2}
+$$ {#eq-copea}
+
+The elliptic area provides a compact descriptor of the global spatial dispersion of CoP samples. Larger values indicate that the CoP explored a larger region of the support surface during quiet standing. In this sense, $EA$ complements the stabilogram metrics: while $\sigma_x$, $\sigma_y$, $v_x$, and $v_y$ describe sway separately along each anatomical direction, $EA$ summarizes the overall size of the statokinesigram in the horizontal plane.
+
+:::{.callout-note title="Why 1.96?"}
+*As will become clear later in the course, the factor 1.96 corresponds to the 95% confidence interval of a normally distributed variable. Multiplying the principal-axis standard deviations ($\sqrt{\lambda_1}$ and $\sqrt{\lambda_2}$) by 1.96 therefore defines the major and minor axes of a 95% confidence interval.*
+
+*Because both directions are considered simultaneously, the resulting ellipse encloses approximately 85% of the CoP samples @oliveira96.*
+:::
+
+\
+
+## From Theory to Practice (Smart Posture)
+
+At this point, we have developed an understanding of what postural sway is and how it can be quantified from CoP measurements. This information provides the basis for studying the physiology of postural control under a wide range of conditions, including motor training, environmental perturbations, pathological conditions, and quiet standing. Likewise, factors not directly related to the physiology of postural control can also be investigated, such as intention @stoffregen00, stabilometric trial duration @carpenter01, and anthropometric characteristics @chiari02.
+
+Although this course is not about posture control itself, stabilometry provides an excellent experimental paradigm for learning the principles of experimental design and statistical inference. Throughout the course, postural sway measurements will serve as the experimental data upon which the inferential methods introduced in later chapters will be applied. Consequently, data collection constitutes a fundamental component of the learning experience.
+
+:::: {.columns}
+::: {.column width="60%"}
+![](/include/images/part_1/ch_2/1-2-8_smart-posture.png)
+:::
+::: {.column width="3%"}
+:::
+::: {.column width="37%"}
+Because collecting stabilometric trials from every student using a laboratory-grade force plate would be impractical, postural sway data will be collected using the inertial sensors embedded in modern smartphones.
+:::
+::::
+
+Unlike force plates, smartphones do not provide direct measurements of the CoP. Instead, they record body accelerations and angular velocities, from which orientation-related signals can be derived. For the purposes of this course, these signals will be assumed to provide a meaningful representation of postural sway, allowing students to collect, analyze, and interpret experimental data using readily available technology.

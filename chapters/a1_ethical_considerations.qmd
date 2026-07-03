@@ -1,0 +1,16 @@
+# Ethical Considerations {#sec-a1}
+
+As part of the laboratory activities, students will collect experimental data on human posture control using their own smartphones (PhyPhox ad hoc developed application).
+
+The activity is designed exclusively for educational purposes and does not constitute research involving human subjects.
+
+To ensure compliance with ethical standards and data protection regulations (GDPR), the following principles apply:
+
+- **Voluntary participation**: Students may opt out of personal data collection without any academic penalty. Alternative datasets will be provided.
+- **Data anonymization**: No personally identifiable information will be collected. Data will be recorded and analyzed in anonymized or pseudonymized form.
+- **Purpose limitation**: Data will be used solely for teaching activities within the course and will not be used for research or publication without prior ethical approval and explicit consent.
+- **Data minimization**: Only data strictly necessary for the learning objectives will be collected.
+Use of personal devices: Students will use their own smartphones; no additional personal data beyond the experimental measurements will be accessed or stored.
+- **Safety considerations**: The experimental protocol involves low-risk tasks (quiet standing). Students will be instructed to perform the activity in safe conditions and may refrain from participation if they have any condition affecting balance or safety.
+
+*All activities are conducted in accordance with institutional guidelines and applicable European data protection regulations.*

@@ -1,0 +1,1315 @@
+# Population, Sample, and Data Distribution {#sec-ch3}
+
+In the previous chapters, we dealt with the different study designs and with how to communicate data in the most effective way. These two aspects are pivotal when conducting a well-design experiment in biomedical sciences. But what is the main reason for conducting an biomedical experiment? With no doubt, the answer is to generalize.
+
+As a concrete example of the importance of generalization, consider the outbreak of COVID-19 virus in 2020. In an attempt to prevent infection, researchers developed a new COVID-19 vaccine, which effectiveness would need to be tested in a well-designed study. A [randomized controlled trial](#sec-rct) was therefore conducted, whereby 40,000 participants around the world were recruited and allocated (1:1 ratio) into a [control group](#sec-placebo-control) (placebo)---receiving saline injection---and an intervention group---receiving the new vaccine. The primary endpoint was laboratory-confirmed symptomatic COVID-19 infection after a period following injections. Two outcomes were possible---COVID-19 infection or no infection. Suppose that 50 cases of infection were registered in the intervention group (0.25% risk of infection) against 1,000 in the control group (5% risk of infection), yielding an estimated efficacy of about 95%. **The thing is that this result was observed for a sample of subjects**.
+
+:::{.callout-important title="Importance of Generalization"}
+*Generalization would allow to translate the results of this hypothetical study to the real world. Does the 95% COVID-19 vaccine efficacy extend to the broad population?*
+:::
+
+:::{.callout-note title="COVID-19 vaccine study"}
+*The example provided above was fictitious. For a concrete example on a RCT study to test the efficacy of a COVID-19 vaccine check e.g. [Polack et al](https://www.nejm.org/doi/full/10.1056/NEJMoa2034577) @polack20.*
+:::
+
+Generalization relies on **Probabilities**. 
+
+Even if the COVID-19 vaccine study exemplified above had been well-designed, in principle, it is possible that the observed difference in the number of infection cases between control and intervention group was due to **random variation**. It is not possible to model the vaccine effect, as there would be infinite possibilities for that. It is however possible to model the absence of an effect. That is, generalization is achieved by addressing the question:
+
+> *If the vaccine had no real effect, what is the probability of observing a difference as large as that observed just by chance?*
+
+**Inferential statistics**---a concept to be dealt with later in this course---provides the formal tools for addressing this question. **Probability** justifies the inference, that is, it provides the foundation for quantifying uncertainties.
+
+<!-- \ -->
+
+<!-- ## Intuition About Probability-Driven Inference -->
+
+<!-- TODO -->
+
+\
+
+## Probability
+
+In @sec-exp-design, an **experiment** was defined as a set of procedures conducted to test a hypothesis. These procedures are replicated over a number of individuals, with each replication termed a **trial**—*a single run of an experiment, conducted with the goal of collecting data*. For each trial there is an associated **outcome**, with different examples mentioned in previous chapters (e.g. the response to a drug treatment, height, patient activation measure, and the many stabilometric descriptors shown in @tbl-3-2-3).
+
+Trials are often (or should be) **independent**, which means that the probability of a given outcome remains the same regardless of the outcomes of previous trials.
+
+The most classical example to illustrate this concept is that of flipping a coin. Only two outcomes are possible—heads or tails. The outcome of a coin toss is governed by physics (initial force, air resistance, landing surface, etc.). If these factors do not systematically favor one of the two outcomes, the coin is said to be *fair*. In this case, due to the symmetry between the two possible outcomes and the absence of bias in the tossing mechanism, the probability of observing either outcome is 50%.
+
+To assess this probability in practice, repeated trials (coin tosses; @fig-3-3-1) can be performed and the probability of obtaining tails can be **estimated** by computing its relative frequency:
+
+$$
+\hat{P}(A)=\frac{\text{\# of outcomes } A}{\text{\# of trials}}
+$$ {#eq-probability}
+
+In the coin tossing example, outcome $A$ corresponds to observing a tail. The value given by Equation @eq-probability is not the true probability, but an empirical estimate that depends on the number of trials performed.
+
+The number of trials changes between the experiments shown in @fig-3-3-1:
+
+- **First experiment:** the coin is tossed 50 times and the outcome tails is observed 30 times, yielding an estimated probability of 60.0% ($\hat{P}(\text{tails})=\frac{30}{50}=0.6$).  
+- **Second experiment:** the coin is tossed 400 times and the outcome tails is observed 213 times, yielding an estimated probability of 53.3% ($\hat{P}(\text{tails})=\frac{213}{400}=0.533$).
+- **Third experiment:** the coin is tossed 1000 times and the outcome tails is observed 497 times, yielding an estimated probability of 49.7% ($\hat{P}(\text{tails})=\frac{497}{1000}=0.497$).
+
+![Three experiments run to assess the probability of obtaining tails in coin tosses](/include/images/part_3/ch_3/3-3-1_coin-tosses.png){#fig-3-3-1 width=90%}
+
+It is important to note that the **true probability does not change** across experiments; instead, the *estimate* of the probability varies depending on the number of trials performed. As the number of trials increases, the estimate becomes more stable and tends to approach the true probability.
+
+This idea is formalized by the **law of large numbers**, which states that the relative frequency of an outcome converges to its probability in the long run:
+
+$$
+P(\text{tails}) = \lim_{n \to \infty} \frac{\text{\# of tails in } n \text{ tosses}}{n}
+$$
+
+Although the probability of observing an exact proportion (e.g. exactly 50% tails) in a finite number of trials may be small, the probability of observing a proportion *close* to 50% becomes very large as the number of trials increases.
+
+:::{.callout-important title="Number of Trials"}
+*The smaller the number of trials, the less likely the observed relative frequency reflects the true probability of an outcome. In biomedical sciences, the number of trials is often limited to the number of individuals assessed. Understanding the notions of probability, population, and sample is therefore crucial for generalizing the results of a study.*
+:::
+
+\
+
+### Definitions and Rules
+
+In what follows, probabilities will be interpreted as observed (empirical) frequencies. For simplicity of notation, these probabilities will be denoted by $P()$ instead of $\hat{P}()$. Given that probabilities are inferred from observed frequencies, the tables below illustrate probabilities for two biomedical examples—disease severity and treatment received (@tbl-3-3-1) and level of blood glucose by sex (@tbl-3-3-2).
+
+From a first inspection, a clear difference between both tables emerges. The first table shows counts—the number of observations per condition. The second table shows proportions—the number of observations per condition relative to the total number of observations across all conditions. That is, the second table (@tbl-3-3-2) shows relative frequencies.
+
+:::: {.columns .small-text}
+::: {.column .dataTable-wrapper width=47.5%}
+```{r}
+#| echo: false
+#| label: tbl-3-3-1
+#| tbl-cap: Disease severity by treatment 
+
+# Create data
+df1 <- data.frame(
+  "Severity<br>level" = c("Mild", "Moderate", "Severe", "Total"),
+  "Treat. A (#)" = c(1200, 1100, 700, 3000),
+  "Treat. B (#)" = c(900, 1200, 900, 3000),
+  "Total" = c(2100, 2300, 1600, 6000),
+  check.names = FALSE
+)
+
+# Datatable
+datatable(
+  df1,
+  escape = FALSE,
+  rownames = FALSE,
+  options = list(
+    scrollX = TRUE,
+    dom = 't',
+    ordering = FALSE
+  )
+) %>%
+  formatStyle(
+    'Severity<br>level',
+    fontWeight = styleEqual("Total", "bold")
+  )
+```
+:::
+::: {.column width=5%}
+
+:::
+::: {.column width=47.5%}
+```{r}
+#| echo: false
+#| label: tbl-3-3-2
+#| tbl-cap: Blood glucose level and gender
+
+# Create data
+df2 <- data.frame(
+  "Glucose<br>Category" = c("Normal", "Prediabetes", "Diabetes", "Total"),
+  "Males" = c(0.325, 0.110, 0.065, 0.500),
+  "Females" = c(0.325, 0.110, 0.065, 0.500),
+  "Total" = c(0.650, 0.220, 0.130, 1.000),
+  check.names = FALSE
+)
+
+# Datatable
+datatable(
+  df2,
+  colnames = c("Glucose<br>level", "Males (♂)", "Females (♀)", "Total"),
+  escape = FALSE,
+  rownames = FALSE,
+  options = list(
+    scrollX = TRUE,
+    dom = 't',
+    ordering = FALSE
+  )
+) %>%
+  formatRound(c("Males", "Females", "Total"), digits = 3) %>%
+  formatStyle(
+    'Glucose<br>Category',
+    fontWeight = styleEqual("Total", "bold")
+  )
+```
+:::
+::::
+
+\
+
+#### Outcomes and Events
+
+Based on @tbl-3-3-1, a **single trial** consists of observing one patient and recording their disease severity. The **experiment** consists of repeating this process across patients. The outcome of each trial can be *Mild*, *Moderate*, or *Severe*. The probability of a given outcome, for example *having Moderate severity disease*, is given by:
+
+$$
+P(\text{Moderate})=\frac{2300}{6000}=`r round(df1$Total[2]/df1$Total[4],3)`
+$$
+
+For @tbl-3-3-2, the **experiment** consists of observing subjects and recording their glucose level and sex, with each **trial** being one such observation. The outcome of each trial can be *Normal*, *Prediabetes*, or *Diabetes*. The probability of having a Normal glucose level is given by:
+
+$$
+P(\text{Normal})=`r df2$Total[1]`
+$$
+
+An **event** is defined as a set of outcomes (including possibly a single outcome). Based on @tbl-3-3-2, there are six possible outcomes for glucose level and sex, with their respective probabilities:
+
+- $I_1$: ♀ with Normal glucose level ($P(I_1)=0.325$)
+- $I_2$: ♀ with Prediabetes ($P(I_2)=0.110$)
+- $I_3$: ♀ with Diabetes ($P(I_3)=0.065$)
+- $I_4$: ♂ with Normal glucose level ($P(I_4)=0.325$)
+- $I_5$: ♂ with Prediabetes ($P(I_5)=0.110$)
+- $I_6$: ♂ with Diabetes ($P(I_6)=0.065$)
+
+:::{#sec-axiomsp}
+:::{.callout-important title="Axioms of probability"}
+- **First**, *probability is a non-negative real number: $P(I_i)\ge0, \forall i$.*
+- **Second**, *the probability of the **sample space** ($\Omega$)^[*the set of all possible outcomes*] is $P(\Omega)=1$.*
+- **Third**, *if events are mutually exclusive (i.e., they cannot occur simultaneously), the probability that at least one occurs is the sum of their probabilities. For example, since a subject cannot be classified as both Normal and Prediabetes at the same time:*
+
+$$
+P(I_1 \cup I_2 \cup I_4 \cup I_5)=P(I_1)+P(I_2)+P(I_4)+P(I_5)=0.87
+$$
+:::
+:::
+
+\
+
+#### Multiplication Rule {#sec-mrule}
+
+The **multiplication rule** can be used to assess the independence of events. 
+
+**Events are independent** *if the occurrence of one event does not affect the probability of the other event occurring*. If two events are independent, according to the multiplication rule, the probability of both occurring is given by the product of their individual probabilities. 
+
+Could being male, for example, affect the probability of being diagnosed with Normal glucose level? That is, are these two events dependent? Based on the data in @tbl-3-3-2, the two events are independent and so the answer to this question is no:
+
+$$
+P(I_4)=P(\text{Normal} \cap ♂)=0.325=P(♂)\times P(\text{Normal})
+$$
+
+Another possibility for reasoning about independence would be: given that event A happened, does it make it more (or less) likely for event B to occur? Framed with the example of @tbl-3-3-2, knowing that a subject is male, would it affect the occurrence of being diagnosed with Normal glucose level? Alternatively, does the probability of being diagnosed as Normal change given the subject assessed is male? Mathematically, this question is equivalent to asking whether: 
+
+$$
+P(\text{Normal})\ne P(\text{Normal}\mid ♂)
+$$
+
+This probability is the **conditional probability**. It reads *the probability of being diagnosed as Normal given the subject is male*. 
+
+The answer to the question is no. The two probabilities are equal and so the two events (being male and being diagnosed with Normal blood glucose) are independent:
+
+$$
+P(\text{Normal})=`r df2$Total[1]`=\frac{0.325}{0.500}=P(\text{Normal}\mid ♂)
+$$
+
+In summary, for any two events, let us say $A$ and $B$, regardless of whether they are independent or not, the probability of both occurring concurrently is given by:
+
+$$
+P(A \cap B)=P(A\mid B)P(B)=P(B\mid A)P(A)
+$${#eq-mrule}
+
+If events $A$ and $B$ are independent, $P(A\mid B)=P(A)$ just as $P(B\mid A)=P(B)$, and so @eq-mrule becomes:
+
+$$
+P(A\cap B)=P(A)P(B)
+$${#eq-mrule-ind}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-1_multiplication-rule.md")
+```
+:::
+
+\
+
+#### Addition Rule {#sec-arule}
+
+The third axiom of probability defined [above](#sec-axiomsp) applies to **mutually exclusive events**---*that is, events that cannot occur concurrently*. Indeed, any subject, male or female, cannot be diagnosed with Normal AND Prediabetes glucose level at the same time. 
+
+According to the **addition rule**, the probability that at least one out of two or more mutually exclusive events occurs is given by the sum of their individual probabilities. 
+
+The addition rule can be applied, for example, to compute the probability that a subject has a Normal glucose level, regardless of sex. The event of interest is given by two mutually exclusive events, $I_1$ and $I_4$, with the relative probability being:
+
+$$
+P(I_1 \cup I_4)=P(I_1)+P(I_4)=0.65
+$$
+
+The addition rule applies to non-mutually exclusive events as well, after accounting for their simultaneous occurrence. For example, based on @tbl-3-3-2, let us consider the probability $P(♀ \cup \text{Diabetes})$, that the subject recruited is female or is classified as Diabetes glucose level. These two events are not mutually exclusive, because a subject can be both female and classified as having Diabetes glucose level. Therefore, simply adding their probabilities would count their simultaneous occurrence twice. To avoid this double counting, the probability of the joint event must be subtracted:
+
+$$
+P(♀ \cup \text{Diabetes})=P(♀)+P(\text{Diabetes})-P(♀ \cap \text{Diabetes})
+$$
+
+Using the values from @tbl-3-3-2:
+
+$$
+P(♀ \cup \text{Diabetes})=0.500+0.130-0.065=0.565
+$$
+
+In summary, for any two events, let us say $A$ and $B$, the addition rule is given by:
+
+$$
+P(A \cup B)=P(A)+P(B)-P(A \cap B)
+$${#eq-arule}
+
+If events $A$ and $B$ are mutually exclusive, then $P(A \cap B)=0$, and so the expression simplifies to:
+
+$$
+P(A \cup B)=P(A)+P(B)
+$${#eq-arule-me}
+
+\
+
+#### Marginal and Joint Probabilities
+
+The tables above also allow us to distinguish between **joint** and **marginal** probabilities. A **joint probability** refers to the probability of two events occurring simultaneously. 
+
+For example, based on @tbl-3-3-2, the probability that a subject is male *and* has a Normal glucose level is given by
+
+$$
+P(\text{Normal} \cap ♂)=0.325
+$$
+
+Similarly, from @tbl-3-3-1, the number of subjects with Moderate severity receiving Treatment B (1200 out of 6000) can be interpreted as the joint probability
+
+$$
+P(\text{Moderate} \cap \text{Treat B})
+$$
+
+A **marginal probability**, on the other hand, refers to the probability of a single event, irrespective of the outcome of other variables. These probabilities are obtained from the margins (totals) of the table. 
+
+For example, the probability of being male is given by 
+
+$$
+P(♂)=0.500
+$$
+and the probability of having a Normal glucose level is 
+
+$$
+P(\text{Normal})=0.650
+$$
+
+In @tbl-3-3-1, the probability of Moderate severity regardless of treatment is 
+
+$$
+P(\text{Moderate})=\frac{2300}{6000}=`r round(df1$Total[2]/df1$Total[4],3)`
+$$
+
+Joint and marginal probabilities are closely related. Marginal probabilities can be obtained by summing joint probabilities across the levels of another variable. For example:
+
+$$
+P(\text{Normal}) = P(\text{Normal} \cap ♂) + P(\text{Normal} \cap ♀)
+$$
+which, based on @tbl-3-3-2, gives $0.325 + 0.325 = 0.650$.
+
+:::{.callout-note title="Relationship between marginal and joint probabilities, and rules"}
+*In summary, joint and marginal probabilities play a central role in defining relationships between events.*
+
+*If events are independent, the joint probability is given by the product of their marginal probabilities (@eq-mrule-ind).*
+
+*If events are mutually exclusive, the probability that at least one of them occurs is given by the sum of their marginal probabilities (@eq-arule-me).*
+:::
+
+\
+
+## Sample and Population
+
+Generalization is the main concept opening this chapter. Generalization is important because any clinically relevant hypothesis, in general, cannot be tested on all target subjects, but only on a subset of subjects (@fig-3-3-2). It is therefore crucial to determine whether the results of a study conducted on a subset of subjects generalizes to a much larger set of subjects. 
+
+*The subset defines the* **sample of study***, which is selected to be representative of the* **population***, a large set of experimental units (patients, subjects, motor units, cells, etc) sharing a common feature.* 
+
+![Sample is a subset of individuals recruited from a large set of individuals sharing common features.](/include/images/part_3/ch_3/3-3-2_sample-vs-population.png){#fig-3-3-2 width=90%}
+
+The process of selecting a subset of subjects (a sample) out of the larget set of candidates (populations) is termed **sampling**. Here are some benefits of sampling:
+
+1. *Samples can be studied more quickly than entire population*: the procedure of data collection and analysis can be conducted faster with small samples. 
+2. *Studying the entire population is often impractical or impossible*: sometimes it is possible, but usually too costly or slow.
+3. *It is more economically affordable to study a sample than the population*: fewer resources, in terms of equipment and people, are needed.
+4. *Possibly against intuition, more accurate results can be obtained with samples*: as fewer observations are involved, more resources can be devoted to each measurement, improving data quality.
+5. *With probability sampling, uncertainty in results can be quantified*.
+
+\
+
+### Sampling Methods
+
+In experimental design, generalization is achieved by **inference**, as *broad conclusions about the population are drawn based on the results obtained from a sample*. A key point is whether the sample recruited represents the population. If this is not the case, inferences would be of limited validity. This leads into the concept of how selecting individuals out of the population. 
+
+Two main branches emerge for the selection of individuals, based mainly on when selection is arbitrary or random.
+
+\
+
+#### Non-probability Sampling
+
+With this sampling method, individuals are recruited arbitrarily and not randomly. It is therefore not possible to know the probability with which any individual may be selected and to estimate errors. @fig-3-3-3 illustrates three different selection methods based on non-probability sampling:
+
+- **Convenience Sampling**: people are selected based on convenience (e.g. easiest to reach).
+- **Snowball Sampling**: participants are in charge of recruitment. The first (seed) participant starts the process, recruiting other participants (wave 1) that, in turn, recruit others (wave 2), creating the snowball effect. 
+- **Quota Sampling**: subjects are recruited based on convenience, after however the population has been split into groups (based on sex, age, etc) and the number of people per group (i.e., the quota) has been defined.
+
+![Non-probability sampling methods (AI-generated illustration created with ChatGPT (OpenAI), 2026).](/include/images/part_3/ch_3/3-3-3_nonprobability-sampling.png){#fig-3-3-3 width=90%}
+
+Non-probability sampling methods offer the most practical approach to recruiting a sample, in terms of time, cost and tools required. However, the selected sample is likely to be influenced by the experimenter and to do not represent the population (**selection bias**).
+
+\
+
+#### Probability Sampling
+
+With this sampling method, *each individual has a known, non-zero probability of being selected*. The probability of recruiting each invidual may not be the same, according to the **probability sampling method** used for selected. To explain this concept, as well as some of the methods used for probability sampling, consider the following hypothetical example.
+
+A biomedical researcher wishes to apply for a grant proposal to test the hypothesis that the hippocampal volume changes with age. Hippocampal volume refers to the size of the hippocampus---a small, curved structure in the brain that plays a central role in the management of memories. The researcher plans to measure the hippocampal volume from MRI scans already available.
+
+:::{.callout-important title="Example: the biomedical researcher needs to"}
+- *select a sample of brain MRI scans from the 2,700 scans acquired at a memory clinic over the past year.*
+- *evaluate the hippocampal volume on the selected scans.*
+- *compare the measured volume between subjects of different age.*
+
+*Based on notions that will be dealt with later in the course, the biomedical research determines that a sample of 180 scans should be sufficient to estimate the effect of age on hippocampal volume.*
+:::
+
+Three probability methods can be methods used for the selection of the 180 scans, as detailed in the following sections.
+
+\
+
+##### Simple Random Sampling {#sec-srsampling}
+
+With this method, each individual has the same probability of being selected. 
+
+Sampling is to be made **without replacement**, *meaning that after a scan is selected it is not considered for following selections* (i.e., a scan can be selected only once). There is a very large number of samples of size $n=180$ scans that could be selected out of the $N=2,700$ scans available. Most importantly, each of the $\binom{n}{N}$ samples has the same probability of occurrence.
+
+:::{style="font-size: 85%;"}
+```{r echo=FALSE, results='asis'}
+n <- 180
+N <- 2700
+k <- N/n
+kni <- round((N-50)/n,1)
+set.seed(80)  # for reproducibility
+start <- sample(1:k, size = 1, replace = FALSE)
+exams2forms("../include/exercises/3-3-2_simple-random-sampling.md")
+```
+:::
+
+Either a table of random numbers or computer programs could be used to randomly select the $n=180$ scans. The latter is the most popular approach for extracting the desired sample of 180 random scans. One option for doing that in **R** would be:
+
+```{r}
+#| results: FALSE 
+set.seed(80)  # for reproducibility
+scans_ids <- sample(1:2700, size = 180, replace = FALSE)
+```
+
+The [sample](https://rdrr.io/r/base/sample.html) function uses an algorithm for generating the 180 *random* numbers required, with the [set.seed](https://rdrr.io/r/base/Random.html) determining the starting point of the algorithm. That is, by setting a seed the 180 random numbers generated will be always the same (the same 180 numbers generated here would be generated in any other computer by setting seed to 80).
+
+:::{.callout-note title="Examples of how to use R"}
+*Except for the code above, no tips are provided in this book about how to use R and RStudio for creating graphs and for conducting the statistical analyses.*
+
+*During the laboratory exercises, running in parallel with the classroom teaching, students will gradually get acquainted with the use of the R programming language in experimental design.*
+:::
+
+\
+
+##### Systematic Sampling
+
+With this method, all members of the population are put in a list. For the MRI scan example, the list would go from 1 to 2,700. Starting from any random number, at a given $k$ step the 180 desired scans are selected in sequence, systematically. Let's apply this method for the selection of 180 scans, in three steps:
+
+- Compute the step size based on the ration between the population and sample size: $k=N/n=2700/180=`r N/n`$.
+- Define the starting point as any number among the first $k=`r k`$ scans. The R code above could be used for that, starting at scan # $`r start`$.
+- Compose the sample by taking every $k$ member in the list from the starting point.
+
+@fig-3-3-4 (left panel) shows a schemtic example of systematic sampling for $k=4$ with the random start at subject 3. For the MRI scan example, the three steps above would result in the selection of scans $\{`r start`, `r start+k`, ..., `r start + (n-1)*k`\}$
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-3_systematic-sampling.md")
+```
+:::
+
+\
+
+![Two probability sampling methods (AI-generated illustration created with ChatGPT (OpenAI), 2026).](/include/images/part_3/ch_3/3-3-4_probability-sampling.png){#fig-3-3-4 width=90%}
+
+\
+
+##### Stratified Sampling
+
+The right panel of @fig-3-3-4 above illustrates the stratified sampling method. It consists of applying the [simple random sampling](#sec-srsampling) method after the population has been divided into **strata** (subpopulations). More specifically, simple random sampling is applied to recruit subjects for each **stratum** separately. 
+
+The point is deciding whether it is relevant to stratify. Considering the example of the hippocampal size evaluation, this would likely seem the case. Given the hypothesis to be tested, that hippocampal volume depends on age, it would seem appropriate to ensure a given number of scans is assessed for different age groups. In this case the total sample size would still be $n=`r n`$, but the number of scans per group would be a fraction of that, depending on the number of strata considered. Without stratification, it would not be possible to ensure the equal representation of different age groups.
+
+:::{.callout-note title="Definition of strata"}
+*In the example above, groups were defined based on age. Any other variable could be considered for stratification, like sex, disease severity, expertise, etc.*
+:::
+
+\
+
+### External vs Internal Validity
+
+Any study relying on probability sampling, as discussed in the previous section, is more likely to achieve high **external validity**. That is, *the results of the study are more likely to be generalizable from the sample to the target population*. However, generalizability should not be confused with causal validity: results may generalize well and still be biased.
+
+For example, patients to be tested for the effect of a new drug may be randomly selected from the population of all eligible patients attending hospitals in a city. After recruitment, these patients must be assigned either to a placebo-control group (receiving a dummy drug) or to an intervention group (receiving the new drug). This assignment should also be random.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-4_internal-validity.md")
+```
+:::
+
+The answer to this question relates to **internal validity**---that is, the extent to which the observed effect of a treatment can be attributed to the treatment itself, rather than to other factors. Random assignment helps ensure that, on average, the groups are comparable, thereby reducing bias in the estimated treatment effect.
+
+For example, if the new drug were administered primarily to healthier patients, any observed benefit might be due to their better baseline health rather than the drug itself. In this case, the estimated effect of the treatment would be biased.
+
+\
+
+### Target and Sampled Population {#sec-target-pop}
+
+The definition of a population is study dependent. @fig-3-3-5 illustrates the different layers defining populations for an asthma study. The following example reframes this concept within a sport science context.
+
+Suppose a boat company wishes to assess how effective a newly developed rigger is, expecting it to improve boat speed for a given rowing power. Testing this hypothesis on novice rowers would not be appropriate. The boat adaptation is expected to benefit elite rowers in general—this broader group can be viewed as the **overall population of interest**.
+
+However, the boat company is primarily interested in contributing to the performance of national rowers. Therefore, the **target population** is restricted to elite rowers of the country in which the company operates.
+
+In practice, it is not feasible to test all individuals in the target population. Instead, only elite rowers residing in nearby towns may be considered for recruitment—this defines the **accessible population**.
+
+Finally, not all eligible athletes will participate, and resource constraints may further limit recruitment. The subset of individuals who are actually included in the study constitutes the **sample**.
+
+![From the whole (population) to the part (sample)](/include/images/part_3/ch_3/3-3-5_target-and-sample-population.png){#fig-3-3-5 width=80%}
+
+\
+
+## Random Variables
+
+A **random variable** is a function that assigns a numerical value to each outcome in a sample space. Most variables encountered in biomedical studies can be modeled as random variables. Anthropometric measures, conduction velocity of muscle fibers, mean heart rate, body temperature, blood pressure, and diagnostic test results are common examples.
+
+The term **variable** reflects the fact that repeated measurements on different subjects may yield different values. The term **random** indicates that the observed value is uncertain, although it follows a **probability distribution**, some of which are illustrated in the following section.
+
+Consider the sample space ($\Omega$) associated with three coin tosses:
+
+$$
+\Omega = \{hhh, hht, hth, htt, thh, tht, tth, ttt\}
+$$
+
+where $h$ and $t$ denote heads and tails, respectively.
+
+Different random variables ($X$) can be defined on $\Omega$, for example:
+
+- total number of heads  
+- total number of tails  
+- number of heads minus number of tails  
+- getting head in the second throw  
+- ... others  
+
+Consider the random variable $X$, defined as the total number of heads. For each outcome in $\Omega$, $X$ takes the values:
+
+$$
+\{3,2,2,1,2,1,1,0\} \implies X \in \{0,1,2,3\}
+$$
+
+Thus, $X$ assigns a real number to each outcome in $\Omega$. Since the outcome itself is random, the value of $X$ is also random.
+
+What is the probability of observing each possible value of $X$? If the coin is fair, each outcome in $\Omega$ occurs with probability $1/8$. Therefore:
+
+- $P(X=0)=1/8$ (one outcome with no heads)  
+- $P(X=1)=3/8$ (three outcomes with one head)  
+- $P(X=2)=3/8$ (three outcomes with two heads)  
+- $P(X=3)=1/8$ (one outcome with three heads)  
+
+Denoting the possible values of $X$ as $x_i$, the probability that $X$ takes a specific value is written as $p(x_i)=P(X=x_i)$, with:
+
+$$
+\sum_i p(x_i)=1
+$$
+
+The function $p(x_i)$ is called the **probability mass function** and describes the probability distribution of a discrete random variable.
+
+:::{.callout-note title="Notation: Random Variables and Observed Values"}
+*In this book, uppercase letters (e.g., $X$, $\overline{X}$) denote **random variables**, while lowercase letters (e.g., $x$, $\overline{x}$) denote their **observed values** in a specific sample.*
+
+*For example, $X_i$ represents a random variable, whereas $x_i$ is the value observed for the $i$-th subject in the sample. Similarly, $\overline{X}$ denotes the sample mean as a random variable, while $\overline{x}$ is its computed value for a given dataset.*
+:::
+
+\
+
+## Frequency and Probability Distributions
+
+A distribution describes how the values of a random variable are allocated in terms of frequency or probability. 
+
+In practice, this can be approached in two ways. When the distribution is constructed from empirical data—based on repeated observations collected during an experiment—it is termed a **frequency distribution**. An example is provided in @fig-3-3-1, showing how many times heads and tails were obtained after tossing a coin 50, 400, and 1,000 times. As the number of trials increases, the relative frequencies of the outcomes tend to stabilize and approximate their underlying probabilities. When probabilities are assigned to outcomes using a theoretical model—often informed by empirical data—this defines a **probability distribution**.
+
+Distributions may be **discrete** or **continuous**. The coin tossing example above illustrates a discrete distribution, as the random variable “total number of heads” ($X$) takes discrete values. In contrast, a random variable may take values over a continuum. For example, $X$ could represent systolic blood pressure, which varies continuously across subjects. In this case, the probability that $X$ takes any exact value is 0, since there are infinitely many possible outcomes. Instead, probabilities are defined over intervals, and the distribution models the probability that $X$ falls within a given range of values.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-5_freq-vs-prob-distributions.md")
+```
+:::
+
+Typically, the probability distribution of a random variable in biomedical science is unknown. These probabilities are estimated from observations over a large number of trials. The following sections illustrate biomedical examples for three probability distributions.
+
+\
+
+### The Binomial Distribution {#sec-binom-dist}
+
+The **Binomial Distribution** applies to **binary outcomes**—a variable taking one of two possible values. Typically, binary outcomes represent opposite states, such as having a pathology or not, being overweight or not, or being infected or not. The Binomial distribution models the number of events when repeated trials with binary outcomes are conducted.
+
+Consider the two possible outcomes to be success ($\text{S}$) or failure ($\text{F}$). The probability associated with success is given by $P(\text{S}) = \pi$, while the probability of failure is $P(\text{F}) = 1 - \pi$. A fixed number $n$ of **independent** trials are performed; independence ensures that the outcome of one trial does not affect the probability of subsequent outcomes.
+
+The total number of successes $X$ is a random variable that follows a Binomial distribution with parameters $n$ and $\pi$. That is, by knowing $n$ and $\pi$, the probability that $X$ takes any integer value from $0$ to $n$ can be determined.
+
+::: {.callout-note title="Binomial Variable"}
+*A Binomial random variable is denoted as*
+$$
+X \sim B(n, \pi), \quad \pi \in [0,1]
+$$
+*where $n$ is the number of trials and $\pi$ is the probability of success.*
+:::
+
+Before working out the **probability mass function** for the Binomial distribution, let's get an intuition for that with a concrete biomedical example.
+
+Consider a study assessing the proportion of patients developing immunity to a virus after vaccination. The study reports that 7,000 out of 10,000 patients developed immunity, resulting in an estimated probability of $\hat{\pi} = p = 0.7$. Based on this estimate, we approximate the probability that a randomly selected vaccinated patient develops immunity as $0.7$.
+
+If three patients are vaccinated, what is the probability, $P(X \geq 2)$, that at least two of them develop immunity?
+
+Let the two possible outcomes be Immune ($I$), Not immune ($V$).
+
+For $n = 3$ patients, the sample space is:
+
+$$
+\Omega = \{III, IIV, IVI, IVV, VII, VIV, VVI, VVV\}
+$$
+
+Assuming independence and using $P(I)=0.7$ and $P(V)=0.3$, the probability of each outcome can be computed using the [multiplication rule](#sec-mrule):
+
+$$
+\begin{aligned}
+P(III) &= 0.7 \times 0.7 \times 0.7 \\
+P(IIV) &= 0.7 \times 0.7 \times 0.3 \\
+P(IVI) &= 0.7 \times 0.3 \times 0.7 \\
+P(IVV) &= 0.7 \times 0.3 \times 0.3 \\
+P(VII) &= 0.3 \times 0.7 \times 0.7 \\
+P(VIV) &= 0.3 \times 0.7 \times 0.3 \\
+P(VVI) &= 0.3 \times 0.3 \times 0.7 \\
+P(VVV) &= 0.3 \times 0.3 \times 0.3
+\end{aligned}
+$$
+
+Since these outcomes are mutually exclusive, we can compute probabilities for the number of immune patients using the [addition rule](#sec-arule):
+
+$$
+\begin{aligned}
+P(X=0) &= P(VVV) = (1)\cdot 0.7^0 \cdot 0.3^3 \\
+P(X=1) &= P(IVV) + P(VIV) + P(VVI) = (3)\cdot 0.7^1 \cdot 0.3^2 \\
+P(X=2) &= P(IIV) + P(IVI) + P(VII) = (3)\cdot 0.7^2 \cdot 0.3^1 \\
+P(X=3) &= P(III) = (1)\cdot 0.7^3 \cdot 0.3^0
+\end{aligned}
+$$
+
+The coefficients $(1)$, $(3)$, $(3)$, and $(1)$ are the **Binomial coefficients**, given by $\binom{n}{k}$, where $n$ is the number of trials and $k$ is the number of successes (i.e., patients immune).
+
+Thus, the general form of the Binomial probability mass function is:
+
+$$
+P(X = k) = \binom{n}{k} \pi^k (1 - \pi)^{n-k}=\frac{n!}{n!(n-k)!}\pi^k (1 - \pi)^{n-k}
+$$ {#eq-binom-pmf}
+
+Finally, based on @eq-binom-pmf, the probability that at least two patients develop immunity in response to vaccination is:
+
+$$
+P(X \geq 2) = \sum_{k=2}^3 P(X=k)=\binom{3}{2} 0.7^2 \times 0.3^1 + \binom{3}{3} 0.7^3 = `r sum(dbinom(2:3, size = 3, prob = 0.7))`
+$$
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-6_binomial.md")
+```
+:::
+
+\
+
+### The Poisson Distribution
+
+Like the Binomial distribution, the **Poisson distribution** is a discrete probability distribution. While the Binomial distribution models the number of successes in a fixed number of trials, the Poisson distribution models the number of events occurring within a given interval of time or space.
+
+The Poisson distribution is defined by a single parameter, $\lambda$, representing the average rate at which events occur in the interval. It is commonly used when events occur:
+
+- randomly (i.e., without a deterministic pattern),
+- independently (the occurrence of one event does not influence another), and
+- at a constant average rate over the interval.
+
+The Poisson distribution is particularly useful for modeling counts of relatively rare events in a given interval, and it addresses questions such as: *How many events occur in a fixed period of time?*
+
+Consider an example of interest in health sciences: the number of patient falls per week in a rehabilitation clinic. Let the random variable $X$ denote the number of falls in a given week. Suppose the average rate of falls is $\lambda = 2.0$ per week and that falls occur randomly and independently. What is the probability $P(X > 3)$ of observing more than three falls in a given week?
+
+To answer this question, we use the probability mass function of the Poisson distribution:
+
+$$
+p(k)=P(X=k)=\frac{\lambda^k e^{-\lambda}}{k!}
+$$ {#eq-poisson}
+
+:::{.callout-note title="Poisson Variable"}
+*A Poisson random variable is denoted as*
+$$
+X \sim \text{Poisson}(\lambda)
+$$
+*where $\lambda$ represents the average number of events occurring in a given time interval or spatial region.*
+:::
+
+The probability of observing more than three falls in a week is therefore:
+
+$$
+P(X>3) = 1 - P(X \le 3) = 1 - \sum_{k=0}^{3} \frac{2^k e^{-2}}{k!} \approx `r round(1 - sum(dpois(0:3, 2)), 2)`
+$$
+
+More than three falls are expected in approximately 14% of weeks. Over a year (52 weeks), this corresponds to about $52 \times 0.14 \approx `r round(52*0.14)`$ weeks in which more than three falls may occur.
+
+The value of $\lambda$ used in this example may be estimated from data. For instance, if 104 falls were recorded over the past year, then $\lambda = \frac{104}{52} = 2$. This assumes that the average rate of events remains stable over time, which is a key assumption of the Poisson model.
+
+@fig-3-3-6 provides a comparison of the Binomial and Poisson distributions for different parameter values. As $n\pi$ increases in the Binomial distribution and as $\lambda$ increases in the Poisson distribution, both distributions become more symmetric and bell-shaped, approaching the Gaussian (Normal) distribution.
+
+![Binomial and Poisson distributions for different values of their respective parameters](/include/images/part_3/ch_3/3-3-6_binom-vs-poisson.png){#fig-3-3-6 width=100%}
+
+\
+
+### The Normal Distribution
+
+Later in this course, we will deal with statistical methods for the generalization of results obtained from a sample of subjects to a population—**inferential statistics**. Both parametric and non-parametric methods will be introduced. Most parametric methods discussed in this course rely (either directly or approximately) on the assumption that the **distribution of residuals is Gaussian**, named after the German mathematician Carl Friedrich Gauss. 
+
+This distribution is also known as the **Normal distribution**. Historically, it is so named because many natural phenomena were observed to follow it, rather than because it represents what is “normal” in a general sense.
+
+The **Gaussian (Normal) distribution** is therefore of key importance in experimental design and statistical inference.
+
+:::{.callout-note title="Normal as a reference"}
+*Because of its widespread use in the biomedical literature, hereafter the terminology* **Normal distribution** *will be used.*
+:::
+
+The Normal distribution is characterized by a symmetric, bell-shaped curve. Observations are more likely to occur near the mean ($\mu$), which determines the center of the distribution. Observations farther from the mean become progressively less likely, with the spread of the distribution determined by the standard deviation ($\sigma$).
+
+Unlike the Binomial and Poisson distributions, the Normal distribution is defined over a continuous domain. A random variable $X$ with a Normal distribution can take any real value ($X \in \mathbb{R}$).
+
+For continuous distributions such as the Normal distribution, probabilities are defined over intervals and are described by the **probability density function** $f(x)$. The probability of observing a value in a given interval corresponds to the area under the curve over that interval.
+<!-- FEEDBACK: important conceptual clarification (density ≠ probability at a point) -->
+
+For the Normal distribution, the probability density function is defined as:
+
+$$
+f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}
+$$ {#eq-normal-pdf}
+
+:::{.callout-note title="Normal Variable"}
+*A Normal random variable is denoted as*
+
+$$
+X \sim \mathcal{N}(\mu, \sigma^2)
+$$
+
+*where $\mu$ is the mean and $\sigma^2$ is the variance (with $\sigma$ being the standard deviation).*
+
+
+*Playing with the sliders below, it is possible to explore how both parameters ($\mu$ and $\sigma$) affect the shape of the Normal distribution.*
+:::
+
+:::{.boxed}
+:::: {.columns}
+::: {.column width=25.0%}
+:::{style="font-size: 90%;"}
+By moving the sliders, the values of $\mu$ and $\sigma$ change. 
+
+As $\mu$ respectively increases or decreases, the curve moves left and right. 
+
+As $\sigma$ respectively increases or decreases, the curve becomes more or less spread.
+:::
+:::
+
+::: {.column width=5%}
+
+:::
+
+::: {.column width=70%}
+```{ojs}
+//| echo: false
+
+viewof mu = Inputs.range([-5, 5], {
+  value: 0,
+  step: 0.1,
+  label: tex`\text{mean } (\mu)`
+})
+
+viewof sigma = Inputs.range([0.2, 5], {
+  value: 0.5,
+  step: 0.1,
+  label: tex`\text{st. dev. } (\sigma)`
+})
+```
+
+---
+
+```{ojs}
+//| echo: false
+
+normalPdf = (x, mu, sigma) =>
+  (1 / (sigma * Math.sqrt(2 * Math.PI))) *
+  Math.exp(-0.5 * ((x - mu) / sigma) ** 2)
+
+xs = Array.from({ length: 240 }, (_, i) => -6 + i * 0.05)
+
+curve = xs.map(x => ({
+  x,
+  y: normalPdf(x, mu, sigma)
+}))
+
+Plot.plot({
+  width: 700,
+  height: 600,
+  marginLeft: 100,
+  marginTop: 20,
+  marginBottom: 60,
+  style: {
+    fontSize: 24,   // <-- increase this
+  },
+  x: {
+    domain: [-6, 6],
+    label: "𝑥",
+    labelAnchor: "center",
+    labelOffset: 60
+  },
+  y: {
+    domain: [0, 1.0],
+    label: "𝑓(𝑥)",
+    ticks: 5,
+    labelAnchor: "center",
+    labelOffset: 80,
+    grid: true
+  },
+  marks: [
+    Plot.line(curve, { x: "x", y: "y", strokeWidth: 12, stroke: "lightblue" }),
+    Plot.ruleX([mu], {y1: 0,  y2: 1 / (sigma * Math.sqrt(2 * Math.PI))}),
+    
+    Plot.text(
+      [{x: mu, y: normalPdf(mu, mu, sigma), label: `mu = ${mu.toFixed(1)}, sigma = ${sigma.toFixed(1)}`}],
+      {x: "x", y: "y", text: "label", dy: -30}
+    )
+  ]
+})
+```
+:::
+:::
+::::
+
+\
+
+Probabilities for continuous random variables are computed as areas under the curve of the probability density function (for the Normal distribution, see @eq-normal-pdf). Specifically, the probability that a random variable falls within an interval corresponds to the area under the curve over that interval.
+
+The integral of $f(x)$ defines the **cumulative distribution function (CDF)** $F(x)$, which gives the probability that the random variable $X$ takes a value less than or equal to $x$:
+
+$$
+F(x) = P(X \le x) = \int_{-\infty}^{x} f(u)\, du
+$${#eq-normal-cdf}
+
+For the Normal distribution, the cumulative distribution function does not have a closed-form expression. 
+
+Before the advent of computers, probabilities were therefore obtained using tables printed in textbooks. However, it would be impractical to tabulate values for every possible combination of mean ($\mu$) and standard deviation ($\sigma$). A practical solution is to use a **Standard Normal distribution**, to which any Normal random variable can be transformed.
+
+\
+
+### Standard Normal (z) Distribution {#sec-snd}
+
+The Standard Normal distribution, also known as the Z distribution, allows comparison between Normal random variables with different means and standard deviations. Probabilities for any Normal random variable can be computed from the Standard Normal distribution, since they are related through a linear transformation.
+
+:::{.callout-note title="Standard Normal Variable"}
+*A Standard Normal random variable is denoted as*
+
+$$
+Z \sim \mathcal{N}(0, 1)
+$$
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-7_standard-normal.md")
+```
+:::
+
+A Normal random variable $X$ can be transformed into a Standard Normal variable $Z$ with:
+
+$$
+Z = \frac{X-\mu}{\sigma}
+$$ {#eq-x-z}
+
+This transformation is known as **standardization**.
+
+Conversely, values from the Standard Normal distribution can be transformed back to the original scale:
+
+$$
+X = Z\sigma + \mu
+$$ {#eq-z-x}
+
+@fig-3-3-7 (left panel) illustrates the distribution of systolic blood pressure measured in 1,800 young healthy subjects. The histogram and the superimposed curve suggest that blood pressure is approximately Normally distributed. From this sample, the mean and standard deviation can be estimated:
+
+$$
+X \sim N(\mu=130 \text{ mmHg}, \sigma=12 \text{ mmHg})
+$$ 
+
+After subtracting $\mu$ from $X$ and dividing by $\sigma$ (see @eq-x-z), the resulting standardized variable follows the distribution shown in @fig-3-3-7 (right panel). The shape of the distribution remains unchanged, but the scale is transformed:
+
+$$
+Z \sim \mathcal{N}(0, 1)
+$$
+
+![Examples of Normal distribution (left) and Standard Normal distribution (right)](/include/images/part_3/ch_3/3-3-7_normal-and-standard-normal.png){#fig-3-3-7 width=100%}
+
+\
+
+#### Z-scores and Probabilities
+
+Tables and computer programs can be used to compute probabilities associated with intervals of the Standard Normal distribution. Here, the focus is on the use of computer programs. In *R*, for example, the probability $P(Z < z_s)$ of obtaining a value smaller than a given $z$-score ($z_s \in (-\infty, +\infty)$) can be computed using the [`pnorm`](https://rdrr.io/r/stats/Normal.html) function. 
+
+:::{.boxed #sec-zinteractiveplot}
+:::: {.columns}
+::: {.column width=35.0%}
+By moving the slider, $z_s$ can be selected in the range $(-3.5, 3.5)$.
+
+The probability that $Z$ is smaller than $z_s$ is given by the shaded area in the figure.
+
+```{ojs}
+//| echo: false
+zscore = z.toFixed(1)
+prob_fmt = prob.toFixed(3)
+```
+
+$P(Z <$ `{ojs} zscore` $)=$ `{ojs} prob_fmt` 
+
+:::
+::: {.column width=5%}
+:::
+::: {.column width=60%}
+```{ojs}
+//| echo: false
+viewof z = Inputs.range([-3.5, 3.5], {value: 0,  step: 0.01, label: "z-score (z_s)",  width: "100%",  format: x => x.toFixed(2)})
+```
+
+---
+
+```{ojs}
+//| echo: false
+phi = x => Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI)
+
+erf = x => {
+  const sign = x < 0 ? -1 : 1
+  x = Math.abs(x)
+
+  const a1 = 0.254829592
+  const a2 = -0.284496736
+  const a3 = 1.421413741
+  const a4 = -1.453152027
+  const a5 = 1.061405429
+  const p = 0.3275911
+
+  const t = 1 / (1 + p * x)
+  const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x)
+
+  return sign * y
+}
+
+Phi = x => 0.5 * (1 + erf(x / Math.SQRT2))
+
+prob = Phi(z)
+
+xvals = Array.from({length: 801}, (_, i) => -4 + i * 0.01)
+
+curveData = xvals.map(x => ({x, y: phi(x)}))
+
+shadeData = xvals
+  .filter(x => x <= z)
+  .map(x => ({x, y: phi(x)}))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  width: 700,
+  height: 600,
+  marginLeft: 100,
+  marginTop: 20,
+  marginBottom: 60,
+  style: {
+    fontSize: 24,   // <-- increase this
+  },
+
+  x: {label: "z", domain: [-4, 4], grid: true},
+  y: {label: "𝑓(z)", domain: [0, 0.45], ticks: 5, grid: true},
+  marks: [
+  
+    Plot.areaY(shadeData, {x: "x", y: "y", curve: "natural", fill: "steelblue", fillOpacity: 0.35}),
+    
+    Plot.line(curveData, {x: "x", y: "y", curve: "natural", strokeWidth: 12, stroke: "lightblue"}),
+    
+    Plot.ruleX([z], {y1: 0,  y2: phi(z)}),
+  
+    Plot.ruleY([0]),
+    
+    Plot.text(
+      [{x: z, y: phi(z), label: `z = ${z.toFixed(1)}`}],
+      {x: "x", y: "y", text: "label", dy: -30}
+    )
+  ]
+})
+```
+:::
+::::
+:::
+
+
+\
+
+#### Blood Pressure Examples
+
+\
+
+##### From z-score to Probability
+
+**Considering the blood pressure Normal random variable $X$, with the distribution shown in @fig-3-3-7, what is the probability that a subject has blood pressure above $140 \text{ mmHg}$?**
+
+To address this question, we compute $P(X > 140)$. First, we convert $140 \text{ mmHg}$ into a $z$-score. Knowing that $X \sim \mathcal{N}(130, 12)$, from @eq-x-z we have:
+
+```{r}
+#| echo: false
+
+z_s <- round((140-130)/12,2)
+pz_s <- round(pnorm(z_s),3)
+```
+
+$$
+z = \frac{140 - 130}{12} \approx `r z_s`
+$$
+Then, by setting $z_s$ to $`r z_s`$ in the [interactive plot](#sec-zinteractiveplot) above, we obtain that $P(Z<`r z_s`)=`r pz_s`$. However, this is not the quantity of interest. We are interested in the probability that blood pressure exceeds $140 \text{ mmHg}$:
+
+$$
+P(X>140)=P(Z>`r z_s`)=1-P(Z<`r z_s`)=`r 1-pz_s`
+$$
+There is therefore a 20.3% probability that a subject has blood pressure above $140 \text{ mmHg}$.
+
+\
+
+##### From Probability to z-score
+
+**What are the blood pressure values enclosing 95% of observations around the mean?**
+
+In this case, we aim to determine the range of blood pressure values containing 95% of observations in young healthy subjects.
+
+This requires identifying the lower ($z_l$) and upper ($z_u$) bounds such that:
+
+$$
+P(z_l<Z<z_u)=0.95
+$$
+Because the Standard Normal distribution is symmetric around zero, the remaining 5% of probability is split equally between the two tails:
+
+$$
+P(Z < z_l) = 0.025 \quad \text{and} \quad P(Z > z_u) = 0.025
+$$
+From Standard Normal tables, or from the [interactive plot](#sec-zinteractiveplot) above, we observe that:
+
+$$
+z_l = -1.96 \quad \text{and} \quad z_u = 1.96
+$$
+
+Finally, these $z$-scores are transformed back to the original scale using @eq-z-x:
+
+$$
+\begin{aligned}
+x_l &= \mu + z_l \sigma = 130 + (-1.96)\times 12 = `r 130 - 1.96 * 12` \\
+x_u &= \mu + z_u \sigma = 130 + 1.96 \times 12 = `r 130 + 1.96 * 12`
+\end{aligned}
+$$
+
+Thus, approximately 95% of observations are expected to lie between these two values.
+
+---
+
+\
+
+## Sampling Distribution
+
+Figures -@fig-3-3-6 and -@fig-3-3-7 show examples of distributions obtained from experimental data. These figures illustrate how often values are observed: for discrete variables (Binomial and Poisson distributions, @fig-3-3-6) counts of exact outcomes are reported, whereas for continuous variables (Normal distribution, @fig-3-3-7) frequencies are reported over intervals. *These are distributions of individual observations*.
+
+A **sampling distribution** refers to the distribution of a statistic computed from repeated samples, such as the mean or the standard deviation. If we repeatedly draw samples from a population and compute a statistic (e.g., the sample mean) for every sample, the resulting values will form a distribution—the sampling distribution of that statistic.
+
+@fig-3-3-8 schematically illustrates the difference between the distribution of BMI^[*Body Mass Index* $BMI=\frac{\text{body mass}}{\text{height}^2}$] values for a sample of subjects and the sampling distribution of the mean BMI ($\overline{X}$) computed across many samples.
+
+![Schematic representation of the sampling distribution of the mean. Persons were created with ChatGPT (OpenAI), 2026.](/include/images/part_3/ch_3/3-3-8_bmi-sampling-distribution.png){#fig-3-3-8 width=100%}
+
+Assume the population parameters are $\mu=22.5$ and $\sigma=2.9$. After drawing a sample of size $n_1$ from a population of size $N$, we obtain:
+
+$$
+\overline{x}_{s_1}=21.5 \text{ kg}/\text{m}^2
+$$
+
+where $\overline{x}_{s_1}$ denotes the sample mean for the first sample. A second sample of size $n_2$ yields $\overline{x}_{s_2}=22.8$, and a $k$-th sample of size $n_k$ yields $\overline{x}_{s_k}=23.1$. Thus, each sample produces a different mean.
+
+@fig-3-3-8 (right panel) illustrates the distribution of these sample means. The values are concentrated around the population mean ($\mu = 22.5$), forming an approximately symmetric, bell-shaped distribution. This suggests that the **sampling distribution of the mean is approximately Normal**, with mean equal to the population mean and a standard deviation that, as discussed below, depends on the sample size.
+
+\
+
+### The Central Limit Theorem {#sec-clt}
+
+The **Central Limit Theorem** states that, under fairly general conditions, the distribution of the sample mean of independent and identically distributed random variables approaches a Normal distribution as the sample size increases. The sample mean, computed from independent observations (e.g. different subjects), is itself a random variable. As the sample size becomes sufficiently large, the sampling distribution of the mean becomes approximately Normal.
+
+:::{.callout-important title="Assumption of Normality"}
+*Based on the* **Central Limit Theorem**, *the sampling distribution of the mean can be approximated as Normal:*
+
+- *when the sample size is sufficiently large*
+- *even if the population distribution is not Normal*
+:::
+
+The required sample size depends on the shape of the population distribution. If the population is already Normally distributed, the sampling distribution of the mean is exactly Normal for any sample size. If the population distribution is moderately skewed (cf. @fig-3-2-4), a common rule of thumb is that a sample size of $n \ge 30$ is sufficient for the Normal approximation to be reasonable.
+
+A key implication of the Central Limit Theorem is that it applies regardless of the population distribution. To illustrate this, consider again the BMI example (@fig-3-3-8), but suppose that BMI values in the population follow a Uniform distribution.
+
+:::{.boxed}
+:::: {.columns}
+::: {.column width=35.0%}
+##### Uniform Distribution
+
+![](/include/images/part_3/ch_3/uniform-distribution.png)
+:::
+
+::: {.column width=5.0%}
+:::
+
+::: {.column width=60.0%}
+:::{style="font-size: 90%;"}
+This is a continuous distribution in which all values within a given interval are equally likely.
+
+It is defined by the lower and upper bounds $a$ and $b$, and its probability density function is:
+
+$$
+f(x) = \begin{cases} 
+\frac{1}{b - a} & x \in [a, b] \\ 
+0 & \text{otherwise} 
+\end{cases}
+$$
+:::
+:::
+::::
+:::
+
+:::{.callout-note title="Uniform Variable"}
+*A Uniform random variable is denoted as*
+$$
+X \sim U(a, b)
+$$
+:::
+
+If BMI values are uniformly distributed between $a=15$ and $b=35$, each value in this interval is equally likely. @fig-3-3-9 shows a simulation of the sampling distribution of the mean BMI for 200 samples with sizes $n=2$ (left), $n=5$ (middle), and $n=15$ (right). For all sample sizes, the sample means are centered around $25 \text{ kg}/\text{m}^2$, which is the population mean of $X \sim U(15,35)$. Additionally, **as the sample size increases, the sampling distribution becomes more concentrated around the population mean and more closely resembles a Normal distribution**.
+
+![Sampling distribution of the BMI for three different sample sizes](/include/images/part_3/ch_3/3-3-9_sampling-distribution-sample-size.png){#fig-3-3-9 width=100%}
+
+\
+
+### Standard Deviation and Standard Error {#sec-stderror}
+
+The **Standard Error** is the standard deviation of the sampling distribution of the mean. The parameter $\sigma$ denotes the standard deviation of the population and measures the variability among individual observations. The standard error of the mean, denoted by $\sigma_{\overline{X}}$, quantifies how much variability is expected in the sample mean when computed over repeated samples.
+
+The population standard deviation $\sigma$ and the standard error of the mean $\sigma_{\overline{X}}$ are related through the sample size:
+
+$$
+\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
+$$ {#eq-std-x}
+
+where $n$ is the sample size—the number of individuals over which the mean is computed. @eq-std-x explains why the sampling distribution of the mean becomes narrower as the sample size increases (see @fig-3-3-9).
+
+To understand this relationship, we examine how the variability of individual observations contributes to the variability of the sample mean.
+
+Let $X_1, \dots, X_n$ denote independent observations drawn from the same population. The sample mean is defined as:
+
+$$
+\overline{X} = \frac{1}{n}\sum_{i=1}^{n} X_i
+$$
+
+The variability of $\overline{X}$ can be approximated using error propagation, based on how $\overline{X}$ depends on each observation:
+
+$$
+\sigma_{\overline{X}} = \sqrt{\left(\sigma_{X_1} \frac{\partial \overline{X}}{\partial X_1}\right)^2 + \dots + \left(\sigma_{X_n} \frac{\partial \overline{X}}{\partial X_n}\right)^2}
+$$
+
+Since:
+
+$$
+\frac{\partial \overline{X}}{\partial X_i} = \frac{1}{n}
+$$
+
+we obtain:
+
+$$
+\sigma_{\overline{X}} = \sqrt{\frac{\sigma_{X_1}^2}{n^2} + \dots + \frac{\sigma_{X_n}^2}{n^2}}
+$$
+
+Because all observations are drawn from the same population, each has the same standard deviation $\sigma$, so:
+
+$$
+\sigma_{\overline{X}} = \sqrt{\frac{\sigma^2}{n^2} + \dots + \frac{\sigma^2}{n^2}} = \sqrt{n \cdot \frac{\sigma^2}{n^2}} = \frac{\sigma}{\sqrt{n}}
+$$
+
+:::{.callout-important title="Standard Error and Sample Size"}
+*The standard error of the mean* $\sigma_{\overline{X}}$ *decreases proportionally to the inverse of the square root of the sample size* $n$.
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-3-8_sampling-distribution.md")
+```
+:::
+
+\
+
+## Inference: from Sample to Population
+
+This chapter introduced the fundamental concepts underlying statistical generalization. Data are collected from a sample of subjects, with the goal of drawing conclusions about a population. This process relies on methods of **statistical inference**.
+
+Regardless of the statistic of interest---e.g., a proportion or a mean---the corresponding population parameters are typically unknown. These parameters are estimated from experimental data collected from a sample of individuals. Estimates are often denoted using a hat symbol (e.g., $\hat{\theta}$). @fig-3-3-10 provides examples of estimated proportion and mean, illustrating the inferential process.
+
+![Statistical inference: estimating population parameters from a sample of individuals](/include/images/part_3/ch_3/3-3-10_inferential-statistics.png){#fig-3-3-10 width=100%}
+
+The population mean $\mu$ is estimated by the sample mean:
+
+$$
+\hat{\mu} = \overline{X} = \frac{1}{n} \sum_{i=1}^{n} X_i
+$$ {#eq-mu-estimator}
+
+The sample mean $\overline{X}$ is a *best guess* for the unknown population parameter $\mu$. Since $\overline{X}$ summarizes the data into a single value, it is called a **point estimate**, while the formula defining it is the **point estimator**.
+
+\
+
+### Properties of Estimators
+
+Estimators provide approximations of unknown parameters. The resulting estimate may differ from the true population parameter due to **systematic error (bias)** and **random variability**.
+
+\
+
+#### Estimator Bias
+
+Let $\theta$ be a population parameter and $\hat{\theta}$ its estimator. The estimator $\hat{\theta}$ is said to be **unbiased** if:
+
+$$
+E(\hat{\theta}) = \theta
+$$
+
+The **bias** is defined as:
+
+$$
+\text{bias} = E(\hat{\theta}) - \theta
+$$
+
+where $E(\cdot)$ denotes the expected value.
+
+For a discrete random variable:
+
+$$
+E(X) = \sum_i x_i p(x_i)
+$$
+
+For a continuous random variable:
+
+$$
+E(X) = \int_{-\infty}^{\infty} x f(x)\, dx
+$$
+
+Since $E(X) = \mu$, it can be shown that the sample mean $\overline{X}$ is an unbiased estimator of $\mu$:
+
+$$
+\begin{aligned}
+E(\overline{X}) &= E\left(\frac{1}{n} \sum_{i=1}^{n} X_i \right) \\
+&= \frac{1}{n} \sum_{i=1}^{n} E(X_i) \\
+&= \frac{1}{n} \sum_{i=1}^{n} \mu \\
+&= \mu
+\end{aligned}
+$$
+
+\
+
+#### Estimator Consistency
+
+An estimator is said to be **consistent** if it converges to the true population parameter as the sample size increases. That is, $\hat{\theta}_n \to \theta$ as $n \to \infty$.
+
+A sufficient condition for consistency is that the estimator is unbiased and its variance
+
+$$
+\text{Var}(\hat{\theta})=E(\hat{\theta}-\theta)^2 
+$$ {#eq-estimator-var}
+
+approaches zero as the sample size increases. In particular:
+
+$$
+\lim_{n \to \infty} \text{Var}(\hat{\theta}_n) = 0
+$$
+
+where $\hat{\theta}_n$ denotes the estimator based on a sample of size $n$.
+
+For example, according to @eq-std-x, the sample mean is a consistent estimator of $\mu$ because:
+
+$$
+\text{Var}(\overline{X}) = \frac{\sigma^2}{n} \to 0 \quad \text{as } n \to \infty
+$$
+
+\
+
+### Two Approaches for Statistical Inference
+
+In the following chapters, statistical inference will be treated in detail for different study designs. Here, a brief introduction is provided to two common approaches for drawing conclusions from experimental data.
+
+\
+
+#### Hypothesis Testing {#sec-ht}
+
+In this approach, we test a hypothesis about a population parameter. For example, consider the efficacy of a new drug in reducing arterial pressure in hypertensive patients.
+
+If the drug was not effective, then after applying it to the *target population* (@fig-3-3-5), the mean change in arterial pressure would be expected to be $\mu = 0 \text{ mmHg}$. This defines the **null hypothesis** $\text{H}_0$:
+
+$$
+\text{H}_0: \mu = 0
+$$
+
+If, however, the drug is effective, the population mean change would be expected to be less than $0$, defining the **alternative hypothesis** $\text{H}_1$:
+
+$$
+\text{H}_1: \mu < 0
+$$
+
+Since the target population cannot be directly observed, we collect data from a sample of subjects. We compute the sample mean $\overline{X}$ and assess how likely it would be to observe such a value if $\text{H}_0$ were true—that is, if the drug had no effect.
+
+:::{#sec-alpha}
+:::{.callout-important title="p-value and the Significance Level"}
+*Testing $\text{H}_0$ is achieved by computing the* ***probability of observing a result as extreme as, or more extreme than, the one obtained, assuming that $\text{H}_0$ is true***. *This conditional probability is called the* ***p-value***. *It should not be interpreted as the probability that $\text{H}_0$ is true.*
+
+*If the **p-value** is smaller than the **significance level $\alpha$**, we reject $\text{H}_0$ in favor of $\text{H}_1$. Conversely, if the p-value is greater than or equal to $\alpha$, we do not reject $\text{H}_0$.*
+
+*The significance level $\alpha$ is typically set at 0.05 or 0.01.*
+:::
+:::
+
+\
+
+#### Confidence Interval
+
+A **Confidence Interval (CI)** provides a range of plausible values for an unknown population parameter, based on sample data. It complements hypothesis testing and offers an estimate of uncertainty associated with a point estimate. While [hypothesis testing](@sec-ht) focuses on the probability of observing the sample data under a specific hypothesis, a confidence interval provides a range of values that are consistent with the observed data.
+
+Typically, confidence intervals are constructed at a 95% confidence level. A 95% confidence interval for the population mean $\mu$ can be written as:
+
+$$
+CI_{95\%} = [a, b]
+$$
+
+where $a$ and $b$ are the lower and upper bounds of the interval.
+
+The confidence level (e.g., 95%) refers to the long-run performance of the method: if the same experiment were repeated many times and a confidence interval was computed for each sample, approximately 95% of those intervals would contain the true population mean $\mu$.
+
+Once a specific confidence interval is computed from the data, the population mean $\mu$ is fixed (though unknown), and the interval either contains it or not.
+
+:::{.callout-important title="Confidence Interval vs Hypothesis Testing"}
+*Unlike hypothesis testing, which evaluates the compatibility of the data with a specific assumed value of the population parameter (e.g., $\mu = 0$), a confidence interval does not presume any single value for $\mu$. Instead, it provides a range of parameter values that are consistent with the observed data. In many cases, this range corresponds to all values of $\mu$ that would not be rejected by a hypothesis test at the same significance level, linking the two approaches to statistical inference.*
+:::

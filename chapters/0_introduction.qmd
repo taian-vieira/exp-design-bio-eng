@@ -1,0 +1,194 @@
+# Introduction to Experimental Design {.unnumbered #sec-intro} 
+
+*Research*, *manufacturing*, and *clinical settings* are fields where **biomedical engineers** (**BEs**) play a key role. Among the many possible contributions that a **BE** may provide in these fields, three are of major interest:
+
+-   identifying the **best** procedure for patient care: *treatment, diagnosis, and rehabilitation*.
+-   testing *new tools* or *instruments* designed for **improving** rehabilitation protocols, training programs, and surgical interventions.
+-   **assessing** how exposure to a given condition (e.g. smoking, overweight) may affect our health.
+
+But how can the **BE** ascertain whether a given procedure is better than another? On which basis may the **BE** determine that a new tool is superior to existing tools? How and which variables need to be considered to assess the effect of a condition on our health status?
+
+**These issues can only be addressed through well-designed experiments**
+
+As quoted by Susan White @white20: ![](/include/images/introduction/research_design.jpg){width="100%"} *AI-generated illustration created with ChatGPT (OpenAI), 2026*
+
+\
+
+## Experimental Design Issues {#sec-exp-design}
+
+Before presenting a definition for **Experimental Design**, its importance should be clarified. Some examples may help understanding its relevance.
+
+Suppose you are asked to conduct an **experiment**^[*a series of controlled steps conducted to gather information or to test a hypothesis*] to test the idea that coffee consumption may impact cardiovascular health. You decide to recruit a sample of subjects and stratify them according to their daily coffee consumption. You measure their heart rate and hypothesize that subjects who drink more coffee may exhibit a higher resting heart rate. This is exactly the result you obtain, and you may therefore be tempted to publish your study, concluding that drinking too much coffee may negatively impact health.
+
+After some time, you receive a letter from a colleague asking: did you control for lifestyle factors (e.g. physical activity) when recruiting subjects? You reply that you did not. Your colleague then points out that your results may be of dubious validity. **Can you guess why lifestyle would be a confounder**^[*any factor compromising the relationship between the variables of interest: heart rate at rest and coffee consumption in this case*]**?**
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/0-1_lifestyle.md")
+```
+:::
+
+For interested reader, this review by [Mendonza and colleagues](https://www.ochsnerjournal.org/content/23/2/152) @mendoza23 provides an insightful view about the impact of coffee consumption on health.
+
+[![](/include/images/introduction/intro-1_mendoza_et_al.png){width=95%}](https://www.ochsnerjournal.org/content/23/2/152)
+
+\
+
+Another example concerns testing a new drug for weight loss. In this case, you work within a team to evaluate whether a new FDA-approved drug is effective. The team recruits a group of participants and measures body mass *before*, *two months after*, and *four months after* the drug is administered. Your team observes a **significant**^[*unlikely due to chance*] decrease in body mass.
+
+**How confident can you be that the observed effect was due to the new drug?** If the drug was tested on subjects in the Northern hemisphere, from January to May, a similar weight loss effect might also be observed in people not taking the drug (**controls**^[*group of subjects not receiving the new treatment being studied, according to the [NIH cancer institute](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/control-group)*]): people tend to prepare themselves for the summer.
+
+
+\
+
+## Definition of Experimental Design
+
+There are many definitions of **Experimental Design** in the literature. This variety likely stems from the different fields in which experiments are designed. In a nutshell, we may say that:
+
+> ***Experimental Design** is the art of designing experiments*
+
+A more formal definition, applicable to the biomedical field, would be the **planning of actions necessary for testing hypotheses of documented relevance in health sciences**.
+
+Key elements common to the design of experiments entail three main steps, as detailed in the following sections.
+
+-   [**INTRODUCTION**](#stating-the-relevance-of-experiments): *relevance of experiments*
+-   [**METHODS**](#designing-the-study): *study design*
+-   [**RESULTS & DISCUSSION**](#communicating-findings): *communicating your discovery*
+
+\
+
+### Stating the Relevance of Experiments {#stating-the-relevance-of-experiments}
+
+Regardless of the field of application, any experiment should be motivated by a **sound question**. The relevance of such a question should be clear, and meaningful questions can only be formulated based on previous knowledge or well-established grounds.
+
+Before designing a study, you should provide clear answers to the following questions:
+
+-   **What is your question?**—*the open problem*, i.e. a gap in current knowledge
+-   **How would addressing your question contribute to advancing knowledge?**—*the importance of the problem*
+-   **Why do you ask your question?**—*the necessity of your study (the contribution of your study should be substantial, not incremental)*
+-   **What do you expect to observe?**—*your* ***hypothesis***
+
+All these points should be covered in the **Introduction section** of a study.
+
+\
+
+### Designing the Study {#designing-the-study}
+
+In practical terms, **designing the study consists of identifying the most appropriate procedures to test a given hypothesis**. When planning procedures, you must explicitly define each of the following points:
+
+1.  **Independent variable**: what will you manipulate to test your hypothesis?
+
+2.  **Dependent variable**: what will you measure?
+
+3.  **Confounding variables**: is it necessary to control for other variables that may influence the outcome?
+
+4.  **Define the study design**: will any intervention be applied?
+
+5.  **Experimental units**: how many participants (units) are needed to ensure reliable results?
+
+6.  **Data collection**: what will you use, and how, to measure the variables of interest?
+
+7.  **Data analysis**: how will the data be processed to obtain **metrics of interest**^[*quantity to be used for testing the study hypothesis*]?
+
+All these points should be defined before starting data collection. Only in this way is it possible to ensure that experiments are conceived on solid grounds rather than on convenience.
+
+:::{.callout-note title="What is this book about?"}
+*The course **`r course_name`** covers points 4 and 5 to a limited extent, and point 7 extensively. Point 7 is mainly focused on understanding and applying statistical methods.*
+:::
+
+\
+
+While most **BEs** successfully reach the point of computing the **metrics of interest**, many stop there. The final step consists of using **statistics**^[*it may refer to a value, the process of analyzing data, or a field of study*] to make a confident statement about the study hypothesis: *do your results support your hypothesis or not?*
+
+We encounter **statistics** frequently—when watching a soccer match or checking the distribution of students' grades. Although statistical methods are defined in the **METHODS** phase, their real value emerges when reporting findings.
+
+\
+
+### Reporting Findings
+
+You may have conducted the most relevant experiment in the world, yielding highly impactful results. However, this effort would be wasted without a clear and accurate report communicating your findings.
+
+After collecting and analyzing data, results should be presented and critically discussed. This often involves creating **tables** and **figures**. **Figures** are generally preferred, as they can summarize information that would otherwise require extensive text: *one **figure** is worth a thousand words*. **Tables**, however, may be more appropriate in specific cases, such as describing demographic characteristics.
+
+When communicating results, two points should be emphasized:
+
+1.  Using **descriptive statistics** to summarize data, often through clear visualizations of **metrics of interest**.
+
+2.  Making claims based on **group results**^[*values pooled across experimental units and conditions*] using **inferential statistics**.
+
+![AI-generated illustration created with ChatGPT (OpenAI), 2026.](/include/images/introduction/descriptive_inferential_statistics.jpeg){width="100%"} *AI-generated illustration created with ChatGPT (OpenAI), 2026*
+
+------------------------------------------------------------------------
+
+\
+
+## Why the Trouble of Studying Statistics?
+
+The concepts covered in this course go beyond data analysis. **BEs** with a solid understanding of experimental design and statistics are better positioned to secure attractive job opportunities. There are concrete examples of how this knowledge can be beneficial.
+
+\
+
+### Assisting Companies in Making Profit
+
+Following Susan White @white20:
+
+> *To sell their products, a company must convince physicians that its products are better than those of competitors. To make its point, a company uses graphs, charts, and the results of studies comparing its products with others on the market.*
+
+Understanding how to present information is crucial. What graphical representation best conveys your message? How can you create effective visualizations?
+
+::: note
+**This course will provide the tools to identify appropriate graphs and create effective visualizations.**
+:::
+
+\
+
+### Improving Clinical/Sport Practice
+
+Biomedical Engineering spans a wide range of scales, from cellular to whole-body systems. Data collected to test hypotheses may therefore be highly diverse. Processing data is not sufficient; once **metrics of interest** are obtained, decisions must be made regarding the hypothesis. These decisions rely on probability.
+
+::: note
+**This course will guide BEs in making informed decisions and conducting effective experiments.**
+:::
+
+\
+
+### Staying Up-To-Date
+
+Understanding experimental design, statistical methods, and scientific reporting is essential for staying current with advancements. New findings are reported in peer-reviewed manuscripts^[*papers written and evaluated by experts in the field, contributing to the reliability of published results*].
+
+Staying up-to-date requires the ability to critically interpret findings. This includes understanding whether graphical results genuinely support the authors' claims.
+
+Consider, for example, the data shown in @fig-intro-2, illustrating the relationship between peak power and cycling cadence.
+
+-   *[**Fresh group**]{style="color:#1E4B9C;"}: subjects performed maximal efforts starting from rest.*
+-   *[**Fatigued group**]{style="color:#D44B31;"}: subjects performed the same trials after a fatiguing exercise.*
+
+Based on this information, try to address the questions: **Does maximal peak power depend on pedaling rate? Does fatigue affect peak power?**
+
+![This figure was created with ChatGPT (OpenAI), based on simulated data according to [Beelen and Sargeant 1991](https://journals.physiology.org/doi/abs/10.1152/jappl.1991.71.6.2332?journalCode=jappl)  @beelen91. Circles and whiskers correspond to mean and standard deviation, respectively. * denote statistical significance at *p* < 0.05"](/include/images/introduction/intro-2_power_and_cycling.jpg){#fig-intro-2 width=80%}
+
+---
+
+\
+
+## How is This Book Structured?
+
+This book provides students with the theoretical and practical knowledge necessary to successfully complete the course on **`r course_name`**. Three main topics are covered, organized into three separate **Parts**:
+
+\
+
+### Part 1: Smart Posture
+
+The theory covered in this course will be applied to real data collected by each student^[*students not willing to collect data can work with data collected by their colleagues or provided by the lecturer*]. To this end, one experimental paradigm has been selected: **the control of human standing posture**. After a brief overview of the fundamentals of postural control, postural sway data will be collected directly using a smartphone with the **PhyPhox** app. This part introduces the theoretical background and provides a tutorial on how to collect posture data using smartphones.
+
+\
+
+### Part 2: R Tutorial
+
+All practical activities in this course will be completed using the **R programming language**, hereafter referred to as **R**. The main features of **R** are covered in this part, including the **I**ntegrated **D**evelopment **E**nvironment **RStudio**, as well as syntax, variable definition, data import/export, functions, and code automation.
+
+\
+
+### Part 3: The Theory Behind Experimental Design
+
+This part covers the theoretical aspects of experimental design, from study types to methods for hypothesis testing. All questions presented during lectures are included here in an interactive quiz format, allowing students to test their knowledge either during lectures or while studying at home.

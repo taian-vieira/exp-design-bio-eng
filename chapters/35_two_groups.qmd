@@ -1,0 +1,716 @@
+# Inference, Power, and Sample Size - Two Group
+
+The previous chapter introduced parametric and non-parametric methods for inferential statistics in single-group designs. In this chapter, these methods are extended to designs involving two independent groups. Independence means that observations collected in one group do not influence or correspond to observations in the other group.
+
+Two-group designs are widely used in the health sciences. Three examples of studies based on this design are presented below.
+
+\
+
+:::{.panel-tabset}
+
+#### Example 1
+
+##### Weight loss
+
+Interest may lie in assessing whether diet or exercise is more effective for weight loss. Two groups of individuals with similar characteristics were recruited, as shown in the figure.
+
+The study compares the mean weight loss observed in the two groups.
+
+![](/include/images/part_3/ch_5/example-1_weight-loss.png){width=100%}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'} 
+exams2forms("../include/exercises/3-5-1_example-1.md")
+```
+:::
+
+#### Example 2
+
+##### Jump Height
+
+The height achieved in a vertical jump is a key performance variable in many sports. Could it be that basketball players jump higher, on average, than volleyball players?
+
+A study was conducted on professional players in both sports, controlling for relevant confounders (e.g. body mass, experience). The mean jump height was measured for the two groups.
+
+![](/include/images/part_3/ch_5/example-2_jump-height.png){width=80%}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'} 
+exams2forms("../include/exercises/3-5-1_example-2.md")
+```
+:::
+
+#### Example 3
+
+##### Endurance
+
+Differences between men and women are well documented in the sports science literature. These differences are often influenced by physiological factors such as lean body mass. With respect to endurance, however, women may outperform men under certain conditions.
+
+Two independent groups of male and female individuals, matched by training status, health, age, and body mass, were recruited and asked to run at constant speed until exhaustion.
+
+![](/include/images/part_3/ch_5/example-3_endurance.png){width=50% fig-align="center"}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'} 
+exams2forms("../include/exercises/3-5-1_example-3.md")
+```
+:::
+
+:::
+
+\
+
+## Parametric Test for Equal Variances (Student's $t$-test)
+
+In the previous chapter, the Student’s *t*-distribution was used to assess the significance of a paired mean difference, defined as the mean of differences between two measurements collected on the same individuals. Statistical significance was evaluated by computing the probability associated with the observed test statistic under the null hypothesis that the population mean difference was zero ($H_0: \mu_D = 0$).
+
+A similar approach is adopted for two independent groups. In this case, inference focuses on the difference between group means. Observations in each group are assumed to be independent, both within and between groups, and to be drawn from Normally distributed populations.
+
+Let the observations in the two groups be defined as:
+
+$$
+\begin{aligned}
+X_i &\sim \mathcal{N}(\mu_X, \sigma^2) \\
+Y_i &\sim \mathcal{N}(\mu_Y, \sigma^2)
+\end{aligned}
+$$
+
+where $\mu_X$ and $\mu_Y$ are the population means. The variance $\sigma^2$ is assumed to be the same for both populations.
+
+The difference between population means is:
+
+$$
+\mu_D = \mu_X - \mu_Y
+$$
+
+and is estimated from sample data as:
+
+$$
+\overline{D} = \overline{X} - \overline{Y}
+$$
+
+Since $\overline{X}$ and $\overline{Y}$ are independent and Normally distributed random variables, their difference $\overline{D}$ is also Normally distributed.
+
+Because the two groups are independent, and using the property of variances in @eq-sum-of-variances, the variance of the difference between sample means is:
+
+$$
+\sigma_{\mu_D}^2 = \sigma_{\mu_X}^2 + \sigma_{\mu_Y}^2
+$$
+
+Because the variance of a sample mean depends on sample size:
+
+$$
+\begin{aligned}
+\sigma_{\mu_X}^2 &= \frac{\sigma^2}{n} \\
+\sigma_{\mu_Y}^2 &= \frac{\sigma^2}{m}
+\end{aligned}
+$$
+
+it follows that:
+
+$$
+\sigma_{\mu_D}^2 = \frac{\sigma^2}{n} + \frac{\sigma^2}{m}
+$$
+
+:::{.callout-note title="Distribution of the mean difference"}
+For two independent groups with Normally distributed observations and equal variances, the mean difference is distributed as:
+
+$$
+\overline{D} \sim \mathcal{N} \left( \mu_D,\; \sigma^2 \left[ \frac{1}{n} + \frac{1}{m} \right] \right)
+$$
+
+where $\mu_D$ is the difference between population means, $\sigma$ is the common population standard deviation, and $n$ and $m$ are the sample sizes.
+:::
+
+\
+
+### The Sample Variance
+
+In practice, the population variance $\sigma^2$ is unknown and must be estimated from the data. Under the assumption of equal variances, a pooled estimate is used.
+
+The **pooled sample variance** is defined as:
+
+$$
+s_p^2 = \frac{(n-1)s_X^2 + (m-1)s_Y^2}{n+m-2}
+$$ {#eq-pooled-variance}
+
+where the sample variances for the two groups are:
+
+$$
+\begin{aligned}
+s_X^2 &= \frac{1}{n-1} \sum_{i=1}^{n}(X_i - \overline{X})^2 \\
+s_Y^2 &= \frac{1}{m-1} \sum_{i=1}^{m}(Y_i - \overline{Y})^2
+\end{aligned}
+$$ {#eq-sample-variances}
+
+The pooled variance is a weighted average of the group variances, where the weights correspond to the degrees of freedom. Larger samples contribute more to the estimate, reflecting their greater reliability.
+
+\
+
+### The Test Statistic
+
+The goal is to test whether the difference between population means is zero:
+
+$$
+H_0: \mu_X - \mu_Y = \mu_D = 0
+$$
+
+Based on the assumptions of independent and Normally distributed data, and assuming equal population variances estimated from the experimental data, the test statistic is given by:
+
+$$
+t = \frac{(\overline{X}-\overline{Y}) - (\mu_X-\mu_Y)}{s_p \sqrt{\frac{1}{n} + \frac{1}{m}}}
+= \frac{\overline{D} - \mu_D}{s_p \sqrt{\frac{1}{n} + \frac{1}{m}}}
+$$ {#eq-t-equal-variances}
+
+Under the null hypothesis, this statistic follows a Student’s *t*-distribution with:
+
+$$
+T \sim t_{\nu} = t_{n+m-2}
+$$
+
+where $\nu = n+m-2$ is the number of degrees of freedom.
+
+\
+
+
+### Exercise: $t$-test for Equal Variances {#sec-ttest-equal}
+
+The goal is to assess the significance of the difference between group means. To illustrate the procedure, consider a sport-related example based on simulated data inspired by the study of [Pawlik and Mroczek](https://www.nature.com/articles/s41598-023-35729-w#Sec9) @pawlik23, who investigated sex differences in jump height in volleyball players.
+
+:::: {.columns}
+::: {.column .dataTable-wrapper .small-text width=47.5%}
+```{r}
+#| label: tbl-3-5-1
+#| echo: false
+#| tbl-cap: Serve height for male and female volleyball players
+#| message: false
+#| warning: false
+
+n <- 7
+m <- 10
+women <- c(40.1, 41.0, 35.1, 36.1, 38.8, 45.1, 67.3, NA, NA, NA)
+men <- c(71.5, 85.1, 66.0, 48.0, 59.4, 58.8, 80.5, 71.0, 73.6, 65.8)
+xbar <- round(mean(women, na.rm = TRUE),1)
+sx <- round(sd(women, na.rm = TRUE),1)
+cix <- xbar + c(-1, 1) * round(qt(0.975,n-1) * sx / sqrt(n),2)
+ybar <- round(mean(men),1)
+sy <- round(sd(men),1)
+ciy <- ybar + c(-1, 1) * round(qt(0.975,m-1) * sy / sqrt(m),2)
+sp <- round(sqrt((sx^2*(n-1)+sy^2*(m-1))/(m+n-2)),2)
+d <- round(abs(xbar-ybar)/sp,2)
+lambda <- round(d * sqrt(n*m/(n+m)),2)
+nu <- ((sx^2)/n + (sy^2)/m)^2 / ( ((sx^2)/n)^2 / (n-1) + ((sy^2)/m)^2 / (m-1) )
+
+# Simulated data
+df <- data.frame(
+  women = as.character(women),
+  men  = as.character(men)
+)
+
+df <- bind_rows(df, data.frame( 
+                  women = c(paste("$\\overline{x}=$",xbar), paste("$s_x=$",sx)), 
+                  men = c(paste("$\\overline{y}=$",ybar), paste("$s_y=$",sy))
+                  )
+                )
+
+df$row_id <- seq_len(nrow(df))
+
+datatable(
+  df,
+  rownames = FALSE,
+  escape = FALSE,
+  colnames = c("Female<br>($x_i$, $n=7$)", "Male<br>($y_i$, $m=10$)", ""),
+  options = list(
+    dom = "t",
+    pageLength = nrow(df),
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = "dt-center", targets = "_all"),
+      list(visible = FALSE, targets = 2)
+    ),
+    drawCallback = JS("function(settings) {MathJax.typeset();}")
+  )
+) |>
+  formatStyle(
+    columns = c("women", "men"),
+    valueColumns = "row_id",
+    fontWeight = styleEqual(c(nrow(df) - 1, nrow(df)), c("bold", "bold")),
+    backgroundColor = styleEqual(c(nrow(df) - 1, nrow(df)), c("#add8e6", "#add8e6"))
+  )
+```
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=50%}
+Jump height is defined as the vertical displacement of the body centre of mass (CoM) between takeoff and the highest point of the jump, where vertical velocity is zero.
+
+Three main methods exist for estimating jump height, all based on the conservation of mechanical energy ([Linthorne](https://pubs.aip.org/aapt/ajp/article-abstract/69/11/1198/529369/Analysis-of-standing-vertical-jumps-using-a-force?redirectedFrom=fulltext) @linthorne01). These methods differ in how the vertical velocity at takeoff is determined.
+
+In the referenced study, jump height for male and female volleyball players was computed using the **flight-time method**
+:::
+::::
+
+\
+
+The flight-time method assumes that the vertical position of the CoM at takeoff and landing is the same. Under this assumption, the magnitude of the vertical velocity is identical at both instants and can be estimated from the time spent in the air.
+
+![Assumption for jump height calculation using the flight time method.](/include/images/part_3/ch_5/3-5-1_jump-height.png){width=80% #fig-3-5-1}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-5-2_unpaired-design-ht.md")
+```
+:::
+
+\
+
+### Graphically Representing Group Data
+
+Since inference is based on the difference between group means, graphical representations can provide useful insights into potential differences.
+
+Error plots (see @sec-errorplot) display a measure of central tendency together with a measure of variability. Three common approaches are illustrated in @fig-3-5-2.
+
+- **Standard deviation:** whiskers extend one standard deviation above and below the mean, reflecting variability in individual observations.
+- **Standard error of the mean (SEM):** whiskers represent the uncertainty in the estimate of the mean, computed as:
+
+$$ 
+\begin{aligned} 
+s_\overline{x} &= \frac{s_x}{\sqrt{n}} = r sx / sqrt(n) \text{ cm} \\ 
+s_\overline{y} &= \frac{s_y}{\sqrt{m}} = r sy / sqrt(m) \text{ cm} 
+\end{aligned} 
+$$
+
+- **Confidence intervals (CI):** whiskers correspond to the bounds of the $95\%$ confidence interval, based on $\alpha=0.05$:
+
+$$
+\begin{aligned} 
+CI_{\mu_X} &= \overline{x} \pm t_{n-1,\,1-\frac{\alpha}{2}} \frac{s_x}{\sqrt{n}} 
+= `r xbar` \pm `r round(qt(0.975,n-1),2)` \times \frac{`r sx`}{\sqrt{`r n`}} 
+= \left(`r cix[1]`, `r cix[2]`\right) \\
+
+CI_{\mu_Y} &= \overline{y} \pm t_{m-1,\,1-\frac{\alpha}{2}} \frac{s_y}{\sqrt{m}} 
+= `r ybar` \pm `r round(qt(0.975,m-1),2)` \times \frac{`r sy`}{\sqrt{`r m`}} 
+= \left(`r ciy[1]`, `r ciy[2]`\right) 
+\end{aligned}
+$$
+
+These intervals provide a range of plausible values for the population means $\mu_X$ and $\mu_Y$ based on the observed data.
+
+![Error plots for the jump height data.](/include/images/part_3/ch_5/3-5-2_error-plot.png){width=100% #fig-3-5-2}
+
+:::{.callout-important title="Drawing inference from confidence intervals"}
+*Confidence intervals provide a visual indication of differences between groups. Non-overlapping confidence intervals suggest a statistically significant difference between means. However, overlapping intervals do not necessarily imply the absence of a significant difference.*
+:::
+
+\
+
+## Parametric Test for Unequal Variances (Welch's $t$-test) {#sec-welchttest}
+
+In the previous section, the parametric $t$-test for two unpaired groups was presented under the assumption that the variance $\sigma^2$ was the same for observations in both groups.
+
+When the variances differ between groups---a condition known as **heteroskedasticity**---the traditional Student's $t$-test may lead to an inflated Type I error rate. This occurs because the pooled variance estimator assumes equal variances and may provide a biased estimate when this assumption is violated, particularly when sample sizes differ.
+
+In such cases, a correction to the test statistic and its associated degrees of freedom is required. This leads to the **Welch's $t$-test**.
+
+\
+
+### The Test Statistic
+
+When the assumption of equal variances is violated, but observations remain independent and Normally distributed, the difference between sample means is still Normally distributed:
+
+$$
+\overline{D} = \overline{X} - \overline{Y} \sim \mathcal{N}\left(\mu_D,\; \frac{\sigma_X^2}{n} + \frac{\sigma_Y^2}{m}\right)
+$$
+
+where $\sigma_X^2$ and $\sigma_Y^2$ are the population variances of the two groups, and $n$ and $m$ are the respective sample sizes.
+
+Since population variances are unknown, they are estimated using the sample variances.
+
+The test statistic is therefore:
+
+$$
+t = \frac{(\overline{X}-\overline{Y}) - (\mu_X-\mu_Y)}{\sqrt{\frac{s_X^2}{n} + \frac{s_Y^2}{m}}}
+= \frac{\overline{D} - \mu_D}{\sqrt{\frac{s_X^2}{n} + \frac{s_Y^2}{m}}}
+$$ {#eq-t-unequal-variances}
+
+Unlike the equal-variance case, the denominator does not use a pooled variance but instead combines the two sample variances directly.
+
+The associated degrees of freedom are adjusted using the **Welch–Satterthwaite correction** (@satterthwaite46; @welch47):
+
+$$
+\nu_u = \frac{\left(s_X^2/n + s_Y^2/m\right)^2}{\frac{\left(s_X^2/n\right)^2}{n - 1} + \frac{\left(s_Y^2/m\right)^2}{m - 1}}
+$$ {#eq-dof-correction}
+
+\
+
+### Exercise: $t$-test for Unequal Variances {#sec-ttest-unequal}
+
+Considering the data reported in @tbl-3-5-1, an example of the application of Welch's $t$-test can be derived. In this case, we do not assume that the variance for the jump height of male and female volleyball players is the same.
+
+For the significance level $\alpha = 0.05$ and the alternative hypothesis $H_1: \mu_D \ne 0$, complete the exercise below.
+
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-5-3_unpaired-design-unequal-variances.md")
+```
+
+:::{.callout-important title="Welch's VS Student's t-test"}
+*In practice, Welch’s $t$-test is often preferred as a default, as it remains valid under both equal and unequal variances.*
+:::
+
+\ 
+
+## Non-Parametric Tests for Unpaired Groups
+
+The parametric approaches presented above to test for differences between two unpaired groups rely on two key assumptions: independence of observations and Normality.
+
+The independence assumption is often satisfied in practice, as observations typically come from different subjects within and between groups. In contrast, the Normality assumption often does not hold.
+
+Consider, for example, the data in @tbl-3-5-1. If an additional jump height value of $95.2 \text{ cm}$ were recorded for a female player, this would provide strong evidence that the jump height values are not Normally distributed in the female group. As shown in @fig-3-5-3, the presence of this outlier leads to a distribution that is clearly asymmetric: values above the median are more spread out than those below it. In such situations, applying a parametric $t$-test may lead to misleading results, potentially affecting both Type I error rates and statistical power.
+
+:::{.callout-note title="Increased Type II error"}
+*For the specific example of @fig-3-5-3, the application of the parametric $t$-test for unequal variances would not lead to rejection of $H_0$, as the test statistic $t=2.21$ is smaller than the critical value $t_{\nu,97.5\%}=2.3$.*
+:::
+
+There are two main strategies to address violations of the Normality assumption. The first is to invoke the Central Limit Theorem (see @sec-clt) by collecting sufficiently large samples (typically at least $30$ observations per group), so that the sampling distribution of the mean is approximately Normal. The second strategy, discussed below, is to use a **non-parametric test**, which does not rely on distributional assumptions.
+
+![Box plots for the jump height data, including an additional value in the female group ($x_8=95.2 \text{ cm}$).](/include/images/part_3/ch_5/3-5-3_box-plot.png){width=80% #fig-3-5-3}
+
+\
+
+### Formulations for Non-Parametric Tests {#sec-rank-sum}
+
+Two equivalent formulations for non-parametric inference with two unpaired groups are the *Wilcoxon rank-sum* test @wilcoxon45 and the *Mann–Whitney U* test @mann47. Although derived differently, the two approaches are mathematically equivalent and yield the same p-value.
+
+Unlike parametric tests, these methods operate on the **ranks** of the data rather than their raw values. By focusing on the relative ordering of observations, they are more robust to outliers and departures from Normality.
+
+To illustrate the procedure, consider the jump height data from the study of Pawlik and Mroczek @pawlik23. The question of interest is whether jump height differs between male and female volleyball players. For simplicity, we consider a subset of the data: the first three observations for the female group ($n=3$) and the first five observations for the male group ($m=5$), as reported in @tbl-3-5-2.
+
+::: {.dataTable-wrapper .small-text width=47.5%}
+```{r}
+#| label: tbl-3-5-2
+#| echo: false
+#| tbl-cap: Raw and ranked jump height data for male and female volleyball players
+#| message: false
+#| warning: false
+
+n <- 3
+m <- 5
+nassignments <- factorial(m+n)/(factorial(n) * factorial(m))
+women <- c(women[1:3], rep(NA,5))
+men <- c(men[1:5],rep(NA,3))
+allplayers <- c(women[1:3],men[1:5])
+rk <- rank(allplayers)
+femaler <- c(rk[1:3],rep(NA,5))
+maler <- c(rk[4:8],rep(NA,3))
+wf <- sum(femaler[1:3])
+# generate all combinations of ranks
+ranks <- 1:(m+n)
+combs <- combn(ranks, n)
+Wvals <- colSums(combs)
+zb <- round(qnorm(0.2),3)
+zc <- round(qnorm(0.95),3)
+
+df <- data.frame(
+  women = women,
+  men  = men,
+  grouped_data = allplayers,
+  ranks = rk,
+  femaler = femaler,
+  maler = maler
+)
+
+datatable(
+  df,
+  rownames = FALSE,
+  escape = FALSE,
+  colnames = c("Raw data female<br>($x_i$, $n=3$)", "Raw data male<br>($y_i$, $m=5$)", "Grouped data<br>($z_i \\in {x_i,y_i}$)", "Ranked data<br>($r_i = rank(z)$)","Ranked data female<br>($r_{x_i}$, $n=3$)", "Ranked data male<br>($r_{y_i}$, $m=5$)"),
+  options = list(
+    dom = "t",
+    pageLength = nrow(df),
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = "dt-center", targets = "_all")
+    ),
+    drawCallback = JS("function(settings) {MathJax.typeset();}")
+  )
+)
+```
+:::
+
+\
+
+### Hypothesis Testing with a Non-Parametric Test
+
+The Wilcoxon rank-sum test is based on the sum of ranks obtained after combining the data from both groups. Its computation involves four main steps:
+
+- **step 1:** *combine the $m+n=8$ observations ($z_i \in \{x_i, y_i\}$)*
+- **step 2:** *assign ranks to the combined data ($r_i = \mathrm{rank}(z_i)$)*
+- **step 3:** *separate the ranks back into the two groups: female ($r_{x_i}$) and male ($r_{y_i}$)*
+- **step 4:** *compute the sum of ranks for the smaller group (here, the female group)*
+
+Let $W$ denote the sum of ranks for the smaller group. Under the null hypothesis, the two groups come from identical distributions. Equivalently, a randomly selected observation from one group is equally likely to be larger or smaller than a randomly selected observation from the other group.
+
+$$
+H_0: \text{the two distributions are identical}
+$$
+
+Under additional assumptions (e.g., similar distribution shapes), this can be interpreted as equality of population medians, $\eta_f = \eta_m$.
+
+Under $H_0$, all possible assignments of ranks to the groups are equally likely. Therefore, the distribution of the test statistic $W$ can be computed exactly.
+
+For the smaller group (female players, $n=3$), the number of possible assignments is:
+
+$$
+n_a = \binom{m+n}{n} = \binom{`r m+n`}{`r n`} = `r nassignments`
+$$
+
+Each assignment has probability:
+
+$$
+P(i) = \frac{1}{n_a} = \frac{1}{`r nassignments`} = `r 1/nassignments`
+$$
+
+Examples of such assignments are illustrated in @fig-3-5-4.
+
+![Examples of 4 out of the `r nassignments` possible assignments of ranks and the corresponding value of the test statistic $W$.](/include/images/part_3/ch_5/3-5-4_rank-assignments.png){width=100% #fig-3-5-4}
+
+\
+
+For the data in @tbl-3-5-2, the observed sum of ranks for the female group is:
+
+$$
+w_f = 2 + 3 + 1 = `r wf`
+$$
+
+If we hypothesize that female players tend to have lower jump heights, we consider the probability of observing a value of $W$ as small as or smaller than $w_f$.
+
+The desired probability is computed by the number of outcomes satisfying $W \le w_f$:
+
+$$
+P(W \le w_f) = \frac{1}{n_a}\sum_{i=1}^{n_a}k_i, \quad \begin{cases}
+0 & W_i > w_f \\
+1 & W_i \le  w_f
+\end{cases} 
+$$
+
+This probability is given by:
+
+$$
+P(W \le w_f) = \frac{1}{n_a} \sum_{i=1}^{n_a} \mathbf{1}(W_i \le w_f)
+$$
+
+From the distribution of $W$ under the null hypothesis (see @fig-3-5-5), it can be seen that observing $W \le w_f = `r wf`$ is a rare event. In fact, only one assignment satisfies this condition, so that:
+
+$$
+P(W \le `r wf`) = \frac{1}{`r nassignments`} = `r 1/nassignments`
+$$
+
+Since this probability is smaller than $\alpha = 0.05$, we reject $H_0$. We conclude that the data provide evidence that female players tend to have lower jump heights than male players.
+
+![Distribution of the test statistic $W$ under the null hypothesis of equally likely assignment of ranks between groups.](/include/images/part_3/ch_5/3-5-5_W-distribution.png){width=100% #fig-3-5-5}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'} 
+exams2forms("../include/exercises/3-5-4_h1-for-jump-height.md")
+```
+:::
+
+\
+
+## Which Test to Use: Parametric or Non-Parametric?
+
+To address this question, it is important to understand how each type of test is associated with the probabilities of committing Type I or Type II errors. A useful way to investigate this is through simulations, following these steps:
+
+1. Generate two samples ($X$ and $Y$), with given sizes ($n$ and $m$) and under specific assumptions (e.g. $X \sim \mathcal{N}(\mu_X,\sigma_X)$, $Y \sim \mathcal{N}(\mu_Y,\sigma_Y)$, or other distributions).
+2. Compute the test statistic using both parametric and non-parametric methods.
+3. Repeat steps **1** and **2** $M$ times, where $M$ is on the order of hundreds or thousands.
+4. Compute how often the test leads to rejecting $H_0$ when it is true (Type I error) and to not rejecting $H_0$ when it is false (Type II error).
+
+Simulations of this kind have been widely reported in the literature.
+
+[Blair and Higgins](https://www.jstor.org/stable/1164905) @blair80, for example, observed that the Wilcoxon rank-sum test tends to have higher power than the parametric $t$-test when data are drawn from an exponential distribution. This result held across different sample sizes and differences between group means (see their Figure 4).
+
+[Zimmerman](https://www.jstor.org/stable/20152581) @zimmerman98, on the other hand, found that non-parametric tests can be more prone to Type I errors under certain conditions. Using mixed-normal distributions with unequal variances and sample sizes, he showed that Type I error rates increased as variance differences grew for both the Wilcoxon rank-sum and the standard $t$-test. However, the parametric $t$-test generally exhibited lower Type I error rates, while the Welch $t$-test remained stable, maintaining a Type I error probability close to $5\%$ (see his Figure 1).
+
+\
+
+## Computing Power of $t$-test for Unpaired Groups
+
+As discussed in the previous chapter (see @sec-power-ttest), the statistical power of the $t$-test for paired designs depends on (see @eq-betapower-t):
+
+- the *non-centrality parameter* $\lambda$
+- the *significance level* $\alpha$
+- the *degrees of freedom* $\nu$
+
+The same principles apply to unpaired designs, with two key differences.
+
+The degrees of freedom are given by the total sample size minus two:
+$$
+\nu = n + m - 2
+$$
+
+The non-centrality parameter $\lambda$ is adjusted to account for differences in sample sizes, assuming equal variances:
+
+$$
+\lambda = d \sqrt{\frac{nm}{n+m}} = \frac{|\mu_D|}{\sigma_p} \sqrt{\frac{nm}{n+m}}
+$$ {#eq-unpaired-lambda}
+
+where $\mu_D$ is the difference between the population means and $\sigma_p$ is the population pooled standard deviation (see @eq-pooled-variance for its sample estimate).
+
+\
+
+### Example of Power Calculation - Experimental Data
+
+Using the jump height data for male and female volleyball players, we can estimate the statistical power associated with the unpaired $t$-test.
+
+From @tbl-3-5-1 and from the hypothesis testing [exercise](@sec-ht-exercise) for unpaired designs, we know:
+
+- *the sample means for female ($\overline{x} = `r xbar` \text{ cm}$) and male ($\overline{y} = `r ybar` \text{ cm}$) players;*
+- *the pooled standard deviation $s_p = `r sp` \text{ cm}$;*
+- *the sample sizes for female ($n=7$) and male ($m=10$) players.*
+
+We can therefore compute:
+
+$$
+\begin{aligned}
+\hat{d} &= \frac{|\overline{x} - \overline{y}|}{s_p}
+= \frac{|`r xbar` - `r ybar`|}{`r sp`}
+= `r d` \\
+\hat{\lambda} &= `r d` \sqrt{\frac{7 \times 10}{7 + 10}} = `r lambda`
+\end{aligned}
+$$
+
+To complete the power calculation, we need the critical value of the test statistic. This depends on the degrees of freedom, the significance level, and the alternative hypothesis.
+
+In this case, the degrees of freedom are $\nu = 7 + 10 - 2 = 15$, and we consider $\alpha = 0.05$. The alternative hypothesis is that female players tend to jump lower than male players, i.e., $H_1: \mu_X - \mu_Y = \mu_D < 0$. The critical value $t_{15,0.05}$ satisfies:
+
+$$
+P\left(t < t_{15,0.05}\right) = P\left(t > t_{15,0.95}\right) = \alpha = 0.05
+$$
+
+By symmetry of the $t$-distribution, and based on the [interactive plot](@#sec-tinteractiveplot) in the previous chapter, we consider the positive critical value:
+
+$$
+t_{15,0.95} = `r round(qt(0.95, 15),3)`
+$$
+
+Using $\lambda = `r lambda`$, $\nu = 15$, and $t_{15,0.95} = `r round(qt(0.95, 15),3)`$ in @eq-betapower-t, we obtain a very high statistical power for the data in @tbl-3-5-1:
+
+$$
+\text{power} = 1 - P(t_{\nu,\lambda} < t_{15,0.95}) =
+`r 1-round(pt(q = round(qt(0.95, 15),3), df = 15, ncp = lambda),3)`
+$$
+
+\
+
+### Power from Scientific Judgement
+
+As emphasized in the previous chapter (see @sec-priori-posteriori), statistical power should not be computed from experimental data alone. In this case, power is estimated *a posteriori*, after data collection, and uncertainty in the estimated effect size propagates to the power estimate.
+
+Instead, power should ideally be computed *a priori*, before conducting the study, by specifying a plausible effect size based on scientific knowledge.
+
+Returning to the example above, is it reasonable to expect that female players have substantially lower jump heights than male players? Domain experts may consider a difference equal to half of the population standard deviation to be meaningful, corresponding to $d = 0.5$.
+
+In this case, the non-centrality parameter becomes $\lambda = `r round(lambda/d * 0.5,3)`$, and the statistical power decreases to $`r 1-round(pt(q = round(qt(0.95, 15),3), df = 15, ncp = lambda/d * 0.5),3)`$ if the sample sizes remain unchanged.
+
+This corresponds to low statistical power, meaning that the study has a high probability of failing to detect a true effect.
+
+\
+
+## Computing Sample Size for Unpaired Groups
+
+As discussed in the previous chapter for paired designs, there is no closed-form expression for the sample size based directly on the $t$ test statistic. It is therefore necessary to rely on the Standard Normal distribution to obtain an initial sample size estimate, and then refine it iteratively until the exact power associated with the $t$ test is greater than or equal to the desired value.
+
+\
+
+### Starting with the Z Distribution
+
+First, the $z$-score associated with the Type II error probability is determined. For $\text{power} = 0.80$, corresponding to $\beta=0.20$, we have:
+
+$$
+P(Z < z_{\beta}) = 0.20 \Rightarrow z_{\beta} = `r zb`
+$$
+
+Second, by substituting the expression for $\lambda$ in unpaired designs (@eq-unpaired-lambda) into the power expression (@eq-power-lambda), we obtain:
+
+$$
+z_{\beta} = z_{1-\alpha} - d \sqrt{\frac{nm}{n+m}}
+$$
+
+where $n$ and $m$ denote the sample sizes of the two groups, assuming equal variances.
+
+Third, we define the desired allocation ratio $a$ between groups:
+
+$$
+a = \frac{m}{n}
+$$
+
+Rearranging the previous expression and substituting $m = an$, the sample size for one group becomes:
+
+$$
+n = \left\lceil \frac{1+a}{a} \left(\frac{z_{1-\alpha} - z_\beta}{d}\right)^2 \right\rceil
+$$
+
+Considering an allocation ratio of $a = 1.4$, an effect size $d = 0.5$, a significance level $\alpha = 0.05$, and the value $z_\beta = `r zb`$, we obtain:
+
+$$
+n = \left\lceil \frac{1+1.4}{1.4} \left(\frac{`r zc` - `r zb`}{0.5}\right)^2 \right\rceil
+= `r ceiling((2.4/1.4) * ((zc - zb)/0.5)^2)`
+$$
+
+Based on the chosen allocation ratio, the sample sizes for the two groups are:
+
+$$
+\begin{aligned}
+n &= `r ceiling((2.4/1.4) * ((zc - zb)/0.5)^2)` \\
+m &= \lceil a n \rceil = `r ceiling(ceiling((2.4/1.4) * ((zc - zb)/0.5)^2) * 1.4)`
+\end{aligned}
+$$
+
+\
+
+### Refining Sample Size Computation ($t$ Distribution)
+
+Since the population variance is typically unknown, the test statistic for the unpaired parametric test follows a Student's $t$ distribution. Due to its heavier tails, which reflect the additional uncertainty in estimating the variance, a slightly larger sample size may be required to achieve the desired power compared to the Normal approximation.
+
+Starting from the sample size estimate obtained using the Standard Normal distribution, we now compute the exact power associated with the Student's $t$ test:
+
+$$
+\begin{aligned}
+d &= 0.5 \\
+n &= 43 \\
+m &= 61 \\
+\lambda &= d \sqrt{\frac{43 \times 61}{43 + 61}} = `r round(0.5 * sqrt(43*61 / (43+61)),3)` \\
+\nu &= 43 + 61 - 2 = `r 43+61-2` \\
+\alpha &= 0.05 \\
+t_{1-\alpha, \nu} &= `r round(qt(0.95, 43+61-2),3)` \\
+\text{power} &= P(t_{\nu,\lambda} > t_{1-\alpha,\nu}) =
+`r 1 - round(pt(qt(0.95, 43+61-2), 43+61-2, 0.5 * sqrt(43*61 / (43+61))),3)`
+\end{aligned}
+$$
+
+We observe that the sample size initially obtained using the Standard Normal approximation already provides the desired level of power, i.e., $\text{power} \ge 1 - \beta = 0.80$.
+
+Therefore, no further increase in $n$ and $m$ is required, and the initial estimate is adequate.
+
+This confirms that the Normal approximation provides a reliable starting point for sample size determination.
+
+:::{.callout-important title="Power and sample size for unequal variances"}
+When the equal variances assumption is not reasonable, the test statistic follows the logic of the Welch $t$-test (see @sec-welchttest).
+
+The general framework for power and sample size computation remains the same, but the non-centrality parameter becomes:
+
+$$
+\lambda =
+\frac{|\mu_X-\mu_Y|}
+{\sqrt{\frac{\sigma_X^2}{n}+\frac{\sigma_Y^2}{m}}}
+$$
+
+and the degrees of freedom are adjusted using the Welch--Satterthwaite correction (see @eq-dof-correction).
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'} 
+exams2forms("../include/exercises/3-5-6_sample-size.md")
+```
+:::

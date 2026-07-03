@@ -1,0 +1,123 @@
+# Getting Started with R {#sec-ch22}
+
+All activities in this course will be conducted using the *R programming language*. R is free, open source, and was originally developed for statistical computing and data visualization.
+
+As stated on the [R Project website](https://www.r-project.org/about.html), R is
+
+> *an environment within which statistical techniques are implemented.*
+
+The same source further emphasizes that:
+
+> *One of R’s strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed.*
+
+R has become one of the standard languages for statistical analysis in biomedical research, as reflected by its widespread use in scientific reports and peer-reviewed articles.
+
+:::{.boxed}
+The preference for R is likely motivated by:
+
+-   *the ease with which data can be manipulated in R*
+-   *the numerous libraries specifically designed and freely available for advanced statistical analysis*
+-   *the graphical facilities available for visualizing and exploring data*
+-   *the possibility of using standard programming tools, such as conditionals, loops, user-defined functions, and data import/export*
+-   *many additional tools available within the R ecosystem, including [R Markdown](https://rmarkdown.rstudio.com/) and [Quarto](https://quarto.org/) for writing reproducible documents, books^[*this book was written with Quarto*], and articles,as well as [shiny](https://shiny.posit.co/) for developing interactive web applications*
+:::
+
+:::{.callout-note title="What is this part of the book about?"}
+*A brief tutorial on the R programming language will be presented in the following chapters, focusing only on the aspects that are most relevant for this course. The specific use of R for designing experiments and analyzing experimental data will be explored through **ad hoc** exercises.*
+:::
+
+\
+
+## Installation (R and RStudio)
+
+Start by following the two steps indicated on the [Posit website](https://posit.co/download/rstudio-desktop/):
+
+1.  **install R**
+2.  **install RStudio**
+
+*RStudio* is an open-source integrated development environment (IDE) for using R, although it can also be used with other languages, such as Python. For students who do not wish to install the desktop version, RStudio can also be used through [Posit Cloud](https://posit.cloud/plans?utm_source=Website&utm_medium=IDE_Download&_gl=1*1dyiuiu*_ga*MTI1MzU5MjgzNy4xNzUwMzYzNjQ5*_ga_2C0WZ1JHG0*czE3NTYwNTkzNDQkbzE0JGcxJHQxNzU2MDYwNDI1JGo2MCRsMCRoMA..)^[*beware, however, that limitations apply to free subscriptions*].
+
+\
+
+## RStudio IDE
+
+After R and RStudio have been correctly installed, RStudio can be launched. The RStudio IDE interface should then appear, with four main **panes**, as shown in @fig-2-2-1.
+
+**The following sections provide a brief explanation of the features of interest in each pane.**
+
+![RStudio IDE Interface](/include/images/part_2/2-2-1_rstudio_ide_interface.png){#fig-2-2-1 width=100%}
+
+\
+
+### [**Pane 1**]{style="color: lightpink"}
+
+:::{#sec-panel1}
+This pane may not appear when RStudio is launched for the first time. It displays readable files, such as txt, md, Rmd, qmd, css, json, tex, yml files, among others. Of particular interest are **R files**, which are plain-text files containing executable R code. We will return to R files in @sec-ch24.
+
+Briefly, the [Source Pane]{style="color: lightpink"} is where users can view and edit code-related files.
+:::
+\
+
+### [**Pane 2**]{style="color: lightskyblue;"}
+
+This pane is used to execute R code interactively. In the example shown in @fig-2-2-1, a **numeric variable** named `x` has been created and the value `1` has been assigned to it. Notice that, unlike in many other programming languages, the operator `<-` is commonly used for assignment in R instead of `=`. @sec-ch23 introduces some basic R features, including variable definition, data types, data structures, and data import.
+
+\
+
+### [**Pane 3**]{style="color: mediumseagreen;"}
+
+There are two main tabs of interest in this **Pane**:
+
+#### **Environment**
+
+The Environment tab displays all currently saved R objects. After running the command `x <- 1` in [**Pane 2**]{style="color: lightskyblue;"} (*Console*), the variable `x` is saved in the *R Global Environment*. From the moment the variable `x` has been defined, it can be inspected in the Environment tab (cf. [**Pane 3**]{style="color: mediumseagreen;"} in @fig-2-2-1).
+
+Other potentially useful features of the Environment tab include:
+
+-   interactive import (![](/include/images/icons/import.png){height=1.5em}) of datasets from text files, Excel files, or common statistical software formats (e.g., SPSS).
+-   display of memory usage.
+-   the brush icon (![](/include/images/icons/brush.png){height=1.5em}), which removes all objects from the workspace (*Global Environment*).
+-   loading and saving (![](/include/images/icons/load_save.png){height=1.5em}) data into and from the R workspace.
+
+#### **History**
+
+In this tab, all commands executed during the current R session can be inspected. It is also possible to save and load history data, as well as to erase the entire history or only part of it.
+
+\
+
+### [**Pane 4**]{style="color: orchid;"}
+
+There are four main tabs of interest in this **Pane**:
+
+#### **Files** {#sec-files}
+
+This tab is self-explanatory. It allows users to navigate through directories, create new folders or files, delete files, and rename them. One important concept introduced here is the *Working Directory*. This is the directory R uses when executing code, and it is not necessarily the same directory currently shown in the *Files* tab.
+
+To set a *Working Directory*, click on the (![](/include/images/icons/three_dots.png){height=1.5em}) icon on the top-right edge of the *Files* tab. Then, navigate to the directory you wish to set as your *Working Directory*, select it, click on the (![](/include/images/icons/gear.png){height=1.5em}) icon, and then click on *Set As Working Directory* (@fig-2-2-2).
+
+The importance of the **Working Directory** will be discussed in @sec-ch24.
+
+![Setting current directory as the *Working Directory*](/include/images/part_2/2-2-2_setting_working_directory.png){#fig-2-2-2 width=40%}
+
+#### **Plots**
+
+All static figures created during an R session are stored in this tab. Users can navigate through the figures created, export them, delete all or some of them, and zoom in or out. This tab provides a useful graphical interface for exploring datasets.
+
+#### **Packages**
+
+Packages are R libraries containing functions, datasets, documentation, and, in some cases, compiled code. Packages extend the capabilities of R for specific tasks, such as data manipulation, visualization, or inferential statistics.
+
+The Packages tab lists all installed packages. A package can be used only after it has been installed. To install a new package, most of which are available from the [Comprehensive R Archive Network](https://cran.r-project.org/), use the command [`install.packages()`](https://rdrr.io/r/utils/install.packages.html).
+
+#### **Help**
+
+In this tab, users can find documentation for packages and functions.
+
+You can navigate through previously opened help pages using the left and right arrows (![](/include/images/icons/arrows.png){height=1.5em}). By clicking on the home icon (![](/include/images/icons/help_home.png){height=1.5em}), the general help page appears, providing many useful links.
+
+To open the documentation for a specific function, you may either use the [`help(function_name)`](https://rdrr.io/r/utils/help.html) command or the syntax `?function_name`. Consider, for example, the function mentioned in the previous section, `install.packages()`. To check its documentation, you may type either:
+
+```{r, eval=FALSE}
+?install.packages
+help(install.packages)
+```

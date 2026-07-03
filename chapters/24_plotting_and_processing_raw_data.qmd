@@ -1,0 +1,730 @@
+# Plotting and Processing Raw Data {#sec-ch24}
+
+Visual inspection and signal processing are beyond the scope of this course. Instead, our focus is on *selecting the appropriate **statistical tests** and applying them correctly* to draw inferences about the hypotheses under investigation. These tests require *collecting information* from a set of *experimental units* (e.g., participants, motor units, muscle fibers, or any other unit of analysis). Throughout this course, we will refer to this information as *variables*.
+
+Some *variables* can be obtained by directly asking participants (e.g., age) or through simple measurements (e.g., body mass and height). Others require processing biomedical signals. In this tutorial, and throughout the exercises in this course, we will work with *variables* computed from postural sway data (CoG raw data; see @sec-ch21).
+
+:::{.callout-note title="In this Chapter ..."}
+*... we will use R to process CoG data. Students will use RStudio to compute **five variables** related to postural control, all of which will be used throughout this course.*
+:::
+
+\
+
+## Important Considerations
+
+Before processing any data, we must ensure that the quality of the raw measurements is sufficiently high—*this is essential in any experiment or study*. If you are unsure how to assess data quality, consult the scientific literature in your field and critically evaluate the characteristics of your measurements.
+
+In our case, we collected smartphone orientation data while participants stood quietly. To assess the quality of the recorded data, it is useful to consider the following questions:
+
+- *How was the smartphone held during data acquisition?*
+- *Which reference coordinate system does the smartphone use to report orientation data?*
+- *Was the smartphone held firmly enough that changes in its orientation primarily reflect body sway rather than hand movements?*
+- *What is the expected amplitude of body sway under the different test conditions (e.g., eyes open, eyes closed)?*
+- *What frequency range should these sways exhibit? In other words, what are reasonable durations for the fastest and slowest body sway movements?*
+
+Once we have plausible answers to these---and possibly other---questions, we can visually inspect the data for artifacts. This prior understanding helps us recognize whether the recorded signals are consistent with the expected physiological behavior.
+
+We will begin by loading the raw data from a `csv` file into the R workspace, as described in the [**Loading CoG data**](@sec-loading-data) section.
+
+```{r}
+df <- read.csv(file.path(getwd(), "phyphox_data", "standing_eyes_open", "postural_sways.csv"))
+```
+
+\
+
+## Inspecting Raw Data
+
+We have just loaded the contents of the file `"postural_sways.csv"` into the R workspace. This file contains three columns:
+
+- `time`: time instants at which the smartphone orientation data were recorded;
+- `x_cog`: CoG coordinate in the *frontal plane*^[*divides the body into anterior and posterior sections*] (medio-lateral direction);
+- `y_cog`: CoG coordinate in the *sagittal plane*^[*divides the body into left and right sections*] (antero-posterior direction).
+
+If the data were collected as described in @sec-ch13, `x_cog` and `y_cog` should represent body sway in the medio-lateral and antero-posterior directions, respectively.
+
+To visualize the CoG position in the sagittal plane, we can use [`plot()`](https://rdrr.io/r/base/plot.html):
+
+```{r, eval=FALSE, results='hide'}
+plot(df$y_cog)
+```
+
+![The simplest plot of raw CoG Y data.](/include/images/part_2/ch_4/2-4-1_simple-plot.png){#fig-2-4-1}
+
+\
+
+### Helpful Cosmetics
+
+By calling the [`plot()`](https://rdrr.io/r/base/plot.html) function, you may have noticed that R automatically labels both axes. The $y$ axis is labeled according to the variable passed as the second argument (`df$y_cog`), while the $x$ axis is labeled `Index`. After checking that we have `r length(df$y_cog)` data points using `length(df$y_cog)`, it becomes clear that `Index` refers to the sample number, ranging from 1 to `r length(df$y_cog)`.
+
+Another feature worth noting is that each data point is represented by a marker---a black circle with a white fill. This default behavior is appropriate because R was originally designed for statistical analyses involving relatively small sets of *observations*, typically corresponding to the number of *experimental units* in a study (often fewer than 20). In our case, however, the CoG measurements form a continuous time series, making a line plot without markers a more appropriate representation.
+
+These and many other graphical settings can be customized when calling the [`plot()`](https://rdrr.io/r/base/plot.html) function:
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| echo: !expr 1:9
+
+plot(df$time, df$y_cog,                          # x and y data respectively
+     type = "l",                                 # line type plot
+     col = "turquoise4",                         # color of the line
+     main = "Stabilogram in the Sagittal Plane", # title text, shown on the top of the plot
+     font.main = 2,                              # use bold font for the title text
+     xlab = "Time (s)",                          # label text for the X axis
+     ylab = "CoG Y Position (cm)", # label text for the Y axis
+     bty = "l",                    # show only left and bottom borders
+     )
+arrows(tail(df$time,1),min(df$y_cog,na.rm = TRUE),tail(df$time,1),diff(range(df$y_cog,na.rm = TRUE))/5 + min(df$y_cog,na.rm = TRUE), lwd = 2, length = 0.1)
+text(x = tail(df$time,1), y = min(df$y_cog,na.rm = TRUE), labels = "forward", pos = 4, srt = 90, offset = -1, font = 3)
+```
+
+![Setting some plot cosmetics.](/include/images/part_2/ch_4/2-4-2_line-plot.png){#fig-2-4-2}
+
+For a complete list of graphical parameters, consult the documentation for the [`par()`](https://rdrr.io/r/graphics/par.html) function.
+
+The anatomical interpretation of changes in *CoG Y Position*---that is, positive values correspond to forward displacement---was added using the [`arrows()`](https://rdrr.io/r/graphics/arrows.html) and [`text()`](https://rdrr.io/r/graphics/text.html) functions, which are omitted from the code listing for simplicity.
+
+\
+
+### Plotting CoG X and Y
+
+*Stabilograms* are graphical representations of postural sway as a function of time. Since body sway is measured in both the antero-posterior and medio-lateral directions, two stabilograms are available: one for the sagittal plane (Figures -@fig-2-4-1 and -@fig-2-4-2) and one for the frontal plane.
+
+There are two common ways to display these stabilograms.
+
+\
+
+#### Stacking Stabilograms
+
+One option is to create a separate plot for each stabilogram. Simply calling the [`plot()`](https://rdrr.io/r/base/plot.html) function twice would not achieve the desired result because R would create each plot in a separate graphics device (or overwrite the existing plot, depending on the environment). Instead, we would like to display both stabilograms within the same figure window. This can be accomplished using the [`layout()`](https://rdrr.io/r/graphics/layout.html) function.
+
+```{r}
+#| eval: false
+#| results: 'hide'
+
+desired_layout <- matrix(
+  data = c(1, 2), 
+  nrow = 2, 
+  ncol = 1
+  ) # where to plot the data
+
+desired_layout  # column vector, indicating where to place plot 1 (top) and 2 (bottom)
+
+layout(mat = desired_layout) # tell R to draw the next 2 plots with this layout
+
+layout.show(2) # show the layout (outlines) of the next two plots
+```
+
+![Defining plotting layout.](/include/images/part_2/ch_4/2-4-3_layout.png){#fig-2-4-3}
+
+`desired_layout` is a matrix with one column and two rows, containing the values `1` and `2`. These values specify where each plot should be drawn: the first plot occupies the top row and the second plot the bottom row. Since both plots are intended to have the same size, passing only the matrix `desired_layout` to the [`layout()`](https://rdrr.io/r/graphics/layout.html) function is sufficient.
+
+We can now call [`plot()`](https://rdrr.io/r/base/plot.html) twice to draw the stabilograms for the sagittal and frontal planes.
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+layout(mat = desired_layout) # tell R to draw the next 2 plots with this layout
+
+# first plot - CoG Y stabilogram
+plot(df$time, df$y_cog, 
+  type = "l", 
+  col = "turquoise4", 
+  xlab = "Time (s)", 
+  main = "Stabilograms in the Sagittal and Frontal Planes",
+  font.main = 2, 
+  ylab = "CoG Y Position (cm)", 
+  bty = "l"
+  )
+
+# second plot - CoG X stabilogram
+plot(df$time, df$x_cog, 
+  type = "l", 
+  col = "purple4", 
+  xlab = "Time (s)", 
+  ylab = "CoG X Position (cm)", 
+  bty = "l"
+  )
+```
+
+![Stacked stabilograms.](/include/images/part_2/ch_4/2-4-4_stacked-cog.png){#fig-2-4-4}
+
+\
+
+#### Overlaying Stabilograms
+
+An alternative approach is to display both stabilograms in the same graph. In this case, there is no need to define a plotting layout. We first create one plot with the [`plot()`](https://rdrr.io/r/base/plot.html) function and then add the second trace using the [`lines()`](https://rdrr.io/r/graphics/lines.html) function^[*The `lines()` function adds a line to the graph created by the preceding `plot()` call.*].
+
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+# first plot - CoG Y stabilogram
+plot(df$time, df$y_cog, 
+  type = "l", 
+  col = "turquoise4", 
+  xlab = "Time (s)", 
+  main = "Stabilograms in the Sagittal and Frontal Planes",
+  font.main = 2, 
+  ylab = "CoG Position (cm)", 
+  bty = "l", 
+  ylim = range(c(df$x_cog,df$y_cog), na.rm = TRUE)
+  )
+
+# second plot - CoG X stabilogram
+lines(df$time, df$x_cog, 
+  type = "l", 
+  col = "purple4", 
+  bty = "l"
+  )
+
+# adding legend to distinguish the two traces
+legend(
+  "right", 
+  inset = 0.02, 
+  c("CoG Y","CoG X"), 
+  col = c("turquoise4","purple4"), 
+  lty = 1
+  )
+```
+
+![Overlaying stabilograms.](/include/images/part_2/ch_4/2-4-5_overlaying-cog.png){#fig-2-4-5}
+
+When **overlaying plots**, the different traces must be clearly distinguished and appropriately labeled. Here, different colors are used for the two signals, and the [`legend()`](https://rdrr.io/r/graphics/legend.html) function identifies which line corresponds to each CoG coordinate.
+
+Unfortunately, the overlaid plot does not provide the intended visualization of postural sway in the sagittal (CoG Y) and frontal (CoG X) planes. The primary reason is that the two signals have substantially different mean values. To display both time series on the same graph, the limits of the $y$ axis must be set to encompass the full range of both coordinates, namely [`r round(range(c(df$x_cog,df$y_cog), na.rm = TRUE))`], using the [`range()`](https://rdrr.io/r/base/range.html) function (i.e., `ylim = range(c(df$x_cog,df$y_cog), na.rm = TRUE)`). Because the actual postural sway is only a few centimeters, scaling the $y$ axis to a range of approximately `r diff(round(range(c(df$x_cog,df$y_cog), na.rm = TRUE)))` cm compresses both stabilograms, making the sway difficult to appreciate visually.
+
+The mean value of each time series^[*A sequence of data points collected at successive, often equally spaced, time instants.*]---CoG Y and CoG X---is typically not of interest. It reflects the average position of the CoG during the trial rather than the magnitude or dynamics of body sway. In the next section, we will begin processing the raw data so that the two signals can be meaningfully overlaid and compared.
+
+\
+
+## Processing Raw Data
+
+The appropriate procedure for processing raw data depends on both the characteristics of the data and the scientific question being addressed.
+
+In this tutorial, we will work with postural sway data. Although no specific research question is investigated here, this tutorial provides an opportunity to become familiar with the RStudio IDE, which will be used throughout the course to address a variety of research questions.
+
+The processing consists of two main steps:
+
+-   [Pre-processing Sway Data](@sec-preprocessing)
+-   [Computing the Variables of Interest](@sec-computing-cog-metrics)
+
+\
+
+### Pre-processing Sway Data {#sec-preprocessing}
+
+Before computing any postural metric, we must ensure that the raw data have been properly prepared. Otherwise, the resulting metrics may have questionable validity. For example, recording duration is known to significantly influence postural metrics computed in both the time and frequency domains [@carpenter01]. One way to minimize this effect is to standardize the duration of the recordings before computing the desired metrics.
+
+In this tutorial, we will therefore perform two pre-processing procedures: [**trimming**](@sec-trimming-sway-data) and [**demeaning**](@sec-demeaning-sway-data).
+
+\
+
+#### Trimming Sway Data {#sec-trimming-sway-data}
+
+From the plots shown earlier, we can see that approximately 40 s of sway data were recorded. The first few seconds are likely to contain transient effects (e.g., those associated with initiating data acquisition).
+
+To standardize the duration of the recordings, we will retain a 30 s processing window. Specifically, we will discard the first 5 s of data and then keep the next $N$ samples, where $N = 30 \times sf$ and $sf$ denotes the *sampling frequency*. Before doing so, we must determine the actual sampling frequency.
+
+By default, PhyPhox records orientation data at approximately $100\textrm{Hz}$ unless configured otherwise. Rather than assuming this nominal value, we will estimate the sampling frequency directly from the recorded timestamps.
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+si <- diff(df$time) # sampling intervals: between consecutive samples
+
+plot(si*1000, 
+  ylab = "Sampling interval (ms)", 
+  xlab = "Sampling interval number (#)", 
+  main = "Interval between consecutive samples", 
+  font.main = 2, 
+  col = "turquoise4"
+  )
+```
+
+```{r, echo=FALSE}
+si <- diff(df$time) # sampling intervals: between consecutive samples
+```
+
+![Checking sampling frequency consistency.](/include/images/part_2/ch_4/2-4-6_sampling-rate.png){#fig-2-4-6}
+
+The intervals between consecutive samples are not perfectly constant, indicating a small amount of sampling jitter. On average, however, these deviations are on the order of $1\mu\textrm{s}$, which is negligible compared with the duration of the 30 s processing window.
+
+The estimated sampling frequency is slightly lower than $100\textrm{ Hz}$. Based on @fig-2-4-6, the average sampling rate is $1/0.010008=`r format(a_sf <- 1/0.010008, nsmall = 6)`\textrm{ Hz}$. Consequently, assuming $sf=100\textrm{ Hz}$ introduces a cumulative timing error of approximately $`r sprintf("%+1.1f",100000/a_sf-1000)`\textrm{ ms}$ per second of processed data. For example, while 100 samples correspond to exactly $1\textrm{ s}$ at $100\textrm{ Hz}$, they actually span $100/`r format(a_sf, nsmall = 6)`=`r 100/99.920064`\textrm{ s}$ at the measured sampling frequency.
+
+**This discrepancy is sufficiently small to be ignored, and throughout this tutorial we will assume a sampling frequency of** $sf=100\textrm{ Hz}$.
+
+
+```{r}
+sf <- round(1/mean(si)) # mean sampling frequency (100 Hz)
+dur <- 30               # duration of the processing window
+y_cog <- head(          # 30 s of CoG Y samples
+  df$y_cog[df$time>5],
+  dur * sf
+  ) 
+x_cog <- head(          # 30 s of CoG X samples
+  df$x_cog[df$time>5], 
+  dur * sf
+  ) 
+time <- seq_len(dur * sf) / sf  # time vector (sf = 100 Hz)
+```
+
+We used the [`round()`](https://rdrr.io/r/base/Round.html) function to approximate the estimated sampling frequency to the nearest integer, which in this case is $`r sf`\textrm{ Hz}$^[*this value may differ if a different sampling frequency has been configured in PhyPhox*]. We then used the [`head()`](https://rdrr.io/r/utils/head.html) function to retain $`r dur * sf`$ samples (i.e., $`dur * sf = `r dur` \times `r sf` = `r dur*sf`$) of both CoG Y and CoG X after the first $5 \textrm{ s}$ of recording.
+
+For convenience, the CoG coordinates in the two anatomical directions were stored in the variables `y_cog` and `x_cog`.
+
+\
+
+#### Demeaning Sway Data {#sec-demeaning-sway-data}
+
+Removing the mean from the data is not strictly necessary, but it simplifies both signal processing and visualization.
+
+To demean $y_\textrm{cog}$ and $x_\textrm{cog}$, we simply subtract their respective mean values, computed using the [`mean()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) function:
+
+```{r}
+y_cog = y_cog - mean(y_cog, na.rm = TRUE) # demeaned CoG Y
+x_cog = x_cog - mean(x_cog, na.rm = TRUE) # demeaned CoG X
+```
+
+Notice the argument `na.rm = TRUE` passed to the [`mean()`](https://rdrr.io/r/base/mean.html) function. This ensures that missing values (`NA`) are ignored when computing the mean. Such values may arise, for example, if the final line of the imported `csv` file is empty. We can verify this by inspecting the last few observations with the [`tail()`](https://rdrr.io/r/utils/head.html) function:
+
+```{r}
+tail(df,5) # the last 5 observations in df
+```
+
+\
+
+#### Plotting the Pre-Processed Data
+
+The data should be visually inspected after each processing step to ensure that the intended operations have been correctly applied.
+
+For example, the CoG displacements should remain within a few centimeters in both anatomical directions. In addition, after demeaning, both signals should be centered around $0\textrm{ cm}$ and span the expected duration of $30\textrm{ s}$.
+
+Let us now overlay `y_cog` and `x_cog` to verify that these conditions have been met.
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+# first plot - y_cog stabilogram
+plot(time, y_cog, 
+  type = "l", 
+  lwd = 8, 
+  col = "lightcyan2", 
+  xlab = "Time (s)", 
+  main = "Stabilograms in the Sagittal and Frontal Planes",
+  font.main = 2, 
+  ylab = "CoG Position (cm)", 
+  bty = "l"
+  )
+
+# second plot - x_cog stabilogram
+lines(time, x_cog, 
+  type = "l", 
+  lwd = 2, 
+  col = "turquoise4", 
+  xlab = "Time (s)", 
+  ylab = "CoG X Position (cm)", 
+  bty = "l"
+  )
+
+# adding legend to distinguish the two traces
+legend(
+  "topleft", 
+  inset = 0.02,
+  c(expression("y"["cog"]),expression("x"["cog"])), 
+  col = c("lightcyan2","turquoise4"), 
+  lty = 1, lwd = c(8,2)
+  )
+```
+
+![Stabilograms with demeaned, CoG position data.](/include/images/part_2/ch_4/2-4-7_stabilograms.png){#fig-2-4-7}
+
+\
+
+### Computing CoG Metrics {#sec-computing-cog-metrics}
+
+As discussed in @sec-stabilometry, numerous postural metrics have been proposed to characterize CoG trajectories [@jacono04; @prieto96]. In this tutorial, and throughout the course, we will focus on only three of them: the *Elliptic Area* ($EA$), the *Standard Deviation* ($\sigma_{x,y}$), and the *Mean Speed* ($v_{x,y}$).
+
+\
+
+#### Preliminaries on the Elliptic Area {#sec-eapreliminaries}
+
+In @sec-ea (see @eq-copea), we described the procedure used to compute the *Elliptic Area*. Briefly, we seek the two principal axes of the ellipse that best fits the CoG trajectory. These axes correspond to the directions along which the CoG coordinates are uncorrelated. Mathematically, this is achieved by finding the reference system that diagonalizes the CoG covariance matrix.
+
+We begin by constructing the *Statokinesigram*^[*Graphical representation of the CoG trajectory in the medio-lateral and antero-posterior directions.*]:
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+#| echo: !expr 1:11
+
+plot(x_cog, y_cog, 
+  type = "l", 
+  col = "turquoise4", 
+  asp = 1,
+  main = "Statokinesigram", 
+  xlab = "Medial-Lateral (cm)", 
+  ylab = "Anterior-Posterior (cm)"
+  )
+
+abline(h = 0, lty = "dotted") # adding HORIZONTAL line at 0 cm
+abline(v = 0, lty = "dotted") # adding VERTICAL line at 0 cm
+
+# adding arrows indicating directions
+arrows(-3, -1.5, -2 , -1.5, length = 0.05) 
+text(x = -2.5, y = -1.5, labels = "right", adj = c(0.5, -0.75), font = 3, cex = 0.9) 
+
+arrows(-3, -1.5, -3 , -0.5, length = 0.05) # forward arrow
+text(x = -3, y = -1, labels = "forward", adj = c(0.5, -0.75), srt = 90, font = 3, cex = 0.9) # labeling the arrow
+```
+
+![CoG coordinates projected on the surface.](/include/images/part_2/ch_4/2-4-8_statokinesigram.png){#fig-2-4-8}
+
+The [`abline()`](https://rdrr.io/r/graphics/abline.html) function was used to draw horizontal and vertical reference lines. From @fig-2-4-8, we observe that, over the 30 s recording, the CoG trajectory spans approximately $`r floor(diff(range(y_cog)))`\textrm{ cm}$ in the antero-posterior direction and $`r floor(diff(range(x_cog)))`\textrm{ cm}$ in the medio-lateral direction. We also note that the principal excursion of the CoG follows a direction slightly rotated counterclockwise with respect to the vertical reference axis.
+
+The axes of the ellipse that best fits the *Statokinesigram* (@fig-2-4-8) are computed according to Oliveira et al. [@oliveira96] (see @eq-copea).
+
+\
+
+##### The Covariance Matrix ($\Sigma$)
+
+We begin by computing the covariance matrix $\Sigma$ from the CoG coordinates:
+
+```{r}
+xy <- cbind(x_cog, y_cog) # matrix with N rows (sf * dur) and 2 cols
+head(xy, 5)               # shows the first 5 rows of the xy matrix
+Sigma <- cov(xy)          # covariance matrix
+```
+
+We first used the [`cbind()`](https://rdrr.io/r/base/cbind.html) function to combine the CoG $x$ and $y$ coordinates into a matrix with $N=`r sf*dur`$ rows (equal to `sf * dur`) and two columns (`x_cog` and `y_cog`). We then computed the covariance matrix $\Sigma$ using the [`cov()`](https://rdrr.io/r/stats/cor.html) function from the **stats** package.
+
+Inspecting `Sigma`, we observe that it is a symmetric $2\times2$ matrix, as expected:
+
+```{r}
+Sigma   # displays the covariance matrix
+```
+
+Its main diagonal contains the variances of $x_\textrm{cog}$ and $y_\textrm{cog}$, whereas the off-diagonal elements contain the covariance between the two coordinates. Because covariance is symmetric, these two elements are identical^[$\textrm{cov}(x_\textrm{cog},y_\textrm{cog})=\textrm{cov}(y_\textrm{cog},x_\textrm{cog})$]:
+
+\
+
+##### The Ellipse Semi Axes {#the-ellipse-semi-axes}
+
+Our objective is to find a new covariance matrix $\Lambda$ whose off-diagonal elements are both zero. This corresponds to identifying a new reference system ($x',y'$) in which the transformed coordinates are uncorrelated. We obtain this reference system by computing the eigenvalues and eigenvectors of $\Sigma$ with the [`eigen()`](https://rdrr.io/r/base/eigen.html) function:
+
+```{r}
+xy_prime <- eigen(Sigma)  # computing eigenvalues and eigenvectors of Sigma 
+xy_prime
+```
+
+`xy_prime` is a [List](@sec-list) containing two named elements: `values` and `vectors`. The eigenvalues are stored in `xy_prime$values` in decreasing order, while the corresponding eigenvectors are stored in `xy_prime$vectors`.
+
+:::{.callout-note title="What do these `values` and `vectors` represent?"}
+*The **eigenvalues** stored in `xy_prime$values` correspond to the variances of the CoG coordinates in the transformed reference system defined by $x'$ and $y'$. Consequently, the covariance matrix in this reference system is $\Lambda=\mathrm{diag}(\lambda_1^2,\lambda_2^2)$.*
+
+*The **eigenvectors** stored in `xy_prime$vectors` define the directions of the principal axes of this new reference system.*
+:::
+
+Their geometric interpretation becomes clearer when inspecting the figure below. For convenience, we store the eigenvalues and eigenvectors in separate R variables:
+
+```{r, echo = seq(5,15)}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+plot(x_cog, y_cog, type = "l", col = "turquoise4", asp = 1, main = "Statokinesigram", xlab = "Medial-Lateral (cm)", ylab = "Anterior-Posterior (cm)")
+abline(h = 0, lty = "dotted") # adding HORIZONTAL line at 0 cm
+abline(v = 0, lty = "dotted") # adding VERTICAL line at 0 cm
+
+lambda <- sqrt(xy_prime$values) # square root of eigenvalues
+eigvec <- xy_prime$vectors      # eigenvectors
+
+# SEMI AXES of the ellipse, scalled with 1.96 standard deviation (1.96 lambda)
+arrows(0, 0,                # origin of the vector 
+       eigvec[1] * lambda[1] * 1.96, # x' coordinate of the first eigenvector
+       eigvec[2] * lambda[1] * 1.96, # y' coordinate of the first eigenvector
+       length = 0.05, 
+       col = "pink", 
+       lwd = 8
+       ) # 
+arrows(0, 0,                # origin of the vector 
+       eigvec[3] * lambda[2] * 1.96, # x' coordinate of the second eigenvector 
+       eigvec[4] * lambda[2] * 1.96, # y' coordinate of the second eigenvector
+       length = 0.05, 
+       col = "pink", 
+       lwd = 8
+       ) # 
+
+# SEMI AXES of the ellipse, scaled with 1.00 standard deviation (1.00 lambda)
+arrows(0, 0, 
+       eigvec[1] * lambda[1], 
+       eigvec[2] * lambda[1], 
+       length = 0.05, 
+       col = "pink4", 
+       lwd = 2
+       ) 
+arrows(0, 0, 
+       eigvec[3] * lambda[2], 
+       eigvec[4] * lambda[2], 
+       length = 0.05, 
+       col = "pink4", 
+       lwd = 2
+       ) #
+
+legend(
+  "bottomleft", 
+  inset = 0.02, 
+  c("CoG","Semiaxes scaled by 1.96\U03BB","Semiaxes scaled by 1.00\U03BB"),
+  col = c("turquoise4","pink","pink4"), 
+  lty = 1, 
+  lwd = c(2, 8, 2), 
+  cex = 0.8
+  )
+```
+
+```{r, echo=FALSE}
+lambda <- sqrt(xy_prime$values) # square root of eigenvalues
+eigvec <- xy_prime$vectors      # eigenvectors
+```
+
+![Semiaxes of the ellipse best fitting the CoG data.](/include/images/part_2/ch_4/2-4-9_statokinesigram-ellipse-axes.png){#fig-2-4-9}
+
+Notice that we take the square root of the eigenvalues using the [`sqrt()`](https://rdrr.io/r/base/MathFun.html) function. This yields the standard deviations ($\lambda_1$ and $\lambda_2$) of the CoG coordinates in the transformed reference system.
+
+The ellipse semi-axes are shown using two different scaling factors: $1.00\lambda$ and $1.96\lambda$. Thus, the vectors displayed in @fig-2-4-9 have lengths equal to one and 1.96 standard deviations, respectively. The chosen scaling factor determines the size of the ellipse and, consequently, the proportion of CoG samples enclosed by it. For comparison, approximately 34% of observations project within $\pm1.00\lambda$ along each principal axis, whereas approximately 47.5% project within $\pm1.96\lambda$ along each axis individually.
+
+:::{.callout-note title="How many CoG samples are included in the ellipse?"}
+*Using a scaling factor of $1.96$, approximately 95% of the CoG samples project within the limits of each principal axis.*
+
+*The resulting ellipse encloses approximately 85% of the CoG samples (see @oliveira96).*
+:::
+
+\
+
+##### Drawing the Ellipse
+
+Drawing the ellipse is not necessary to compute the elliptic area, since this calculation only requires the eigenvalues (i.e., $\Lambda=\mathrm{diag}(\lambda_1^2,\lambda_2^2)$; see @eq-copea). However, overlaying the ellipse on the CoG trajectory is useful for verifying that the procedure has been implemented correctly: if so, the ellipse should provide a reasonable fit to the data.
+
+We begin by creating an ellipse, scaling it according to the eigenvalues computed in the previous section, and plotting it:
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+plot(x_cog, y_cog, 
+  type = "l", 
+  col = "turquoise4", 
+  asp = 1, 
+  main = "CoG Statokinesigram", 
+  xlab = "medial-lateral (cm)", 
+  ylab = "Anterior-Posterior (cm)"
+  )
+
+abline(h = 0, lty = "dotted") # adding HORIZONTAL line at 0 cm
+abline(v = 0, lty = "dotted") # adding VERTICAL line at 0 cm
+
+x <- cos(
+  seq(0, 2 * pi, length.out = 100)
+  ) # x coordinates of the ellipse
+y <- sin(
+  seq(0, 2 * pi, length.out = 100)
+  ) # y coordinates of the ellipse
+
+x <- x * lambda[1] * 1.96 # scaling according to the first eigenvalue
+y <- y * lambda[2] * 1.96 # scaling according to the second eigenvalue
+
+lines(x, y, 
+  type = "l", 
+  col = "pink", 
+  lwd = 8
+  ) # drawing ellipse
+
+legend(
+  "bottomleft", 
+  inset = 0.02, 
+  c("CoG","Ellipse (1.96\U03BB)"),
+  col = c("turquoise4","pink"), 
+  lty = 1, 
+  lwd = c(2, 8), 
+  cex = 0.8
+  )
+```
+
+![Scaled ellipse in the $(x,y)$ reference system.](/include/images/part_2/ch_4/2-4-10_statokinesigram-ellipse-xy.png){#fig-2-4-10}
+
+Although the ellipse appears to have been scaled correctly, it does not fit the data well. This occurs because the ellipse was drawn in the original $(x,y)$ reference system. We must therefore rotate it into the reference system defined by the principal axes, $(x',y')$. This can be done in R using the matrix multiplication operator ([`%*%`](https://rdrr.io/r/base/matmult.html)):
+
+```{r}
+#| eval: false
+#| results: 'hide'
+#| code-fold: true
+#| code-summary: Show code
+
+xpyp <- cbind(x,y) %*% 
+  t(eigvec)      # transforming between reference systems
+xp <- xpyp[ , 1] # all elements of the first column of the transformed data
+yp <- xpyp[ , 2] # all elements of the second column of the transformed data
+
+# Then just rerun the commands above
+plot(x_cog, y_cog, 
+  type = "l", 
+  col = "turquoise4", 
+  asp = 1, 
+  main = "CoG Statokinesigram", 
+  xlab = "medial-lateral (cm)", 
+  ylab = "Anterior-Posterior (cm)"
+  )
+
+abline(h = 0, lty = "dotted") # adding HORIZONTAL line at 0 cm
+abline(v = 0, lty = "dotted") # adding VERTICAL line at 0 cm
+
+lines(xp, yp, 
+      type = "l", 
+      col = "pink", 
+      lwd = 8
+      ) # drawing ellipse
+
+legend(
+  "bottomleft", 
+  inset = 0.02, 
+  c("CoG","Ellipse (1.96\U03BB)"), 
+  col = c("turquoise4","pink"), 
+  lty = 1, 
+  lwd = c(2, 8), 
+  cex = 0.8
+  )
+```
+
+![Scaled ellipse in the $(x',y')$ reference system.](/include/images/part_2/ch_4/2-4-11_statokinesigram-ellipse-xpyp.png){#fig-2-4-11}
+
+We changed reference system by multiplying the $x$ and $y$ coordinates of the ellipse (`cbind(x, y)`) by the transpose ([`t()`](https://rdrr.io/r/base/t.html)) of the `eigvec` matrix, which contains the two eigenvectors, one in each column.
+
+\
+
+#### Computing the CoG Elliptic Area {#sec-compute-ea}
+
+After identifying the axes of the ellipse that best fits the CoG data (see [Preliminaries on the Elliptic Area](@sec-eapreliminaries)), we compute the elliptic area $EA$ using @eq-copea, restated here:
+
+$$
+   EA = \pi k^2 \sqrt{\lambda_1 \lambda_2}
+$$
+
+where $\sqrt{\lambda_1}$ and $\sqrt{\lambda_2}$ are the standard deviations of the CoG coordinates in the reference system aligned with the ellipse semi-axes (see @fig-2-4-11), and $k$ is the scaling factor determining the proportion of data points included in the ellipse. For $k=1.96$, the ellipse encloses approximately 85% of the CoG samples.
+
+For the data shown in @fig-2-4-11, the CoG elliptic area is `EA =` $`r format(EA <- pi * 1.96^2 * prod(lambda), digits = 2)` \textrm{ cm}^2$:
+
+```{r}
+EA = pi * 1.96^2 * prod(lambda)
+EA
+```
+
+\
+
+#### Mean Speed and Standard Deviation
+
+Computing these stabilometric metrics simply requires translating the equations introduced in @sec-sv into code. They are restated below for convenience.
+
+Several procedures could be used to compute these two metrics. Both require processing all $N=`r sf*dur`$ CoG samples, corresponding to the $30\textrm{ s}$ processing window defined when [Trimming Sway Data](@sec-trimming-sway-data). Since loops in R will only be introduced in @sec-ch25, we will use a different approach here.
+
+:::{.callout-note title="Do it yourself"}
+*Unlike the Elliptic Area, no code will be provided for computing these two metrics. This task is left as an exercise at the end of this chapter.*
+:::
+
+\
+
+##### Mean CoG Speed ($v_{x_\textrm{cog}}$ and $v_{y_\textrm{cog}}$) {#sec-computing-v}
+
+We may either:
+
+-   compute the total CoG displacement and divide it by the duration of the processing epoch, $\frac{N-1}{sf}=`r (sf*dur-1)/sf`\textrm{ s}$;
+
+-   compute the $N-1=`r sf*dur-1`$ instantaneous speed values from each pair of consecutive CoG samples and then average them.
+
+Both approaches lead to the following equation:
+
+$$
+  v_x=\frac{sf}{(N-1)}\sum_{i = 1}^{N-1} |x_\textrm{cog}(i+1)-x_\textrm{cog}(i)|
+$$
+
+where $x_\textrm{cog}$ denotes the CoG coordinate in the frontal plane^[*to compute Mean CoG Speed in the sagittal plane, replace $x_\textrm{cog}$ with $y_\textrm{cog}$*] (medio-lateral direction), sampled at frequency $sf$ for a total of $N$ samples.
+
+\
+
+##### CoG Standard Deviation ($\sigma_{x_\textrm{cog}}$ and $\sigma_{y_\textrm{cog}}$) {#sec-computing-sigma}
+
+The *CoG Standard Deviation* is defined as:
+
+$$
+  \sigma_x=\sqrt{\frac{1}{N}\sum_{i = 1}^{N} \left(x_\textrm{cog}(i)-\bar{x}_\textrm{cog}\right)^2}
+$$
+
+where $x_\textrm{cog}$ and $\bar{x}_\textrm{cog}$ denote, respectively, the CoG coordinate and the mean CoG position in the frontal plane^[*as for Mean CoG Speed, replace $x_\textrm{cog}$ with $y_\textrm{cog}$ to compute CoG Standard Deviation in the sagittal plane.*] (medio-lateral direction).
+
+Notice that $\bar{x}_\textrm{cog}=0$ because of the [Demeaning Sway Data](@sec-demeaning-sway-data) procedure described above. Therefore, in this case, the *Standard Deviation* and *Root Mean Square* values coincide.
+
+:::{.callout-note title="$N$ or $N-1$?"}
+*Some authors use a slightly different definition of standard deviation, with $N-1$ instead of $N$ in the denominator.*
+
+*The reason for this distinction will become clear later in the course. Because the number of CoG samples is typically large, the two definitions can be considered practically equivalent.*
+:::
+
+\
+
+## Exercises
+
+Compute the Mean CoG Speed ($v_{x_\textrm{cog}}$ and $v_{y_\textrm{cog}}$) and the CoG Standard Deviation ($\sigma_{x_\textrm{cog}}$ and $\sigma_{y_\textrm{cog}}$) for the two `csv` files available in the course material, separately for the medio-lateral ($x$) and antero-posterior ($y$) directions.
+
+-   Remember to do this after [trimming](@sec-trimming-sway-data) and [demeaning](@sec-demeaning-sway-data) the data.
+-   The R [`sd()`](https://rdrr.io/r/stats/sd.html) function is not allowed for computing $\sigma_{y_\textrm{cog}}$.
+-   The R functions and operators suggested for this task are [`diff()`](https://rdrr.io/r/base/diff.html), [`sum()`](https://rdrr.io/r/base/sum.html), [`mean()`](https://rdrr.io/r/base/mean.html), [`^`](https://rdrr.io/r/base/Arithmetic.html), and [`%*%`](https://rdrr.io/r/base/matmult.html).
+
+To check whether your computations are correct, the results for each of the two files are listed in @tbl-2-4-1.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-2-4-1
+#| echo: false
+#| tbl-cap: CoG standard deviation and speed for the two files provided.
+
+sf = 100
+folders = c("standing_eyes_open","standing_eyes_closed")
+df_cog = data.frame(test_condition = folders, v_x = double(2), v_y = double(2), sigma_x = double(2), sigma_y = double(2))
+
+for (i in 1:length(folders)) {
+  df = read.csv(file.path(getwd(),"phyphox_data",folders[i],"postural_sways.csv"))
+  y_cog = head(df$y_cog[df$time>5], dur * sf)
+  x_cog = head(df$x_cog[df$time>5], dur * sf)
+  y_cog = y_cog - mean(y_cog, na.rm = TRUE) # demeaned CoG Y
+  x_cog = x_cog - mean(x_cog, na.rm = TRUE) # demeaned CoG X
+  
+  df_cog$sigma_x[i] = sqrt((t(x_cog) %*% x_cog) / (dur*sf-1) )
+  df_cog$sigma_y[i] = sqrt((t(y_cog) %*% y_cog) / (dur*sf-1) )
+  df_cog$v_x[i] = sf * mean(abs(diff(x_cog))) 
+  df_cog$v_y[i] = sf * mean(abs(diff(y_cog))) 
+}
+
+datatable(df_cog,
+          rownames = FALSE, 
+          escape = FALSE, 
+          colnames = c("File processed", "$\\sigma_x \\textrm{(cm)}$", "$\\sigma_y \\textrm{(cm)}$", "$v_x \\textrm{(cm/s)}$", "$v_y \\textrm{(cm/s)}$"),
+          options = list(
+    dom = 't',ordering = FALSE, columnDefs = list(list(className = "dt-center", targets = "_all"), list(width = paste0(100 / 4, "%"), targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+) |> formatRound(columns = seq(2,5), digits = 1)
+```
+:::

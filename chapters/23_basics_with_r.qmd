@@ -1,0 +1,450 @@
+# The Basics with R {#sec-ch23}
+
+Before delving into the many statistical and graphical tools available for data analysis, we first need to become familiar with the basic logic of the R programming language. This is the purpose of this tutorial.
+
+\
+
+## Objects
+
+Everything stored in R is an object. An object may be a *variable*, a *function*, a dataset, or any other element created during an R session. Objects available in the R workspace can be inspected either by typing [`ls()`](https://rdrr.io/r/base/ls.html) in the *Console* or by checking the *Environment* tab.
+
+The object shown in the *Environment* tab (@fig-2-3-1) was created after running the code described in the following section.
+
+![Checking existing variables.](/include/images/part_2/2-3-1_environment_tab.png){#fig-2-3-1}
+
+```{r}
+#| echo: false
+mu_cog_x_speed = 6.08 # defined below as the mean of CoG speed across five subjects
+```
+
+\
+
+## Variables
+
+Variables can be created using either the `=` or `<-` operator. Although both operators can be used for assignment, there are functional differences between them. For example, `<-` has higher precedence than `=`, which may lead to unexpected results if both are mixed in the same line of code. The general recommendation in the [R Style Documentation](https://cran.r-project.org/web/packages/rockchalk/vignettes/Rstyle.pdf) is to use `<-` for assignment:
+
+> *Most* usages of the equal sign for assignments do not cause runtime errors. Not all possible problems were eliminated, however. Thus the equal sign is not recommended, it is tolerated.
+
+*We will therefore use `<-` for assignments and `=` for specifying named arguments within functions. Examples will follow.*
+
+Let us create the variable `mu_cog_x_speed`, storing the mean of the five CoG speed values listed in @tbl-2-1-1. We will then check whether this variable is present in the R workspace and print its value:
+
+```{r}
+mu_cog_x_speed <- (6.1 + 5.2 + 5.7 + 7.1 + 6.3) / 5 # creating a variable object in R
+print(mu_cog_x_speed)                               # printing the value of the only object created
+```
+
+```{r, results=FALSE}
+ls()                                                # listing objects in the workspace
+```
+
+```{r, echo=FALSE}
+ls()[grep("mu_cog_x_speed",ls())]
+```
+
+The hash symbol `#` indicates that the text following it is a comment, not a piece of code to be executed.
+
+The variable just created also appears in the *Environment* tab (@fig-2-3-1). To remove this variable from the R workspace, we can use the command [`rm()`](https://rdrr.io/r/base/rm.html) (e.g., `rm("mu_cog_x_speed")`), or click on the *brush icon* (![](/include/images/icons/brush.png){height=1.5em}) in the toolbar of the *Environment* tab. These options can be used to remove one, several, or all variables from the workspace.
+
+\
+
+## Functions
+
+Functions work as they do in other programming languages: they are blocks of code that execute when called by the user. Built-in functions are not shown in the workspace, whereas custom functions created by the user are. We will return to custom functions [later on](@sec-rfunctions) in this tutorial.
+
+Available functions and their documentation can be inspected under the *Packages* and *Help* tabs.
+
+We will now compute the same mean value as before, this time using the [`mean()`](https://rdrr.io/r/base/mean.html) function available in the [`base`](https://rdrr.io/r/) package.
+
+```{r}
+mu_cog_x_speed <- mean(c(6.1, 5.2, 5.7, 7.1, 6.3))
+mu_cog_x_speed
+```
+
+There are two important points to notice here.
+
+1.  The computed mean value, stored in the variable `mu_cog_x_speed`, can be inspected without explicitly using the [`print()`](https://rdrr.io/r/base/print.html) command.
+2.  The function [`mean()`](https://rdrr.io/r/base/mean.html) was applied to a vector containing the numbers `6.1`, `5.2`, `5.7`, `7.1`, and `6.3`, which were concatenated with the [`c()`](https://rdrr.io/r/base/c.html) function.
+
+\
+
+## Data types
+
+The following data types are commonly used in R.
+
+\
+
+:::{.panel-tabset}
+
+### **Numeric**
+
+This is the most common data type in R. Whenever decimal numbers are assigned to a variable, R stores them as numeric values by default. We can check this by creating the vector `cog_x_speed`, containing five plausible values for CoG speed in the lateral direction, using the [`c()`](https://rdrr.io/r/base/c.html) function:
+
+```{r}
+cog_x_speed <- c(6.1, 5.2, 5.7, 7.1, 6.3) # mm/s
+class(cog_x_speed)
+str(cog_x_speed)
+```
+
+We used the [`class()`](https://rdrr.io/r/base/class.html) and [`str()`](https://rdrr.io/r/utils/str.html) functions to inspect the type of the `cog_x_speed` variable. Notice that [`str()`](https://rdrr.io/r/utils/str.html) displays the data type, the dimension of the object, and the values stored in it.
+
+\
+
+### **Integer**
+
+Integer variables are similar to numeric variables, except that decimal values are not allowed. Suppose we want to store the age of the five subjects for whom `cog_x_speed` was computed. These values can be stored in a variable named `age`:
+
+```{r}
+age <- as.integer(c(31, 25, 28, 47, 30)) # years
+str(age)
+```
+
+By default, the vector created with the [`c()`](https://rdrr.io/r/base/c.html) function stores numbers as *numeric* values. We explicitly converted them to *integers* using the function [`as.integer()`](https://rdrr.io/r/base/integer.html).
+
+\
+
+### **Character**
+
+Character variables store text, also referred to as strings. Character values are created using quotation marks. In this example, we store the names of the five subjects for whom age and CoG speed values were obtained:
+
+```{r}
+subjects <- c("Sarah", "Rob", "Ted", "Jessica", "John") # volunteers
+str(subjects)
+```
+
+\
+
+### **Logical**
+
+Logical variables can assume only two possible values: `TRUE` or `FALSE`. For example, we may ask whether each subject tested is younger than 30 years:
+
+```{r}
+young_subjects <- age<30
+young_subjects
+```
+
+According to this definition, two subjects are younger than 30. If we wish to identify these subjects, we can use the logical values stored in `young_subjects` as indices:
+
+```{r}
+subjects[young_subjects]
+```
+
+In this case, R retrieves the second and third entries of the `subjects` variable because the second and third elements of `young_subjects` are `TRUE`. Alternative ways to access these two subjects are:
+
+```{r}
+subjects[2:3]
+subjects[c(2,3)]
+```
+
+The Parkinsonian column in @tbl-2-1-1 provides another example of a **logical** variable. We will recreate this variable below in the [**List**] section.
+:::
+
+\
+
+## Data structures {#sec-datastructures}
+
+There are different ways to organize data into R objects, depending on whether the variables of interest store *numeric*, *text*, or *other types* of data. Three useful functions help us understand the differences between data structures in R:
+
+-   [`typeof()`](https://rdrr.io/r/base/typeof.html), which indicates the type of the stored data.
+-   [`length()`](https://rdrr.io/r/base/length.html), which returns the number of elements stored.
+-   [`attributes()`](https://rdrr.io/r/base/attributes.html), which returns additional information about the object.
+
+The following sections briefly describe the most relevant data structures used in this course.
+
+\
+
+### **Vectors**
+
+Vectors are one-dimensional objects storing a collection of elements, *all of the same data type*. In other words, *vectors* are homogeneous data structures. A vector can store *numeric* data, such as the values stored in the `cog_x_speed` variable created earlier, or *character* data, such as subject names:
+
+```{r}
+subjects <- c("Sarah","Rob","Ted","Jessica","John")
+str(subjects)
+typeof(subjects)
+```
+
+The two variables `subjects` and `cog_x_speed` store collections of elements of the same type, *character* and *numeric*, respectively. In R, *vectors* may have one important attribute: *names*. Names can be defined when using the [`c()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/c) function:
+
+```{r}
+two_subjects <- c(Sarah = 6.1, Rob = 5.2) # or c("Sarah" = 6.1, "Rob" = 5.2)
+two_subjects
+attributes(two_subjects)
+names(two_subjects)
+str(two_subjects)
+```
+
+Here, we used the [`names()`](https://rdrr.io/r/base/names.html) function to retrieve the names of the entries in the vector `two_subjects`. The same function can also be used to define or modify the *names* attribute.
+
+\
+
+### **Matrices**
+
+Like vectors, *matrices store data of a single type*, but they arrange these data in two dimensions. Instead of storing age and CoG speed in two separate variables, we can create a matrix storing both variables in two separate columns, using the [`matrix()`](https://rdrr.io/r/base/matrix.html) function:
+
+```{r}
+age_and_cog_x_speed <- matrix( 
+  data = c(31, 25, 28, 47, 30, 6.1, 5.2, 5.7, 7.1, 6.3), 
+  nrow = 5, ncol = 2,
+  byrow = FALSE             # indicates whether entries should be arranged by rows
+  ) 
+
+typeof(age_and_cog_x_speed) # why is "double" the result of typeof()?
+age_and_cog_x_speed
+```
+
+The result of [`typeof()`](https://rdrr.io/r/base/typeof.html) is `"double"` because all elements in a matrix must have the same type. Since the vector used to create the matrix contains decimal values, R stores all entries as numeric double-precision values, including the ages.
+
+Similarly, we may name either or both dimensions of the matrix just created, using the functions [`dimnames()`](https://rdrr.io/r/base/dimnames.html), [`rownames()`](https://rdrr.io/r/base/colnames.html), or [`colnames()`](https://rdrr.io/r/base/colnames.html):
+
+```{r}
+colnames(age_and_cog_x_speed) <- c("age","cog_x_speed")
+attributes(age_and_cog_x_speed)
+str(age_and_cog_x_speed)
+```
+
+:::{.callout-note title="Utility of matrices"}
+*Matrices will rarely be used to **analyze results from biomedical research** directly. They can be very useful, however, when processing raw data. **We will use matrices later to compute stabilometric descriptors from the sway data collected with smartphones***.
+:::
+
+\
+
+### **List** {#sec-list}
+
+The main distinction between a *list* and a *vector* or *matrix* is that a list can store data of different types. A list can also nest *vectors* or *matrices* of different sizes.
+
+With the [`list()`](https://rdrr.io/r/base/list.html) function, we can create a list grouping the data shown in @tbl-2-1-1. This can be done without naming the groups of elements:
+
+```{r}
+# creating a list with subjects, CoG lateral speed, and Parkinsonian status 
+subjects <- c("Sarah", "Rob", "Ted", "Jessica", "John") 
+cog_x_speed <- c(6.1, 5.2, 5.7, 7.1, 6.3)
+parkinsonian <- c(FALSE, FALSE, FALSE, TRUE, FALSE)
+table_1 <- list(subjects, cog_x_speed, parkinsonian)
+table_1
+typeof(table_1) # type is "list", as different data types are stored in table_1
+length(table_1) # this is 3, as there are 3 elements in table_1
+str(table_1) # this fully describes table_1
+```
+
+In this case, each element in the list `table_1` stores five values. This does not have to be the case. Different elements in a list may store different numbers of values, either of the same type or of different types.
+
+It is worth noticing that we could have assigned names to each element in the list:
+
+```{r}
+table_1 <- list(subjects = subjects, cog_speed = cog_x_speed, is_parkinsonian = parkinsonian)
+str(table_1)
+attributes(table_1)
+```
+
+\
+
+### **Factor** {#sec-factor}
+
+A *factor* is a special data type in R. It is used to represent categorical data, typically stored as repeated text labels across different *observations*^[*Each* ***observation*** *corresponds to one or more pieces of information collected from a single experimental unit---typically a person in biomedical experiments.*]. *In our example, **observations** are the five subjects, who may be categorized, for example, according to gender**:
+
+```{r}
+gender <- factor(c("female", "male", "male", "female", "male"))
+str(gender)
+```
+
+In this case, the `gender` [`factor()`](https://rdrr.io/r/base/factor.html) has five entries and two *levels*---that is, the set of values the *factor* may assume: `"male"` and `"female"`. The *levels* of a *factor* can be accessed with the [`levels()`](https://rdrr.io/r/base/levels.html) function:
+
+```{r}
+attributes(gender)
+levels(gender)
+```
+
+We may add this *factor* to the `table_1` *list* just created. Notice that we need to wrap it in another *list* before appending it; otherwise, we would not obtain the desired result. **What would happen in that case?**
+
+```{r}
+table_1 <- append(table_1, list(gender = gender), after = 1) # insert at specific location
+table_1
+str(table_1)
+```
+
+Notice that we used the [`append()`](https://rdrr.io/r/base/append.html) function instead of [`c()`](https://rdrr.io/r/base/c.html). To remain consistent with the columns in Table @tbl-2-1-1, we used `after = 1` to place gender as the second element of `table_1`.
+
+Also notice how clearly the [`str()`](https://rdrr.io/r/utils/str.html) *function summarizes* the content of the `table_1` object, indicating *the number of elements* stored, the *name* of each element (which could be `NULL`), the *type of data*, the *number of values*, and the *corresponding values within each entry*.
+
+\
+
+## Data Frames {#sec-dataframes}
+
+A **data frame** is another R structure for organizing data. Instead of describing it alongside the other structures covered in the [previous section](@sec-datastructures), it is presented in a stand-alone section. This is because *data frames* are the most common data organization structure used in R for statistical analysis.
+
+*Data frames* are tabular structures---that is, they organize data in two dimensions. Rows correspond to *observations*, while columns store the *variables*^[*The meaning of **variable** here should not be confused with the meaning of an object in R. Here, **variable** refers to the characteristic or attribute describing the observed or measured data.*] associated with each *observation*.
+
+*An **observation** is generally defined as a piece of information collected experimentally.* In biomedical research, *observations* often correspond to persons. Taking the example of @tbl-2-1-1, which is redrawn here (cf. @tbl-2-3-1) to explicitly indicate the *observations*, experimental data were obtained from five subjects. The *variables* of interest are **Gender**, **Lateral CoG Speed**, and whether the subject is affected by **Parkinson's disease**. **Subject** and **Age** store personal data^[*Collecting personal data is discouraged. Only when the study requires keeping track of personal data should this possibility be considered.*]: the name of each individual is rarely useful in statistical analysis, whereas age may be relevant when evidence suggests that it may influence the *variables* of interest (e.g. does CoG speed depend on age?).
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-2-3-1
+#| echo: false
+#| tbl-cap: Interactive table illustrating how a data frame looks.
+
+df_table <- data.frame( list(paste("observation ", 1:5), subjects, gender, age, cog_x_speed, parkinsonian))
+
+datatable(df_table,
+          rownames = FALSE, 
+          escape = FALSE, 
+          colnames = c("", "Subject", "Gender", "Age", "$v_x \\text{ (m/s)}$", "Parkinsonian"),
+          options = list(
+    dom = 't',ordering = FALSE, columnDefs = list(list(className = "dt-center", targets = "_all"), list(width = paste0(100 / 4, "%"), targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+
+\
+
+### Creating Data Frames
+
+@tbl-2-3-1, from columns **Subject** to **Parkinsonian**, can be created using the [`data.frame()`](https://rdrr.io/r/base/data.frame.html) command, based on the R variables we created in previous sections:
+
+```{r}
+df <- data.frame(subjects, gender, age, cog_x_speed, parkinsonian)
+df
+```
+
+The tabular structure of the *data frame object* `df` is clear. Importantly, *rows were identified with integers*, from 1 to 5, and *columns were named after the R variable objects* passed to the [`data.frame()`](https://rdrr.io/r/base/data.frame.html) function. The name of each **variable** (column) may be defined explicitly when calling [`data.frame()`](https://rdrr.io/r/base/data.frame.html). Using short but meaningful names is advisable.
+
+```{r}
+df <- data.frame(sub = subjects, sex = gender, age = age, cog = cog_x_speed, disease = parkinsonian)
+str(df)
+```
+
+The [`str()`](https://rdrr.io/r/utils/str.html) function provides a useful summary of the whole *data frame* structure. It tells us:
+
+-   how many *observations* we have ($n=5$),
+-   the *variables* associated with each *observation*,
+-   the name of each *variable* (`"sub"`, `"sex"`, `"age"`, `"cog"`, `"disease"`),
+-   the type of data stored in each column (`chr`, `Factor`, `int`, `num`, `logi`),
+-   the data itself.
+
+\
+
+### Accessing Entries in Data Frames
+
+Elements stored for a single *variable* in the *data frame* `df` can be retrieved in different ways, using single brackets `[]`, double brackets `[[]]`, or the accessor `$`.
+
+With single brackets `[]`, we access one specific variable of the *data frame* `df`---that is, one of its five columns:
+
+```{r}
+df[1] # this is a data frame with one variable ("sub") and five ("chr") observations
+df[3] # this is a data frame with one variable ("age") and five ("int") observations
+str(df[3])
+```
+
+To retrieve the entries of a single column as a vector, use double brackets `[[]]` or the accessor `$`:
+
+```{r}
+df[[3]] # vector of integers 
+str(df[[3]])
+df$age # equivalent to df[[3]]
+
+```
+
+\
+
+### Retrieving Information About Data Frames
+
+Some useful R functions can be used to inspect the structure of a *data frame*:
+
+```{r}
+nrow(df) # number of rows (observations)
+ncol(df) # number of columns (variables)
+dim(df[1:3]) # number of rows and columns
+length(df) # number of rows or columns? What do you think?
+```
+
+Often, a *data frame* contains many *observations*. In such cases, printing the full content of the *data frame* (`df` in our case) may be confusing, and we may lose sight of the column names. The [`head()`](https://rdrr.io/r/utils/head.html) function can help:
+
+```{r}
+head(df, 3) # checking the first three observations in df
+```
+
+The [`summary()`](https://rdrr.io/r/base/summary.html) function is remarkably useful for obtaining a brief overview of *descriptive statistics* for the whole `df` object. We will discuss *descriptive statistics* in detail later (cf @sec-ch32). In our example, we have five *variables*, with the first serving only for illustrative purpose. For each of the following four *variables* we can quickly inspect:
+
+-   **Gender**: the *levels* of this factor and the number of *observations* in each level,
+-   **Age** and **Lateral CoG Speed**: minimum and maximum values, first, second, and third *quartiles*, and the mean value,
+-   **Parkinsonian**: how many subjects are affected by Parkinson's disease and how many are not.
+
+This is achieved with [`summary()`](https://rdrr.io/r/base/summary.html):
+
+```{r}
+summary(df)
+```
+
+\
+
+## Importing data
+
+We will import data frequently, often with the purpose of addressing *questions of interest*, such as:
+
+-   *Does this new training program improve gait function?*
+-   *Is muscle spasticity relieved by a serious-game rehabilitation program?*
+-   *How much does this new method for counting motor units outperform existing approaches?*
+
+Addressing these questions requires the use of statistical tools to analyze *variables*. These *variables* may be obtained directly or after processing raw data for a group of subjects, according to a carefully planned *experimental protocol*. We may therefore have to import two types of files: *files with raw data*^[*Kinematic, kinetic, electrophysiological, or any other type of data (e.g. movies, light intensity, audio, etc.) collected for each individual.*] and *files with variables*^[*Variables may be obtained by processing raw data (e.g., CoG speed) or collected directly from the experimental units. It is based on these metrics that we may test our hypotheses.*].
+
+:::{.callout-note title="Which data will we work with?"}
+*For now, we will consider the former case, working with raw data. Upon completion of this tutorial, instead of working with simulated data or data collected by others, we will work with postural data collected by ourselves and from ourselves.*
+:::
+
+\
+
+### Getting Folder and File storing CoG data
+
+In this course, [PhyPhox](https://phyphox.org/) is used to collect CoG data (cf @sec-ch13).
+
+The first step is to identify the folder where the raw data of interest are stored. For now, we are working with an example of CoG data, which you can download and find inside [this compressed here](/include/download/phyphox_data.zip){download="phyphox_data.zip"}. 
+
+**Unzip the downloaded file and place its contents inside a folder named `phyphox_data`, in your Working Directory** (cf. [**Files**](@sec-files) section in the previous Chapter).
+
+```{r, results=FALSE}
+my_wd <- getwd() # this command retrieves my working directory my_wd
+my_wd
+list.dirs(my_wd, recursive = FALSE, full.names = FALSE) # with list.dirs() we list the files inside our working directory 
+```
+
+The function [`list.dirs()`](https://rdrr.io/r/base/list.files.html) listed all directories in `my_wd`, retrieved with the [`getwd()`](https://rdrr.io/r/base/getwd.html) function. We see that there is only one `phyphox_data` directory inside `my_wd`. We may further check the content of `phyphox_data`:
+
+```{r}
+list.files(file.path(my_wd, "phyphox_data"))
+```
+
+With [`file.path()`](https://rdrr.io/r/base/file.path.html), we created a path to the `phyphox_data` directory by concatenating `"phyphox_data"` to `my_wd`. With the [`list.files()`](https://rdrr.io/r/base/list.files.html) function, we listed the full content of the `phyphox_data` directory, including files and directories.
+
+There are two `xls` files and two directories inside `phyphox_data`. All were obtained after exporting data from *PhyPhox* (see @sec-phyphox-data-export). Each folder is associated with an `xls` file---that is, the file `"standing_eyes_open.xls"` contains the same information as the file `"postural_sways.csv"` inside the folder `"standing_eyes_open"`:
+
+```{r}
+list.files(file.path(my_wd, "phyphox_data", "standing_eyes_open"))
+```
+
+\
+
+### Loading CoG data into R workspace {#sec-loading-data}
+
+To import CoG data into R, we may proceed interactively by right-clicking on the `csv` (or `xls`) file under the **Files** tab. Two options appear: `View File` and `Import Dataset...` (Figure @fig-2-3-2). By clicking on `View File`, a preview of the data is shown in the [Source Pane](@sec-panel1) if it is a `csv` file. If it is an `xls` file, R opens the file in *Excel*.
+
+![Interactive data import.](/include/images/part_2/2-3-2_interactive_data_import.png){#fig-2-3-2}
+
+By clicking on `Import Dataset...`, a dialog may appear asking the user to install a package for importing the data, if the package is not already installed. If the required package is available, a window opens with useful and self-explanatory information on the data import procedure (Figure \@ref(fig:figure-2-3-3)).
+
+![Interactive data import.](/include/images/part_2/2-3-3_import_excel_data.png){#fig-2-3-3}
+
+For now, we will import the `csv` data using the [`read.csv()`](https://rdrr.io/r/utils/read.table.html) function, already available in the [`utils`](https://www.rdocumentation.org/packages/utils) package. The content of the `csv` file is loaded into the R workspace as a *data frame*. In the next Chapter, we will plot and process these *raw CoG data*, extracting the *variables* of interest for further analysis.
+
+```{r}
+df <- read.csv(file.path(getwd(), "phyphox_data", "standing_eyes_open", "postural_sways.csv"))
+```
+
+```{r}
+str(df)
+head(df,5)
+```
+
+\
+
+## **Exercise** {.unnumbered}
+
+Install the [readxl package](https://cran.r-project.org/web/packages/readxl/index.html) and use it to import *raw CoG data* from the `"standing_eyes_open.xls"` file, available in the `phyphox_data` folder. The function of interest is [`read_xls()`](https://readxl.tidyverse.org/reference/read_excel.html). Use the [`head()`](https://rdrr.io/r/utils/head.html) function to check whether the first five rows of raw CoG data match the values listed above.

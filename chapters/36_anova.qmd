@@ -1,0 +1,2601 @@
+# Balanced and Unbalanced Designs over Two Groups {#sec-anova}
+
+The previous two chapters introduced inferential statistical methods for outcomes collected either on two occasions from the same group or from two distinct groups. Both parametric and non-parametric tests were presented, with particular emphasis on the two types of error inherent to inferential statistics, as well as on the strategies to mitigate them.
+
+:::{.callout-note title="This chapter..."}
+*... extends those inferential techniques to situations in which generalization involves more than two conditions, combining different groups of subjects and/or multiple assessments within each group.*
+::::
+
+\ 
+
+## Factors and Levels
+
+As the number of conditions in a study increases, it becomes essential to classify them according to their role. A key distinction is between the **response variable** and the **predictors**---also referred to as **independent variables** or **factors**.
+
+\
+
+### Response Variables
+
+Also known as **dependent variables**, response variables cannot be controlled or manipulated by the experimenter; they can only be observed or measured. Response variables represent the outcome of interest. For example, in a study assessing the effect of visual input and alcohol intake on balance, the magnitude of postural sway may serve as the response variable. By examining how this variable *responds* to experimentally manipulated conditions (i.e., factors), it is possible to infer cause-and-effect relationships.
+
+### Factors {#sec-factors}
+
+Factors, or independent variables, are variables that can be systematically manipulated by the experimenter with the expectation of influencing the response variable. *Factors take on a finite number of values*, known as **levels**. These may be categorical (e.g., types of orthoses) or continuous (e.g., drug dosage).
+
+:::{.callout-note title="Response variables as factors"}
+*A variable treated as a response in one study may be considered a factor in another. For instance, muscle response to perturbations could be measured across different walking speeds in one study, whereas another study might investigate the effect of orthotic devices on walking speed.*
+:::
+
+:::: {.columns}
+::: {.column .small-text width=50%}
+\
+
+##### **EXERCISE** - Identify factor and levels
+
+![](/include/images/part_3/ch_6/factors-and-levels.png){width=100%}
+:::
+::: {.column width=2.5%}
+:::
+::: {.column .small-text width=47.5%}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-1_factors-and-levels.md")
+```
+:::
+::::
+
+\
+
+### Applied Examples
+
+Two examples involving designs with more than two conditions are presented below.
+
+[Cabral and colleagues](https://link.springer.com/article/10.1007/s00421-020-04520-4) @cabral20 investigated the time course of mechanical and electrophysiological properties of the biceps brachii muscle following induced damage. The amplitude distribution of compound action potentials^[*elicited by supramaximal nerve stimulation*] was measured at five time points: baseline, and one, two, three, and four days post-exercise. *The response variable was the centroid of the amplitude distribution, while time since damage was the factor, with five levels.*
+
+In a second study, [Yanguang and colleagues](https://link.springer.com/article/10.1186/s13102-021-00234-y) @yanguang21 employed a mixed design with two factors. The authors examined whether High-Intensity Interval Training^[*alternating short periods of intense anaerobic exercise with recovery*] (HIIT) provides greater physical and psychological benefits than Moderate-Intensity Continuous Training^[*a steady, continuous aerobic effort lasting over 30 minutes*] (MICT) in individuals with substance use disorders over a 12-month period. Results indicated that both interventions improved health outcomes; however, HIIT led to greater improvements in physical measures such as grip strength and balance, and more substantial reductions in subjective drug cravings.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-2_applied-example-two-factors.md")
+```
+:::
+
+\
+
+## Multiple Comparisons
+
+When faced with three or more conditions, a common initial approach is to perform multiple inferential tests across all possible pairs of groups.
+
+To illustrate this approach, consider a study designed to assess the effect of different interventions on walking performance. A standard measure of gait performance is the distance covered during a six-minute walk test (@fig-3-6-1). *Walking distance is therefore the response variable.*
+
+![Schematic illustration of the walk test. Created with ChatGPT (Open AI 2026).](/include/images/part_3/ch_6/3-6-1_walk-test.png){width=100% #fig-3-6-1}
+
+Walking distances were measured for three groups of subjects matched for age, anthropometric characteristics, and baseline walking ability. Each group received a different treatment---*standard physiotherapy*, *balance training*, or *strength training*. This study therefore includes one factor (intervention) with three levels.
+
+Individual data for $n=10$ subjects per group are summarized in @tbl-3-6-1 and @fig-3-6-2.
+
+:::: {.columns}
+::: {.column .dataTable-wrapper .small-text width=50%}
+```{r}
+#| label: tbl-3-6-1
+#| echo: false
+#| tbl-cap: Simulated 6-min walk distance (m).
+#| message: false
+#| warning: false
+
+pt <- c(463, 457, 454, 454, 455, 454, 452, 456, 460, 454)
+bt <- c(450, 452, 451, 451, 454, 449, 453, 447, 448, 448)
+st <- c(438, 438, 441, 445, 442, 447, 442, 440, 447, 440)
+
+walk6min <- data.frame(
+  `Standard physiotherapy` = pt,
+  `Balance training` = bt,
+  `Strength training` = st
+)
+
+datatable(walk6min, rownames = FALSE, escape = FALSE, colnames = c("Standard<br>physiotherapy","Balance<br>training","Strength<br>training"),
+  options = list(dom = "t", scrollX = TRUE, pageLength = nrow(walk6min), ordering = FALSE,columnDefs = list(list(className = "dt-center", targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+::: {.column width=2.5%}
+:::
+::: {.column .small-text width=47.5%}
+![Boxplots showing simulated 6-min walk distance after 6 weeks under three rehabilitation protocols.](/include/images/part_3/ch_6/3-6-2_walk-duration.png){width=100% #fig-3-6-2}
+
+**The goal is to determine which treatment leads to the greatest improvement in walking performance, as measured by distance covered in the 6-minute walk test.**
+:::
+::::
+
+Assuming the groups are independent and observations are Normally distributed, one might consider performing separate $t$-tests for all pairwise comparisons. With three levels, there are $\binom{3}{2} = 3$ possible comparisons:
+
+1. *Standard Physiotherapy* $\times$ *Balance Training*  
+2. *Standard Physiotherapy* $\times$ *Strength Training*  
+3. *Balance Training* $\times$ *Strength Training*  
+
+However, this approach leads to an important issue: inflation of the Type I error rate, as introduced in @sec-errors and discussed below.
+
+\
+
+### Family-Wise Error Rate ($\alpha^*$) {#sec-fwer}
+
+In a $t$-test, rejection of the null hypothesis $H_0$ is based on the probability of observing a test statistic at least as extreme as the one obtained, assuming $H_0$ is true. If this probability is less than the significance level $\alpha$---typically 0.05---the null hypothesis is rejected.
+
+Because statistical inference is probabilistic, there is always a chance that an observed effect is due to random variation rather than a true underlying effect. Rejecting $H_0$ in such cases constitutes a Type I error. The significance level $\alpha$ controls the probability of this error for a single test.
+
+When multiple tests are conducted, the probability of committing at least one Type I error increases. This probability is known as the **Family-Wise Error Rate (FWER)**, denoted $\alpha^*$.
+
+For each comparison, we can define a binary outcome: either a Type I error is committed or not. Under the null hypothesis, the probability of committing a Type I error in a single test is $\pi = \alpha$.
+
+Let $X$ be the random variable representing the number of Type I errors across $n_c$ independent comparisons. Then,
+
+$$
+X \sim B(n_c, \alpha)
+$$
+
+The probability of committing *at least one* Type I error is:
+
+$$
+P(X \ge 1) = 1 - P(X = 0)
+$$
+
+Using the Binomial probability mass function (@eq-binom-pmf),
+
+$$
+P(X = 0) = (1 - \alpha)^{n_c}
+$$
+
+Therefore, the Family-Wise Error Rate is:
+
+$$
+\alpha^* = P(X \ge 1) = 1 - (1 - \alpha)^{n_c}
+$$ {#eq-fwer}
+
+Thus, performing multiple comparisons increases the likelihood of incorrectly rejecting at least one true null hypothesis.
+
+:::{.callout-note title="FWER $\ge \alpha$"}
+*The expression above assumes independence between comparisons. When tests are positively correlated—as is often the case in practice—the true Family-Wise Error Rate is typically lower than this value, though still larger than $\alpha$. Thus, this formula should be interpreted as an approximation that highlights the inflation of Type I error under multiple testing.*
+:::
+
+:::{.callout-important title="p-hacking"}
+*Conducting multiple comparisons without proper correction increases the risk of falsely detecting effects that do not exist. This practice---often referred to as p-hacking---is discouraged in sound scientific research.*
+
+*Inferential analyses should be guided by pre-specified hypotheses grounded in strong theoretical or empirical justification.*
+:::
+
+\
+
+## One-Way Analysis of Variance for Independent Groups {#sec-oneway-anova}
+
+@fig-3-6-2 reports the walking distance measured for three groups of patients during a 6-minute walk test. This figure suggests a systematic difference between groups. The question addressed by inferential statistics is whether the observed differences between group means are statistically significant or whether they may be explained by chance. The **Analysis of Variance (ANOVA)** addresses this question.
+
+Two sources of variability explain the variation in the data shown in @fig-3-6-2. There is **between-group** variability, associated here with the treatment effect, and **within-group** variability, associated with inter-individual differences.
+
+ANOVA assesses differences between group means by partitioning the total variability in the data. The simplest ANOVA arrangement includes one factor with three or more levels. Designs with a single factor are often called **one-way designs** or **one-way layouts**.
+
+Before describing the procedure for statistical inference, it is important to clarify notation and assumptions.
+
+\
+
+### Notation and Assumptions
+
+In a balanced one-way design, there are $I$ groups (factor levels), each with $J$ observations.
+
+For the 6-minute walk distance example:
+
+$$
+I = 3 \quad J = 10
+$$
+
+The following quantities (see @fig-3-6-3) are included in the one-way ANOVA model:
+
+- $Y_{ij}$ denotes the $j$-th observation in the $i$-th treatment group.
+- $\mu$ is the grand (overall) mean, computed over the $I \times J$ observations.
+- $\alpha_i$ denotes the effect of treatment $i$ relative to $\mu$.
+- $\varepsilon_{ij}$ corresponds to the residual associated with the $j$-th observation in the $i$-th group.
+
+The residuals $\varepsilon_{ij}$, which correspond to random errors, are assumed to be **independent** and **Normally distributed**, with **mean** zero and **variance** $\sigma^2$:
+
+$$
+\varepsilon_{ij} \sim \mathcal{N}(0,\sigma^2)
+$$
+
+![Notations regarding individual observations ($y_{i,j}$), the group means ($\overline{y}_{i.}$), and the grand mean ($\overline{y}_{..}$). Non-capitalized symbols are used to indicate values observed on a specific sample of subjects.](/include/images/part_3/ch_6/3-6-3_notations.png){#fig-3-6-3 width=80%}
+
+\
+
+### The Model and the Definition of $H_0$
+
+The one-way design model states that observations are, on average, determined by the grand mean $\mu$ and the group effect $\alpha_i$:
+
+$$
+Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}
+$$ {#eq-oneway-model}
+
+Given the assumption on $\varepsilon_{ij}$, the expected value in the $i$-th group is:
+
+$$
+E\left(Y_{ij}\right)
+=
+\mu + \alpha_i
+$$
+
+If there is no group effect, all group means are equal and there is no differential effect $\alpha_i$. The null hypothesis can therefore be written as:
+
+$$
+H_0: \alpha_i = 0, \quad i = 1,\ldots,I
+$$ {#eq-h0-oneway}
+
+\
+
+### The Sum of Squares
+
+ANOVA is based on the partition of the total variability. For the one-way design, three sums of squares are defined.
+
+:::{.panel-tabset}
+
+#### $SS_{\text{tot}}$
+
+:::: {.columns}
+::: {.column width=80%}
+The first is the **total sum of squares** $SS_{\text{tot}}$:
+$$
+SS_{\text{tot}} = \sum_{i=1}^I\sum_{j=1}^J \left(Y_{ij}-\overline{Y}\right)^2
+$$
+:::
+::: {.column width=20%}
+![](/include/images/part_3/ch_6/ss_tot.png){width=100%}
+:::
+::::
+
+where $\overline{Y}$ is the grand mean.
+
+#### $SS_{\text{B}}$
+
+![](/include/images/part_3/ch_6/ss_B.png){width=100%}
+The second is the **sum of squares between groups** $SS_{\text{B}}$:
+
+$$
+SS_{\text{B}} = \sum_{i=1}^I\sum_{j=1}^J \left(\overline{Y}_i-\overline{Y}\right)^2
+$$
+
+Since $\overline{Y}_i$ does not depend on $j$, this simplifies to:
+
+$$
+SS_{\text{B}} = J\sum_{i=1}^I \left(\overline{Y}_i-\overline{Y}\right)^2
+$$
+
+#### $SS_{\text{W}}$
+
+:::: {.columns}
+::: {.column width=80%}
+The third is the **sum of squares within groups** $SS_{\text{W}}$:
+
+$$
+SS_{\text{W}} = \sum_{i=i}^I\sum_{j=1}^J \left(Y_{ij}-\overline{Y}_i\right)^2
+$$
+
+:::
+:::{.column width=20%}
+![](/include/images/part_3/ch_6/ss_W.png){width=100%}
+:::
+::::
+:::
+
+The Analysis of Variance is based on the following identity:
+
+$$
+\sum_{i=i}^I\sum_{j=1}^J \left(Y_{i,j}-\overline{Y}\right)^2 = J\sum_{i=i}^I \left(\overline{Y}_i-\overline{Y}\right)^2 + \sum_{i=i}^I\sum_{j=1}^J \left(Y_{i,j}-\overline{Y}_i\right)^2 \\
+$$
+
+For the one-way design with independent groups, this identity is often known expressed as:
+
+$$
+SS_\text{tot} = SS_\text{B}+SS_\text{W}
+$$ {#eq-ss-anova1}
+
+The sum of squared departures of all individuals observations with respect to the grand mean is given by the sum of two terms:
+
+1. *the sum of square of the difference between group means and the grand mean.*
+2. *the sum of square of the error term, measuring departures of individual observations with respect to the group mean.*
+
+In other words, the total variability in the data is given by the sum of the group effect (e.g., treatment effect $SS_{\text{B}}$) and of the random variation within groups ($SS_{\text{W}}$).
+
+:::{#nte-ss-proof .callout-note title="Proving the sum of squares identity" collapse="true"}
+:::{.small-text}
+*Starting from the total sum of squares,*
+
+$$
+\sum_{i=1}^{I}\sum_{j=1}^{J}
+\left(Y_{ij} - \overline{Y}\right)^2
+$$
+
+*we add and subtract the group mean $\bar{Y}_{i.}$ inside the parentheses:*
+
+$$
+Y_{ij} - \overline{Y} = \left(\overline{Y}_i - \overline{Y}\right) + \left(Y_{ij} - \overline{Y}_i\right)
+$$
+
+*Substituting this into the total sum of squares gives*
+
+$$
+\sum_{i=1}^{I}\sum_{j=1}^{J} \left[\left(\overline{Y}_i - \overline{Y}\right)
++ \left(Y_{ij} - \overline{Y}_i\right) \right]^2
+$$
+
+*Expanding the squared term,*
+
+$$
+\sum_{i=1}^{I}\sum_{j=1}^{J}
+\left(\overline{Y}_i - \overline{Y}\right)^2
++
+2\sum_{i=1}^{I}\sum_{j=1}^{J}
+\left(\overline{Y}_i - \overline{Y}\right)
+\left(Y_{ij} - \overline{Y}_i\right)
++
+\sum_{i=1}^{I}\sum_{j=1}^{J}
+\left(Y_{ij} - \overline{Y}_i\right)^2
+$$
+
+*The middle term is equal to zero because*
+
+$$
+\sum_{j=1}^{J}
+\left(Y_{ij} - \overline{Y}_i\right)
+=
+0
+$$
+
+*for each group $i$. Therefore,*
+
+$$
+2\sum_{i=1}^{I} \left(\overline{Y}_i - \overline{Y}\right)
+\sum_{j=1}^{J} \left(Y_{ij} - \overline{Y}_i\right) = 0
+$$
+
+*The first term can be simplified because, for each group $i$, $\left(\bar{Y}_{i.} - \bar{Y}_{..}\right)^2$ does not depend on $j$. Thus, summing it over the $J$ observations in each group gives*
+
+$$
+\sum_{i=1}^{I}\sum_{j=1}^{J} \left(\overline{Y}_i - \overline{Y}\right)^2
+= J\sum_{i=1}^{I} \left(\overline{Y}_i - \overline{Y}\right)^2
+$$
+
+*Therefore,*
+
+$$
+\sum_{i=1}^{I}\sum_{j=1}^{J} \left(Y_{ij} - \overline{Y}\right)^2
+= J\sum_{i=1}^{I} \left(\overline{Y}_i - \overline{Y}\right)^2
++ \sum_{i=1}^{I}\sum_{j=1}^{J} \left(Y_{ij} - \overline{Y}_i\right)^2
+$$
+
+*This identity shows that the total sum of squares can be decomposed into the sum of squares* **between groups** *and the sum of squares* **within groups**:
+
+$$
+SS_{\text{tot}} = SS_{\text{B}} + SS_{\text{W}}
+$$
+:::
+:::
+
+\
+
+### The chi-square $\chi^2$ Distribution
+
+If residuals $\varepsilon$ (@eq-oneway-model) are independent and Normally distributed, with zero mean and variance $\sigma^2$, then:
+
+$$
+\begin{aligned}
+SS_{\text{B}}/\sigma^2 &\sim \chi_{I-1}^2 \\
+SS_{\text{W}}/\sigma^2 &\sim \chi_{I(J-1)}^2 
+\end{aligned}
+$$
+
+where $\chi_{\nu}^2$ denotes the chi-square distribution with $\nu$ degrees of freedom.
+
+Considering the one-way design with three groups in @fig-3-6-2, we may expand the term as:
+
+$$
+\frac{SS_{\text{B}}}{\sigma^2}
+=
+J\left(\frac{\overline{Y}_1-\overline{Y}}{\sigma}\right)^2
++
+J\left(\frac{\overline{Y}_2-\overline{Y}}{\sigma}\right)^2
++
+J\left(\frac{\overline{Y}_3-\overline{Y}}{\sigma}\right)^2
+$$
+
+Defining the standardized variables
+
+$$
+Z_i = \frac{\sqrt{J}\left(\overline{Y}_i-\overline{Y}\right)}{\sigma}
+$$
+
+we obtain
+
+$$
+\frac{SS_{\text{B}}}{\sigma^2}
+=
+Z_1^2 + Z_2^2 + Z_3^2
+$$
+
+$SS_{\text{B}}/\sigma^2$ is therefore expressed as the sum of squared, standardized Normal random variables (see @sec-snd). However, these variables are **not independent**, because the deviations of the group means from the grand mean satisfy the constraint:
+
+$$
+\sum_{i=1}^I \left(\overline{Y}_i-\overline{Y}\right) = 0
+$$
+
+As a consequence, only $I-1$ of the $Z_i$ are independent, which explains why:
+
+$$
+\frac{SS_{\text{B}}}{\sigma^2} \sim \chi^2_{I-1}
+$$
+
+$SS_{\text{B}}/\sigma^2$ is therefore a random variable defined by the sum of squared, standardized Normal random variables, and follows a $\chi^2$ distribution with $I-1$ degrees of freedom.
+
+The same reasoning applies to $SS_{\text{W}}$, with a different number of degrees of freedom.
+
+:::{.callout-note}
+*The $\chi^2$ distribution provides the basis for deriving the ANOVA test statistic. In the following section, this result will be used to construct the test for comparing group means. No further detail on the $\chi^2$ distribution is required at this stage.*
+:::
+
+\
+
+### The Fisher ($F$) Test Statistic {#sec-f-oneway}
+
+Under the assumptions of the model in @eq-oneway-model—namely that errors are independent and Normally distributed with zero mean and variance $\sigma^2$, the between- and within-group sums of squares provide estimates of the variance.
+
+Consider the expected values of these quantities:
+
+$$
+\begin{aligned}
+E\left[SS_{\text{W}}\right] &= E\left[\sum_{i=1}^I\sum_{j=1}^J\left(Y_{ij}-\overline{Y}_i\right)^2\right] = I(J-1)\sigma^2 \\
+E\left[SS_{\text{B}}\right] &= E\left[J\sum_{i=1}^I\left(\overline{Y}_i-\overline{Y}\right)^2\right] = (I-1)\sigma^2 + J\sum_{i=1}^I\alpha_i^2
+\end{aligned}
+$$
+
+These expressions follow from the identity $E[X^2] = \text{Var}(X) + E[X]^2$ and from the independence of the errors.
+
+Under the null hypothesis ($H_0: \alpha_i = 0$ for all $i$), both $SS_{\text{B}}$ and $SS_{\text{W}}$ estimate the same quantity $\sigma^2$, up to their respective degrees of freedom.
+
+The test statistic for the Analysis of Variance, known as the Fisher $F$ statistic, is defined as the ratio of mean squares:
+
+$$
+F = \frac{MS_{\text{B}}}{MS_{\text{W}}}
+= \frac{SS_{\text{B}}/(I-1)}{SS_{\text{W}}/[I(J-1)]}
+$$ {#eq-f-statistic}
+
+The numerator is based on a $\chi^2$ random variable with $I-1$ degrees of freedom, while the denominator is based on an independent $\chi^2$ random variable with $I(J-1)$ degrees of freedom.
+
+:::{.callout-important title="Fisher Distribution"}
+*The ratio of two independent $\chi^2$ random variables divided by their respective degrees of freedom follows a **Fisher distribution**:*
+
+$$
+F \sim F(\nu_n, \nu_d)
+$$
+
+*where $\nu_n$ and $\nu_d$ denote the degrees of freedom in the numerator and denominator, respectively.*
+:::
+
+Under the null hypothesis (@eq-h0-oneway), the expected values of the numerator and denominator are equal, so the $F$ statistic is expected to be close to $1$. When a group effect is present, the between-group variability increases, leading to values of $F$ larger than $1$.
+
+The decision to reject the null hypothesis is based on the probability of observing an $F$ value at least as large as the observed value $f$:
+
+$$
+P(F > f) < \alpha
+$$
+
+where $\alpha$ is the significance level, typically set at $0.05$.
+
+Tables, computer programs, or the interactive plot below can be used to compute this probability.
+
+
+:::{.boxed #sec-finteractiveplot}
+:::: {.columns}
+::: {.column width=30.0%}
+:::{.small-text}
+By moving the sliders, the numerator ($\nu_n$) and the denominator ($\nu_d$) degrees of freedom, as well as the Fisher's $F$ value can be selected.
+
+Which probability to compute $P(F<f)$ or $P(F>f)$ can be set with the pop-up menu.
+:::
+
+[**The requested probability is `{ojs} prob.toFixed(3)`**]{style="color: #35759C;"}
+:::
+::: {.column width=5%}
+:::
+::: {.column width=65%}
+:::{.small-text}
+```{ojs}
+//| echo: false
+jStat = await import("https://cdn.jsdelivr.net/npm/jstat-esm@latest/+esm")
+
+// Controls
+viewof nu_n = Inputs.range([1, 30], {value: 2,step: 1,label: "ν_n (numerator df)"})
+
+viewof nu_d = Inputs.range([1, 100], {value: 27,step: 1,label: "ν_d (numerator df)"})
+
+viewof fValue = Inputs.range([0.01, 20], {value: 5.37,step: 0.01,label: "F value"})
+
+viewof tail = Inputs.select(["Left tail: P(F < f)", "Right tail: P(F > f)"],  {label: "Probability shown"})
+```
+:::
+
+---
+
+```{ojs}
+//| echo: false
+// F density
+fPdf = x => jStat.centralF.pdf(x, nu_n, nu_d)
+
+// Probability
+prob = tail === "Left tail: P(F < f)"
+    ? jStat.centralF.cdf(fValue, nu_n, nu_d)
+    : 1 - jStat.centralF.cdf(fValue, nu_n, nu_d)
+
+// Grid for plotting
+xMin = 0
+xMax = Math.max(10, fValue * 1.4)
+yMax = Math.max(...curve.map(d => d.y))
+step = 0.01
+
+curve = Array.from(
+  {length: Math.floor((xMax - xMin) / step) + 1},
+  (_, i) => {
+    const x = xMin + i * step
+    return {x, y: fPdf(x)}
+  }
+)
+
+// Shaded region
+shade =
+  tail === "Left tail: P(F < f)"
+    ? curve.filter(d => d.x <= fValue)
+    : curve.filter(d => d.x >= fValue)
+
+// Plot
+Plot.plot({
+  width: 700,
+  height: 600,
+  marginLeft: 120,
+  marginTop: 20,
+  marginBottom: 60,
+  style: {
+    fontSize: 24
+  },
+  x: {label: "F values",domain: [0, xMax],labelArrow: false},
+  y: {label: null, ticks: 5},
+  marks: [
+    Plot.areaY(shade, {x: "x", y: "y", curve: "natural", fillOpacity: 0.45, fill: "steelblue"}),
+    Plot.line(curve, {x: "x", y: "y", curve: "natural", strokeWidth: 12, stroke: "lightblue"}),
+    Plot.ruleX([fValue], {y1: 0, y2: 0.8, strokeWidth: 2}),
+    Plot.text([{x: fValue * 1.02, y: 0.85}], {x: "x", y: "y", text: [`F = ${fValue.toFixed(2)}`], fontSize: 26, fontWeight: "bold"}),
+    Plot.text(
+  [{
+    x: 0,
+    y: yMax / 2,
+    label: "Fisher's density function, f(F)"
+  }],
+  {
+    x: -1.5,              // move left of y-axis; adjust if needed
+    y: "y",
+    text: "label",
+    rotate: -90,
+    fontSize: 24,
+    textAnchor: "middle"
+  }
+)
+  ]
+})
+```
+:::
+::::
+:::
+
+\
+
+### One-Way ANOVA Table
+
+When conducting an ANOVA test, the key quantities are typically summarized in an ANOVA table (@fig-3-6-4). Each column provides the information required to compute the test statistic:
+
+- **source of variation**: between groups and within groups (and sometimes total),
+- **degrees of freedom** associated with each source,
+- **sum of squares**,
+- **mean square**, obtained by dividing the sum of squares by the corresponding degrees of freedom,
+- **test statistic**, given by the $F$ value.
+
+![ANOVA table for one-way designs](/include/images/part_3/ch_6/3-6-4_oneway-table.png){width=100% #fig-3-6-4}
+
+\
+
+### Example of Application 
+
+The simulated data in @tbl-3-6-1, reporting the walking distance for three groups of patients receiving different treatments, yields the ANOVA table shown below.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-6-2
+#| echo: false
+#| tbl-cap: One-way ANOVA table created for data in @tbl-3-6-1.
+#| message: false
+#| warning: false
+
+# Sum of squares
+J <- 10
+I <- 3
+nub <- I-1
+nuw <- I*(J-1)
+Y.. <- mean( c(pt, bt, st) )
+Yi. <- c( mean(pt), mean(bt), mean(st) )
+ssb <- round(J*sum( (Yi. - Y..)^2 ),1)
+ssw <- round(sum( c( (pt - Yi.[1])^2, (bt - Yi.[2])^2, (st - Yi.[3])^2 ) ),1) 
+msb <- round(ssb / nub,1)
+msw <- round(ssw / nuw,1)
+f <- round(msb/msw,1)
+
+anova_tbl <- data.frame(
+  `Source of Variation` = c("Between groups<br>(training type)", 
+                            "Within groups<br>(residuals)"),
+  `Degrees of Freedom` = c(paste0("$\\nu_\\text{B}$ = ", nub), paste0("$\\nu_\\text{W}$ = ", nuw)),
+  `Sum of Squares` = c(paste0("$SS_\\text{B}$ = ", ssb), paste0("$SS_\\text{W}$ = ", ssw)),
+  `Mean Square` = c(paste0("$MS_\\text{B}$ = ", msb),paste0("$MS_\\text{W}$ = ", msw)),
+  check.names = FALSE
+)
+
+datatable(anova_tbl,rownames = FALSE, escape = FALSE, options = list(
+    dom = 't',ordering = FALSE, columnDefs = list(list(className = "dt-center", targets = "_all"), list(width = paste0(100 / 4, "%"), targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+
+Based on the mean square values obtained for between- and within-group effects, the observed Fisher $F$ statistic is:
+
+$$
+F = \frac{MS_\text{B}}{MS_\text{W}} = \frac{`r msb`}{`r msw`} = `r f`
+$$
+
+There are two equivalent approaches to deciding whether to reject $H_0$.
+
+\
+
+#### Comparing Against the Critical Value
+
+We may compare the observed value $f$ with the critical value from the $F$ distribution. The critical value $F_{\nu_n,\nu_d,1-\alpha}$ depends on the degrees of freedom and the chosen significance level $\alpha$:
+
+$$
+P\left(F > F_{\nu_n,\nu_d,1-\alpha}\right) = \alpha
+$$
+
+For $\alpha = 0.05$, $\nu_n=I-1=2$ and $\nu_d=I(J-1)=27$, as confirmed by the [interactive plot](#sec-finteractiveplot) above, the critical value is:
+
+$$
+F_{2,27,0.95} = 3.36
+$$
+
+
+Given the observed $f=`r f`>3.6=F_{2,27,0.95}$, the null hypothesis is rejected, indicating a significant group effect.
+
+\
+
+#### Using the $p$-value
+
+Alternatively, the decision can be based on the $p$-value associated with the observed $F$ statistic. The $p$-value is the probability of observing a value at least as large as $f$ under $H_0$:
+
+$$
+p = P(F > f)
+$$
+
+If $p \le \alpha$, the null hypothesis is rejected.
+
+Based on the [interactive plot](#sec-finteractiveplot) above, we have that: 
+
+$$ 
+P\left(F>f=`r f`\right) \ll 0.001 
+$$ 
+
+Given this probability is much smaller than $\alpha$, $H_0$ is rejected.
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-4_oneway-variable-J.md")
+```
+:::
+
+
+:::{.callout-important title="Interpreting One-Way ANOVA Results"}
+*Both approaches---comparison with a critical value or evaluation of the $p$-value---lead to the same conclusion.*
+
+*In this example, both methods indicate rejection of $H_0$, suggesting that at least one group mean differs significantly from the others.*
+
+*However, ANOVA does not identify which groups differ; it only indicates the presence of a group effect.*
+:::
+
+\
+
+## Post-Hoc Analysis {#sec-post-hoc}
+
+**Post-hoc analyses** are multiple-comparison tests performed after rejection of $H_0$ based on Fisher's $F$ statistic. ANOVA is therefore an omnibus inferential test, addressing the global question: *is there evidence that at least one group mean differs from the others?*
+
+If the answer to this question is **NO**, running *post-hoc* analyses would only increase the possibility of committing a Type I error without justification.
+
+If the answer is **YES**, running *post-hoc* analyses is justified.
+
+:::{.callout-note}
+*Different types of post-hoc analyses exist. Here, only the most commonly used multiple-comparison tests will be presented and discussed.*
+:::
+
+\
+
+### Fisher Least Significant Difference (LSD)
+
+Fisher LSD is essentially a set of pairwise $t$-tests performed after a significant omnibus ANOVA, using the pooled within-group variance estimated from all groups. Considering any two groups, $k$ and $l$, the $t$ test statistic is computed as:
+
+$$
+t_{k,l} =
+\frac{\overline{Y}_k-\overline{Y}_l}
+{\sqrt{MS_\text{W}\left(\frac{1}{J_k}+\frac{1}{J_l}\right)}}
+$$ {#eq-fisherlsd}
+
+where $J_k$ and $J_l$ correspond to the sample sizes in groups $k$ and $l$, respectively. $MS_\text{W}$ is the pooled within-group variance, corresponding to the mean square of the within-group residuals:
+
+$$
+MS_\text{W}
+=
+\frac{SS_\text{W}}{\nu_\text{W}}
+=
+\frac{1}{\nu_\text{W}}
+\sum_{i=1}^I\sum_{j=1}^{J_i}
+\left(Y_{ij}-\overline{Y}_i\right)^2
+$$
+
+where $\nu_\text{W}$ denotes the degrees of freedom for the within-group sum of squares:
+
+$$
+\nu_\text{W} = \sum_{i=1}^I\left(J_i-1\right)
+$$
+
+\
+
+#### Applying Fisher LSD to the Example Data {#sec-fisherlsd-example}
+
+Considering the walk distance data reported in @tbl-3-6-1, the ANOVA test indicated a significant group effect. This suggests that walking distance differs significantly between at least two groups.
+
+With the Fisher LSD post-hoc test, we may identify which group comparisons are responsible for this effect. Given the group means and the value of $MS_\text{W}$ obtained from the walking data (@tbl-3-6-1 and @tbl-3-6-2):
+
+- $\overline{Y}_1=`r Yi.[1]` \text{m}$: *mean walk distance for the physiotherapy group* 
+- $\overline{Y}_2=`r Yi.[2]` \text{m}$: *mean walk distance for the balance training group* 
+- $\overline{Y}_3=`r Yi.[3]` \text{m}$: *mean walk distance for the strength training group* 
+- $MS_\text{W}=r msw$: *pooled variance across the three groups*
+
+the $t$ statistic can be computed for each of the three possible pairwise comparisons:
+
+$$
+\begin{aligned}
+t_{1,2} &= \frac{`r Yi.[1]` - `r Yi.[2]`}{\sqrt{`r msw`\left(\frac{1}{`r J`} + \frac{1}{`r J`}\right)} } = `r round((Yi.[1] - Yi.[2])/ sqrt(msw * (1/J + 1/J)),3)` \\
+t_{1,3} &= \frac{`r Yi.[1]` - `r Yi.[3]`}{\sqrt{`r msw`\left(\frac{1}{`r J`} + \frac{1}{`r J`}\right)} } = `r round((Yi.[1] - Yi.[3])/ sqrt(msw * (1/J + 1/J)),3)` \\
+t_{2,3} &= \frac{`r Yi.[2]` - `r Yi.[3]`}{\sqrt{`r msw`\left(\frac{1}{`r J`} + \frac{1}{`r J`}\right)} } = `r round((Yi.[2] - Yi.[3])/ sqrt(msw * (1/J + 1/J)),3)`
+\end{aligned} 
+$$
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-5_fisherlsd-post-hoc.md")
+```
+:::
+
+\
+
+#### When to Use Fisher LSD
+
+Fisher LSD is among the most powerful post-hoc procedures because it does not apply a strong correction for multiple comparisons. This greater power comes at the cost of weaker control of the Family-Wise Error Rate (FWER; see @sec-fwer).
+
+When there are exactly three groups, the protected Fisher LSD procedure---where pairwise comparisons are performed only after a significant omnibus ANOVA---controls the FWER at approximately $\alpha$. With four or more groups, however, Fisher LSD no longer provides adequate protection against Type I error inflation.
+
+There are three scenarios to consider:
+
+:::{.panel-tabset}
+
+##### Scenario 1
+
+###### **All means are equal**
+
+:::: {.columns .small-text}
+::: {.column width=60%}
+All means are equal. The omnibus ANOVA tests the global null hypothesis and keeps the Type I error rate at $\alpha$. If the $p$-value for the $F$ statistic is larger than $\alpha$, we stop here and no further testing is justified.
+:::
+:::{.column width=40%}
+![](/include/images/part_3/ch_6/scenario1-equalmeans.png){width=100%}
+:::
+::::
+
+**NO REJECTION** of the omnibus null hypothesis:
+
+$$
+H_0: \mu_1 = \mu_2 = \mu_3
+$$
+
+##### Scenario 2
+
+###### **One mean is different**
+
+:::: {.columns .small-text}
+::: {.column width=60%}
+One mean is different. The omnibus ANOVA is expected to yield an $F$ statistic significantly larger than one. After rejection of the omnibus null hypothesis, the post-hoc comparisons identify which pairs of means differ.
+:::
+:::{.column width=40%}
+![](/include/images/part_3/ch_6/scenario2-onemeandiffers.png){width=100%}
+:::
+::::
+
+**REJECTION** of the omnibus null hypothesis:
+
+$$
+H_0: \mu_1 = \mu_2 = \mu_3
+$$
+
+##### Scenario 3
+
+###### **All means differ**
+
+:::: {.columns .small-text}
+::: {.column width=60%}
+All means differ. In this case, the omnibus ANOVA is also expected to reject the null hypothesis. Because all pairwise null hypotheses are false, no Type I error can be committed in the pairwise comparisons.
+:::
+:::{.column width=40%}
+![](/include/images/part_3/ch_6/scenario3-allmeansdiffer.png){width=100%}
+:::
+::::
+
+**REJECTION** of the omnibus null hypothesis:
+
+$$
+H_0: \mu_1 = \mu_2 = \mu_3
+$$
+
+:::
+
+\
+
+### Tukey Honestly Significant Difference (HSD) {#sec-tukeyhsd}
+
+The Tukey HSD post-hoc analysis is more conservative than Fisher LSD. It corrects for multiple comparisons with the goal of keeping the FWER equal to the significance level $\alpha$. This correction is particularly useful for factors with four or more levels.
+
+The correction consists of considering a different distribution for the test statistic. While Fisher LSD is based on Student's $t$-distribution to assess the significance of pairwise differences, Tukey HSD uses a test statistic ($q$) following the **Studentized Range Distribution**.
+
+For equal sample sizes, the Tukey statistic can be written as:
+
+$$
+q_{I,\nu}
+=
+\max_{k,l}
+\frac{\left| \overline{Y}_k - \overline{Y}_l \right|}
+{\sqrt{MS_\text{W}/J}},
+\quad k \ne l
+$$ {#eq-tukeyhsd}
+
+where:
+
+- $\overline{Y}_k$ is the sample mean for group $k$.
+- $MS_\text{W}$ is the pooled within-group variance.
+- $I$ is the number of groups.
+- $J$ is the number of observations per group.
+- $\nu$ is the within-group degrees of freedom.
+
+For a balanced design with $k$ groups and $n$ observations per group:
+
+$$
+\nu = I(J-1)
+$$
+
+More generally,
+
+$$
+\nu = N-I
+$$
+
+where $N$ is the total number of observations.
+
+@fig-3-6-5 illustrates the difference between the Studentized Range Distribution and the Student's $t$ Distribution presented in @sec-student.
+
+![Studentized range distribution used in Tukey HSD post-hoc analysis.](/include/images/part_3/ch_6/3-6-5_studentized-range-distribution.png){width=100% #fig-3-6-5}
+
+:::{.callout-important title="Key point of the Studentized Range Distribution"}
+*All **pairwise mean comparisons** are evaluated with respect to the distribution of the maximum standardized difference among group means.*
+
+*Therefore, the $q$ test statistic depends on the **total number of groups $k$**, not only on the pair being compared. This is the basis for the multiple-comparison correction.*
+:::
+
+\
+
+#### Applying Tukey HSD to the Example Data
+
+To provide a direct comparison with the Fisher LSD post-hoc method, let us apply Tukey HSD to the walk distance data reported in @tbl-3-6-1.
+
+The values required to compute the $q$ test statistic (@eq-tukeyhsd)---the group means $\overline{Y}_i$ and the pooled variance $MS_\text{W}$---were introduced in @sec-fisherlsd-example. Based on these values, the three pairwise comparisons are:
+
+$$ \begin{aligned}
+q_{1,2} &= \frac{\left|`r Yi.[1]` - `r Yi.[2]`\right|}{\sqrt{`r msw`\left(\frac{1}{`r J`}\right)} } = `r round(abs(Yi.[1] - Yi.[2])/ sqrt(msw * (1/J)),3)` \\
+q_{1,3} &= \frac{\left|`r Yi.[1]` - `r Yi.[3]`\right|}{\sqrt{`r msw`\left(\frac{1}{`r J`}\right)} } = `r round(abs(Yi.[1] - Yi.[3])/ sqrt(msw * (1/J)),3)` \\
+q_{2,3} &= \frac{\left|`r Yi.[2]` - `r Yi.[3]`\right|}{\sqrt{`r msw`\left(\frac{1}{`r J`}\right)} } = `r round(abs(Yi.[2] - Yi.[3])/ sqrt(msw * (1/J)),3)`
+\end{aligned} 
+$$
+
+Considering the first pairwise comparison, between groups $1$ and $2$, the probability of observing a $q$ value greater than that obtained under $H_0$ is:
+
+$$
+P(q_{I=3,\,\nu=27} > q_{1,2}) = `r round(ptukey(q=abs(Yi.[1] - Yi.[2])/ sqrt(msw * (1/J)), nmeans = 3, df = 27, lower.tail = FALSE),3)`
+$$
+
+This probability is larger than that obtained with Fisher LSD for the same pairwise comparison in @sec-fisherlsd-example. This reflects the more conservative nature of Tukey HSD. Given the probability remains smaller than $\alpha$, the conclusion that the means of groups $1$ and $2$ differ significantly is maintained.
+
+\
+
+#### Applying Tukey HSD to Example Data with Four Groups {#sec-tukey-example4}
+
+Being more conservative, Tukey HSD protects against FWER inflation and is thus well suited for pairwise comparisons involving several factor levels.
+
+Suppose there was a fourth group for the walk distance data, involving a *stretch-training protocol*, with $J_4 = 8$ observations. @tbl-3-6-3 reports the data for this new group, while @fig-3-6-6 summarizes the distribution of walking distance for the four groups.
+ 
+
+:::: {.columns}
+::: {.column .dataTable-wrapper .small-text width=35%}
+```{r}
+#| label: tbl-3-6-3
+#| echo: false
+#| tbl-cap: Simulated 6-min walk distance (m) for the stretch training group.
+#| message: false
+#| warning: false
+
+strt <- round(c(4.05, 4.03, 4.01, 4.04, 4.02, 4.03, 4.00, 4.02) * 100 + 50)
+
+nuw <- I*(J-1) + 7
+Yi. <- c( mean(pt), mean(bt), mean(st), mean(strt) )
+ssw <- round(sum( c( (pt - Yi.[1])^2, (bt - Yi.[2])^2, (st - Yi.[3])^2, (strt - Yi.[4])^2 ) ),1) 
+msw <- round(ssw / nuw,1)
+
+walk6min <- data.frame(`Stretch training` = strt)
+
+datatable(walk6min, rownames = FALSE, escape = FALSE, colnames = "Stretch<br>training",
+  options = list(dom = "t", scrollX = TRUE, pageLength = nrow(walk6min), ordering = FALSE,columnDefs = list(list(className = "dt-center", targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+::: {.column width=2.5%}
+:::
+::: {.column .small-text width=62.5%}
+![Boxplots showing simulated 6-min walk distance after 6 weeks under **four** rehabilitation protocols.](/include/images/part_3/ch_6/3-6-6_four-group-boxplot.png){width=100% #fig-3-6-6}
+:::
+::::
+
+In this case the degrees of freedom change to:
+
+$$
+\nu_\text{W} =\sum_{i=1}^4 J_i-1= 9+9+9+7 = 34
+$$
+
+The pooled variance also changes, because the new group contributes to the within-group sum of squares:
+
+$$
+MS_\text{W} = \frac{1}{34} \sum_{i=1}^4 \sum_{j=1}^{J_i} \left(Y_{ij}-\overline{Y}_i\right)^2 = `r round(msw,1)`
+$$
+
+Based on @tbl-3-6-3, the mean walk distance for the new group is $\overline{Y}_4=`r mean(strt)` \text{ m}$.
+
+To compute the Tukey test statistic between groups with unequal sample sizes, we use the Tukey--Kramer adjustment:
+
+$$
+q_{k,l} = \frac{\left| \overline{Y}_k - \overline{Y}_l \right|}
+{\sqrt{\frac{MS_\text{W}}{2}\left(\frac{1}{J_k} + \frac{1}{J_l}\right)}}
+$$ {#eq-tukeyhsd-diffsamplesize}
+
+where $J_k$ and $J_l$ denote the sample sizes of groups $k$ and $l$, respectively.
+
+Applying this equation to compare groups $1$ (*standard physiotherapy*) and $4$ (*stretch training*) gives:
+
+
+$$
+q_{1,4} = \frac{\left|`r Yi.[1]` - `r Yi.[4]`\right|}{\sqrt{\frac{`r msw`}{2}\left(\frac{1}{`r J`} + \frac{1}{`r J-2`}\right)} } = `r round(abs(Yi.[1] - Yi.[4])/ sqrt(msw / 2 * (1/J + 1/8)),3)`
+$$
+
+The corresponding probability is:
+
+$$
+P(q_{I=4, \, \nu=34}>q_{1,4}) = `r round(ptukey(q=abs(Yi.[1] - Yi.[4])/ sqrt(msw / 2 * (1/10 + 1/8)), nmeans = 4, df = nuw, lower.tail = FALSE),3)`
+$$
+
+Being this probability greater than the significance level $\alpha = 0.05$, the conclusion is that there is no evidence of a significant difference in walking speed between physiotherapy and stretching groups.
+
+:::{.callout-note title="Tukey method"}
+*Tukey method was designed to consider all possible multiple comparisons. For $I$ groups, there is a total of $I(I-1)2$ multiple comparisons.*
+
+*Henceforth the Tukey--Kramer notation will be used to refer to the Tukey's post-hoc analysis, regardless of the sample size.*
+:::
+
+\
+
+### The Dunnett Test
+
+This test is mainly used when interest lies in comparing different (*treatment*) groups against one reference (*control*) group. The Dunnett test relies on a Student's $t$-type statistic:
+
+$$
+t_i =
+\frac{\overline{Y}_i-\overline{Y}_0}
+{\sqrt{MS_\text{W} \left( \frac{1}{J_i}+ \frac{1}{J_0}\right)}}
+$$ {#eq-tdunnet}
+
+where $\overline{Y}_0$ corresponds to the mean of the reference group, with $J_0$ observations.
+
+Just like the Tukey--Kramer method, the Dunnett test applies a correction to control the FWER. This correction is based on the joint multivariate $t$ distribution of the comparisons between treatment groups and the control group. This distribution depends on the degrees of freedom associated with the pooled variance $MS_\text{W}$, the dependence between comparisons arising from the shared control group, and the total number of comparisons.
+
+For a total of $I$ groups, the number of comparisons in the Dunnett test is limited to $I-1$. Because this is smaller than the number of all possible pairwise comparisons,
+
+$$
+\frac{I(I-1)}{2},
+$$
+
+the correction applied by the Dunnett test is less conservative than the Tukey--Kramer correction when the only relevant comparisons are against a control group. **The Dunnett test is therefore generally more powerful than the Tukey--Kramer test for control-versus-treatment comparisons.**
+
+For these comparisons, the Dunnett test usually yields smaller adjusted $p$-values than the Tukey--Kramer method.
+
+\
+
+#### Applying the Dunnett Test to Example Data with Four Groups
+
+Considering the mean values and the pooled variance reported above for the $I=4$ groups (see @sec-fisherlsd-example and @sec-tukey-example4), @fig-3-6-7 shows the $p$-values obtained for the three comparisons with the Dunnett test and for all multiple comparisons with the Tukey--Kramer method.
+
+![Pairwise results for the Dunnett and Tukey--Kramer post-hoc methods for the data shown in @fig-3-6-6.](/include/images/part_3/ch_6/3-6-7_ptable-tukey-dunnett.png){width=85% #fig-3-6-7}
+
+:::{.callout-note title="Dunnett versus Tukey--Kramer"}
+*@fig-3-6-7 illustrates the greater power of the Dunnett test when compared with Tukey--Kramer for comparisons against a reference group. The Dunnett method should be considered when the scientifically relevant comparisons are those between treatment groups and a control group.*
+:::
+
+\
+
+### The Bonferroni Correction
+
+The Bonferroni correction applies to both parametric and non-parametric multiple-comparison procedures. When $n_c$ multiple comparisons are assessed, as discussed in @sec-fwer, the probability of committing at least one Type I error, termed the Family-Wise Error Rate ($\alpha^*$), is greater than the Type I error rate for a single test. The Bonferroni correction keeps $\alpha^* \le \alpha$.
+
+The Bonferroni method is based on **Boole's inequality**. Let $H_i$ denote the event of incorrectly rejecting the null hypothesis in the $i$-th comparison. Then $P(H_i)$ is the probability of committing a Type I error in that comparison, while
+
+$$
+P\left(\bigcup_{i=1}^{n_c} H_i\right)
+$$
+
+is the probability of committing at least one Type I error across all comparisons. Boole's inequality states that:
+
+$$
+P \left( \bigcup_{i=1}^{n_c} H_i \right)\leq\sum_{i=1}^{n_c} P(H_i)
+$$
+
+Therefore, if each comparison is tested at level $\alpha$,
+
+$$
+\alpha^*\le\sum_{i=1}^{n_c} \alpha=n_c\alpha
+$$
+
+To limit the FWER to a desired value $\alpha^*$, the Bonferroni method sets the significance level for each individual comparison to:
+
+$$
+\alpha = \frac{\alpha^*}{n_c}
+$$ {#eq-bonferroni}
+
+\
+
+#### Checking FWER with Bonferroni Correction
+
+With the Bonferroni correction, the Family-Wise Error Rate defined in @eq-fwer becomes:
+
+$$
+\alpha^*
+=
+1 - \left(1-\frac{\alpha}{n_c} \right)^{n_c}
+$$
+
+where $n_c$ is the total number of multiple comparisons to be made.
+
+This expression assumes independence between comparisons. The Bonferroni correction itself, however, does not require independence; it is valid because it relies on Boole's inequality.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| echo: false
+#| label: tbl-3-6-4
+#| tbl-cap: Family-Wise Error Rate correction
+#| message: false
+#| warning: false
+
+library(DT)
+
+# Create the dataframe matching the image data
+nc <- c(4, 8, 16, 25, 50)
+fwer_data <- data.frame(
+  nc = nc,
+  without_bonferroni = round(1-(1-0.05)^nc,3),
+  with_bonferroni = round(1-(1-0.05/nc)^nc,3)
+)
+
+datatable(
+  fwer_data,
+  colnames = c("Number of paired tests ($n_c$)", "FWER without Bonferroni", "FWER with Bonferroni"),
+  escape = FALSE,
+  options = list(dom = 't', ordering = FALSE, columnDefs = list(
+      list(className = 'dt-center', targets = '_all') # Center-align all columns
+    ), drawCallback = JS("function(settings) {MathJax.typeset();}")
+  ),
+  rownames = FALSE,
+  selection = 'none'
+)
+```
+:::
+
+Equivalently, instead of applying the correction to $\alpha$, the correction may be applied to the $p$-values associated with the pairwise test statistics. This is the most common way of reporting the Bonferroni correction.
+
+In this case, each uncorrected $p$-value is multiplied by the total number of comparisons $n_c$:
+
+$$
+p_\text{Bonferroni} = n_c p
+$$
+
+If the corrected $p$-value is smaller than the desired significance level (e.g. $\alpha = 0.05$), the null hypothesis for that comparison is rejected.
+
+An example of this method applied to the walk distance data (@fig-3-6-6) is shown in @fig-3-6-8.
+
+:::{.callout-note title="Bonferroni is a conservative correction"}
+*The Bonferroni correction is conservative because it controls the Type I error using a worst-case scenario. In practice, the overall probability of committing a Type I error is often smaller than the value assumed by the correction. As a result, Bonferroni may reduce statistical power more than necessary.*
+:::
+
+\
+
+#### The Bonferroni-Holm Correction
+
+This post-hoc method applies a less severe correction to the FWER than the Bonferroni correction. Instead of using a fixed adjustment factor $n_c$ for all comparisons, the Bonferroni-Holm correction applies a stepwise correction based on the rank order of the $p$-values.
+
+The procedure is illustrated in @fig-3-6-8 and can be summarized in four main steps:
+
+1. *compute the test statistic for the $n_c$ multiple comparisons, for example using the Fisher LSD statistic in @eq-fisherlsd.*
+2. *compute the uncorrected $p$-value associated with each test statistic.*
+3. *rank the $p$-values in ascending order, from smallest to largest.*
+4. *compare the ranked $p$-values sequentially with progressively less stringent thresholds.*
+
+For the ordered $p$-values
+
+$$
+p_{(1)} \le p_{(2)} \le \ldots \le p_{(n_c)},
+$$
+
+the Holm procedure compares the $k$-th ordered $p$-value with:
+
+$$
+\frac{\alpha}{n_c + 1 - k}
+$$
+
+Starting from the smallest $p$-value, each null hypothesis is rejected as long as:
+
+$$
+p_{(k)}\left(n_c + 1 - k\right)\le\alpha
+$$
+
+The procedure stops at the first non-significant comparison.
+
+![Pairwise results for the Bonferroni and Bonferroni-Holm corrections, applied to the data shown in @fig-3-6-6. Groups 1, 2, 3, and 4 respectively correspond to *Physiotherapy*, *Balance*, *Strength*, and *Stretching*.](/include/images/part_3/ch_6/3-6-8_ptable-bonferroni-holm.png){width=100% #fig-3-6-8}
+
+The Bonferroni-Holm correction generally yields greater statistical power than the standard Bonferroni correction while still controlling the FWER. Because of this, it is often preferred over the more conservative Bonferroni correction.
+
+:::{.callout-note title="Confidence intervals with Holm correction"}
+*The Bonferroni-Holm method is primarily a stepwise hypothesis-testing procedure. Simultaneous confidence intervals are less straightforward to obtain than with Bonferroni or Tukey-based methods.*
+:::
+
+\
+
+### Which Post-Hoc Test to Consider?
+
+@fig-3-6-9 provides a direct comparison of the $p$-values for the five post-hoc methods discussed above. [$p$-values indicating significant pairwise differences are highlighted in red]{style="color: red;"}.
+
+There is no universally best post-hoc method. The choice depends on the scientific question and on how Type I and Type II errors should be balanced.
+
+If the goal is to compare all pairs of groups, Tukey--Kramer is often appropriate. If the goal is to compare treatments against a control group, Dunnett is usually preferable. If a simple and broadly applicable correction is required, Bonferroni or Bonferroni-Holm may be used, with Holm generally offering greater power than standard Bonferroni.
+
+@fig-3-6-10 provides a general guideline for selecting a post-hoc method according to the study design and the desired balance between Type I and Type II errors.
+
+![Pairwise results for the five post-hoc methods discussed, applied to the data shown in @fig-3-6-6. Groups 1, 2, 3, and 4 respectively correspond to *Physiotherapy*, *Balance*, *Strength*, and *Stretching*.](/include/images/part_3/ch_6/3-6-9_ptable-all-methods.png){width=100% #fig-3-6-9}
+
+![Which post-hoc method to use based on the study design.](/include/images/part_3/ch_6/3-6-10_which-post-hoc.png){width=100% #fig-3-6-10}
+
+\
+
+## Non-Parametric ANOVA for Independent Groups(Kruskal-Wallis)
+
+The one-way ANOVA inferential test presented in @sec-oneway-anova relies on three main assumptions:
+
+1. **the error terms $\varepsilon_{ij}$ are Normally distributed** (see @eq-oneway-model). Like the $t$ test, the $F$ test remains approximately valid for moderate to large samples drawn from moderately non-Normal distributions. If this assumption is severely violated, the mean squares no longer follow a $\chi^2$ distribution and therefore the $F$ ratio does not follow a Fisher distribution (see @eq-f-statistic).  
+2. **the error variance $\sigma^2$ is constant** (homoscedasticity). In many applications, error variances may differ between groups. For example, subjects who underwent the stretch-training protocol in the simulated data shown in @fig-3-6-6 exhibited less variable walking distances over 6 minutes. ANOVA is, however, reasonably robust to heteroscedasticity when the number of observations is similar across groups.
+3. **the observations, and therefore the errors $\varepsilon_{ij}$, are independent**. This assumption is fundamental for both parametric and non-parametric methods.
+
+When there is evidence that either of the first two assumptions is severely violated, a non-parametric alternative to one-way ANOVA may be preferred.
+
+\
+
+### The Kruskal-Wallis Test Statistic {#sec-kw-test-statistic}
+
+The Kruskal-Wallis method generalizes the non-parametric rank-based tests used to compare two independent groups (see @sec-rank-sum).
+
+The Kruskal-Wallis test statistic is based on pooling and ranking observations across all groups. To illustrate the computation of the test statistic, let us consider a subset of the walk-distance data for three groups, according to @tbl-3-6-5 below.
+
+
+:::{.small-text}
+```{r}
+#| label: tbl-3-6-5
+#| echo: false
+#| tbl-cap: Row and ranked subset of walk distance data shown in @tbl-3-6-1
+#| message: false
+#| warning: false
+
+pt <- c(463, 457, 454, 454, 455, 454)
+bt <- c(450, 452, 451, 451, 454)
+st <- c(438, 438, 441, 445)
+r <- rank(c(pt,bt,st))
+rpt <- r[1:6]
+rbt <- r[(1:5)+6]
+rst <- r[(1:4)+11]
+
+r <- mean(c(rpt,rbt,rst))
+ri <- c(mean(rpt), mean(rbt), mean(rst))
+ssb <- sum((ri-r)^2 * c(6,5,4))
+K = ssb * 12 / (15*(15+1))
+D = 1 - sum(c(2,2,4)^3 - c(2,2,4)) / (15^3 - 15)
+Kadj <- K/D
+
+df <- data.frame(
+  Y1 = pt, R1 = rpt, Y2 = c(bt,NA), R2 = c(rbt,NA), Y3 = c(st,NA,NA), R3 = c(rst,NA,NA))
+
+sketch <- htmltools::withTags(
+  table(
+    class = "display",
+    thead(tr(th(colspan = 2, "Standard Physio", br(), tags$i(HTML("J<sub>1</sub> = 6"))), th(colspan = 2, "Balance training", br(), tags$i(HTML("J<sub>2</sub> = 5"))), th(colspan = 2, "Strength training", br(), tags$i(HTML("J<sub>3</sub> = 4")))),
+      tr(th("$y_{1j}$"), th("$r_{1j}$"), th("$y_{2j}$"), th("$r_{2j}$"), th("$y_{3j}$"), th("$r_{3j}$"))))
+)
+
+datatable(
+  df, container = sketch, rownames = FALSE, escape = FALSE, class = "cell-border", options = list(dom = "t", paging = FALSE,  searching = FALSE, ordering = FALSE, info = FALSE, autoWidth = FALSE,   columnDefs = list(list(className = "dt-center", targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+
+The null hypothesis tested by the Kruskal-Wallis method is that the distributions of the groups are identical. When group distributions have similar shapes and spreads, this is often interpreted as testing equality of group medians.
+
+Similarly to the parametric ANOVA, the Kruskal-Wallis method relies on a between-group sum of squares computed over ranks:
+
+$$
+\begin{aligned}
+SS_\text{B} &= \sum_{i=1}^I J_i\left(\overline{R}_i - \overline{R}\right)^2 \\
+\overline{R} &= \frac{1}{N}\sum_{i=1}^{I}\sum_{j=1}^{J_i} R_{ij} = \frac{N+1}{2} \\
+\overline{R}_i &= \frac{1}{J_i}\sum_{j=1}^{J_i} R_{ij}
+\end{aligned}
+$$
+
+where $N$ is the total number of observations across all groups $
+N=\sum_{i=1}^I J_i$.
+
+When there are at least five observations per group, the null hypothesis can be assessed using the following test statistic:
+
+$$
+K = \frac{12}{N(N+1)}SS_\text{B}
+$$
+
+It should be noted that, in the presence of tied ranks, as in the example data (see @tbl-3-6-5), the variance of ranks is reduced. A correction is therefore needed to account for ties:
+
+$$
+D =1-\frac{\sum_{p=1}^P \left(t_p^3-t_p\right)}{N^3-N}
+$$
+
+where $t_p$ is the number of repeated observations associated with the $p$-th tied rank.
+
+For example, in @tbl-3-6-5 there are $P=3$ tied ranks. The first tied rank contains two replicated observations:
+
+$$
+t_1=2, \quad r_{31}=r_{32}=1.5
+$$
+
+The third tied rank contains four replicated observations:
+
+$$
+t_3=4, \quad r_{13}=r_{14}=r_{16}=r_{25}=10.5
+$$
+
+The Kruskal-Wallis statistic adjusted for ties is therefore:
+
+$$
+K_\text{adj} = \frac{K}{D} \sim \chi^2_{\nu=I-1}
+$$ {#eq-kw-kadj}
+
+Thus, $K_\text{adj}$ approximately follows a chi-square distribution with $\nu=I-1$ degrees of freedom.
+
+\
+
+### Applying Kruskal-Wallis to the Walk-Distance Data
+
+The goal here is to assess whether there is a significant difference in walk distance between groups by applying the Kruskal-Wallis method to the data reported in @tbl-3-6-5.
+
+From this data set, the following quantities are computed:
+
+- $SS_\text{b}= `r ssb`$ 
+- $k = `r K`$ 
+- $d = `r D`$ 
+- $k_\text{adj} = `r Kadj`$
+
+Under the null hypothesis, that $K \sim \chi^2_{I-1=2}$, we may compute the probability of observing a value larger than that obtained from the data:
+
+$$ 
+P(K>k_\text{adj}) = `r round(pchisq(Kadj, df=2, lower.tail = FALSE),3)` 
+$$
+
+Given this probability is smaller than the significance level, typically set at $\alpha=0.05$, there is evidence to reject the hypothesis that the walk distance is comparable between groups.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-6_post-hoc-kw.md")
+```
+:::
+
+\
+
+## One-Way Analysis of Variance for Repeated Measures
+
+Parametric and non-parametric inferential methods were presented in the previous sections to assess differences between three or more independent groups. In such designs, different groups of subjects are recruited for each condition.
+
+Sometimes, however, measurements are collected repeatedly from the same subjects over three or more occasions (often across time). These designs are known as **repeated-measures designs**.
+
+Inferential methods for assessing two paired groups were presented in @sec-onegroup. This section extends these methods to three or more repeated measures.
+
+\
+
+### Example of Application: Building Intuition for the Importance of Repeated Measures
+
+Let us consider the effect of a new diet program on weight loss. The table in @fig-3-6-11 reports body-mass measurements obtained from a sample of $J=4$ subjects during baseline, and three and six weeks after starting the diet ($I=3$).
+
+![Tabular and graphical representation of body mass measurements over three time points: baseline, three weeks, and six weeks after starting a diet program.](/include/images/part_3/ch_6/3-6-11_repeated-meas-anova.png){width=100% #fig-3-6-11}
+
+The Kruskal-Wallis test statistic computed from this data set is relatively low. Under the null hypothesis of no diet effect, the probability of observing a value greater than that obtained is large. The parametric ANOVA also yields a low $F$ statistic with a similarly large associated probability. Both approaches therefore lead to the same conclusion: there is insufficient evidence to reject $H_0$. Derivation is left as an exercise for the interested reader.
+
+By visually inspecting the plot in @fig-3-6-11, however, we observe a consistent decrease in body mass for all four subjects over the six-week period. Why then do we obtain such large $p$-values with Kruskal-Wallis and with the parametric ANOVA?
+
+The issue is the large variability between individuals. In the independent-group ANOVA, the within-group variability reflects both random error and differences between subjects. This inflates the denominator of the $F$ ratio and reduces the sensitivity of the test.
+
+:::{.callout-note title="Partitioning the within-group sum of squares"}
+*Repeated-measures designs separate the variability due to differences between subjects from the residual error. This generally increases the sensitivity of the inferential test to detect changes across repeated measurements.*
+:::
+
+\
+
+### The Repeated-Measures Model
+
+Let us define a new term $\beta_j$ representing the variability between subjects. For a fixed number of subjects $J$ measured over $I$ repeated measurements, the repeated-measures ANOVA model is:
+
+$$
+Y_{ij} = \mu + \alpha_i + \beta_j + \varepsilon_{ij}
+$$ {#eq-anova-rm}
+
+The sum-of-squares identity obtained for the independent-group one-way ANOVA (see @eq-ss-anova1) becomes:
+
+$$
+SS_\text{tot} = SS_\text{I} + SS_\text{J} + SS_\text{E}
+$$ {#eq-ss-anova1rm}
+
+where the terms respectively correspond to the total sum of squares, the repeated-measure effect, the subject effect, and the residual error:
+
+$$
+\begin{aligned}
+SS_\text{tot} &= \sum_{i=1}^I\sum_{j=1}^J\left(Y_{ij}-\overline{Y}\right)^2 \\
+SS_\text{I} &= J\sum_{i=1}^I\left(\overline{Y}_{i.}-\overline{Y}\right)^2 \\
+SS_\text{J} &= I\sum_{j=1}^J\left(\overline{Y}_{.j}-\overline{Y}\right)^2
+\end{aligned}
+$$
+
+where $\overline{Y}_{i.}$ and $\overline{Y}_{.j}$ denote the means across subjects and across repeated measurements, respectively. @fig-3-6-12 provides a schematic illustration of how to compute $SS_\text{I}$ and $SS_\text{J}$.
+
+The error sum of squares $SS_\text{E}$ can be computed either from the identity above (@eq-ss-anova1rm) or directly from the residuals:
+
+$$
+\begin{aligned}
+SS_\text{E} &= SS_\text{tot} - SS_\text{I} - SS_\text{J}, \quad \text{or} \\
+SS_\text{E} &= \sum_{i=1}^I \sum_{j=1}^J\left(Y_{ij}-\overline{Y}_{i.}-\overline{Y}_{.j}+\overline{Y}\right)^2
+\end{aligned}
+$$
+
+:::{.callout-note title="Deriving $SS_\text{E}$ from residuals" collapse="true"}
+:::{.small-text}
+*Residuals are computed as:*
+
+$$
+\varepsilon_{ij} = Y_{ij} - \hat{Y}_{ij}
+$$
+
+*where $\hat{Y}_{ij}$ is the estimated value for subject $j$ at repeated measurement $i$:*
+
+$$
+\hat{Y}_{ij} = \mu + \alpha_i + \beta_j
+$$
+
+*Given that the expected values of the grand mean, repeated-measure effect, and subject effect are:*
+
+$$
+\begin{aligned}
+E\left(\mu\right) &= \overline{Y} \\
+E\left(\alpha_i\right) &= \overline{Y}_{i.}-\overline{Y} \\
+E\left(\beta_j\right) &= \overline{Y}_{.j}-\overline{Y}
+\end{aligned}
+$$
+
+*the residual error becomes:*
+
+$$
+\begin{aligned}
+\varepsilon_{ij} &= Y_{ij} - \overline{Y} - \left(\overline{Y}_{i.}-\overline{Y}\right) -
+\left(\overline{Y}_{.j}-\overline{Y}\right) \\
+&= Y_{ij} - \overline{Y}_{i.} - \overline{Y}_{.j} +\overline{Y}
+\end{aligned}
+$$
+
+*It therefore follows that:*
+
+$$
+SS_\text{E} = \sum_{i=1}^I\sum_{j=1}^J\left(Y_{ij}-\overline{Y}_{i.}-\overline{Y}_{.j}+\overline{Y}\right)^2
+$$
+:::
+:::
+
+![Illustration of the repeated-measure effects ($\alpha_i$) and subject effects ($\beta_j$) as departures from the grand mean $\overline{y}$. Lowercase symbols denote quantities estimated from the sample of four subjects.](/include/images/part_3/ch_6/3-6-12_ss-computation-rmanova.png){#fig-3-6-12 width=80%}
+
+\
+
+### The $F$ Test Statistic for Repeated Measures
+
+Compared with the Fisher $F$ statistic for independent groups (see @eq-f-statistic), the main difference in repeated-measures ANOVA lies in the denominator of the $F$ ratio:
+
+$$
+F = \frac{SS_\text{I}/\nu_\text{I}} {SS_\text{E}/\nu_\text{E}} = \frac{MS_\text{I}} {MS_\text{E}}
+$$
+
+where $\nu_\text{E}$ corresponds to the degrees of freedom associated with the residual error term. It is computed as:
+
+$$
+\nu_\text{E}
+=
+\nu_\text{tot} - \nu_\text{I}-\nu_\text{J}
+=
+(I-1)(J-1)
+$$
+
+Inference follows from the probability of observing a Fisher $F$-value larger than the observed value $f$, under the null distribution:
+
+$$
+F \sim F(\nu_\text{I},\nu_\text{E})
+$$
+
+(see the [interactive plot](#sec-finteractiveplot) above).
+
+\
+
+### **EXERCISE** - Complete the Table and Draw the Conclusion
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-7_rm-diet-exercise.md")
+```
+:::
+
+\
+
+## Non-Parametric ANOVA for Repeated Measures (Friedman)
+
+The exercise above illustrates the increased power of repeated-measures ANOVA over the one-way design for independent groups. However, the parametric repeated-measures ANOVA relies on assumptions similar to those underlying the independent-group ANOVA: independence between subjects, Normally distributed residuals, and homogeneity of variance.
+
+Given the limited number of subjects considered in the diet example above ($J=4$; @fig-3-6-11), the Normality assumption may be difficult to verify reliably.
+
+When there is evidence that the assumptions of Normality or homoscedasticity are severely violated, a non-parametric alternative to repeated-measures ANOVA may be preferable.
+
+\
+
+### The Friedman Test Statistic
+
+The Friedman method is analogous to the Kruskal–Wallis method, with the main difference that observations are ranked within blocks—that is, within subjects.
+
+To illustrate the computation of the Friedman test statistic, let us consider the ranked body-mass data shown in @tbl-3-6-6.
+
+:::{.small-text}
+```{r}
+#| label: tbl-3-6-6
+#| echo: false
+#| tbl-cap: Raw and ranked body mass data shown in @fig-3-6-11
+#| message: false
+#| warning: false
+
+baseline <- c(103, 78, 84, 91)
+threewks <- c(98, 76, 78, 91)
+sixwks <- c(94, 74, 76, 88)
+rb <- c(3, 3, 3, 2.5)
+rt <- c(2, 2, 2, 2.5)
+rs <- c(1, 1, 1, 1)
+I <- 3
+J <- 4
+
+r <- mean(c(rb,rt,rs))
+ri <- c(mean(rb), mean(rt), mean(rs))
+ssb <- J*sum((ri-r)^2)
+Q = ssb * 12 / (I*(I+1))
+C = 1 - sum( (2^3 - 2) / (J*(I^3 - I)))
+Qadj <- Q/C
+
+df <- data.frame(
+  Person = c(1,2,3,4), baseline = baseline, threewks = threewks, sixwks = sixwks, rPerson = c(1,2,3,4), rbaseline = rb, rthreewks = rt, rsixwks = rs)
+
+sketch <- htmltools::withTags(
+  table(
+    class = "display",
+    thead(tr(th(colspan = 4, "Raw body mass $(J=4)$", th(colspan = 4, "Ranked body mass $(J=4)$"))), tr(th("#"), th("$y_{1j}$"), th("$y_{2j}$"), th("$y_{3j}$"), th("#"), th("$r_{1j}$"), th("$r_{2j}$"), th("$r_{3j}$")))))
+
+datatable(
+  df, container = sketch, rownames = FALSE, escape = FALSE, class = "cell-border", options = list(dom = "t", paging = FALSE,  searching = FALSE, ordering = FALSE, info = FALSE, autoWidth = FALSE,   columnDefs = list(list(className = "dt-center", targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+
+The null hypothesis tested by the Friedman method is that the distribution of ranks is identical across repeated measurements. When distributions have similar shapes and spreads, this hypothesis may be interpreted as testing equality of median values across conditions.
+
+For $I$ repeated measurements on each block (subject), the Friedman statistic is computed as:
+
+$$
+Q = \frac{12J}{I(I+1)} \sum_{i=1}^I \left(\overline{R}_i - \overline{R}\right)^2 = \frac{12}{I(I+1)}SS_\text{B}
+$$
+
+where:
+
+$$
+SS_\text{B} = J \sum_{i=1}^I \left(\overline{R}_i - \overline{R}\right)^2
+$$
+
+and where $\overline{R}_i$ and $\overline{R}$ respectively denote the mean rank for the $i$-th repeated measurement and the mean of all $IJ$ ranks.
+
+:::{.callout-note title="Derivation of rank means and $SS_\text{B}$"}
+*The mean ranks $\overline{R}_i$ and $\overline{R}$ are derived analogously to the Kruskal–Wallis method (see @sec-kw-test-statistic).*
+:::
+
+In the presence of ties, as for subject $j=4$ in @tbl-3-6-6, the variance of ranks is reduced. Unlike the Kruskal–Wallis correction, the Friedman correction accounts for ties within subjects:
+
+$$
+C = 1- \frac{\sum_{j=1}^J \sum_{m=1}^{M_j}\left(t_{jm}^3-t_{jm}\right)} {J\left(I^3-I\right)}
+$$
+
+where $t_{jm}$ is the number of tied observations in the $m$-th group of ties for subject $j$.
+
+For example, in @tbl-3-6-6 there is one group of ties for subject $j=4$:
+
+$$
+t_{41}=2, \quad r_{14}=r_{24}=2.5
+$$
+
+The Friedman statistic adjusted for ties is therefore:
+
+$$
+Q_\text{adj} = \frac{Q}{C} \sim \chi^2_{\nu=I-1}
+$$ {#eq-friedman-qadj}
+
+Thus, $Q_\text{adj}$ approximately follows a chi-square distribution with $\nu=I-1$ degrees of freedom.
+
+\
+
+### Applying Friedman to the Diet Example
+
+The question addressed here is whether there is a significant decrease in body mass over time. Due to the small sample size, the Friedman method is applied to the data reported in @tbl-3-6-6.
+
+From this data set, the following quantities are computed:
+
+- $SS_\text{B}= `r ssb`$
+- $q = `r Q`$
+- $c = `r C`$
+- $q_\text{adj} = `r Qadj`$
+
+Under the null hypothesis, that $Q_\text{adj} \sim \chi^2_{I-1}$, we may compute the probability of observing a value larger than that obtained from the data:
+
+$$
+P(Q>q_\text{adj}) = `r round(pchisq(Qadj, df=2, lower.tail = FALSE),3)`
+$$
+
+Given this probability is smaller than the significance level, typically set at $\alpha=0.05$, there is evidence supporting a significant effect of the diet program.
+
+:::{.callout-note title="Post-hoc following rejection of $H_0$ with Friedman"}
+*To assess at which time points weight loss became significant, multiple comparisons may be performed. Given the likely violation of the Normality assumption, Bonferroni or Bonferroni--Holm corrections may be used to control the Family-Wise Error Rate.*
+:::
+
+\
+
+## Two-Way Analysis of Variance (Fixed Effects)
+
+The previous sections presented different approaches for testing the effect of a single factor with three or more levels. These approaches differed according to whether groups were independent or repeated and whether assumptions such as Normality and homoscedasticity were satisfied.
+
+This section extends the parametric ANOVA framework to designs involving two factors, each with two or more levels---the **two-way ANOVA layout**.
+
+\
+
+### Example of Application
+
+The two-way ANOVA design is developed below using simulated gait-speed data inspired by the study of [Taylor-Piliae and colleagues](https://www.sciencedirect.com/science/article/pii/S0966636211007624?via%3Dihub) @taylor12.
+
+As stated by Taylor-Piliae and colleagues @taylor12:
+
+> *Gait velocity is an objective indicator of post-stroke walking ability, a reliable marker of deficit severity, and a strong predictor of functional community walking.*
+
+Based on their study, @tbl-3-6-7 reports simulated gait-speed data for groups of stroke survivors.
+
+The question of interest is whether there is a significant treatment effect on gait speed. Because groups were stratified according to stroke severity, a more complex model than that considered for one-way ANOVA is required.
+
+:::{.small-text}
+```{r}
+#| label: tbl-3-6-7
+#| echo: false
+#| tbl-cap: Gait speed (m/s) for different groups of patients with different severity of stroke disease.
+#| message: false
+#| warning: false
+
+g11 <- c(0.67, 0.71, 0.66, 0.78, 0.72)
+g21 <- c(0.67, 0.74, 0.75, 0.74, 0.70)
+g12 <- c(0.67, 0.62, 0.57, 0.49, 0.65)
+g22 <- c(0.67, 0.63, 0.62, 0.66, 0.67)
+g13 <- c(0.49, 0.49, 0.45, 0.35, 0.48)
+g23 <- c(0.57, 0.57, 0.57, 0.50, 0.60)
+I <- 2
+J <- 3
+K <- 5
+
+df <- data.frame(
+  group = c(rep("control",K), rep("treatment",K)),
+  minor = c(g11, g21),
+  moderate = c(g21,g22),
+  severe = c(g13,g23)
+  )
+
+sketch <- htmltools::withTags(
+  table(
+    class = "display",
+    thead(tr(th(rowspan = 2, "Groups ($I=2$)",br(),"($i=1 \\text{: control}$)",br(),"($i=2 \\text{: treatment}$)"), th(colspan = 3, "Stroke Severity $(J=3)$")), tr(th("Minor ($j=1$)"), th("Moderate ($j=2$)"), th("Severe ($j=3$)")))))
+
+datatable(
+  df, container = sketch, rownames = FALSE, escape = FALSE, class = "cell-border", options = list(dom = "t", paging = FALSE,  searching = FALSE, ordering = FALSE, info = FALSE, autoWidth = FALSE,   columnDefs = list(list(className = "dt-center", targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+
+\
+
+### Additive and Interaction Effects
+
+The ANOVA models presented for one-way independent-group designs (@eq-oneway-model) and repeated-measures designs (@eq-anova-rm) parameterize factors as additive effects. In a two-way design, however, an additive model assumes that there is **no interaction between factors**. In other words, the effect of one factor does not depend on the level of the other factor.
+
+Examples of additive effects between two factors, $A$ and $B$, are illustrated in the mean plots of @fig-3-6-13:
+
+![Hypothetical examples of mean values for two levels of factor $A$ and three levels of factor $B$.](/include/images/part_3/ch_6/3-6-13_additive-effects.png){#fig-3-6-13 width=100%}
+
+- **case 1**: both factors $A$ and $B$ exhibit additive effects.
+- **case 2**: only factor $A$ exhibits an additive effect.
+- **case 3**: factor $B$ differentiates level 1 from levels 2 and 3, while factor $A$ still produces a consistent separation.
+
+:::{.callout-important title="Graphical characteristic of additive effects"}
+*Parallel lines in mean plots such as those shown in @fig-3-6-13 provide evidence for the absence of interaction between factors.*
+:::
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-8_two-way-interaction.md")
+```
+:::
+
+\
+
+### The Two-Way Model
+
+Let $I$ and $J$ denote the number of levels of the two factors. For each of the $I\times J$ combinations of levels, there are $K$ observations ($K=5$ in @tbl-3-6-7).
+
+The full two-way ANOVA model including interaction is:
+
+$$
+Y_{ijk} = \mu + \alpha_i + \beta_j + \delta_{ij} + \varepsilon_{ijk}
+$$ {#eq-twoway-model}
+
+where:
+
+- $\mu$ is the grand mean, over the $IJK$ observations.
+- $\alpha_i$ is the additive effect of factor $I$ (*treatment effect*).
+- $\beta_j$ is the additive effect of factor $J$ (*stroke severity effect*).
+- $\delta_{ij}$ is the interaction effect between the two factors.
+- $\varepsilon_{ijk}$ is the residual error.
+
+Assuming independent Normally distributed residuals with zero mean and variance $\sigma^2$:
+
+$$
+E[Y_{ijk}] = \mu + \alpha_i + \beta_j + \delta_{ij}
+$$
+
+Under the constraints:
+
+$$
+\sum_{i=1}^I\alpha_i = 0 \qquad \sum_{j=1}^J\beta_j = 0 \qquad \sum_{i=1}^I\delta_{ij}= \sum_{j=1}^J\delta_{ij}=0
+$$ {#eq-model-constraints}
+
+parameter estimates are:
+
+$$
+\begin{aligned}
+\hat{\mu} &= \overline{Y} \\
+\hat{\alpha}_i &= \overline{Y}_{i..}-\overline{Y} \\
+\hat{\beta}_j &= \overline{Y}_{.j.}-\overline{Y} \\
+\hat{\delta}_{ij} &= \overline{Y}_{ij.} - \overline{Y}_{i..} - \overline{Y}_{.j.} + \overline{Y}
+\end{aligned}
+$$
+
+:::{.callout-note title="Deriving the estimates" collapse="true"}
+*To estimate $\alpha_i$ based on the two-way model (@eq-twoway-model), we isolate the contribution of factor $I$ by averaging values across the $K$ observations and the $J$ levels of factor $J$:*
+
+$$
+\begin{aligned}
+\overline{Y}_{i..} &= \frac{1}{JK} \sum_{j=1}^J \sum_{k=1}^K Y_{ijk} \\
+&= \mu + \alpha_i + \frac{1}{J}\sum_{j=1}^J \beta_j + \frac{1}{J}\sum_{j=1}^J \delta_{ij} + \frac{1}{JK}\sum_{j=1}^J\sum_{k=1}^K\varepsilon_{ijk}
+\end{aligned}
+$$
+
+*Given the constraints $\sum_{j=1}^J\beta_j=0$ and $\sum_{j=1}^J\delta_{ij}=0$, and because residuals average to zero, this becomes:*
+
+$$
+\overline{Y}_{i..} = \mu + \alpha_i
+$$
+
+*Since $\mu$ is estimated by the grand mean $\overline{Y}$, the estimate of $\alpha_i$ is:*
+
+$$
+\hat{\alpha}_i = \overline{Y}_{i..}-\overline{Y}
+$$
+
+*The estimate for $\beta_j$ is derived by averaging across the levels of factor $I$ and the $K$ observations. The interaction effect is then the part of the cell mean that remains after removing the grand mean and the two additive effects:*
+
+$$
+\hat{\delta}_{ij} = \overline{Y}_{ij.} - \overline{Y}_{i..} - \overline{Y}_{.j.} + \overline{Y}
+$$
+:::
+
+\
+
+### The Sum of Squares
+
+As in one-way ANOVA, the Fisher $F$ statistics are derived from a partition of the total sum of squares:
+
+$$
+SS_\text{tot} = SS_\text{I} + SS_\text{J} + SS_\text{IJ} + SS_\text{E}
+$$ {#eq-ss-anova2}
+
+This identity can be obtained by writing:
+
+$$
+\begin{aligned}
+Y_{ijk}-\overline{Y} &=  \left(\overline{Y}_{i..}-\overline{Y}\right) \\
+&+ \left(\overline{Y}_{.j.}-\overline{Y}\right) \\
+&+ \left(\overline{Y}_{ij.}-\overline{Y}_{i..}-\overline{Y}_{.j.}+\overline{Y}\right) \\
+&+ \left(Y_{ijk}-\overline{Y}_{ij.}\right)
+\end{aligned}
+$$
+
+and then squaring and summing both sides over all levels and observations. The derivation follows the same reasoning used for the one-way design (see @nte-ss-proof).
+
+The total sum of squares is:
+
+$$
+SS_\text{tot} = \sum_{i=1}^I \sum_{j=1}^J \sum_{k=1}^K \left(Y_{ijk}-\overline{Y}\right)^2
+$$
+
+The tabset below provides the mathematical definition and graphical visualization for each sum of squares contributing to $SS_\text{tot}$, considering the gait-speed data (@tbl-3-6-7).
+
+:::{.panel-tabset}
+
+#### $SS_{\text{I}}$
+
+:::: {.columns}
+::: {.column width=40%}
+The first right-side term is the **sum of squares between levels of factor $I$** (*treatment groups*):
+
+$$
+SS_{\text{I}} = JK \sum_{i=1}^I \left(\overline{Y}_{i..}-\overline{Y}\right)^2
+$$ 
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=57.5%}
+![](/include/images/part_3/ch_6/ss_I.png){width=100%}
+:::
+::::
+
+#### $SS_{\text{J}}$
+
+:::: {.columns}
+::: {.column width=40%}
+The second right-side term is the **sum of squares between levels of factor $J$** (*disease severity*):
+
+$$
+SS_{\text{J}} = IK \sum_{j=1}^J \left(\overline{Y}_{.j.}-\overline{Y}\right)^2
+$$ 
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=57.5%}
+![](/include/images/part_3/ch_6/ss_J.png){width=100%}
+:::
+::::
+
+#### $SS_{\text{IJ}}$
+
+The third right-side term is the **sum of squares for the interaction between factors $I$ and $J$** (*dependence of treatment effect on disease severity*):
+
+$$
+SS_{\text{IJ}} = K\sum_{i=1}^I\sum_{j=1}^J \left(\overline{Y}_{ij.}-\overline{Y}_{i..}-\overline{Y}_{.j.}+\overline{Y}\right)^2
+$$
+
+![](/include/images/part_3/ch_6/ss_IJ.png){width=100%}
+
+#### $SS_{\text{E}}$
+
+:::: {.columns}
+::: {.column width=47.5%}
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-9_ss-E.md")
+```
+:::
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=50%}
+\
+![](/include/images/part_3/ch_6/ss_E.png){width=100%}
+:::
+::::
+
+The fourth right-side term is the **sum of squares of residuals** (*the error term*):
+
+$$
+SS_{\text{E}} = \sum_{i=1}^I\sum_{j=1}^J\sum_{k=1}^K \left(Y_{ijk}-\overline{Y}_{ij.}\right)^2
+$$ 
+:::
+
+\
+
+### The Fisher ($F$) Test Statistic
+
+Three null hypotheses are tested in the two-way ANOVA: the additive effects of factors $I$ and $J$, and their interaction.
+
+All tests use a common denominator:
+
+$$
+SS_\text{E}/\sigma^2 \sim \chi^2_{\nu_\text{E}}
+$$
+
+assuming:
+
+$$
+\varepsilon_{ijk} \sim \mathcal{N}(0,\sigma^2)
+$$
+
+with:
+
+$$
+\nu_\text{E}=IJ(K-1)
+$$
+
+\
+
+#### $H_{0I}$: No Effect of Factor $I$
+
+Under the null hypothesis of no additive effect of factor $I$:
+
+$$
+H_{0I}: \alpha_i = 0, \quad i\in\{1,\ldots,I\}
+$$
+
+The corresponding $F$ statistic is:
+
+$$
+F = \frac{SS_\text{I}/(I-1)} {SS_\text{E}/[IJ(K-1)]} = \frac{MS_\text{I}}{MS_\text{E}} \sim F(\nu_\text{I},\nu_\text{E})
+$$
+
+where $\nu_\text{I}=I-1$ is the degrees of freedom associated with $SS_\text{I}$.
+
+\
+
+#### $H_{0J}$: No Effect of Factor $J$
+
+Under the null hypothesis of no additive effect of factor $J$:
+
+$$
+H_{0J}: \beta_j = 0, \quad j\in\{1,\ldots,J\}
+$$
+
+The corresponding $F$ statistic is:
+
+$$
+F = \frac{SS_\text{J}/(J-1)} {SS_\text{E}/[IJ(K-1)]} = \frac{MS_\text{J}}{MS_\text{E}} \sim F(\nu_\text{J},\nu_\text{E})
+$$
+
+where $\nu_\text{J}=J-1$ is the degrees of freedom associated with $SS_\text{J}$.
+
+\
+
+#### $H_{0IJ}$: No Interaction Between Factors $I$ and $J$
+
+Under the null hypothesis of no interaction effect:
+
+$$
+H_{0IJ}: \delta_{ij}=0, \quad i\in\{1,\ldots,I\}, \quad j\in\{1,\ldots,J\}
+$$
+
+The corresponding $F$ statistic is:
+
+$$
+F = \frac{SS_\text{IJ}/[(I-1)(J-1)]} {SS_\text{E}/[IJ(K-1)]}
+= \frac{MS_\text{IJ}}{MS_\text{E}} \sim F(\nu_\text{IJ},\nu_\text{E})
+$$
+
+where $\nu_\text{IJ}=(I-1)(J-1)$ is the degrees of freedom associated with $SS_\text{IJ}$.
+
+\
+
+### Two-Way ANOVA Table
+
+The inferential procedure with two-way designs is analogous to that considered for one-way designs (see @sec-f-oneway). The $F$ values computed above for the additive and interaction effects follow Fisher distributions with their respective degrees of freedom.
+
+As for one-way designs (@fig-3-6-4), an ANOVA table is typically drawn when inspecting results for two-way designs. @fig-3-6-14 illustrates the general ANOVA table for two-way layouts. Additional rows are included in the table, reporting the quantities necessary for computing the $F$ values and drawing conclusions for the three null hypotheses under test.
+
+![ANOVA table for two-way designs](/include/images/part_3/ch_6/3-6-14_twoway-table.png){width=100% #fig-3-6-14}
+
+The decision to reject each null hypothesis is based on the probability of observing an $F$ value larger than the observed value $f$. If the $p$-value reported in the last column of the table (@fig-3-6-14)---which can be computed from the [interactive plot](#sec-finteractiveplot) above---is smaller than the significance level $\alpha$, the corresponding null hypothesis is rejected.
+
+\
+
+### Example of Application 
+
+The simulated data in @tbl-3-6-7, reporting gait speed for $I=2$ groups (control and treatment) and $J=3$ stroke conditions (minor, moderate, and severe), each with $K=5$ subjects, yields the ANOVA table shown below.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-6-8
+#| echo: false
+#| tbl-cap: Two-way ANOVA table created for data in @tbl-3-6-7.
+#| message: false
+#| warning: false
+
+# Sum of squares
+nui <- I-1
+nuj <- J-1
+nuij <- (I-1)*(J-1)
+nue <- I*J*(K-1)
+
+df <- data.frame(
+    I = factor(rep(c("control", "treatment", "control", "treatment", "control", "treatment"), each = K)),
+    J = factor(rep(c("minor", "minor", "moderate", "moderate", "severe", "severe"), each = K)),
+    data = c(g11, g21, g12, g22, g13, g23)
+)
+
+Y... <- df |> summarise(mean = mean(data))
+Yi.. <- df |> group_by(I) |> summarise(mean = mean(data))
+Y.j. <- df |> group_by(J) |> summarise(mean = mean(data))
+Yij. <- df |> group_by(I,J) |> summarise(mean = mean(data))
+
+msi <- round(J*K*sum( (Yi..$mean - Y...$mean)^2 ) / nui,4)
+msj <- round(I*K*sum( (Y.j.$mean - Y...$mean)^2 ) / nuj,4)
+msij <- round(K*sum( (Yij.$mean - rep(Yi..$mean,each=J) - rep(Y.j.$mean,I)+ Y...$mean)^2 ) / nuij,4)
+mse <- round((sum( (df$data - Y...$mean)^2 ) - (msi*nui+msj*nuj+msij*nuij) ) / nue,4)
+fi <- round(msi/mse,2)
+fj <- round(msj/mse,2)
+fij <- round(msij/mse,2)
+pi <- pf(fi, nui, nue, lower.tail = FALSE)
+pj <- pf(fj, nuj, nue, lower.tail = FALSE)
+pij <- pf(fij, nuij, nue, lower.tail = FALSE)
+
+anova_tbl <- data.frame(
+  `Source of Variation` = c("Factor $I$<br>(additive effect)", "Factor $J$<br>(additive effect)", "Factor $I\\times J$<br>(interaction effect)","Error term<br>(residuals)"),
+  `Degrees of Freedom` = c(paste0("$\\nu_\\text{I}$ = ", nui), paste0("$\\nu_\\text{J}$ = ", nuj), paste0("$\\nu_\\text{IJ}$ = ", nuij),paste0("$\\nu_\\text{E}$ = ", nue)),
+  `Sum of Squares` = c(paste0("$SS_\\text{I}$ = ", msi*nui), paste0("$SS_\\text{J}$ = ", msj*nuj), paste0("$SS_\\text{IJ}$ = ", msij*nuij),paste0("$SS_\\text{E}$ = ", mse*nue)),
+  `Mean Square` = c(paste0("$MS_\\text{I}$ = ", msi),paste0("$MS_\\text{J}$ = ", msj),paste0("$MS_\\text{IJ}$ = ", msij),paste0("$MS_\\text{E}$ = ", mse)),
+  `F-Ratio` = c(paste0("$f$ = ", fi),paste0("$f$ = ", fj),paste0("$f$ = ", fij), ""),
+  `p-value` = c(sprintf("%1.4f", pi), sprintf("%1.2e", pj), sprintf("%1.4f", pij), NA),
+  check.names = FALSE
+)
+
+datatable(anova_tbl,rownames = FALSE, escape = FALSE, options = list(
+    dom = 't',ordering = FALSE, columnDefs = list(list(className = "dt-center", targets = "_all"), list(width = paste0(100 / 4, "%"), targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))  
+)
+```
+:::
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-10_which-h0-to-reject.md")
+```
+:::
+
+The two-way ANOVA table above indicates a significant effect of treatment and of stroke severity. This means that gait speed is significantly different between:
+
+- ***treatment and control groups**, averaged across stroke-severity levels.*
+- ***minor, moderate, and severe stroke conditions**, averaged across treatment groups.*
+
+The interaction effect is not significant, indicating that the treatment effect does not depend strongly on stroke severity in these simulated data.
+
+In the absence of a significant interaction effect, post-hoc analysis (see @sec-post-hoc) should be limited to pairwise differences between levels within each factor, without mixing levels between factors. To clarify this point, @fig-3-6-15 indicates which mean values should be subjected to pairwise testing.
+
+![Post-hoc analyses should be applied separately for each factor, given that @tbl-3-6-8 did not reveal a significant interaction effect.](/include/images/part_3/ch_6/3-6-15_twoway-post-hoc.png){width=100% #fig-3-6-15}
+
+\
+
+## Two-Way Analysis of Variance with Mixed Effects
+
+Inspection of the data in @tbl-3-6-7 and of the right panel in @fig-3-6-15 suggests that the treatment effect may depend on stroke severity. In other words, there may be an interaction between treatment and stroke severity.
+
+In the two-way ANOVA presented above, the observations in the control and treatment groups were treated as independent. A more powerful design would test the treatment effect on the same subjects before and after the intervention. That is, subjects within each stroke-severity level would be assessed twice: before and after a period of rehabilitation.
+
+This is a **mixed design**, because it combines:
+
+- a **repeated-measures factor**: factor $I$ (*time*: pre-post),
+- a **between-subjects factor**: factor $J$ (*stroke severity*),
+- a **random subject effect**, with subjects nested within levels of factor $J$.
+
+This design is also known as a **two-way ANOVA with repeated measures on one factor**.
+
+\
+
+### The Two-Way Model
+
+The main difference from the two-way model presented above (@eq-twoway-model) is that part of the residual variability can now be attributed to stable differences between subjects. This is possible because the same subjects are measured repeatedly across the levels of factor $I$.
+
+:::: {.columns}
+::: {.column width=40%}
+One additional term, $\gamma_{jk}$, accounts for the variability between subjects within each level of the non-repeated factor $J$. The remaining term, $\varepsilon_{ijk}$, represents residual error.
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=57.5%}
+![](/include/images/part_3/ch_6/ss_JK.png){width=100%}
+:::
+::::
+
+The model can therefore be written as:
+
+$$
+Y_{ijk}=\mu + \alpha_i + \beta_j + \delta_{ij} + \gamma_{jk} + \varepsilon_{ijk}
+$$
+
+where:
+
+- $\mu$ is the grand mean.
+- $\alpha_i$ is the effect of factor $I$ (*time*: pre-post).
+- $\beta_j$ is the effect of factor $J$ (*stroke severity*).
+- $\delta_{ij}$ is the interaction effect between time and stroke severity.
+- $\gamma_{jk}$ is the random effect of subject $k$ nested within level $j$ of stroke severity.
+- $\varepsilon_{ijk}$ is the residual error.
+
+The total sum of squares is partitioned into five terms:
+
+$$
+SS_\text{tot}=SS_\text{I}+SS_\text{J}+SS_\text{IJ}+SS_\text{JK}+SS_\text{E}
+$$ {#eq-ss-anova2rm}
+
+where $SS_\text{JK}$ captures inter-individual variability within levels of factor $J$:
+
+$$
+SS_\text{JK}=I \sum_{j=1}^J \sum_{k=1}^K \left(\overline{Y}_{.jk}-\overline{Y}_{.j.}\right)^2
+$$
+
+Here, $\overline{Y}_{.jk}$ is the mean across repeated measurements for subject $k$ within level $j$ of stroke severity, and $\overline{Y}_{.j.}$ is the mean across subjects and repeated measurements for level $j$.
+
+The residual sum of squares is:
+
+$$
+SS_\text{E}=\sum_{i=1}^I\sum_{j=1}^J\sum_{k=1}^K\left(
+Y_{ijk}-\overline{Y}_{ij.}-\overline{Y}_{.jk}+\overline{Y}_{.j.}\right)^2
+$$
+
+Equivalently, it can be computed from the sum-of-squares identity: $SS_\text{E}=SS_\text{tot}-SS_\text{I}-SS_\text{J}-SS_\text{IJ}-SS_\text{JK}$
+
+:::{.callout-note title="Error terms in the mixed design"}
+*The mixed design has two error terms. The effect of the between-subjects factor $J$ is tested against the subject-within-$J$ variability, $MS_\text{JK}$. The repeated-measures factor $I$ and the interaction $I \times J$ are tested against the residual error, $MS_\text{E}$.*
+:::
+
+\
+
+### Two-Way ANOVA Table with Mixed Effects
+
+Because the variability between subjects is separated from the residual error, the denominator of the $F$ ratio depends on which effect is being tested. Compare the ANOVA table below, for the mixed design (@tbl-3-6-9), with that obtained for the same data set when all effects were treated as fixed and independent (@tbl-3-6-8).
+
+The $p$-values change because the sources of variability are partitioned differently. In particular, the interaction effect is now statistically significant, since its $p$-value is smaller than the significance level $\alpha=0.05$. This indicates that the treatment effect depends on stroke severity.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-6-9
+#| echo: false
+#| tbl-cap: Two-way ANOVA table created for the mixed design. Control and treatment groups in @tbl-3-6-7 are now considered as pre-post measurements on the same subjects within each stroke-severity level.
+#| message: false
+#| warning: false
+
+# Degrees of freedom
+nui <- I - 1
+nuj <- J - 1
+nuij <- (I - 1) * (J - 1)
+nujk <- J * (K - 1)
+nue <- (I - 1) * J * (K - 1)
+
+# Data frame for mixed design
+df <- data.frame(
+  I = factor(rep(c("pre", "post", "pre", "post", "pre", "post"), each = K)),
+  J = factor(rep(c("minor", "minor", "moderate", "moderate", "severe", "severe"), each = K)),
+  K = factor(c(rep(seq(1, 5), I), rep(seq(6, 10), I), rep(seq(11, 15), I))),
+  data = c(g11, g21, g12, g22, g13, g23)
+)
+
+# Means
+Y... <- df |> summarise(mean = mean(data))
+Yi.. <- df |> group_by(I) |> summarise(mean = mean(data), .groups = "drop")
+Y.j. <- df |> group_by(J) |> summarise(mean = mean(data), .groups = "drop")
+Yij. <- df |> group_by(I, J) |> summarise(mean = mean(data), .groups = "drop")
+Y.jk <- df |> group_by(J, K) |> summarise(mean = mean(data), .groups = "drop")
+
+# Sum of squares
+ssi <- J * K * sum((Yi..$mean - Y...$mean)^2)
+ssj <- I * K * sum((Y.j.$mean - Y...$mean)^2)
+ssij <- K * sum((Yij.$mean - rep(Yi..$mean, each = J) - rep(Y.j.$mean, I) + Y...$mean)^2)
+ssjk <- I * sum((Y.jk$mean - rep(Y.j.$mean, each = K))^2)
+sstot <- sum((df$data - Y...$mean)^2)
+sse <- sstot - ssi - ssj - ssij - ssjk
+
+# Mean squares
+msi <- round(ssi / nui, 4)
+msj <- round(ssj / nuj, 4)
+msij <- round(ssij / nuij, 4)
+msjk <- round(ssjk / nujk, 4)
+mse <- round(sse / nue, 4)
+
+# F ratios: note different denominators
+fi <- round(msi / mse, 2)
+fj <- round(msj / msjk, 2)
+fij <- round(msij / mse, 2)
+
+# p-values
+pi <- pf(fi, nui, nue, lower.tail = FALSE)
+pj <- pf(fj, nuj, nujk, lower.tail = FALSE)
+pij <- pf(fij, nuij, nue, lower.tail = FALSE)
+
+anova_tbl <- data.frame(
+  `Source of Variation` = c(
+    "Factor $I$<br>(time effect)",
+    "Factor $J$<br>(stroke severity)",
+    "Factor $I\\times J$<br>(interaction effect)",
+    "Subjects within $J$<br>(random effect)",
+    "Error term<br>(residuals)"
+  ),
+  `Degrees of Freedom` = c(
+    paste0("$\\nu_\\text{I}$ = ", nui),
+    paste0("$\\nu_\\text{J}$ = ", nuj),
+    paste0("$\\nu_\\text{IJ}$ = ", nuij),
+    paste0("$\\nu_\\text{JK}$ = ", nujk),
+    paste0("$\\nu_\\text{E}$ = ", nue)
+  ),
+  `Sum of Squares` = c(
+    paste0("$SS_\\text{I}$ = ", round(ssi, 4)),
+    paste0("$SS_\\text{J}$ = ", round(ssj, 4)),
+    paste0("$SS_\\text{IJ}$ = ", round(ssij, 4)),
+    paste0("$SS_\\text{JK}$ = ", round(ssjk, 4)),
+    paste0("$SS_\\text{E}$ = ", round(sse, 4))
+  ),
+  `Mean Square` = c(
+    paste0("$MS_\\text{I}$ = ", msi),
+    paste0("$MS_\\text{J}$ = ", msj),
+    paste0("$MS_\\text{IJ}$ = ", msij),
+    paste0("$MS_\\text{JK}$ = ", msjk),
+    paste0("$MS_\\text{E}$ = ", mse)
+  ),
+  `F-Ratio` = c(
+    paste0("$f=\\frac{MS_\\text{I}}{MS_\\text{E}}$= ", fi),
+    paste0("$f=\\frac{MS_\\text{J}}{MS_\\text{JK}}$= ", fj),
+    paste0("$f=\\frac{MS_\\text{IJ}}{MS_\\text{E}}$= ", fij),
+    "",
+    ""
+  ),
+  `p-value` = c(
+    sprintf("%1.4f", pi),
+    sprintf("%1.2e", pj),
+    sprintf("%1.4f", pij),
+    NA,
+    NA
+  ),
+  check.names = FALSE
+)
+
+DT::datatable(
+  anova_tbl,
+  rownames = FALSE,
+  escape = FALSE,
+  options = list(
+    dom = 't',
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = "dt-center", targets = "_all"),
+      list(width = paste0(100 / 6, "%"), targets = "_all")
+    ),
+    drawCallback = DT::JS("function(settings) {MathJax.typeset();}")
+  )
+)
+```
+:::
+
+\
+
+### Interpreting Two-Way ANOVA Results with a Significant Interaction Effect
+
+The mixed-design ANOVA indicates a main effect of factor $I$ (*time*: pre-post; see @tbl-3-6-9). Since the time factor has two levels, this main effect suggests a difference in gait speed between pre- and post-intervention measurements when averaging across stroke-severity levels.
+
+However, this additive effect should not be interpreted in isolation, because the interaction between factor $I$ and factor $J$ is statistically significant. This means that the pre-post change in gait speed depends on stroke severity.
+
+:::{.callout-important title="Additive $\times$ interaction effects"}
+*Statistically significant additive effects should be interpreted with caution when interaction effects are statistically significant. In this case, the effect of one factor depends on the level of the other factor.*
+:::
+
+In the presence of an interaction, pairwise differences should be assessed within levels of one of the factors. Given the interest in assessing the effect of the rehabilitation program, pre-post differences should be assessed separately within each stroke-severity level.
+
+For the three possible pre-post comparisons, based on the Tukey HSD post-hoc test (see @sec-tukeyhsd), a statistically significant difference is observed only for the severely affected subjects (@fig-3-6-16).
+
+:::: {.columns}
+::: {.column width=50%}
+Symbols such as $*$, $\#$, or letters, are often used to indicate where pairwise differences are statistically significant, yielding a $p$-value smaller than the significance level $\alpha$.
+
+In this example, the pre-post difference was significant only for the severely affected patients. This indicates that the treatment benefit was most evident in this subgroup.
+:::
+::: {.column width=2.5%}
+:::
+:::{.column width=47.5%}
+![Pairwise assessment of pre-post differences in gait speed. The symbol * denotes statistical significance at $p<0.05$.](/include/images/part_3/ch_6/3-6-16_tukey-post-hoc.png){width=100% #fig-3-6-16}
+:::
+::::
+
+::: {.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-6-11_three-way-layout.md")
+```
+:::
+
+\
+
+## Unbalanced ANOVA Designs
+
+So far, only situations in which the number of observations was the same across factor levels were considered. This may not be the case in some studies.
+
+For example, subjects may drop out after enrollment, resulting in fewer observations at follow-up assessments. Issues with signal quality or limited availability of resources may also lead to unequal numbers of observations across factor-level combinations. When this occurs in an ANOVA design, the design is said to be **unbalanced**.
+
+\
+
+### The Problem with Unbalanced Designs
+
+With unbalanced designs, the ANOVA model does not necessarily change. What changes is how the model parameters and sums of squares are estimated.
+
+Based on the linear two-way ANOVA model presented above (@eq-twoway-model), the expected value for observations in the $i$-th level of factor $I$ and the $j$-th level of factor $J$ is:
+
+$$
+\hat{Y}_{ij}=\hat{\mu}+\hat{\alpha}_i+\hat{\beta}_j+\hat{\delta}_{ij}
+$$
+
+where all terms on the right side are estimates of the model parameters.
+
+:::{.callout-note title="Least-squares estimates of parameters for balanced designs" collapse="true"}
+*No derivation has been provided so far for the parameter estimates. For the interested reader, parameters can be estimated in the **least-squares sense**.*
+
+*Let us define the quadratic error function:*
+
+$$
+\theta=\sum_{i,j,k}\left(Y_{ijk}-\hat{Y}_{ij}\right)^2=\sum_{i,j,k}
+\left(Y_{ijk}-\mu-\alpha_i-\beta_j-\delta_{ij}\right)^2
+$$
+
+*Parameters are estimated by choosing values of $\mu$, $\alpha_i$, $\beta_j$, and $\delta_{ij}$ that minimize $\theta$. In the least-squares sense, this means solving:*
+
+$$
+\frac{\partial \theta}{\partial \mu}
+=\frac{\partial \theta}{\partial \alpha_i}
+=\frac{\partial \theta}{\partial \beta_j}
+=\frac{\partial \theta}{\partial \delta_{ij}}=0
+$$
+
+*Considering, for example, the effect $\alpha_i$:*
+
+$$
+\frac{\partial \theta}{\partial \alpha_i}
+=-2 \sum_{j,k}\left(Y_{ijk}-\mu-\alpha_i-\beta_j-\delta_{ij}\right)
+$$
+
+*we obtain:*
+
+$$
+\begin{aligned}
+&\sum_{j,k} \left(Y_{ijk}-\mu-\alpha_i-\beta_j-\delta_{ij}\right)=0 \\
+&\Rightarrow K\left(\sum_j \overline{Y}_{ij.}-\sum_j\mu- \sum_j\alpha_i-\sum_j\beta_j-\sum_j\delta_{ij}\right)=0 \\
+&\Rightarrow K\left(\sum_j \overline{Y}_{ij.}-J\mu-J\alpha_i\right)=0 \\
+&\Rightarrow \overline{Y}_{i..}-\mu-\alpha_i=0
+\end{aligned}
+$$
+
+*The estimated parameter is therefore:*
+
+$$
+\hat{\alpha}_i = \overline{Y}_{i..}-\hat{\mu} = \overline{Y}_{i..}-\overline{Y}
+$$
+
+*Analogously, for a balanced design:*
+
+$$
+\begin{aligned}
+\hat{\mu} &= \overline{Y} \\
+\hat{\beta}_j &= \overline{Y}_{.j.}-\overline{Y} \\
+\hat{\delta}_{ij} &= \overline{Y}_{ij.}-\overline{Y}_{i..}-\overline{Y}_{.j.}+\overline{Y}
+\end{aligned}
+$$
+:::
+
+Given the constraints for each parameter of the model (@eq-model-constraints), and assuming a fixed number of $K$ observations per cell (*balanced design*), the effect of factor $I$ can be estimated as:
+
+$$
+\begin{aligned}
+\hat{\alpha}_i &= \frac{1}{JK} \sum_{j,k} \left(Y_{ijk}-\mu-\beta_j-\delta_{ij}\right) \\
+&= \frac{1}{J} \left[ \sum_j \overline{Y}_{ij.} - \sum_j \mu - \sum_j \beta_j -
+\sum_j \delta_{ij} \right] \\
+&= \frac{1}{J} \left[ \sum_j \overline{Y}_{ij.} - J\mu \right] \\
+&= \overline{Y}_{i..}-\mu \\
+&= \overline{Y}_{i..}-\overline{Y}
+\end{aligned}
+$$
+
+This identity does not generally hold when the number of observations differs across factor-level combinations (*unbalanced design*). Denoting by $n_{ij}$ the number of observations collected for the combination of levels $i$ and $j$, the least-squares normal equation for $\alpha_i$ becomes:
+
+$$
+\begin{aligned}
+&\sum_{j,k} \left(Y_{ijk}-\mu-\alpha_i-\beta_j-\delta_{ij}\right)=0 \\
+&\Rightarrow \sum_j n_{ij}\overline{Y}_{ij.} - \sum_j n_{ij}\mu - \sum_j n_{ij}
+\left(\alpha_i+\beta_j+\delta_{ij}\right)=0
+\end{aligned}
+$$
+
+Because $n_{ij}$ differs between cells, the contribution of factor $I$ cannot be separated from the contributions of factor $J$ and the interaction in the same simple way as in the balanced design. The model is therefore fitted numerically, usually through the general linear model framework.
+
+:::{.callout-important title="Why unbalanced designs are more difficult"}
+*In balanced designs, the effects of the factors are orthogonal: each effect can be estimated independently from the others. In unbalanced designs, this orthogonality is lost. As a result, sums of squares and parameter estimates depend on how the model is specified and on the order or type of sums of squares used.*
+:::
+
+\
+
+### Inferential Procedure with Unbalanced Designs
+
+The main difficulty with unbalanced designs is that the effects of the different factors cannot be isolated as straightforwardly as in balanced designs. To illustrate the problem, let us consider a simplified version of the gait-speed example.
+
+@tbl-3-6-10 reports gait-speed values measured from two groups of subjects with either minor or severe stroke disease. The design is unbalanced because the number of subjects with minor and severe stroke differs between groups.
+
+:::: {.columns}
+::: {.column width=50%}
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-6-10
+#| echo: false
+#| tbl-cap: Gait speed (m/s) for different groups of patients with different severity of stroke disease.
+#| message: false
+#| warning: false
+
+g11 <- c(0.67, 0.71, 0.66, 0.72)
+g21 <- c(0.57, 0.60)
+g12 <- c(0.45, 0.35, NA, NA)
+g22 <- c(0.67, 0.75)
+I <- 2
+J <- 2
+
+df <- data.frame(
+  group = c(rep("control",4), rep("treatment",2)),
+  minor = c(g11, g21),
+  severe = c(g12,g22)
+  )
+
+sketch <- htmltools::withTags(
+  table(
+    class = "display",
+    thead(tr(th(rowspan = 2, style = "width: 70px;", "Groups ($I=2$)",br(),"($i=1 \\text{: control}$)",br(),"($i=2 \\text{: treat.}$)"), th(colspan = 2, "Stroke Severity $(J=2)$")), tr(th("Minor",br(),"($j=1$)"), th("Severe",br(),"($j=2$)")))))
+
+datatable(
+  df, container = sketch, rownames = FALSE, escape = FALSE, class = "cell-border", options = list(dom = "t", paging = FALSE, scrollX = FALSE, searching = FALSE, ordering = FALSE, info = FALSE, autoWidth = FALSE,   columnDefs = list(list(className = "dt-center", targets = "_all")), drawCallback = JS("function(settings) {MathJax.typeset();}"))
+)
+```
+:::
+:::
+::: {.column width=2.5%}
+:::
+:::{.column width=47.5%}
+Based on the values reported here, there are two possible approaches for computing the mean gait speed for the control group:
+
+1. weighting the cell means according to the number of observations in each cell. The resulting mean is $\overline{Y}_{1..}=0.593\ \text{m/s}$.
+
+2. averaging the cell means without weighting them according to the number of observations. The resulting mean is $\overline{Y}_{1..}=0.545\ \text{m/s}$.
+:::
+::::
+
+The interpretation of the contribution of factor $I$ to the model changes depending on how this group mean is computed.
+
+For the weighted mean, the imbalance across levels of factor $J$ is not adjusted for. Differences between control and treatment groups are therefore assessed directly from the observed marginal means.
+
+For the unweighted mean, the effect of factor $J$ is controlled for. In this case, the treatment effect is assessed after accounting for differences in stroke severity. These unweighted means are also known as **estimated marginal means** or **least-square means**.
+
+To clarify this point, consider the weighted and unweighted means shown in @fig-3-6-17 for the control group. The weighted mean is larger because the control group contains more subjects with minor stroke severity, who tend to exhibit higher gait-speed values.
+
+Consequently, the weighted mean is pulled toward the larger gait speeds observed in the minor-stroke subgroup. The observed difference between treatment groups may therefore partly reflect the imbalance in stroke severity rather than a genuine treatment effect.
+
+In biomedical research, it is often important to assess the effect of one factor after controlling for the effects of the other factors included in the model. In some situations, however, one may deliberately choose to ignore the contribution of another factor, for example when factors are introduced sequentially according to a specific experimental rationale.
+
+These different inferential goals lead to different approaches for computing the sums of squares in unbalanced ANOVA designs.
+
+![Mean and standard deviation for each of the $I\times J=2\times2=4$ cells (left). Weighted and unweighted mean values for the control group, compared with the treatment-group mean (right).](/include/images/part_3/ch_6/3-6-17_unbalanced-design-means.png){width=100% #fig-3-6-17}
+
+\
+
+### Type I, Type II, and Type III Sums of Squares
+
+In balanced ANOVA designs, the effects of different factors are orthogonal. This means that the contribution of one factor to the total variability can be separated independently from the contribution of the other factors.
+
+In unbalanced designs, however, factor effects become partially confounded because the number of observations differs across cells. Consequently, the sum of squares attributed to one factor depends on how the other factors are handled in the model.
+
+Three main approaches are commonly used: Type I, Type II, and Type III sums of squares.
+
+:::{.callout-note title="Which type of sum of squares should be used?"}
+*There is no universally correct type of sum of squares for all unbalanced designs. The choice depends on the scientific question and should be defined before inspecting the results.*
+:::
+
+:::{.panel-tabset .small-text}
+
+#### Type I SS
+
+Type I sums of squares are also called **sequential sums of squares** because effects are tested in the order in which they enter the model.
+
+The procedure is based on comparing residual sums of squares from nested models. For example, if factor $I$ is entered before factor $J$, the sequence is:
+
+$$
+\begin{aligned}
+SS_\text{E} &= \sum_{i,j,k}\left(Y_{ijk}-\mu\right)^2 \\
+SS_\text{E}(I) &= \sum_{i,j,k}\left(Y_{ijk}-\mu'-\alpha_i\right)^2 \\
+SS_\text{E}(I,J) &= \sum_{i,j,k}\left(Y_{ijk}-\mu'-\alpha_i-\beta_j\right)^2 \\
+SS_\text{E}(I,J,IJ) &= \sum_{i,j,k}\left(Y_{ijk}-\mu'-\alpha_i-\beta_j-\delta_{ij}\right)^2
+\end{aligned}
+$$
+
+The sums of squares are then computed as reductions in residual variability:
+
+$$
+\begin{aligned}
+SS_I &= SS_\text{E} - SS_\text{E}(I) \\
+SS_{J|I} &= SS_\text{E}(I)-SS_\text{E}(I,J) \\
+SS_{IJ|I,J} &= SS_\text{E}(I,J)-SS_\text{E}(I,J,IJ)
+\end{aligned}
+$$
+
+This means that the first factor entered into the model receives credit for any variability shared with the other factors. Therefore, changing the order of the factors may change the sums of squares, the $F$ statistics, and the $p$-values.
+
+Type I sums of squares are useful when the order of entry has a clear scientific meaning. For example, a researcher may decide to first enter a confounding variable and then test whether a treatment explains additional variability.
+
+:::{.callout-important title="Practical interpretation of Type I sums of squares"}
+*Type I sums of squares answer sequential questions. For example: after ignoring disease severity initially, does treatment explain variability? Then, after treatment has been included, does disease severity explain additional variability?*
+:::
+
+#### Type II SS
+
+Type II sums of squares evaluate each main effect after controlling for the other main effects, but without including the interaction in the test of the main effects.
+
+For the two-way model, the main-effect sums of squares are obtained by comparing models as follows:
+
+$$
+\begin{aligned}
+SS_I^{II} &= SS_\text{E}(J)-SS_\text{E}(I,J) \\
+SS_J^{II} &= SS_\text{E}(I)-SS_\text{E}(I,J)
+\end{aligned}
+$$
+
+Thus, factor $I$ is tested after accounting for factor $J$, and factor $J$ is tested after accounting for factor $I$.
+
+This approach is appropriate when the interaction effect is absent or not part of the scientific question. If a meaningful interaction is expected, Type II sums of squares may be misleading because the additive effects are interpreted without accounting for the interaction.
+
+:::{.callout-important title="Practical interpretation of Type II sums of squares"}
+*Type II sums of squares answer controlled additive questions. For example: after accounting for stroke severity, is there a treatment effect? This approach is most appropriate when interaction effects are not expected or are negligible.*
+:::
+
+#### Type III SS
+
+Type III sums of squares evaluate each effect after controlling for all other effects in the model, including interactions.
+
+For the two-way model, the main-effect sums of squares are obtained by comparing models as follows:
+
+$$
+\begin{aligned}
+SS_I^{III} &= SS_\text{E}(J,IJ)-SS_\text{E}(I,J,IJ) \\
+SS_J^{III} &= SS_\text{E}(I,IJ)-SS_\text{E}(I,J,IJ) \\
+SS_{IJ}^{III} &= SS_{IJ\mid I,J}
+\end{aligned}
+$$
+*Because the interaction effect is entered after both main effects in the full model, the interaction sum of squares is identical for Type I and Type III approaches.*
+
+Type III sums of squares therefore assess the unique contribution of each factor after all other terms in the model have been considered.
+
+This is the most common approach in biomedical research and in many statistical software packages, especially when designs are unbalanced and interactions are included in the model.
+
+The logic of Type III sums of squares is closely related to the unweighted means shown in @fig-3-6-17. The goal is to estimate the contribution of one factor independently from the imbalance associated with the other factors.
+
+:::{.callout-important title="Practical interpretation of Type III sums of squares"}
+*Type III sums of squares answer fully adjusted questions. For example: is there a treatment effect after accounting for stroke severity and for the treatment $\times$ severity interaction? This approach is often preferred when interaction effects are part of the model.*
+:::
+
+:::
+
+\
+
+### Conducting the Analysis in Practice
+
+The practical steps for conducting ANOVA with unbalanced designs depend on the type of sums of squares selected.
+
+:::{.panel-tabset .small-text}
+
+#### Type I Procedure
+
+1. Define the order in which factors enter the model based on the scientific question.
+2. Fit the simplest model, including only the grand mean.
+3. Add factor $I$ and compute the reduction in residual sum of squares.
+4. Add factor $J$ and compute the additional reduction in residual sum of squares.
+5. Add the interaction $I\times J$ and compute the additional reduction in residual sum of squares.
+6. Use each reduction in residual sum of squares to compute the corresponding mean square, $F$ statistic, and $p$-value.
+
+The result depends on the order in which factors are entered. Therefore, the order must be justified scientifically.
+
+#### Type II Procedure
+
+1. Fit the additive model containing both factors but no interaction:
+
+$$
+Y_{ijk}=\mu+\alpha_i+\beta_j+\varepsilon_{ijk}
+$$
+
+2. Test factor $I$ after accounting for factor $J$.
+3. Test factor $J$ after accounting for factor $I$.
+4. If necessary, inspect or separately test whether an interaction effect is present.
+5. Interpret the main effects only if the interaction is absent or not meaningful for the scientific question.
+
+Type II sums of squares are therefore most useful when the primary interest lies in additive effects.
+
+#### Type III Procedure
+
+1. Fit the full model, including both main effects and the interaction:
+
+$$
+Y_{ijk}=\mu+\alpha_i+\beta_j+\delta_{ij}+\varepsilon_{ijk}
+$$
+
+2. Test factor $I$ after accounting for factor $J$ and the interaction $I\times J$.
+3. Test factor $J$ after accounting for factor $I$ and the interaction $I\times J$.
+4. Test the interaction effect after accounting for both main effects.
+5. If the interaction is significant, interpret the main effects with caution and proceed to simple effects or post-hoc comparisons within levels of one factor.
+
+Type III sums of squares are often preferred when the model includes interaction terms and the design is unbalanced.
+
+:::
+
+\
+
+### Interpreting Different ANOVA Tables
+
+Because the sums of squares are computed differently, Type I, Type II, and Type III approaches may lead to different $F$ statistics and different $p$-values.
+
+This does not mean that one result is automatically correct and the others are incorrect. Instead, each approach answers a different inferential question:
+
+- **Type I** asks whether each factor explains additional variability given the factors entered before it.
+- **Type II** asks whether each main effect explains variability after the other main effects have been considered.
+- **Type III** asks whether each effect explains variability after all other effects in the model have been considered.
+
+:::{.callout-important title="Practical recommendation"}
+*For biomedical applications, Type II and Type III sums of squares are usually more relevant than Type I. Type II is useful when interaction effects are not expected. Type III is often preferred when interaction effects are included in the model or when the goal is to assess fully adjusted effects.*
+:::
+
+In the example shown in @fig-3-6-17, the mean lines are not parallel, suggesting a possible interaction between treatment and stroke severity. In this situation, Type III sums of squares are generally the most appropriate choice because they assess each effect after accounting for the interaction.

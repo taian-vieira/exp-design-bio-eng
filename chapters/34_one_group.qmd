@@ -1,0 +1,1905 @@
+# Inference, Error, Power, and Sample Size - One Group {#sec-onegroup}
+
+The previous chapter provided the foundations for statistical inference---that is, generalizing results from a sample to a population. This chapter introduces the systematic procedures used for statistical inference, focusing on study designs based on a single sample of individuals. Two common situations arise.
+
+In the first, a physiological or performance variable is measured once in each subject and compared to a reference value derived from the literature or population norm. In the second, the same variable is measured repeatedly in the same subjects, typically before and after an intervention. These two scenarios---comparison against a norm and comparison of pre–post measurements---form the basis for introducing statistical inference with a single group of subjects.
+
+:::{.callout-note title="This chapter..."}
+*... discusses the main steps underlying statistical inference, including the associated errors. The procedures are illustrated using simulated data inspired by scientific articles.*
+:::
+
+\
+
+## Statistically Significant Differences
+
+In statistical inference, differences are evaluated through formal hypotheses. In the context of this chapter, two common situations arise for a single-group study design.
+
+- The mean value of a target population $\mu_{\text{target}}$ is compared with the mean value of a reference population $\mu_{\text{norm}}$.
+
+- The mean value of the same population measured at two different times---before ($\mu_{\text{pre}}$) and after ($\mu_{\text{post}}$) a period or intervention---is compared.
+
+In both cases, the goal is to assess whether the observed difference between means provides sufficient evidence against the null hypothesis of no difference. A difference between means is said to be **statistically significant** if it would be unlikely to observe such a difference under the assumption that the null hypothesis is true.
+
+\
+
+### Intuition for a Significant Difference
+
+To start, consider the cross-sectional study by [Williams et al.](https://bjsm.bmj.com/content/58/Suppl_2/A122.1?utm_source=chatgpt.com) @williams24. These authors evaluated lung function in 311 elite athletes from Olympic and Paralympic sports. Spirometric variables were compared to Global Lung Initiative reference values, which provide normative values based on age, sex, and height.
+
+In particular, consider the Forced Expiratory Volume in one second ($FEV_1$), which measures the volume of air a person can maximally exhale in the first second following a deep breath (@fig-3-4-1). $FEV_1$ is commonly used to assess lung function and diagnose airway obstruction.
+
+![Measuring the forced expiratory volume in one second. Created with ChatGPT (OpenAI 2026).](/include/images/part_3/ch_4/3-4-1_fev_explanation.png){#fig-3-4-1 width=80%}
+
+It is reasonable to expect that $FEV_1$ values in elite athletes would be higher than the norm. This hypothesis can be tested by comparing the mean value observed in a sample of elite athletes with the normative value for age- and sex-matched individuals. **How much larger than the normative value should the sample mean be to conclude that elite athletes have greater expiratory capacity than the reference population?**
+
+There are two main aspects to consider when addressing this question.
+
+The first aspect concerns the difference $\Delta$ between the sample mean $\overline{X}$ and the reference value $\mu$ (the population norm): $\Delta = \overline{X} - \mu$. The magnitude of this difference affects how compatible the sample is with the reference population. If elite athletes truly have larger $FEV_1$ values, then their measurements should not be regarded as typical of the reference population of non-trained, healthy male adults.
+
+The second aspect concerns the variability of the data. How **meaningful** the observed difference ($\Delta$) is depends on the spread of $FEV_1$ values in the [target population](#sec-target-pop). As discussed earlier in this book, the standard deviation quantifies the dispersion of values around the mean. @fig-3-4-2 illustrates three possible distributions of $FEV_1$ values with different standard deviations ($\sigma_1 > \sigma_2 > \sigma_3$). From this figure, the following key point emerges:
+
+*The larger the population standard deviation, the more likely it is to observe a given difference between the sample mean and the population norm by chance.*
+
+
+![Intuition for the significance of differences](/include/images/part_3/ch_4/3-4-2_significant-difference.png){#fig-3-4-2 width=80%}
+
+\
+
+### Assessing the Significance of a Difference
+
+Probability is used to assess whether the sample mean $\overline{X}$ is significantly different from the population mean $\mu$. In @fig-3-4-2 we observe that $\overline{X} > \mu$, suggesting that athletes may have higher expiratory capacity than healthy, non-trained adults.
+
+To evaluate whether this observed difference is statistically significant, we consider how likely it would be to observe a sample mean at least as large as $\overline{X}$ under the assumption that the population mean is $\mu$—that is, assuming the null hypothesis $H_0$ is true.
+
+To test the significance of the difference, we rely on the [hypothesis testing](@sec-ht) framework introduced in the previous chapter. Specifically, we use the [Standard Normal Distribution](@sec-snd) to compute the probability of observing a value as extreme as the one obtained.
+
+This probability is computed as:
+
+$$
+P(Z > z_s) = 1 - P(Z < z_s)
+$$
+
+where $z_s$ is obtained by standardizing the sample mean using @eq-x-z. The quantity $P(Z < z_s)$ can be computed using the [interactive plot](#sec-interactiveplot) in the previous chapter, statistical software, or tables.
+
+:::{.callout-important title="Unknown population variance"}
+*However, there is an important issue. **The population variance (and thus the standard deviation), required in @eq-x-z to compute $z_s$, is typically unknown.***
+:::
+
+\
+
+### Sample Variance ($s^2$)
+
+It is often the case that the population variance $\sigma^2$ is unknown. In practice, it is estimated from the sample using a slightly modified version of the expression introduced in @eq-std, with the sample mean $\overline{X}$ instead of $\mu$ and with a correction:
+
+$$
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \overline{X})^2
+$$ {#eq-sample-var}
+
+According to the previous chapter, @eq-sample-var is an **estimator** of $\sigma^2$, while $s^2$ is the corresponding **estimate** based on the observed sample.
+
+The factor $(n-1)$ arises because the sample mean $\overline{X}$ is estimated from the same data. Once the mean is fixed, only $n-1$ of the deviations $(X_i - \overline{X})$ can vary freely—the last one is constrained so that the deviations sum to zero.
+
+:::{#sec-dof}
+:::{.callout-important title="Degrees of Freedom"}
+*This leads to the concept of **degrees of freedom**, defined as the number of values that are free to vary when computing a statistic. In this case, although $n$ observations are available, only $n-1$ independent pieces of information remain after estimating the mean. Therefore, the sample variance is computed using $n-1$ degrees of freedom.*
+:::
+:::
+
+::: {.callout-note title="Unbiased Variance Estimator" collapse="true"}
+:::{.small-text}
+If $s^2$ is an unbiased estimate of $\sigma^2$, then $E(s^2)=\sigma^2$. This can be demonstrated in five steps:
+
+$$
+\begin{align}
+\sum (X_i - \bar{X})^2 &= \sum ((X_i - \mu) - (\bar{X} - \mu))^2 \tag{1} \\
+&= \sum (X_i - \mu)^2 - n(\bar{X} - \mu)^2 \tag{2} \\
+E\left[\sum (X_i - \bar{X})^2\right] &= \sum E[(X_i - \mu)^2] - nE[(\bar{X} - \mu)^2] \tag{3} \\
+&= n\sigma^2 - n\left(\frac{\sigma^2}{n}\right) \tag{4} \\
+E[s^2] &= \frac{(n-1)\sigma^2}{n-1} = \sigma^2 \tag{5}
+\end{align}
+$$
+
+- **1:** add and subtract $\mu$
+- **2:** after squaring and summing, the cross-term $-2(\overline{X}-\mu)\sum (X_i-\mu)$ vanishes
+- **3:** tthe linearity of expectation is applied across the sum
+- **4:**the individual variance is replaced by $\sigma^2$ and $\frac{\sigma^2}{n}$ is the variance of the sample mean.
+- **5:** dividing by $(n-1)$ is required so that $E[s^2]=\sigma^2$
+:::
+:::
+
+\
+
+### Sample Standard Deviation ($s$)
+
+As discussed in the previous section, the sample variance (@eq-sample-var) is an unbiased esimate of the population variance---$E[s^2]=\sigma^2$. However, the sample standard deviation, computed as
+
+$$
+s = \sqrt{s^2} = \sqrt{\frac{\sum_{i=1}^{n} (X_i - \overline{X})^2}{n-1}} 
+$$ {#eq-sample-std}
+
+is a biased estimate of the population standard deviation. This is because:
+
+$$
+E[\sqrt{s^2}]\ne \sqrt{E[s^2]}=\sigma
+$$
+
+The bias, given by $E[s]-\sigma$, decreases with the sample size as shown in the box below. For a sample of four individuals, for example, $s$ underestimate $\sigma$ by a factor of $0.9375$. With ten individuals, the underestimation factor is $0.975$. Therefore, for most applications $s$ can be regarded as an approximately unbiased estimator of $\sigma$.
+
+::: {.callout-note title="Unbiased Standard Deviation Estimator" collapse="true"}
+:::{.small-text}
+Considering that:
+
+$$
+\frac{(n-1)s^2}{\sigma^2} \sim \chi_{n-1}^2
+$$
+
+where $\chi_{n-1}^2$ denotes a Chi-square distribution with $n-1$ degrees of freedom^[*this distribution will be presented later in this book*], we can write:
+
+$$
+s = \sigma \sqrt{\frac{\chi_{n-1}^2}{n-1}}
+$$
+
+Taking expectations:
+
+$$
+E[s] = \sigma \, E\left[\sqrt{\frac{\chi_{n-1}^2}{n-1}}\right]
+$$
+
+This shows that the sample standard deviation $s$ is a **biased estimator** of $\sigma$, since:
+
+$$
+E[s] = c_n \, \sigma \quad \text{with} \quad c_n < 1
+$$
+
+where $c_n$ is a constant depending on the sample size $n$.
+
+For large sample sizes, this constant can be approximated as:
+
+$$
+c_n \approx 1 - \frac{1}{4n}
+$$
+
+Thus, the bias of $s$ decreases as the sample size increases.
+
+*Although the sample standard deviation is a biased estimator of $\sigma$, the bias becomes negligible for moderate to large sample sizes. In most biomedical applications, $s$ can therefore be treated as an approximately unbiased estimator of $\sigma$.*
+:::
+:::
+
+\
+
+## The Student's t-Distribution {#sec-student}
+
+When a Normally distributed random variable $X \sim \mathcal{N}(\mu, \sigma^2)$ is standardized using the population standard deviation, the resulting variable follows a Standard Normal distribution---$Z \sim \mathcal{N}(0,1)$.
+
+However, in practice, the population standard deviation $\sigma$ is usually unknown and must be estimated from the sample. When $\sigma$ is replaced by the sample standard deviation $s$, and the sample mean is standardized, the resulting variable follows a **t-distribution**:
+
+$$
+t = \frac{\overline{X} - \mu}{s/\sqrt{n}}
+$$ {#eq-xbar-t}
+
+The **t-distribution** was introduced in 1908 by William Sealy Gosset @student08, who published under the pseudonym *Student*.
+
+The probability density function of the t-distribution is:
+
+$$
+f(t) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sqrt{\pi \nu}\,\Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}}
+$$
+
+where $\nu$ denotes the [degrees of freedom](@sec-dof). The density function depends on $\nu$. Examples of $f(t)$ for three different values of $\nu$ are provided below, along with some considerations about the t-distribution.
+
+:::{.callout-note title="The t-distribution:"}
+![](/include/images/part_3/ch_4/t-distribution.png){width=80%}
+
+- *is a family of curves indexed by $\nu$.*
+- *is symmetric and bell-shaped, like the Normal distribution.*
+- *has heavier tails, reflecting additional uncertainty from estimating $\sigma$.*
+- *approaches the Standard Normal distribution as $\nu$ increases.*
+:::
+
+:::{.callout-note title="Student's t Random Variable"}
+*A random variable following a t-distribution is denoted as*
+
+$$
+T \sim t(\nu)
+$$
+:::
+
+\
+
+## Using the t-Distribution to Assess Statistical Significance
+
+Let's consider the Forced Expiratory Volume example in the study of Williams et al @williams24 (@fig-3-4-1). It was hypothesized that elite athletes would have greater expiratory capacity when compared with age-matched, non-trained individuals.
+
+:::: {.columns}
+::: {.column .dataTable-wrapper .small-text width=47.5%}
+```{r}
+#| label: tbl-3-4-1
+#| echo: false
+#| tbl-cap: Forced Expiratory Volume in one second
+#| message: false
+#| warning: false
+
+# Example biomedical data:
+set.seed(80)
+n <- 12
+# Simulated FEV1 values in liters (athletes slightly above norm)
+fev1 <- round(rnorm(n, mean = 4.35, sd = 0.8),2)
+mu_fev <- round(4.00,2)
+X_fev <- round(mean(fev1),2)
+s_fev <- round(sd(fev1),2)
+t <- round((X_fev-mu_fev)*sqrt(n)/s_fev,2)
+tc <- round(qt(0.975, n-1),3)
+ci <- X_fev + (c(-1,1) * round(tc*s_fev/sqrt(n-1),2))
+
+dat <- tibble(athlete = as.character(seq(1, n)),  x = fev1)
+
+# Render with DT
+datatable(
+  dat,
+  rownames = FALSE,
+  escape = FALSE,
+  colnames = c("Athletes ($i$)", "$FEV_1$ ($\\text{L}$; $x_i$)"),
+  options = list(
+    dom = 'tp', # Display only the table (no search/pagination)
+    pageLength = 4,
+    columnDefs = list(
+      list(className = 'dt-center', targets = 0:1) # Center align data columns
+    ),
+    drawCallback = JS("function(settings) {
+          MathJax.typeset(); 
+        }")
+  )
+)
+```
+:::
+
+::: {.column width=2.5%}
+:::
+
+::: {.column width=50%}
+This table illustrates $FEV_1$ simulated data, for a sample of $`r n`$ male athletes.
+
+Simulations were inspired by the study of Williams and colleagues @williams24, presented above.
+
+Specifically, $FEV_1$ values were simulated for a sample of elite athletes (male adults).
+:::
+::::
+
+:::{.callout-note title="Simulated FEV Data"}
+*Based on @tbl-3-4-1, reporting Forced Expiratory Volume (see @fig-3-4-1) for a sample of `r n` elite athletes, we obtain that:*
+
+- *the sample mean is $\overline{x}=`r X_fev` \text{ L}$.*
+- *the sample standard deviation is $s=`r s_fev` \text{ L}$.*
+:::
+
+There are two approaches to assess whether the sample of athletes has greater expiratory capacity than the reference population of healthy, non-trained individuals.
+
+\
+
+### Hypothesis Testing with the t-Distribution
+
+The main steps involved in [hypothesis testing](@sec-ht) have been briefly introduced in the previous chapter. Here, these steps are detailed for the $t$-distribution, considering the simulated $FEV_1$ data (@tbl-3-4-1).
+
+\
+
+#### The Procedure for Hypothesis Testing
+
+Hypothesis testing may be conducted in five steps.
+
+::: {.panel-tabset}
+##### Step 1
+
+###### **Define the Hypotheses**
+
+With hypothesis testing, we address the question:
+
+- *What is the probability of observing a sample mean at least as large as $\overline{x}=`r X_fev` \text{ L}$, assuming that the mean $FEV_1$ for athletes ($\mu_{\text{athletes}}$) and non-trained individuals ($\mu_{\text{norm}}$) is the same?*
+
+From this question, the null hypothesis $H_0$ and the alternative hypothesis $H_1$ can be defined:
+
+$$
+\begin{aligned}
+H_0 &: \mu_{\text{athletes}} = \mu_{\text{norm}} \\
+H_1 &: \mu_{\text{athletes}} > \mu_{\text{norm}}
+\end{aligned}
+$$
+
+$H_0$ assumes that elite athletes and non-trained individuals have the same mean $FEV_1$. $H_1$ assumes that athletes have greater expiratory capacity.
+
+We do not know the value of $\mu_{\text{athletes}}$, and we assume $\mu_{\text{norm}} = `r mu_fev` \text{ L}$ based on reference values for age-matched, non-trained individuals.
+
+##### Step 2
+
+###### **Select the Test Statistic**
+
+The test statistic quantifies how extreme the observed sample mean is under the null hypothesis.
+
+We assume the `r n` $FEV_1$ observations are independent and drawn from a Normally distributed population. The first assumption is reasonable since each value is obtained from a different subject. The Normality assumption does not rely on the Central Limit Theorem, given the relatively small sample size ($n=`r n`$), but rather on prior knowledge that $FEV_1$ is approximately Normally distributed.
+
+The population standard deviation of $FEV_1$ in elite athletes is unknown. Therefore, the sample standard deviation (@eq-sample-std) is used to estimate variability.
+
+Based on these considerations, the appropriate test statistic is the Student's $t$ value (@eq-xbar-t).
+
+##### Step 3
+
+###### **Define the Significance Level++ ($\alpha$)
+
+The **significance level**, denoted as $\alpha$, defines the probability of rejecting the null hypothesis when it is actually true.
+
+If $H_0$ is true, then athletes and non-trained individuals have comparable expiratory capacity. By rejecting $H_0$ we would incorrectly judge athletes to have greater expiratory capacity than non-trained individuals.
+
+$\alpha$ determines the probability of making this mistake under $H_0$.
+
+Typical values for $\alpha$ are $0.05$ and $0.01$. 
+
+##### Step 4
+
+###### **Determining the Critical Value** ($t_c$)
+
+The **critical value** $t_c$ splits the distribution of the test statistic (the Student's t) into two regions—the **rejection region** and the **non-rejection region**.
+
+The value of $t_c$ depends on:
+
+- the significance level $\alpha$,
+- the degrees of freedom $\nu$,
+- and the alternative hypothesis $H_1$.
+
+Given $H_1:\mu_{\text{athletes}} > \mu_{\text{norm}}$, the test is one-sided, and the critical value is defined such that:
+
+$$
+P(t > t_c) = \alpha
+$$
+
+For a sample of size $n = `r n`$ (thus $\nu = n - 1 = `r n-1`$) and $\alpha = 0.05$, according to the [interactive plot](#sec-tinteractiveplot) below the critical value is:
+
+$$
+t_c = `r round(qt(0.95, n-1),2)`
+$$
+
+##### Step 5
+
+###### **Compute the Test Statistic**
+
+The test statistic is computed using the sample mean, the sample standard deviation, and the sample size:
+
+$$
+t = \frac{\overline{x} - \mu_{\text{norm}}}{s/\sqrt{n}} 
+= \frac{`r X_fev` - `r mu_fev`}{`r s_fev`/\sqrt{`r n`}} 
+= `r t`
+$$
+:::
+
+The critical value computed in **Step 4** is $t_c = `r round(qt(0.95, n-1),2)`$, while the observed test statistic is $t = `r t`$.
+
+The null hypothesis is rejected if $t > t_c$.
+
+:::{.callout-important title="Decision based on one-tailed test"}
+*Since $t = `r round((X_fev-mu_fev)*sqrt(n)/s_fev,2)` > `r round(qt(0.95, n-1),2)` = t_c$, we reject $H_0$ in favor of $H_1$.*
+
+*This indicates that the observed mean $FEV_1$ in elite athletes is significantly higher than the reference value for non-trained individuals. In applied terms, this provides statistical evidence that elite athletes have greater expiratory capacity than the reference population.*
+:::
+
+:::{.callout-note title="Critical value notation"}
+*An alternative way to denote the critical value $t_c$ is through the quantiles of the t-distribution:*
+
+$$
+\begin{aligned}
+t_c &= t_{\nu,\,1-\alpha}, \quad \text{one-tailed test} \\
+t_c &= t_{\nu,\,1-\alpha/2}, \quad \text{two-tailed test}
+\end{aligned}
+$$
+
+*where $t_{\nu,p}$ denotes the $p$-quantile of the t-distribution with $\nu$ degrees of freedom, that is, the value such that $P(T \le t_{\nu,p}) = p$.*
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-4-1_se-and-t-value.md")
+```
+:::
+
+\
+
+#### One- and Two-tailed Hypothesis Testing
+
+In **Step 4**, the critical value was defined using $P(t > t_c) = \alpha$, reflecting the one-sided alternative hypothesis
+
+$$
+H_1:\mu_{\text{athletes}} > \mu_{\text{norm}}
+$$
+
+If there is no prior expectation about the direction of the difference, the alternative hypothesis becomes:
+
+$$
+H_1:\mu_{\text{athletes}} \ne \mu_{\text{norm}}
+$$
+
+In this case, a **two-tailed test** is used (@fig-3-4-3). The significance level $\alpha$ is split equally between the two tails of the distribution:
+
+$$
+P(t < -t_c) = \frac{\alpha}{2}, \quad P(t > t_c) = \frac{\alpha}{2}
+$$
+
+Equivalently:
+
+$$
+P(|t| > t_c) = \alpha
+$$
+
+![The critical value and the associated probability according to the alternative hypothesis.](/include/images/part_3/ch_4/3-4-3_one-two-tailed.png){width=95% #fig-3-4-3}
+
+:::{.callout-important title="Decision based on one-tailed test"}
+*Even when considering a more conservative two-tailed test, the conclusion remains unchanged. Given that:*
+
+$$
+|t| = `r t` > `r round(qt(0.975, n-1),2)` = t_c
+$$
+
+*the null hypothesis $H_0$ is still rejected in favor of $H_1$.*
+
+*The direction of the difference is informed by the sign of the difference between the compared means.*
+:::
+
+\ 
+
+#### Checking for Significance with the p-value {#sec-p-value}
+
+The decision of rejecting or not $H_0$ has been made by comparing the $t$ value with the critical value $t_c$. An alternative to this comparison would be using the $p$-value. 
+
+The $p$-value is defined as the probability of observing a $t$ value as extreme as that observed:
+
+$$
+p-\text{value} = P(T>|t|) = P(T>`r t`)= `r round(pt(t, n-1, lower.tail = FALSE),3)`
+$$
+
+This probability indicates how likely the sample mean should be observed if the null hypothesis was true. The decision of rejecting $H_0$ or not stems from the comparison of the $p$-value with the significance level $\alpha$. 
+
+If the $p$-value is smaller than $\alpha$, for one-tailed test, or smaller than $\alpha/2$ for two-tailed test, then, $H_0$ is rejected in favor of $H_1$.
+
+\
+
+### Confidence Interval 
+
+A confidence interval provides a range of plausible values for the population mean. The width of this range depends on the desired level of confidence. Typically, the confidence level is set at $1-\alpha = 0.95$, resulting in a 95% confidence interval, denoted as $CI_{1-\alpha} = CI_{95\%}$.
+
+\
+
+#### Computing the Confidence Interval
+
+The confidence interval is computed using the sample mean, the standard error of the mean, and the critical value $t_c = t_{\nu,\,1-\alpha/2}$:
+
+$$
+CI_{1-\alpha} = \overline{X} \pm t_{\nu,\,1-\frac{\alpha}{2}} \frac{s}{\sqrt{n}}
+$$ {#eq-t-ci}
+
+For the $FEV_1$ example above:
+
+- $\overline{x} = `r X_fev`$
+- $s = `r s_fev`$
+- $\nu = n - 1 = `r n-1`$
+- $t_c = t_{\nu,\,1-\alpha/2} = `r tc`$
+
+The 95% confidence interval for the mean $FEV_1$ value in the elite athlete population is:
+
+$$
+CI_{95\%} = (`r ci[1]`, `r ci[2]`)
+$$
+
+\
+
+#### Interpreting the Confidence Interval
+
+If the experiment were repeated many times on different samples of male elite athletes, and a confidence interval was computed for each sample, approximately 95% of those intervals would contain the true population mean $\mu_{\text{athletes}}$.
+
+From the $CI_{95\%} = (`r ci[1]`, `r ci[2]`)$ obtained, we observe that it does not include the reference mean value for non-trained individuals $\mu_{\text{norm}} = `r mu_fev`$.
+
+:::{.callout-important title="Decision based on the confidence interval"}
+*Since the 95% confidence interval represents a range of plausible values for $\mu_{\text{athletes}}$, and this interval does not include $\mu_{\text{norm}}$, we conclude that the mean $FEV_1$ value in elite athletes is significantly different from that of non-trained individuals.*
+
+*This result is consistent with rejecting the null hypothesis $H_0: \mu_{\text{athletes}} = \mu_{\text{norm}}$.*
+:::
+
+\
+
+### Confidence Inteval VS Hypothesis Testing
+
+Confidence intervals and hypothesis testing provide two complementary ways to draw statistical inferences. While hypothesis testing evaluates the compatibility of the data with a specific assumed value, confidence intervals identify the range of parameter values that are consistent with the observed data.
+
+In many cases, these approaches lead to equivalent conclusions: values that are not contained in a $(1-\alpha)$ confidence interval would be rejected by a hypothesis test at level $\alpha$.
+
+\
+
+### $t$ values and Probabilities
+
+Just like for the z-score $z_s$, tables and computer programs can be used to compute probabilities associated with the Student's $t$ value. In *R*, for example, probabilities can be computed using the [`qt`](https://rdrr.io/r/stats/TDist.html) function. In the box below probabilities for one- and two-tailed $t$ values can be assessed interactively, for different degrees of freedom.
+
+:::{.boxed #sec-tinteractiveplot}
+:::: {.columns}
+::: {.column width=30.0%}
+:::{.small-text}
+By moving the sliders, the degree of freedom ($\nu$) and the $t$ value can be selected.
+
+The probability defined in the pop-up menu below the sliders is given by the shaded area in the figure.
+:::
+
+[**The requested probability is `{ojs} prob.toFixed(3)`**]{style="color: #35759C;"}
+:::
+::: {.column width=5%}
+:::
+::: {.column width=65%}
+:::{.small-text}
+```{ojs}
+//| echo: false
+jStat = await import("https://cdn.jsdelivr.net/npm/jstat-esm@latest/+esm")
+
+// Controls
+viewof df = Inputs.range([1, 30], {value: 11, step: 1, label: "Degrees of freedom"})
+
+viewof tValue = Inputs.range([-5, 5], {value: 1.79, step: 0.01, label: "t value"})
+
+viewof tail = Inputs.select(["Left tail: P(T ≤ t)", "Right tail: P(T ≥ t)", "Two tails: P(|T| ≥ |t|)"], {label: "Probability shown"})
+```
+:::
+
+---
+
+```{ojs}
+//| echo: false
+tPdf = x => jStat.studentt.pdf(x, df)
+
+// Probability
+prob =
+  tail === "Left tail: P(T ≤ t)" ? jStat.studentt.cdf(tValue, df) :
+  tail === "Right tail: P(T ≥ t)" ? 1 - jStat.studentt.cdf(tValue, df) :
+  2 * (1 - jStat.studentt.cdf(Math.abs(tValue), df))
+
+// Grid for plotting
+xMin = -5
+xMax = 5
+step = 0.02
+
+curve = Array.from(
+  {length: Math.floor((xMax - xMin) / step) + 1},
+  (_, i) => {
+    const x = xMin + i * step
+    return {x, y: tPdf(x)}
+  }
+)
+
+// Shaded regions
+leftShade =
+  tail === "Left tail: P(T ≤ t)"
+    ? curve.filter(d => d.x <= tValue)
+    : tail === "Two tails: P(|T| ≥ |t|)"
+    ? curve.filter(d => d.x <= -Math.abs(tValue))
+    : []
+
+rightShade =
+  tail === "Right tail: P(T ≥ t)"
+    ? curve.filter(d => d.x >= tValue)
+    : tail === "Two tails: P(|T| ≥ |t|)"
+    ? curve.filter(d => d.x >= Math.abs(tValue))
+    : []
+
+// Plot
+Plot.plot({
+  width: 700,
+  height: 600,
+  marginLeft: 100,
+  marginTop: 20,
+  marginBottom: 40,
+  style: {
+    fontSize: 24,   // <-- increase this
+  },
+  x: {label: "t", domain: [-xMax, xMax]},
+  y: {label:  "𝑓(t)", ticks: 5},
+  marks: [
+    Plot.areaY(leftShade, {x: "x", y: "y", curve: "natural", fillOpacity: 0.45, fill: "steelblue"}),
+    Plot.areaY(rightShade, {x: "x", y: "y", curve: "natural", fillOpacity: 0.45, fill: "steelblue"}),
+    Plot.line(curve, {x: "x", y: "y",  curve: "natural", strokeWidth: 12, stroke: "lightblue"}),
+    Plot.ruleX([tValue], {y1: 0,  y2: tPdf(tValue)}, {strokeWidth: 2}),
+    ...(tail === "Two tails: P(|T| ≥ |t|)"
+      ? [Plot.ruleX([-Math.abs(tValue)], {y1: 0,  y2: tPdf(tValue)})]
+      : [])
+  ]
+})
+```
+:::
+::::
+:::
+
+\
+
+## $t$-Distribution with Paired Designs
+
+Testing the mean of a single sample against a reference value is less common in practice.
+
+Single-group studies more often focus on assessing changes between two time points, defining a **paired design** or **repeated-measures design**. Typically, such studies involve at least two evaluation sessions. The first session defines the **baseline** (or **pre-**) measurements, which serve as a reference for assessing changes over time. The subsequent session or sessions are conducted after an established period, defining the **follow-up** (or **post-**) measurements. These repeated measurements are often used to assess the effect of an intervention in experimental studies, or to examine how exposure to a condition affects an outcome in observational studies.
+
+:::{.callout-note title="Pre-Post Evaluation"}
+*The inferential method used to assess changes over time depends on the number of evaluation sessions.*
+
+*In this chapter, only the case of two evaluation sessions will be considered: **pre-post** measurements.*
+:::
+
+An example of a paired study design is the assessment of the effect of a drug on blood pressure (see @fig-3-4-4). Blood pressure is measured in the same subjects before and after a treatment period during which a new drug is administered.
+
+:::{.callout-caution title="Lack of controls"}
+*A single-group design such as the one illustrated below is generally not sufficient to establish a drug effect, since no control group is included. It is, however, useful for illustrating inferential procedures for paired designs involving a single group of subjects.*
+:::
+
+![Example of a paired, pre-post study design. Created with ChatGPT (OpenAI 2026).](/include/images/part_3/ch_4/3-4-4_paried-design-scheme.png){#fig-3-4-4 width=80%}
+
+\
+
+### The Importance of Paired Designs
+
+To understand the importance of pairing, consider how ignoring the pairing may lead to incorrect conclusions. Based on the illustration in @fig-3-4-4, blood pressure data were simulated for a sample of $n=6$ patients, measured before and after taking a new drug. The drug is expected to reduce blood pressure in hypertensive subjects.
+
+:::: {.columns}
+::: {.column .dataTable-wrapper .small-text width=47.5%}
+```{r}
+#| label: tbl-3-4-2
+#| echo: false
+#| tbl-cap: Pre-Post blood pressure (mmHg)
+#| message: false
+#| warning: false
+
+x <- c(180, 165, 150, 145, 160, 157)
+xbar <- mean(x[4:6])
+y <- c(170, 155, 140, 135, 150, 145)
+ybar <- mean(y[1:3])
+df <- data.frame(Patient = 1:6, Pre = x, Post = y)
+
+datatable(
+  df,
+  rownames = FALSE,
+  colnames = c("Patients", "Pre ($x_i$)", "Post ($y_i$)"),
+  options = list(
+    pageLength = 6,
+    dom = 't',
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = 'dt-center', targets = 0:1) # Center align data columns
+    ),
+    drawCallback = JS("function(settings) {MathJax.typeset();}")
+  )
+) |>
+  formatStyle(
+    "Post",
+    valueColumns = "Patient",
+    fontWeight = styleEqual(c(1,2,3), c('bold', 'bold', 'bold')),
+    color = styleEqual(c(1,2,3), c("steelblue","steelblue","steelblue"))
+  ) |>
+  formatStyle(
+    "Pre",
+    valueColumns = "Patient",
+    fontWeight = styleEqual(
+      df$Patient,
+      ifelse(df$Patient %in% c(4,5,6), 'bold', 'normal')
+    ),
+    color = styleEqual(c(4,5,6), c("steelblue","steelblue","steelblue"))
+  )
+```
+:::
+
+::: {.column width=2.5%}
+:::
+
+::: {.column width=50%}
+Suppose that, instead of measuring blood pressure in the same patients before and after treatment, the doctor had measured blood pressure before treatment in patients 4, 5, and 6, and after treatment in patients 1, 2, and 3.
+
+Pre- and post-measurements used in this incorrect comparison are indicated with [bold numbers]{style="color: #35759C; font-weight: bold;"} in the table.
+:::
+::::
+
+In this case, we would obtain:
+
+$$
+\begin{aligned}
+\overline{x} &= \frac{`r x[4]` + `r x[5]` + `r x[6]`}{3} = `r xbar` \text{ mmHg} \\
+\overline{y} &= \frac{`r y[1]` + `r y[2]` + `r y[3]`}{3} = `r ybar` \text{ mmHg} \\
+\overline{y} - \overline{x} &= `r ybar` - `r xbar` = `r ybar - xbar` \text{ mmHg}
+\end{aligned} 
+$$
+
+This comparison suggests that the drug is ineffective.
+
+However, this conclusion would be misleading, because the pre- and post-treatment values come from different patients. In that case, the treatment effect is confounded with differences between subjects. For example, patients 4, 5, and 6 may simply have had lower blood pressure than patients 1, 2, and 3, regardless of treatment (e.g. because they are healthier).
+
+Pairing avoids this problem by comparing each subject to themself, thereby controlling for between-subject variability.
+
+\
+
+### Paired Differences
+
+In one-group paired designs, we assess the differences between two observations for each individual:
+
+$$
+d_i = y_i - x_i
+$$
+
+where $x_i$ and $y_i$ denote the pre- and post-measurements for subject $i$.
+
+Considering the data in @tbl-3-4-2, the mean $\overline{d}$ and the standard deviation $s_d$ of the paired differences are:
+
+$$
+\begin{aligned}
+\overline{d} &= \frac{1}{n} \sum_{i=1}^{n} d_i = `r round(mean(y-x))` \text{ mmHg} \\
+s_d &= \sqrt{\frac{\sum_{i=1}^{n} (d_i - \overline{d})^2}{n-1}} = `r round(sd(y-x))` \text{ mmHg}
+\end{aligned}
+$$
+
+The values of $\overline{d}$ and $s_d$ indicate a consistent drug effect---blood pressure is reduced by approximately $10 \text{ mmHg}$ across the $`r n`$ patients. The variability between subjects is greatly reduced, as reflected by the small value of $s_d$.
+
+This reduction in variability can be explained by a property of variance:
+
+$$
+\text{Var}(Y - X) = \text{Var}(Y) + \text{Var}(X) - 2\,\text{Cov}(Y, X)
+$$ {#eq-sum-of-variances}
+
+When $X$ and $Y$ are positively correlated, the covariance term reduces the variance of the difference. In the example of @tbl-3-4-2, $X$ and $Y$ are strongly positively correlated, as $y_i \approx x_i - 10$.
+
+\
+
+### Exercise: t-test with Paired Designs {#sec-ttest-paired}
+
+The goal is to assess the significance of the difference between pre- and post-measurements. To this end, consider the study of [Levine](https://www.ahajournals.org/doi/10.1161/01.CIR.48.3.619) @levine73, who assessed the acute effect of smoking on platelet aggregation^[*fragments of cells in the blood that help stop bleeding*]. It was hypothesized that smoking could increase platelet aggregation, potentially explaining thrombotic events in smokers.
+
+The data in @tbl-3-4-3 were simulated based on the study of Levine @levine73.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-4-3
+#| echo: false
+#| tbl-cap: Percent of Platelet Aggregation
+#| message: false
+#| warning: false
+set.seed(1989)
+
+n <- 10
+
+# Simulated data
+df <- data.frame(
+  Subjects = as.character(1:n),
+  Before = round(rnorm(n, 35, 13),1),
+  After  = round(rnorm(n, 50, 12),1)
+) %>%
+  mutate(Difference = After - Before)
+
+# Summary rows
+mean_row <- data.frame(
+  Subjects = "Mean",
+  Before = round(mean(df$Before),1),
+  After = round(mean(df$After),1),
+  Difference = round(mean(df$Difference),1)
+)
+
+sd_row <- data.frame(
+  Subjects = "SD",
+  Before = round(sd(df$Before),1),
+  After = round(sd(df$After),1),
+  Difference = round(sd(df$Difference),1)
+)
+
+df_full <- bind_rows(df, mean_row, sd_row)
+
+datatable(
+  df_full,
+  rownames = FALSE,
+  options = list(
+    dom = 't',
+    pageLength = n+2,
+    colnames = c("Subjects", "Before ($x_i$)", "After ($y_i$)", "Difference ($d_i$)"),
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = 'dt-center', targets = "_all")
+    ),
+    drawCallback = JS("function(settings) {MathJax.typeset();}")
+  ),
+) |>
+  formatRound(columns = c("Before", "After", "Difference"), digits = 1) |>
+  formatStyle(
+    c("Subjects","Before","After","Difference"),
+    valueColumns = "Subjects",
+    fontWeight = styleEqual(c("Mean","SD"), c('bold', 'bold')),
+    backgroundColor = styleEqual(c("Mean","SD"), c("#add8e6","#add8e6"))
+  ) 
+```
+:::
+
+\
+
+Based on this table, complete the two exercises below to evaluate whether there is a significant increase in platelet aggregation. One exercise guides the inferential process based on hypothesis testing, while the other relies on the confidence interval.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-4-2-paired-design-ht.md")
+```
+
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-4-3-paired-design-ci.md")
+```
+:::
+
+\
+
+## Non-Parametric Tests for One-Group Designs
+
+The use of the t-Distribution to assess the significance of the difference between paired means presumes independence and Normality. The first assumption often holds, given observations are collected from different subjects. The assumption of Normality does not, in particular when the sample size is low ($n<30$; see Section -@sec-clt).
+
+When there are reasons to believe the data distribution is not Normal, statistical significance is assessed with non-parametric approaches.
+
+:::{.callout-note title="Testing for Normality"}
+*There are statistical methods, graphical and inferential, for assessing the Normality assumption. At the moment, these methods are not treated in this book.*
+:::
+
+\
+
+### The Sign Test
+
+The **sign test** is one of the simplest non-parametric methods for assessing whether paired data show a systematic change.
+
+The method consists of examining the signs of the $n$ paired differences. For each paired difference, only the sign is retained:
+
+- $+$ if the difference is positive
+- $-$ if the difference is negative
+
+If there is no treatment effect, positive and negative, signs should occur with equal probability. Under this null hypothesis, the [median](@sec-median) of the paired differences in the population is assumed to be $0$:
+
+$$
+H_0: \eta_{\text{paired}} = 0
+$$ {#eq-h0-st}
+
+Let $D_i$ denote the $i$-th paired difference between two observations. Ignoring tied differences equal to $0$, there are two possible outcomes for the sign of $D_i$: positive or negative. Under $H_0$, each outcome has probability $\pi = 0.5$.
+
+Therefore, the random variable $W_+$, representing the number of positive signs among the paired differences, follows a Binomial distribution with $n$ trials and success probability $\pi = 0.5$:
+
+$$
+W_+ \sim B(n, 0.5)
+$$
+
+The probability mass function of $W_+$ under $H_0$ is:
+
+$$
+p(k) = P(W_+ = k) = \binom{n}{k} 0.5^n
+$$
+
+where $k$ denotes the number of positive signs.
+
+Let us apply the sign test to the first six subjects in @tbl-3-4-3 for the platelet aggregation example (inspired by Levine @levine73). For such a small sample size ($n=6$), it may be unreasonable to assume that the distribution of paired differences is Normal.  @tbl-3-4-4 reports the data for these six subjects, including the differences and their sign.
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-4-4
+#| echo: false
+#| tbl-cap: Percent of Platelet Aggregation (first 6 subjects in @tbl-3-4-3)
+#| message: false
+#| warning: false
+
+set.seed(1989)
+
+n_keep <- 6
+
+# Simulated data limited to first 6 subjects
+df <- data.frame(
+  Subjects = as.character(1:10), # Start with 10 as per your seed
+  Before = round(rnorm(10, 35, 13), 1),
+  After  = round(rnorm(10, 50, 12), 1)
+) %>%
+  head(n_keep) %>% 
+  mutate(
+    Difference = After - Before,
+    Sign = case_when(
+      Difference > 0 ~ "+",
+      Difference < 0 ~ "-",
+      TRUE ~ "0"
+    )
+  )
+
+w_plus <- sum(df$Difference>0)
+
+datatable(
+  df,
+  rownames = FALSE,
+  class = 'cell-border',
+  colnames = c("Subjects", "Before ($x_i$)", "After ($y_i$)", "Difference ($d_i$)", "$\\text{sgn}(d_i)$"),
+  options = list(
+    dom = 't',
+    pageLength = n_keep,
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = 'dt-center', targets = "_all")
+    ),
+    drawCallback = JS("function(settings) {MathJax.typeset();}")
+  ),
+) |>
+  formatRound(columns = c("Before", "After", "Difference"), digits = 1) |>
+    formatStyle(
+    columns = c("Subjects", "Before", "After", "Difference", "Sign"),
+    valueColumns = "Sign",
+    backgroundColor = styleEqual(c("+", "-"), c("#f0fff0", "#fff0f5"))
+  )
+```
+:::
+
+\
+
+:::: {.columns}
+::: {.column .small-text width=60%}
+
+![Probability mass function for $W_+ \sim B(6,0.5)$](/include/images/part_3/ch_4/3-4-5_sign-test-px.png){#fig-3-4-5 width=100%}
+:::
+
+:::{.column width=2.5%}
+
+:::
+
+:::{.column width=37.5%}
+For $n=`r n_keep`$ trials and $\pi = 0.5$, the probabilities of observing $0, 1, \dots, `r n_keep`$ positive signs are:
+
+$$
+\begin{aligned}
+p(0) &= `r round(dbinom(0, n_keep, 0.5) * 100, 1)` \% \\
+p(1) &= `r round(dbinom(1, n_keep, 0.5) * 100, 1)` \% \\
+p(2) &= `r round(dbinom(2, n_keep, 0.5) * 100, 1)` \% \\
+p(3) &= `r round(dbinom(3, n_keep, 0.5) * 100, 1)` \% \\
+p(4) &= p(2) = `r round(dbinom(4, n_keep, 0.5) * 100, 1)` \% \\
+p(5) &= p(1) = `r round(dbinom(5, n_keep, 0.5) * 100, 1)` \% \\
+p(6) &= p(0) = `r round(dbinom(6, n_keep, 0.5) * 100, 1)` \%
+\end{aligned}
+$$
+:::
+::::
+
+To assess the significance of the paired differences in @tbl-3-4-4 using the sign test, the alternative hypothesis must first be defined. Given the hypothesis that platelet aggregation may increase after smoking, the population median of the paired differences is expected to be greater than $0$:
+
+$$
+H_1: \eta_{\text{paired}} > 0
+$$ {#eq-h1-st}
+
+We then count the number of positive signs in the sample:
+
+$$
+w_+ = `r w_plus`
+$$
+
+and compute the probability of observing a value equal to or greater than that observed under the null hypothesis:
+
+$$
+P(W_+ \ge `r w_plus`) = \sum_{k=`r w_plus`}^{6} p(k) = `r round(sum(dbinom((w_plus):6, 6, 0.5)), 2)`
+$$
+
+If $H_0$ was true, the probability of observing at least $`r w_plus`$ positive signs would be $`r round(sum(dbinom((w_plus):6, 6, 0.5)), 2)`$. Given this probability is higher than a significance level set at $\alpha=0.05$, there is no evidence to reject the null hypothesis of no increased platelet aggregation.
+
+\
+
+#### One- and Two-tailed Sign Test
+
+When the alternative hypothesis specifies a direction (e.g., $H_1: \eta_{\text{paired}} > 0$), the sign test is conducted as a one-tailed test, and the probability is computed from the upper tail of the Binomial distribution:
+
+$$
+P(W_+ \ge w_+)
+$$
+
+If no direction is specified (i.e., $H_1: \eta_{\text{paired}} \ne 0$), a two-tailed test is required. In this case, the $p$-value is obtained by considering both tails of the distribution. A common approach is:
+
+$$
+p = 2 \times \min\{P(W_+ \le w_+),\ P(W_+ \ge w_+)\}
+$$
+
+This accounts for the probability of observing values as extreme as the one obtained in either direction.
+
+\
+
+#### Low Power of the Sign Test
+
+**Statistical power** measures how likely a test is to detect an effect when the effect truly exists---that is, to reject the null hypothesis when it is false. The concept of power will be discussed in more detail later in this chapter.
+
+In the [exercises](@sec-ttest-paired) above, the paired $t$-test identified a significant increase in platelet aggregation. By contrast, the [sign test](#sec-sign-test) applied in the previous section to a reduced dataset (cf. @tbl-3-4-3 and @tbl-3-4-4) failed to detect a significant increase.
+
+:::: {.columns}
+::: {.column width=45%}
+These boxplots, created from the data on $n=`r n`$ subjects, suggest a clear pre-post increase in platelet aggregation.
+
+This makes it plausible that the sign test failed to detect a significant effect because of limited power.
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=52.5%}
+![](/include/images/part_3/ch_4/platelet-boxplots.png){width=80%}
+:::
+::::
+
+:::{.callout-note title="Why did the sign test fail?"}
+*One reason is the smaller sample size used for the sign test ($n=`r n_keep`$) compared with the t-test ($n=`r n`$). A smaller sample generally leads to lower power.*
+
+*Another reason is the nature of the sign test itself:* ***it uses only the direction of change, not its magnitude.***
+:::
+
+\
+
+### The Wilcoxon Signed-Rank Test
+
+The main distinction between the **Wilcoxon signed-rank test** and the **sign test** is that the Wilcoxon test considers both the **direction** and the **magnitude** of the paired differences.
+
+As quoted by [King and Eckersley](https://www.sciencedirect.com/science/chapter/monograph/pii/B9780081029398000153) @king19:
+
+> *Although the sign test can be used to test both one-sample and two-sample paired data, the Wilcoxon signed-rank test is more powerful than the sign test for these tasks because it makes use of the magnitudes of the differences rather than just their signs.*
+
+The Wilcoxon signed-rank test is based on the ranks of the absolute paired differences. Its computation involves five main steps. The first four correspond to columns 3–6 in @tbl-3-4-5:
+
+- **step 1:** *compute the paired differences $d_i = y_i - x_i$*
+- **step 2:** *take their absolute values $|d_i|$*
+- **step 3:** *rank the non-zero absolute differences according to their magnitude; tied values receive average ranks*
+- **step 4:** *assign the sign of each difference to its rank*
+- **step 5:** *sum the positive ranks (or, equivalently, the negative ranks)*
+
+:::{.dataTable-wrapper .small-text}
+```{r}
+#| label: tbl-3-4-5
+#| echo: false
+#| tbl-cap: Signed, ranked differences of platelet aggregation
+#| message: false
+#| warning: false
+
+df_wilk <- df[2:4] |>
+  mutate(MagDifference = abs(Difference),
+         Rank = rank(MagDifference),
+         signedRank = Rank * sign(Difference))
+
+w_plus <- sum(df_wilk$Rank[df_wilk$Difference>0])
+
+datatable(
+  df_wilk,
+  rownames = FALSE,
+  class = 'cell-border',
+  escape = FALSE,
+  colnames = c("Before<br>($x_i$)", "After<br>($y_i$)", "Difference<br>($d_i$)", "|Difference|<br>($|d_i|$)", "Rank<br>($r_i$)", "Signed Rank"),
+  options = list(
+    dom = 't',
+    pageLength = n_keep,
+    ordering = FALSE,
+    columnDefs = list(
+      list(className = 'dt-center', targets = "_all")
+    ),
+    drawCallback = JS("function(settings) {MathJax.typeset();}")
+  ),
+) |> formatRound(columns = c("Before", "After", "Difference", "MagDifference"), digits = 1) |>
+    formatStyle(
+    columns = "signedRank",
+    valueColumns = "signedRank",
+    backgroundColor = styleInterval(0, c("#fff0f5","#f0fff0"))
+  )
+```
+:::
+
+The test statistic is the sum of the positive ranks:
+
+$$
+W_+ = \sum_{i=1}^nr_iI(d_i>0)
+$$
+
+where $I(d_i > 0)$ is an indicator function equal to $1$ if $d_i > 0$ and $0$ otherwise.
+
+For the platelet aggregation example in @tbl-3-4-5:
+
+$$
+w_+ = `r w_plus`
+$$
+
+The goal is now to assess the probability of observing a sum of positive ranks as large as, or larger than, the one obtained, assuming the null hypothesis is true.
+
+As for the sign test, the null hypothesis states that there is no systematic increase or decrease in platelet aggregation. More precisely, for the Wilcoxon signed-rank test, the paired differences are assumed to be symmetrically distributed around $0$. Under this assumption, each non-zero difference is equally likely to have a positive or negative sign.
+
+Given the sample size ($n=`r n_keep`$), and assuming there are no zero differences, there are
+
+$$
+2^n=2^`r n_keep`=`r 2^n_keep`
+$$
+
+possible assignments of signs to the ranks. Four examples are illustrated in @fig-3-4-6. Under the null hypothesis, each assignment has probability:
+
+$$
+P(i)=\frac{1}{2^n}=\frac{1}{2^`r n_keep`}=`r 1/2^n_keep`
+$$
+
+![Examples of 4 out of the 64 possible assignments of signs to rank and the corresponding value of the test statistic $W_+$](/include/images/part_3/ch_4/3-4-6_sign-assignments.png){width=90% #fig-3-4-6}
+
+According to the alternative hypothesis of an increase in platelet aggregation, the one-tailed probability is:
+
+$$
+P(W_+ \ge `r w_plus`) = \frac{1}{2^n} \sum_{i=1}^{2^n} k_i,\quad
+k_i = \begin{cases}
+1 & W_{+,i} \ge `r w_plus` \\
+0 & W_{+,i} < `r w_plus`
+\end{cases} 
+$$
+
+For the present example:
+
+$$
+P(W_+ \ge `r w_plus`) = `r wilcox.test(df$Before, df$After, paired = TRUE, alternative = "less", exact = TRUE)$p.value`
+$$
+
+:::{.callout-note title="Effect of ties in the Wilcoxon test"}
+*If some paired differences are equal to zero, they are excluded from the analysis, reducing the effective sample size.*
+
+*If two or more absolute differences are equal, tied ranks are assigned by averaging their positions. In this case, the distribution of the test statistic is no longer based on equally likely sign assignments, and exact probabilities become more complex.*
+:::
+
+\
+
+## Mistakes when Drawing Conclusions
+
+Based on a sample of six subjects, the sign test and the Wilcoxon signed-rank test may lead to different conclusions. This may arise due to differences in both the statistical methods. As a result, two types of errors may emerge when drawing conclusions (@fig-3-4-7).
+
+\
+
+### Type I ($\alpha$) and Type II ($\beta$) Errors {#sec-errors}
+
+A **Type I error** consists of rejecting the null hypothesis when it is actually true. This is equivalent to sending an innocent person to jail or, in a biomedical context, concluding that a treatment has an effect when in reality it does not. The significance level $\alpha$ determines the probability of making a Type I error.
+
+A **Type II error** occurs when the null hypothesis is not rejected even though it is false. This is equivalent to claiming that a treatment has no effect when in fact it does. The probability of making a Type II error is denoted by $\beta$ and is related to the statistical power of the test.
+
+:::{.callout-important title="Not rejecting is different from accepting"}
+*In the absence of evidence to reject $H_0$, conclusions should be framed as **do not reject** rather than **accept** the null hypothesis.*
+
+*It is possible that the study was not sufficiently informative, or that a true effect was not detected due to limited sample size or uncontrolled sources of variability.*
+:::
+
+![Possible outcomes for inferential statistics. Created with ChatGPT (OpenAI 2026.)](/include/images/part_3/ch_4/3-4-7_error-types.png){width=95% #fig-3-4-7}
+
+The goal is to balance the probabilities of these two types of errors.
+
+Considering @fig-3-4-7, if trials are processed by more severe judges, it becomes easier to reject the null hypothesis (not guilty). This increases the probability of a Type I error ($\alpha$) but decreases the probability of a Type II error ($\beta$).
+
+Conversely, if trials are processed by more lenient judges, it becomes harder to reject the null hypothesis (not guilty), decreasing the probability of a Type I error while increasing the probability of a Type II error.
+
+The key point is that the probabilities of Type I and Type II errors are related. For a fixed sample size, decreasing $\alpha$ leads to an increase in $\beta$, and decreasing $\beta$ leads to an increase in $\alpha$.
+
+Only by gathering more evidence would it be possible to concurrently minimize the chances of setting free a guilty person or setting to jail an innocent person.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-4-4_increase-sample.size.md")
+```
+:::
+
+\
+
+### Understanding $\alpha$ and $\beta$ with an Applied Example
+
+In many cases, increasing the sample size is not feasible due to cost, rarity of the condition studied, limited availability of subjects, or time constraints. Investigators must therefore carefully choose appropriate values for $\alpha$ and $\beta$ when designing a study.
+
+To illustrate how $\alpha$ and $\beta$ influence statistical decisions, consider the example below (@fig-3-4-8).
+
+:::{.boxed #sec-cop-ea-example}
+:::: {.columns}
+::: {.column width=50%}
+An experimenter is asked to assess the clinical validity of an audio-feedback system to improve the control of standing posture.
+
+Improved control is defined in terms of a reduction in the centre of pressure (CoP) elliptic area (cf. ellipses in the figure).
+
+The experimenter therefore computes the elliptic area before and after a period of training with the audio-feedback system, making the following considerations:
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=47.5%}
+![CoP feedback](/include/images/part_3/ch_4/3-4-8_cop-audio-feedback.png){width=90% #fig-3-4-8}
+:::
+
+- **Variable:** the variable of interest is the mean $\overline{D}$ of the pre-post paired differences in CoP elliptic area, computed over $n$ subjects.
+
+- **Assumptions:** $\overline{D}$ is assumed to be Normally distributed:
+  $$
+  \overline{D} \sim \mathcal{N}(\mu_D, \sigma_D^2 / n)
+  $$
+  where $\mu_D$ is the population mean of the paired differences (before minus after) and $\sigma_D^2$ is their population variance.
+
+- **Hypotheses:** following training with audio feedback the CoP elliptic area is expected to decrease, defining the null and the alternative hypotheses:
+  $$
+  H_0: \mu_D = 0, \quad H_1: \mu_D > 0
+  $$
+
+- **Test statistic:** based on the assumptions stated, the 
+z-score is the test statistic considered:
+  $$
+  Z = \frac{\overline{D} - \mu_D}{\sigma_D / \sqrt{n}}
+  $$
+After collecting data and performing the statistical test, four possible outcomes may occur:
+:::
+
+::: {.panel-tabset}
+#### [Case 1]{style="font-size: 0.95rem;"} 
+
+##### [**No Error**]{style="color: green;"} 
+
+**$H_0$ IS TRUE and IS NOT REJECTED**
+
+If the true distribution matches the null hypothesis, then for $\alpha = 0.05$, the test statistic falls in the non-rejection region in approximately 95 out of 100 samples.
+
+In this case, we do not reject $H_0$, and the data are consistent with the null hypothesis.
+
+![](/include/images/part_3/ch_4/scenario_1.png){width=100%}
+
+#### [Case 2]{style="font-size: 0.95rem;"} 
+
+##### [**Type I Error**]{style="color: red;"} 
+
+**$H_0$ IS TRUE and IS REJECTED**
+
+Even when $H_0$ is true, the test statistic may fall in the rejection region with probability $\alpha$.
+
+In this case, we reject $H_0$ even though it is true, committing a Type I error.
+
+![](/include/images/part_3/ch_4/scenario_2.png){width=100%}
+
+#### [Case 3]{style="font-size: 0.95rem;"} 
+
+##### [**No Error**]{style="color: green;"} 
+
+**$H_0$ IS FALSE and IS REJECTED**
+
+If the true mean differs from the null value, then, $\mu_D = \delta \ne 0$ ($\delta$ is the feedback effect) and the test statistic is more likely to fall in the rejection region.
+
+The probability of correctly rejecting $H_0$ is $1 - \beta$, known as the **statistical power** of the test.
+
+---
+
+![](/include/images/part_3/ch_4/scenario_3.png){width=100%}
+
+#### [Case 4]{style="font-size: 0.95rem;"} 
+
+##### [**Type II Error**]{style="color: red;"} 
+
+**$H_0$ IS FALSE and IS NOT REJECTED**
+
+If the true mean differs from the null value but the test statistic falls in the non-rejection region, we fail to reject $H_0$.
+
+In this case, a Type II error is made. The probability of this error is denoted by $\beta$.
+
+![](/include/images/part_3/ch_4/scenario_4.png){width=100%}
+:::
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-4-5_decrease-alpha.md")
+```
+
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-4-6_increase-alpha.md")
+```
+:::
+
+\
+
+## Computing $\beta$ and Power (Z distribution)
+
+The four cases above illustrate possible outcomes after performing a statistical test. In practice, only one of these scenarios occurs for a given dataset, and either a Type I or a Type II error may be committed.
+
+A Type I error can occur only when the null hypothesis is true. Its probability is determined solely by the significance level $\alpha$.
+
+A Type II error can occur only when the null hypothesis is false. The probability of making a Type II error, $\beta$, depends on the significance level $\alpha$ and on how much the true distribution differs from the null distribution.
+
+Considering the example above (@fig-3-4-8), for a one-tailed test with paired data, this probability can be expressed as:
+
+$$
+\beta = P(\overline{D} < d_c \mid H_1: \mu_D > 0)
+$$ {#eq-beta-dc}
+
+where $\overline{D} \sim \mathcal{N}(\mu_D, \sigma_D^2 / n)$ is the sample mean difference and $d_c$ is the critical value of the sample mean corresponding to the test threshold.
+
+We now express both $\overline{D}$ and $d_c$ in terms of the standardized variable:
+
+$$
+Z = \frac{\overline{D} - \mu_D}{\sigma_D / \sqrt{n}}
+$$
+
+and
+
+$$
+z_c = \frac{d_c - 0}{\sigma_D / \sqrt{n}}
+$$
+
+Since $z_c$ is defined by the significance level $\alpha$:
+
+$$
+P(Z > z_c) = \alpha \quad \Rightarrow \quad z_c = z_{1-\alpha}
+$$
+
+Substituting into @eq-beta-dc:
+
+$$
+\begin{aligned}
+\beta 
+&= P\left(\overline{D} < d_c \mid \mu_D = \delta \right) \\
+&= P\left(Z < \frac{d_c - \delta}{\sigma_D / \sqrt{n}} \right) \\
+&= P\left(Z < z_{1-\alpha} - \frac{\delta}{\sigma_D / \sqrt{n}} \right)
+\end{aligned}
+$$
+
+Define:
+
+$$
+\lambda = \frac{\delta}{\sigma_D / \sqrt{n}} = \frac{\delta \sqrt{n}}{\sigma_D}
+$$
+
+Then:
+
+$$
+\beta = P(Z < z_{1-\alpha} - \lambda)
+$$ {#eq-power-lambda}
+
+The quantity $\lambda$ is the **non-centrality parameter**, measuring how far the true distribution is shifted from the null distribution in standardized units.
+
+Accordingly, **statistical power** is:
+
+:::{style="font-size: 1.2rem;"} 
+$$ 
+\begin{aligned} \text{power} &= 1-\beta \\ &= 1-P(Z<z_{1-{\color{red}\alpha}}-\frac{{\color{green}\delta}}{{\color{brown}\sigma_D}/\sqrt{{\color{blue}n}}}) \end{aligned} 
+$$ {#eq-power} 
+:::
+
+The interactive plot below illustrates how these parameters influence $\beta$ and power. By varying one parameter while keeping the others fixed, **we observe that power**:
+
+- *increases with the* [**significance level $\alpha$**]{style="color: red;"}
+- *increases with the expected* [**treatment effect $\delta$**]{style="color: green;"}
+- *decreases with the* [**population standard deviation** $\sigma$]{style="color: brown;"}
+- *increases with the* [**sample size $n$**]{style="color: blue;"}
+
+:::{.boxed #sec-tinteractiveplot-power}
+:::: {.columns}
+::: {.column width=32.5%}
+:::{.small-text}
+By moving the sliders, either of the four parameters above changes.
+
+Shaded areas give $\alpha$ and $\beta$ values.
+:::
+:::
+::: {.column width=2.5%}
+:::
+::: {.column width=65%}
+```{ojs}
+//| echo: false
+
+viewof n = Inputs.range([5, 300], {step: 1, value: 10, label: "Sample size (n)"})
+viewof alpha = Inputs.range([0.001, 0.20], {step: 0.001, value: 0.05, label: "Alpha (α)"})
+viewof delta = Inputs.range([0, 5], {step: 0.05, value: 1.0, label: "δ = μ_d"})
+viewof sigma = Inputs.range([0.5, 10], {step: 0.1, value: 3.0, label: "Std. dev. (σ)"})
+viewof twoSided = Inputs.toggle({label: "Two-sided test", value: false})
+```
+:::
+::::
+
+:::: {.columns}
+
+::: {.column width=25%}
+:::{.text-center}
+[$\sigma/ \sqrt{n}=$ `{ojs} se.toFixed(3)`]{style="color: #35759C;"}
+:::
+:::
+
+::: {.column width=25%}
+:::{.text-center}
+[$\alpha=$ `{ojs} alpha.toFixed(3)`]{style="color: #35759C;"}
+:::
+:::
+
+::: {.column width=25%}
+:::{.text-center}
+[$\beta=$ `{ojs} beta.toFixed(3)`]{style="color: #35759C;"}
+:::
+:::
+
+::: {.column width=25%}
+[$\text{power}=$ `{ojs} power.toFixed(3)`]{style="color: #35759C;"}
+:::
+
+::::
+
+```{ojs }
+//| echo: false
+
+se = sigma / Math.sqrt(n)
+zcrit = twoSided ? qnorm(1 - alpha / 2) : qnorm(1 - alpha)
+critLo = twoSided ? -zcrit * se : null
+critHi = zcrit * se
+
+beta = twoSided ? pnorm(critHi, delta, se) - pnorm(critLo, delta, se) : pnorm(critHi, delta, se)
+power = 1 - beta
+
+plotSimple({width: 760, height: 420, mu0: 0, mu1: delta, se, critLo, critHi, twoSided})
+
+function dnorm(x, mean = 0, sd = 1) {
+  return (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - mean) / sd) ** 2)
+}
+
+function pnorm(x, mean = 0, sd = 1) {
+  return 0.5 * (1 + erf((x - mean) / (sd * Math.sqrt(2))))
+}
+
+function qnorm(p) {
+  const a = [-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00]
+  const b = [-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01]
+  const c = [-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00]
+  const d = [7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00]
+
+  const plow = 0.02425
+  const phigh = 1 - plow
+  let q, r
+
+  if (p < 0 || p > 1) return NaN
+  if (p === 0) return -Infinity
+  if (p === 1) return Infinity
+
+  if (p < plow) {
+    q = Math.sqrt(-2 * Math.log(p))
+    return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+           ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+  } else if (p <= phigh) {
+    q = p - 0.5
+    r = q * q
+    return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
+           (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1)
+  } else {
+    q = Math.sqrt(-2 * Math.log(1 - p))
+    return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+            ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+  }
+}
+
+function erf(x) {
+  const sign = x >= 0 ? 1 : -1
+  x = Math.abs(x)
+
+  const a1 = 0.254829592
+  const a2 = -0.284496736
+  const a3 = 1.421413741
+  const a4 = -1.453152027
+  const a5 = 1.061405429
+  const p = 0.3275911
+
+  const t = 1 / (1 + p * x)
+  const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x)
+
+  return sign * y
+}
+
+function plotSimple({width = 760, height = 420, mu0 = 0, mu1 = 1, se = 1, critLo = -1.96, critHi = 1.96, twoSided = true} = {}) {
+  const scale = width / 760
+  const baseFont = 18 * scale
+  const margin = {top: 30, right: 30, bottom: 65, left: 60}
+  const innerWidth = width - margin.left - margin.right
+  const innerHeight = height - margin.top - margin.bottom
+
+  const xmin = Math.min(mu0, mu1, critLo) - 4 * se
+  const xmax = Math.max(mu0, mu1, critHi) + 4 * se
+  const xs = d3.range(xmin, xmax, (xmax - xmin) / 600)
+
+  const ymax = d3.max(xs, d => Math.max(dnorm(d, mu0, se), dnorm(d, mu1, se))) * 1.15
+
+  const x = d3.scaleLinear().domain([xmin, xmax]).range([margin.left, margin.left + innerWidth])
+  const y = d3.scaleLinear().domain([0, ymax]).range([margin.top + innerHeight, margin.top])
+
+  const line0 = d3.line()
+    .x(d => x(d))
+    .y(d => y(dnorm(d, mu0, se)))
+
+  const line1 = d3.line()
+    .x(d => x(d))
+    .y(d => y(dnorm(d, mu1, se)))
+
+  const area0 = d3.area()
+    .x(d => x(d))
+    .y0(y(0))
+    .y1(d => y(dnorm(d, mu0, se)))
+
+  const area1 = d3.area()
+    .x(d => x(d))
+    .y0(y(0))
+    .y1(d => y(dnorm(d, mu1, se)))
+
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .style("max-width", "100%")
+    .style("height", "auto")
+
+  svg.append("g")
+    .attr("transform", `translate(0,${margin.top + innerHeight})`)
+    .call(d3.axisBottom(x))
+    .call(g => {
+      g.selectAll("text").style("font-size", `${baseFont}px`)
+      g.selectAll("line").style("stroke-width", 1.2)
+      g.selectAll("path").style("stroke-width", 1.2)
+    })
+
+  svg.append("g")
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(5))
+    .call(g => {
+      g.selectAll("text").style("font-size", `${baseFont}px`)
+      g.selectAll("line").style("stroke-width", 1.2)
+      g.selectAll("path").style("stroke-width", 1.2)
+    })
+
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", margin.top + innerHeight + 50 * scale)
+    .attr("text-anchor", "middle")
+    .attr("font-size", baseFont + 3)
+    .text("Observed mean difference")
+
+  svg.append("text")
+    .attr("x", 18)
+    .attr("y", 20)
+    .attr("font-family", "sans-serif")
+    .attr("font-size", baseFont + 3)
+    .text("Density")
+
+  const alphaLeft = twoSided && critLo !== null ? xs.filter(d => d <= critLo) : []
+  const alphaRight = xs.filter(d => d >= critHi)
+  const betaRegion = twoSided ? xs.filter(d => d >= critLo && d <= critHi) : xs.filter(d => d <= critHi)
+
+  svg.append("path")
+    .datum(alphaLeft)
+    .attr("fill", "rgba(31,119,180,0.25)")
+    .attr("d", area0)
+
+  svg.append("path")
+    .datum(alphaRight)
+    .attr("fill", "rgba(31,119,180,0.25)")
+    .attr("d", area0)
+
+  svg.append("path")
+    .datum(betaRegion)
+    .attr("fill", "rgba(214,39,40,0.25)")
+    .attr("d", area1)
+
+  svg.append("path")
+    .datum(xs)
+    .attr("fill", "none")
+    .attr("stroke", "#1f77b4")
+    .attr("stroke-width", 2.5)
+    .attr("d", line0)
+
+  svg.append("path")
+    .datum(xs)
+    .attr("fill", "none")
+    .attr("stroke", "#d62728")
+    .attr("stroke-width", 2.5)
+    .attr("d", line1)
+
+  const crits = twoSided ? [critLo, critHi] : [critHi]
+  crits.forEach(c => {
+    svg.append("line")
+      .attr("x1", x(c))
+      .attr("x2", x(c))
+      .attr("y1", y(0))
+      .attr("y2", y(ymax))
+      .attr("stroke", "#444")
+      .attr("stroke-dasharray", "5,4")
+  })
+
+  svg.append("text")
+    .attr("x", x(mu0))
+    .attr("y", y(dnorm(mu0, mu0, se)) - 8)
+    .attr("text-anchor", "middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", baseFont)
+    .attr("fill", "#1f77b4")
+    .text("H₀")
+
+  svg.append("text")
+    .attr("x", x(mu1))
+    .attr("y", y(dnorm(mu1, mu1, se)) - 8)
+    .attr("text-anchor", "middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", baseFont)
+    .attr("fill", "#d62728")
+    .text("H₁")
+
+  svg.append("text")
+    .attr("x", x(critHi) + 6)
+    .attr("y", y(ymax) + 14)
+    .attr("font-family", "sans-serif")
+    .attr("font-size", baseFont)
+    .text("critical values")
+
+  svg.append("text")
+    .attr("x", x(critHi + (xmax - critHi) * 0.25))
+    .attr("y", 0.1)
+    <!-- .attr("y", y(dnorm(critHi + (xmax - critHi) * 0.5, mu0, se)) + 24) -->
+    .attr("text-anchor", "middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", baseFont)
+    .attr("fill", "#1f77b4")
+    .text("alpha")
+
+  svg.append("text")
+    .attr("x", x(mu1 - 0.5 * se))
+    .attr("y", y(dnorm((critLo + critHi) / 2, mu1, se)) - 12)
+    .attr("text-anchor", "middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", baseFont)
+    .attr("fill", "#d62728")
+    .text("beta")
+
+  return svg.node()
+}
+```
+:::
+
+\
+
+### Effect Size
+
+The treatment effect $\delta$ and the population standard deviation are often combined into a single quantity---the **effect size**.
+
+As defined by Cohen @cohen92:
+
+> *the degree to which $H_0$ is false is indexed by the discrepancy between $H_0$ and $H_1$ and is called effect size.*
+
+For paired designs, the effect size is:
+
+$$
+d = \frac{|\mu_{post} - \mu_{pre}|}{\sigma_D} = \frac{\delta}{\sigma_D}
+$$
+
+Cohen proposed the following interpretation for classifying $d$:
+
+- small: $d = 0.2$
+- medium: $d = 0.5$
+- large: $d = 0.8$
+
+Using effect size, $\beta$ and power becomes:
+
+$$
+\begin{aligned}
+\beta &= P\left(Z < z_{1-\alpha} - d \sqrt{n}\right) \\
+\text{power} &= 1 - P\left(Z < z_{1-\alpha} - d \sqrt{n}\right)
+\end{aligned}
+$$ {#eq-betapower-d}
+
+\
+
+### Example of Power Computation
+
+
+```{r}
+#| echo: false
+
+n <- 9
+alpha <- 0.05
+zc <- qnorm(1-alpha)
+zb <- qnorm(0.2)
+delta <- 1
+sigma <- 2
+d <- delta/sigma
+lambda <- d * sqrt(n)
+beta <- round(pnorm(zc-lambda),3)
+n_z <- ceiling(((zc-zb)/d)^2)
+```
+
+Consider the CoP elliptic area example (@fig-3-4-8). The experimenter wishes to assess how confidently the treatment effect can be assessed from the data collected on $n=9$ subjects and for an $\alpha=0.05$ significance level.
+
+The experimenter assumes as relevant a $1 \text{ cm}^2$ reduction of CoP elliptic area, knowing the ellitpic area standard deviation in the population is $2 \text{ cm}^2$. This yields a **medium** effect size according to Cohen @cohen92. 
+
+From the information just presented: 
+
+- $d=`r d`$ 
+- $z_{0.95}=`r round(zc,3)`$ 
+- $\sqrt{n}=`r sqrt(n)`$ 
+
+Based on @eq-betapower-d, we have that: 
+
+$$ 
+\begin{aligned} 
+\text{power}&=1-P(Z<`r round(zc,3)`-`r d`\times `r sqrt(n)`) \\ 
+&=1-P(Z<`r round(zc-lambda,3)`) \\ 
+&=1-`r beta` \\ 
+&=`r 1- beta`
+\end{aligned} 
+$$ 
+
+This can be checked by setting the corresponding parameters in the [interactive plot](#sec-tinteractiveplot-power) above.
+
+\
+
+### A Priori vs A Posteriori Power {#sec-priori-posteriori}
+
+Effect size and power can be computed either *a priori* or *a posteriori*.
+
+In *a priori* analysis, the effect size is assumed based on scientific reasoning before data collection. This is used to design the study.
+
+In *a posteriori* analysis, the effect size is estimated from the observed data. However, this estimate is subject to variability.
+
+The success of an experimental design greatly depends on its ability to assess the effect one expects to observe. It is the statistical power that determines the ability of a test to detect a difference when one truly exists. However, power computed from experimental data---*a posteriori*---is only a *noisy* estimate of the true power.
+
+In this case, power is computed using the estimated effect size, which itself is subject to uncertainty. As a result, even small changes in the estimated effect may lead to substantial differences in the estimated power.
+
+To illustrate this point, consider the previous example, for which power was found to be $`r 1- beta`$. This value was obtained assuming an effect size of $d = `r d`$. If the true effect size was slightly smaller, say $d = 0.6$, the corresponding power would be:
+
+$$
+\begin{aligned}
+\text{power} &= 1 - P\left(Z < `r round(zc,3)` - 0.6 \times `r sqrt(n)`\right) \\
+&= 1 - P\left(Z < `r round(zc - (0.6 * sqrt(n)),3)`\right) \\
+&= 1 - `r round(pnorm(zc - (0.6 * sqrt(n))),3)` \\
+&= `r 1 - round(pnorm(zc - (0.6 * sqrt(n))),3)`
+\end{aligned}
+$$
+
+This example shows that a relatively small change in the assumed effect size can lead to a marked change in statistical power. 
+
+For this reason, the effect size---and consequently the expected power---should be defined *a priori*, when planning the study. The choice of effect size should be grounded in solid scientific reasoning, reflecting what would be considered a meaningful effect in the applied field.
+
+An insightful discussion of the limitations of *a posteriori* power is provided in a [letter to the editor](https://journals.lww.com/annalsofsurgery/citation/2019/08000/comment_on__post_hoc_power_using_observed_estimate.81.aspx) by Andrew Gelman @gelman19, from which the following statement is worth emphasizing:
+
+> *if you want to make a statement about power of a study, you need to make some assumption about effect size.*
+
+\
+
+## Sample Size Computation
+
+Sample size is the main parameter the experimenter can manipulate to achieve the desired Type I and Type II error probabilities. After defining the effect size on scientific grounds, the sample size required for the test statistic of interest can be determined to control the probabilities of the two types of errors.
+
+Examples of sample size computation are provided below for a single-group design, considering both the $z$- and the Student's $t$ test statistics.
+
+\
+
+### Z Distribution
+
+It is convenient to define $z_{\beta}$, which corresponds to the value of the standard Normal distribution such that:
+
+$$
+P(Z < z_\beta) = \beta
+$$
+
+From the power expression (@eq-power-lambda) we obtain:
+
+$$
+z_\beta = z_{1-\alpha} - \lambda
+$$
+
+Substituting $\lambda = d\sqrt{n}$:
+
+$$
+z_\beta = z_{1-\alpha} - d\sqrt{n}
+$$
+
+Solving for $n$:
+
+$$
+\begin{aligned}
+d\sqrt{n} &= z_{1-\alpha} - z_\beta \\
+n &= \left\lceil\left(\frac{z_{1-\alpha} - z_\beta}{d}\right)^2\right\rceil
+\end{aligned}
+$$ {#eq-sample-size-z}
+
+For the CoP elliptic area example, the assumed effect size $d = `r d`$ yielded a power of $`r 1-beta`$ for a sample size of $n = `r n`$ and $\alpha = `r alpha`$.
+
+To achieve a power of at least $80\%$ (i.e., $\beta = 0.2$), the required sample size is:
+
+$$
+n = \left\lceil\left(\frac{`r round(zc,3)` - (`r round(zb,3)`)}{`r d`}\right)^2\right\rceil = `r ceiling(((zc - zb)/d)^2)`
+$$
+
+\
+
+### t Distribution {#sec-power-ttest}
+
+When considering paired designs, sample size computation typically relies on the $t$-distribution, since the test statistic used for inference on the mean paired difference is the Student's $t$.
+
+Before detailing the procedure, it is useful to understand how the computation of power differs between the $Z$ and $t$ cases.
+
+In the $Z$ case, the null and true distributions have the same shape and differ only by a shift determined by the non-centrality parameter $\lambda$.
+
+In the $t$ case, the null distribution follows a central $t$ distribution, whereas the distribution under the alternative hypothesis follows a **non-central t distribution**. This distribution depends on both the degrees of freedom $\nu$ and the non-centrality parameter $\lambda$, and is generally not symmetric.
+
+@fig-3-4-9 illustrates the null and assumed true distributions for both test statistics.
+
+![Distribution of the test statistics for the Standard Normal and both the central and non-central Student's $t$ distribution.](/include/images/part_3/ch_4/3-4-9_noncentral-t-distribution.png){#fig-3-4-9 width=100%}
+
+For the $t$-test, $\beta$ and power are:
+
+$$
+\begin{aligned}
+\beta &= P\left(t_{\nu,\lambda} < t_{1-\alpha,\nu}\right) \\
+\text{power} &= 1 - P\left(t_{\nu,\lambda} < t_{1-\alpha,\nu}\right)
+\end{aligned}
+$$ {#eq-betapower-t}
+
+$\beta$ is given by the probability that the $t$-value ($t_{\nu,\lambda}$) for a non-central $t$-distribution is smaller than the critical value $t_{1-\alpha,\nu}$ for the central $t$-distribution.
+
+To compute the sample size we need to find the smallest $n$ yielding the desired $\beta$ and thus power. However, there is no closed-form solution for $n$, given both $t_{\nu,\lambda}$ and $t_{1-\alpha,\nu}$ depend on $n$.
+
+Power is therefore computed by mixing $Z$- and $t$-distributions, in a three-step procedure. To exemplify sample size computation for the $t$-test, let's consider the parameter from the CoP elliptic area example:
+
+- $d=`r d`$
+- $\alpha = `r alpha`$
+- $\beta = 0.2 \Rightarrow \text{power} = 0.8$
+
+::: {.panel-tabset}
+
+#### Step 1
+
+##### Use Z to estimate $n$
+Although the test statistic is the non-central $t$, the Normal distribution is used to approximate sample size. 
+
+Based on @eq-sample-size-z, we obtained that $n=`r n_z`$.
+
+#### Step 2
+
+##### Compute exact power
+Then, the exact power is computed by considering the $t$-values (@eq-betapower-t). Under $H_0$, $T\sim t(\nu)$. Under $H_1$, $T \sim t(\nu,\lambda)$. Given the initial guess is $n=`r n_z`$, $\lambda=d\sqrt{n}=`r round(d*sqrt(n_z),2)`$, and  $\nu=n-1=`r n_z-1`$, exact Power is therefore given by:
+
+$$
+\begin{aligned}
+\text{power} &= 1 - P\left(t_{\nu,\lambda} < t_{1-\alpha,\nu}\right) \\
+&= 1 - P\left(t_{`r n_z-1`,`r round(d*sqrt(n_z),2)`} < t_{1-`r alpha`,`r n_z-1`}\right) \\
+&= `r 1-round(pt(qt(0.95, 11-1), 11-1, 0.75*sqrt(11)),2)`
+\end{aligned}
+$$
+
+#### Step 3
+
+##### Increase $n$ until achieving desired power
+
+Repeat step 2 by increasing $n$ until the desired $\text{power} \ge 0.8$ is obtained.
+
+In step 1 we obtained that $n=`r n_z-1`$ and $\text{power}=`r round(pt(qt(0.95, n_z-1), n_z-1, 0.5*sqrt(n_z), lower.tail = FALSE),3)`$
+
+- for $n=`r n_z+1`$, power increases to $`r round(pt(qt(0.95, n_z), n_z, 0.5*sqrt(n_z+1), lower.tail = FALSE),3)`$
+- for $n=`r n_z+2`$, power increases to $`r round(pt(qt(0.95, n_z+1), n_z+1, 0.5*sqrt(n_z+2), lower.tail = FALSE),3)`$
+:::
+
+Based on these steps, we therefore consider a sample size of $n=`r n_z+2`$, against a sample size of $n=`r n_z`$ indicated by the Normal approximation.
+
+:::{.callout-note title="Sample size differences between $Z$ and $t$"}
+*For small sample sizes, the use of the $t$-distribution generally leads to larger required sample sizes compared with the Normal approximation, reflecting the additional uncertainty associated with estimating the population standard deviation.*
+:::
+
+\
+
+### One- and Two-tailed Power and Sample Size
+
+The computation of statistical power and sample size depends on whether a one- or two-tailed test is considered.
+
+For a **one-tailed test**, the Type I error probability $\alpha$ is entirely assigned to one tail of the distribution. Power and sample size are computed as detailed in the preceding sections.
+
+For a **two-tailed test**, the significance level $\alpha$ is split equally between the two tails:
+
+$$
+P(|Z| > z_{1-\alpha/2}) = \alpha
+$$
+
+In principle, the Type II error probability should be computed as:
+
+$$
+\beta = P\left(-z_{1-\alpha/2} < Z - \lambda < z_{1-\alpha/2}\right)
+$$
+
+However, when the alternative hypothesis specifies a shift in a single direction (e.g., $\mu > \mu_0$), the contribution of the opposite tail is typically negligible. In this case, power can be well approximated using:
+
+$$
+\text{power} \approx 1 - P\left(Z < z_{1-\alpha/2} - d\sqrt{n}\right)
+$$
+
+Thus, the main practical difference between one- and two-tailed tests lies in the critical value: using $\alpha/2$ instead of $\alpha$ leads to a larger threshold and therefore to lower power for the same sample size.
+
+As a consequence, achieving the same statistical power in a two-tailed test requires a larger sample size.
+
+\
+
+### Software for Sample Size Calculation
+
+Different options exist for the sample size calculation.
+
+There are free online calculators, like [**MedCalc**](https://www.medcalc.org/en/calc/sample-size.php) and [**ClinCalc.com**](https://clincalc.com/stats/samplesize.aspx).
+
+There are some **R packages** for power computation, like [**asbio**](https://www.rdocumentation.org/packages/asbio) and [**pwr**](https://www.rdocumentation.org/packages/pwr)
+
+The most popular tool for power and sample size calculation is likely the free software [**G\*Power**](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower), with exhausting documentation, tutorial, and two scientific papers at its foundation (Faul et al @faul07 and @faul09).

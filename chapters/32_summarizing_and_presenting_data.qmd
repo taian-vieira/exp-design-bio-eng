@@ -1,0 +1,1049 @@
+# Summarizing and Presenting Data {#sec-ch32}
+
+Regardless of the **study design**, all studies involve data collection. *Ideally, these data come from a well-planned experiment motivated by a clear and relevant objective*. The  [previous chapter](#sec-p3-c1) discusses the different study designs, while the course [Introduction](#sec-intro) addresses the steps necessary for conducting a well-designed study. By following these steps, the process of analyzing data is greatly simplified. For example, if the study is conceived upon a well-defined hypothesis, the processing pipelines can be established beforehand---we know what and how to process even before collecting data. 
+
+In some cases, however, data collection begins without a clearly stated hypothesis. In these situations, the analysis becomes exploratory, with the researcher examining the data to identify potentially useful patterns. This practice may be helpful when the intent is to learn a new technique or to get acquainted with a given instrument. For example, if your master dissertation or doctoral thesis requires the collection of surface electromyograms and you have no experience with the instruments available for that, it would seem reasonable to collect data for the simple purpose of getting familiar with the technique. *However, when the goal is to conduct a study, it is difficult to overstate the importance of* ***planning all procedural steps*** *before data collection begins*. Even if the study is exploratory in nature, data collection and analysis should follow a well-structured plan.
+
+Regardless of the context motivating data collection, data analysis generally serves two main purposes: to characterize the distribution of observed values and to test a specific hypothesis.
+
+:::{.callout-note title="This chapter..."}
+*... deals with the characterization of data, discussing statistics for summarizing the data and graphical techniques for representing the data.*
+:::
+
+\
+
+
+## Raw and Processed Data
+
+The term **data collection** refers to **data** in a broad sense. For instance, data may correspond to the electrocardiogram (*raw data*) collected from a subject as shown in @fig-3-2-1, or the beat-by-beat heart rate (*processed data*) computed from this same signal.  Except for the [R Tutorial Chapter][Example Data: Postural Sways], where raw smartphone data is used to process postural sway data, *the concepts discussed in this course apply to processed data*. For clarity, below are two key terms used in the context of experimental design:
+
+- **Observation**: a single data point, or a set of measurements, collected from one individual, often a participant in a biomedical study.
+- **Variable**: a characteristic measured in the study; each observation represents one recorded value of a variable. 
+
+![Example of electrocardiogram from a healthy subject. Heart rate on a beat-by-beat basis can be computed from the time elapsed between consecutive R waves (RR intervals), identifed based on a given threshold.](/include/images/part_3/ch_2/3-2-1_ecg.jpg){#fig-3-2-1 width=95%}
+
+\
+
+## Descriptive Statistics
+
+Typically, many are the individuals tested and many are the variables measured in a study, yielding a high number of observations. *The term **descriptive statistics** is used interchangeably to indicate either the method or the quantity used to summarize observations into a clear and meaningful way*.
+
+:::: {.columns}
+
+::: {.column width="58%"}
+![](/include/images/part_3/ch_2/3-2-2_anthropometrics.png){width="100%"}
+:::
+
+::: {.column width="2%"}
+
+:::
+
+::: {.column width="40%"}
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-1_variables.md")
+```
+:::
+:::
+::::
+
+*Which descriptive statistic to use for summarizing and presenting the data depends on the scale with which variables are measured*. In the figure above, four numerical variables are shown—body height, and chest, waist, and hip circumferences. Sex is another, non-numeric variable.  While the mean value can be computed for body height values measured from a number of subjects, for example, no mean value can be computed for sex. Sex can be counted though (e.g. the number of female subjects taller than 180 cm). 
+
+Based on the nature of the variable to be measured, *there are four **scales of measurement***.
+
+\
+
+### Nominal Scale {#sec-nominal}
+
+*Variables measured on a nominal scale qualify the experimental unit under study*. Emotions (happy, sad), the colors a person sees (red, green), and anatomical planes (sagittal, frontal) are examples of nominal variables. 
+
+Nominal variables may be dichotomous (or binary), assuming either of two possible values (e.g. absence or presence of a clinical condition). 
+
+A nominal variable may also be used to qualify a category of persons (or things), instead of a single individual. For example, we may define *team sports* and *individual sports*. Rugby, basketball, and volleyball fall into the team sports category, while swimming, archery, and weightlifting are examples of individual sports. What about rowing? And tennis? 
+
+\
+
+### Ordinal Scale {#sec-ordinal}
+
+Unlike nominal variables, *ordinal variables can be ordered*. Ordering is possible  because a hierarchy exists between values of a variable measured on an ordinal scale—that is, values of an ordinal variable can be ranked in a meaningful order, determining importance, size, severity of a disease, or education level, for example. 
+
+Similarly to variables measured on a nominal scale, standard arithmetic operations do not apply to variables measured on an ordinal scale. 
+
+Many are the examples of ordinal variables in health science, like the:
+
+- **A**ppearance (skin color), **P**ulse (heart rate), **G**rimace (reflex activity), **R**espiration (APGAR) score for assessing the health of a newborn.
+- Stages of rheumatoid arthritis, ranging from 1 (less severe), with mild pain and tissue edema, to 4 (most severe), with loss of mobility and bony fusion.
+- **I**nternational **P**hysical **A**ctivity **Q**uestionnaire, which may be adminstered in a short or long format to assess how physically active a person is.
+- McGill Pain Questionnaire, relying on sensory, affective, and evaluative components to assess the intensity of experienced pain.
+
+Even though values of an ordinal variable can be ranked, the difference between ranks is not consistent or measurable. For example, the difference between the first and second place is not comparable to that between the second and third place.
+Likewise, the gap between *strongly motivated* and *motivated* is not comparable to that between *demotivated* and *strongly demotivated*.
+
+\
+
+### Interval Scale
+
+Variables measured on an interval scale have the same properties as ordinal variables. The main distinction between both is that variables measured on an interval scale are numerical, with a unit of measurement, and the difference between any pairs of values is meaningful.  
+
+Examples are dates, time of day, **I**ntelligence **Q**uotient (IQ) score, and location in Cartesian space. The difference between 3:00 PM and 2:00 PM, which is one hour, is consistent with the difference between 10:00 AM and 9:00 AM. That is, the interval between hours are equal. A difference of 20 points in the IQ score, from 70 to 90, indicates the same cognitive distance for a 20-point difference measured from 90 to 110. However, it is not possible to say that 10:00 AM is twice 5:00 AM, or that an IQ score of 90 is three times an IQ score of 30---ratios are not meaningful.
+
+\
+
+### Ratio Scale
+
+This is the most precise and quantitative scale of measurement. In addition to being added and subtracted, ratio-scale variables may be multiplied and divided. 
+
+There is a **true zero** point for ratio-scale variables, indicating the absence of the measured quantity. Just like 0 kg indicates the absence of mass, 0 m/s indicates the absence of motion. It is therefore possible to state that the weight of a 100-kg person is twice as that of person with 50 kg body mass, or that a person running at 12 km/h is moving twice as fast as another person running at 6 km/h.
+
+Most physical quantities (mass, height, distance, volume) are (or can be) measured on a ratio scale, just like time (duration: hours required for studying) and frequency (cycling cadence: revolutions per minute). 
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-2_temperature_scale.md")
+```
+:::
+
+\
+
+## Summarizing Data on Numerical Scales
+
+As discussed in the [Introduction](#sec-intro) and in the [previous Chapter](#sec-p3-c1), well-designed studies are motivated by a justified hypothesis. Testing the study's hypothesis requires collecting data from a number of individuals, yielding a number of observations.
+
+Suppose the height of 100 students is measured, resulting in 100 observations of a ratio-scale variable. All 100 measured would be distributed within a given range, from the minimum to the maximum value---from the lowest to the tallest student. @fig-3-2-3 illustrates three possible distributions for the 100 values obtained. For the three possible scenarios, observations span the range from about 125 cm to about 165 cm. There is a clearly appreciable difference between the three distributions. While height values appear to be equally distributed within the whole range for the left distribution, observations tend to be concentrated in the middle of the range of values for the the right distribution. 
+
+:::{.callout-note title="Data distribution"}
+*The characterization of these distributions is the main topic of this Chapter. To this end, measures of* **central tendency** *and* **dispersion** *will be used*.
+:::
+
+![Three possible distributions for height values measured on 100 individuals](/include/images/part_3/ch_2/3-2-3_height-distributions.jpg){#fig-3-2-3 width=80%}
+
+\
+
+## Measures of Central Tendency
+
+**Measures of central tendency** are used to characterize the center of the distribution. Depending on the shape of the distribution, its center may also coincide with the most frequent value. Three are the main central descriptors covered in this seciton.
+
+\
+
+### The Mean {#sec-mean}
+
+Different types of mean values could be computed---geometric, harmonic, trimmed, and quadratic means are some examples. In statistical analysis, the **arithmetic mean** is most often considered:
+
+$$
+  {\color{blue}\mu} = \frac{1}{n}(x_1 + x_2 + \cdots + x_n) = \frac{1}{{\color{green}n}} \sum_{i=1}^{n} {\color{orange}x_i}
+$${#eq-arithmetic-mean}
+
+where $\color{green}{n}$ and $\color{orange}{x_i}$  respectively stand for the **`r colorize("total number of observations","green")`** and the **`r colorize("value of the $i$-th observation","orange")`**. $\color{blue}{\mu}$ corresponds to the **`r colorize("Population Mean","blue")`**, that is , the average value computed over all possible observations of a well defined group of individuals^[*will get back to this point later. For now, the population values (mean and other metrics treated below) are assumed to be known*].
+
+Suppose you work for a care provider, requesting you to assess how autonomous the patients attending to its clinical facilities are in taking care of themselves. After a literature search you find the **Patient Activation Measure** metric, proposed and validated by [Hibbard and colleagues](https://onlinelibrary.wiley.com/doi/10.1111/j.1475-6773.2005.00438.x) @hibbard05. PAM is a 13-item survey assessing the ability of self-management of health and healthcare. Scores range from 0 to 100, indicating a progression from a passive to an active self-manager.
+
+:::: {.columns}
+::: {.column .dataTable-wrapper width=47.5%}
+:::{style="font-size: 80%;"}
+```{r}
+#| echo: false
+#| label: tbl-3-2-1
+#| tbl-cap: PAM scores 
+
+# 1. Simulate the 200 observations
+n <- 20 # how many subjects to consider
+N <- 200 # population
+set.seed(3) # for reproducibility
+pam = round(rnorm(N, mean = 55, sd = 20),0)
+pam[pam>100]=100
+pam[pam<0]=0
+df <- data.frame(
+  patient = 1:n,
+  PAM = pam[1:n]
+)
+
+# 2. Create the interactive table
+datatable(
+  df,
+  colnames = c('patient', 'PAM ($x_i$)'),
+  rownames = FALSE,
+  escape = FALSE,
+  options = list(
+    pageLength = 5,
+    searching = FALSE,
+    lengthChange = FALSE,
+    columnDefs = list(list(className = 'dt-center', targets = "_all")),
+    drawCallback = JS("function(settings) {
+              MathJax.typeset(); 
+            }")
+    ),
+)
+```
+:::
+:::
+::: {.column width=5%}
+
+:::
+::: {.column width=47.5%}
+This table provides a simulated set of PAM scores obtained for $n=`r n`$ patients, showing 5 observations at a time.  Different observations can be inspected by clicking on the interactive options at the bottom of the table, from the first to the last set of 5 entries.
+
+Applying @eq-arithmetic-mean on the `r n` observations included in @tbl-3-2-1 we obtain the mean PAM value: $\mu = `r round(mean(pam[1:n]),1)`$
+:::
+::::
+
+If the $n=`r n`$ PAM scores reported in @tbl-3-2-1 were distributed as shown in the right panel of @fig-3-2-3, the mean value would represent the most frequent entry among the `r n` observations. In general, this is the case---*the mean value is expected to represent the most likely value to be observed when any sample of individual is assessed*. 
+
+::: {#frequency-table}
+You then decide to pool the PAM survey results obtained for samples of `r n` patients for each of the `r length(pam)/n` different clinical facilities owned by the care provider. Instead of representing all observations in a single table, which would be difficult to inspect, you group them together in a more compact table. 
+
+In this compact table---also termed **Frequency Table**---you represent counts of observations falling within predefined PAM ranges. For example, you count how many PAM scores fall within the 0-10 **bin**^[*bins are contiguous, non-overlapping intervals in a  numeric scale*] (i.e.,$0\leq x_i <10$) and represent these counts as if their PAM score was halfway this interval (i.e., for all occurrences $0\leq x_i <10$, $x_i=5$). You then repeat the process for each of the ten consecutive bins, yielding @tbl-3-2-2.
+:::
+
+:::{style="font-size: 80%;"}
+:::{.dataTable-wrapper}
+```{r}
+#| echo: false
+#| results: asis
+#| label: tbl-3-2-2
+#| tbl-cap: Counts of PAM scores within intervals (bins)
+
+
+# 1. Getting counts using the hist function
+h <- hist(pam, breaks = seq(0, 100, 10), plot = FALSE)
+df <- data.frame(
+  intervals = c(paste(seq(0, 80, 10),"$ \\le x_i < $",seq(10, 90, 10)), ("90 $ \\le x_i \\le $ 100")),
+  PAM = h$mids,
+  counts = h$counts,
+  px = round(h$counts/length(pam),3)
+)
+
+datatable(
+  df,
+  colnames = c('intervals', 'PAM ($x_i$)', 'counts', '$p(x_i)$'),
+  rownames = FALSE,
+  escape = FALSE,
+  options = list(
+    dom = 't',
+    columnDefs = list(list(className = 'dt-center', targets = "_all")),
+    drawCallback = JS("function(settings) {
+              MathJax.typeset(); 
+            }")
+    ),
+)
+```
+:::
+:::
+
+The fourth column of @tbl-3-2-2 illustrates the relative number of occurrences within each bin. More specifically,
+
+$$
+p\left(x_i\right)=P\left(X=x_i\right)
+$$
+
+is the **probability mass function**, also termed **frequency function**, determining how often the **random variable** $X$ would match $x_i$. 
+
+The concept of random variable will be treated in the [next Chapter](#sec-ch3), but given PAM score could assume any value from 0 to 100 for any new patient assessed, it seems conceivable to treat it as a random variable. $p(x_i)$ gives the relative frequency with which PAM assumes a value equal to $x_i$. 
+
+The mean value can be computed from @tbl-3-2-2, without relying on the `r N` PAM scores obtained. To this end, the ten PAM scores defined by the middle value within each bin is weighted by their relative frequencies and summed:
+
+$$
+\mu = \sum_{i=1}^{10} x_i p(x_i)=`r round(sum(h$counts/N * h$mids),1)`
+$${#eq-weighted-mean}
+
+If computed directly over the `r N` values, $\mu = `r round(mean(pam),1)`$.
+
+:::{.callout-caution title="CAUTION: Extreme observations affect the mean"}
+*One important point to consider is how sensitive the mean value is to an* **extreme observation**^[*differing substantially from all other observations of the dataset*]*. Complete the exercise below and check by how much the mean value computed over the first sample of `r n` patients (@tbl-3-2-1) would change when a single value changes dramatically.*
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-3_mean-with-extreme.md")
+```
+:::
+
+\
+
+### The Median {#sec-median}
+
+Like the arithmetic mean, the **median** is a central tendency measure. *It separates the distribution of observations into two halves*, the higher half and the lower half. The median is the middle value in the set of observations arranged in increasing order. 
+
+Mathematically, the definition of the median value depends on whether the number of observations is odd or even:
+
+$$
+\left\{
+\begin{aligned}
+\eta &= x_{r_{(n+1)/2}}, & n \text{ is odd} \\
+\eta &= \frac{x_{r_{(n/2)}} + x_{r_{(n/2+1)}}}{2}, & n \text{ is even}
+\end{aligned}
+\right.
+$$ {#eq-median}
+
+where $x_{r_i}$ corresponds to the individual observations ($x_i$), ordered from the smallest to the largest value. 
+
+$\eta$ can be computed directly from the data in @tbl-3-2-1. Just click on the up arrow to the right of PAM ($x_i$). By doing so, PAM scores will be ordered from the smallest to the largest. Given there are `r n` observations in that table, we consider the case $n$ is even in @eq-median. Therfore, the median is given by the average between $x_{10}$ and $x_{11}$. That is:
+
+$$
+\eta=(x_{11}+x_{10})/2=(`r sort(pam[1:n])[10]`+`r sort(pam[1:n])[11]`)/2=`r median(pam[1:n])`
+$$
+
+:::{.callout-note title="Mean and median"}
+*Note how close the median  ($\eta = `r median(pam[1:n])`$) is to the mean value ($\mu=`r round(mean(pam[1:n]),1)`$) computed over the `r n` entries in @tbl-3-2-1.*
+:::
+
+\
+
+### The Mode {#sec-mode}
+
+The Mode ($M$) central tendency measure is defined as the most frequent value. It is therefore used to assess the most common observation in the data set. Depending on the distribution of values, there may be a single, multiple or no mode at all.
+
+Distributions are therefore classified as:
+
+- **Unimodal** when only a single mode is defined (middle and right panels in @fig-3-2-3).
+- **Bimodal** *or* **Multimodal** when two or more modes are respectively defined.
+- **No mode** when the occurrence of the different observations are equally likely (left panel in @fig-3-2-3).
+
+\
+
+### Their Relationship
+
+The relationship between the [**mean**](#sec-mean), the [**median**](#sec-median), and the [**mode**](#sec-mode) depends on the distribution. Mainly on whether the distribution is symmetric or not. 
+
+As illustrated in @fig-3-2-4, the three central tendency measures may match when the distribution is symmetric^[*an exception is when all values are equally likely to occur (left panel in @fig-3-2-3). In this case the mode is not defined*]. 
+
+When the distribution is asymmetric, the three measures tend to differ depending on the degree of **Skewness**---statistics describing the asymmetry of a distribution in relation to its mean. When the distribution is negatively skewed, most observations are concentrated on the right side. In this case the distribution is characterized by a tail towards the left side, where rare observations are found. The opposite holds for positively skewed distributions (@fig-3-2-4).
+
+![The relationship between the three central tendency measures (mean, median, mode)](/include/images/part_3/ch_2/3-2-4_distributions.jpg){#fig-3-2-4 width=75%}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-4_mean-median-mode.md")
+```
+:::
+
+\
+
+## Measures of Dispersion {#sec-dispersion-measures}
+
+While central tendency statistics are informative of the center of the distribution, they do not provide any information about how scattered observations are. **Measures of disperion** therefore complement the measures of central tendency in characterizing the data distribution, indicating how scattered the observations are with respect to the central tendency measure---*measures of dispersion quantify the variability in the data set*.
+
+Measures of dispersion may be absolute, assessing variability in the same unit of measurement of the variable measured, or in relative (unitless) terms. The most widely used measures of dispersion are presented in the following sections.
+
+\
+
+### The Range {#sec-range}
+
+The **range** is the simplest measure of dispersion, being defined as the difference between the largest and the smalles observation in the data set:
+
+$$
+\kappa = \max(x_{1}, \dots, x_{n}) - \min(x_{1}, \dots, x_{n})
+$$ {#eq-range}
+
+The computation of $\kappa$ is straightforward, after ordering observations from the smallest to the largest. 
+
+By clicking on the up arrow (![](/include/images/icons/sort_table.png){height=1.5em}) in @tbl-3-2-1, PAM scores are arranged in increasing order, with the smallest (first) observation being `r min(pam[1:n])` and the largest (last) being `r max(pam[1:n])`. For example, the range of PAM scores for the `r n` entries in @tbl-3-2-1, the range is given by:
+
+$$
+\kappa = `r max(pam[1:n])` - `r min(pam[1:n])`=`r diff(range(pam[1:n]))`
+$$
+
+\
+
+### The Standard Deviation {#sec-std}
+
+The **standard deviation** *measures how spread the observations are with respect to the distribution* [mean](#sec-mean). The larger the standard deviation is the more scattered from the mean the observations are. It is represented with the Greek letter $\sigma$ and is defined by taking the square root of the data **variance** (i.e., the average of squared residuals with respect to the mean):
+
+$$
+\begin{aligned}
+\sigma^2 &= \frac{(x_1 - \mu)^2 + \cdots + (x_n - \mu)^2}{n} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2 \\
+\sigma &= \sqrt{\sigma^2}
+\end{aligned}
+$$ {#eq-std}
+
+where $x_i$ corresponds to individual observations, from the first ($i=1$) to the last ($i=n$). 
+
+$\sigma$ stands for the **population standard deviation**, just like $\mu$ corresponds to the **population mean**. The importance of $\mu$, $\sigma$, and ($\sigma^2$) will be discussed later in this course, when addressing the statistical techniques for testing the study's hypothesis. 
+
+::: {.callout-caution title="CAUTION: $\sigma$ and bell-shape"}
+*Regardless of the data distribution, $\sigma$ reflects how variable observations are. However, when the distribution is bell-shaped, like that in the right panel of @fig-3-2-3, $\sigma$ earns a precise meaning---approximately 68% of the observations fall within $\pm1\sigma$ from $\mu$.*
+:::
+
+\ 
+
+### The Coefficient of Variation
+
+Sometimes, interest may lie in comparing data variability between different conditions, subjects, or even variables (e.g. body mass vs height). Both range and standard deviation, as much as the measures of dispersion presented below, may be not appropriate for such purpose. The metric most often considered in these circumstances is the **coefficient of variation**, *as it provide a relative, unitless measure of disperion*:
+
+$$
+CoV = \frac{\sigma}{\mu} \times 100
+$$ {#eq-cov}
+
+where $\sigma$ corresponds to the standard deviation (@eq-std) and $\mu$ stands for the mean value (@eq-arithmetic-mean).
+
+:::{style="font-size: 85%;"}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-5_cov.md")
+```
+:::
+
+\
+
+### The InterQuartile Range {#sec-iqr}
+
+The **I**nter**Q**uartile **I**nterval (**IQR**) is defined based on *the difference between two* **percentiles**. 
+
+A percentile is the value below which a given percentage of all observations in the data set falls. That is, the $i$-th percentile of a distribution is the value that encloses $i\%$ of all observations. For example, according to the World Health Organization, the body mass of about 15% of 38-month boys [is nearly 13 kg](https://cdn.who.int/media/docs/default-source/child-growth/child-growth-standards/indicators/weight-for-age/cht-wfa-boys-p-0-5.pdf?sfvrsn=7a899731_12). This means that 13 kg is the 15-th percentile of body mass distribution for boys at this age.
+
+There are three percentiles that earn particular importance in describing the distribution of observations. The first one, discussed above, is the 50-th percentile or the [median](#sec-median), enclosing 50% of all observations. The other two are the 25-th and the 75-th percentiles, also known as the the first ($q_1$) and the third ($q_3$) **quartiles**, respectively. The difference between both defines the IQR measure of dispersion:
+
+$$
+IQR = q_3-q_1
+$$ {#eq-iqr}
+
+An example of IQR computation is given in @fig-3-2-7, for a distribution of 100 observation of body height values.
+
+![**I**nter**Q**uartile **I**nterval computed over 100 obsrevations of body height values](/include/images/part_3/ch_2/3-2-7_iqr.png){#fig-3-2-7 width=95%}
+
+\
+
+## Which Measures to Use?
+
+:::: {.columns}
+
+::: {.column .card .card-text width="49%"}
+\
+![](/include/images/part_3/ch_2/3-2-8-1_central_tendency.png){width=100% fig-align="center"}
+**Central Tendency**
+
+- The mean is used for numerical data and for symmetric (not skewed) distributions.
+- The median is used for ordinal data or for numerical data if the distribution is heavily skewed
+:::
+::: {.column width="2%"} 
+:::
+::: {.column .card .card-text width="49%"}
+\
+![](/include/images/part_3/ch_2/3-2-8-2_dispersion.png){width=100%}
+**Dispersion**
+
+- The standard deviation ($\sigma$) is used when the mean is used
+- Percentiles are used when the mean is used to compare individual observations with a set of norms
+- The interquartile range (IQR) is used to describe the central 50% of a distribution.
+- The range is used when the purpose is to emphasize extreme values.
+- The coefficient of variation is used for relative comparisons or for comparing variability on different units of meaasurement 
+:::
+::::
+
+\
+
+## Displaying Numerical Data
+
+After identifying the appropriate measures to summarize the data set, as discussed in the previous sections, the next step is to communicate the data and the results. Communication is as important as all steps planed and conducted for data collection and processing. Sometimes, the most-well-conducted study may reach a very limited audience because results are presented inappropriately. 
+
+A good exercise to ascertain the clarity of presentation is to ask a colleague, possibly not so familiar with your field of study, to describe the results presented. If your colleague reports the exact message that you intended to transmit, the presentation of results is likely effective.
+
+Data presentation mainly resumes to the use of **Tables** or **Figures**. Tables are particularly indicated when data should be communicated precisely, or when the number of variables to report is large. One example is the table reported by [Prieto and colleagues](https://ieeexplore.ieee.org/document/532130) @prieto96, summarizing a large number of descriptors of postural sways---i.e., *stabilometric descriptors*. A similar table, created with simulated postural data, is reported below (@tbl-3-2-3).
+
+::: {.callout-note title="When possible, use figures"}
+*Notwithstanding the value of tables, figures allow for the readily inspection and comparison of summarized data---a figure is worth a thousand words. The following sections present the most common charts considered for the visualization of numerical data.*
+:::
+
+::: {style="font-size: 80%;"}
+```{r}
+#| label: tbl-3-2-3
+#| tbl-cap: "Comparative Postural Sway Metrics: Young vs. Elderly Adults across visual conditions (EO: eyes open; EC: eyes closed)."
+#| echo: false
+#| message: false
+#| warning: false
+
+# 1. Define the unique dataset
+sway_data <- data.frame(
+  Measure = c("mean distance (mm)", "mean distance-AP (mm)", "mean distance-ML (mm)", "rms distance (mm)", "rms distance-AP (mm)", "rms distance-ML (mm)", "range (mm)", "range-AP (mm)", "range-ML (mm)", "mean velocity (mm/s)", "mean velocity-AP (mm/s)", "mean velocity-ML (mm/s)", "95% conf. circle area (mm²)", "95% conf. ellipse area (mm²)", "sway area (mm²/s)", "mean frequency (Hz)", "mean frequency-AP (Hz)", "mean frequency-ML (Hz)", "fractal dimension-PD", "fractal dimension-CC", "fractal dimension-CE", "total power-RD", "total power-AP", "total power-ML", "50% power freq.-RD (Hz)", "50% power freq.-AP (Hz)", "50% power freq.-ML (Hz)", "95% power freq.-RD (Hz)", "95% power freq.-AP (Hz)", "95% power freq.-ML (Hz)", "centroidal freq.-RD (Hz)", "centroidal freq.-AP (Hz)"),
+  Young_EO = c("3.24 ± 1.15", "2.51 ± 0.99", "1.56 ± 0.82", "3.65 ± 1.25", "3.04 ± 1.12", "1.92 ± 0.95", "14.8 ± 4.45", "13.7 ± 4.35", "8.64 ± 3.98", "7.12 ± 1.85", "5.12 ± 1.42", "3.94 ± 1.25", "124 ± 71.5", "102 ± 68.2", "7.34 ± 4.41", "0.38 ± 0.09", "0.41 ± 0.15", "0.54 ± 0.22", "1.44 ± 0.07", "1.49 ± 0.07", "1.53 ± 0.07", "6.82 ± 3.75", "9.12 ± 5.25", "4.48 ± 3.55", "0.29 ± 0.08", "0.28 ± 0.09", "0.36 ± 0.15", "0.94 ± 0.19", "0.94 ± 0.21", "1.01 ± 0.34", "0.54 ± 0.10", "0.52 ± 0.10"),
+  Young_EC = c("3.92 ± 1.71", "3.22 ± 1.34", "1.72 ± 0.98", "4.48 ± 1.88", "3.91 ± 1.59", "2.14 ± 1.22", "18.6 ± 7.31", "18.2 ± 7.12", "10.1 ± 5.62", "9.12 ± 2.95", "6.95 ± 2.25", "4.58 ± 1.72", "198 ± 149", "168 ± 145", "11.8 ± 8.32", "0.41 ± 0.13", "0.43 ± 0.15", "0.58 ± 0.23", "1.45 ± 0.08", "1.51 ± 0.09", "1.56 ± 0.11", "10.8 ± 9.95", "17.2 ± 12.1", "6.32 ± 5.42", "0.33 ± 0.11", "0.31 ± 0.10", "0.39 ± 0.15", "1.07 ± 0.31", "1.01 ± 0.32", "1.12 ± 0.35", "0.58 ± 0.14", "0.55 ± 0.14"),
+  Elderly_EO = c("4.31 ± 1.29", "3.24 ± 1.05", "2.11 ± 1.08", "4.94 ± 1.48", "4.05 ± 1.28", "2.61 ± 1.38", "22.1 ± 6.98", "20.8 ± 6.18", "12.9 ± 7.65", "12.5 ± 4.62", "10.1 ± 3.75", "5.45 ± 2.65", "231 ± 131", "198 ± 129", "16.8 ± 12.5", "0.48 ± 0.14", "0.58 ± 0.20", "0.52 ± 0.17", "1.48 ± 0.07", "1.57 ± 0.08", "1.61 ± 0.10", "13.4 ± 7.62", "21.1 ± 13.5", "9.62 ± 10.4", "0.36 ± 0.16", "0.36 ± 0.15", "0.36 ± 0.15", "1.31 ± 0.38", "1.32 ± 0.36", "1.09 ± 0.32", "0.68 ± 0.18", "0.68 ± 0.17"),
+  Elderly_EC = c("4.62 ± 1.58", "3.75 ± 1.21", "2.01 ± 1.05", "5.21 ± 1.76", "4.58 ± 1.48", "2.52 ± 1.28", "23.2 ± 7.62", "21.9 ± 7.15", "12.8 ± 7.02", "16.8 ± 6.55", "14.1 ± 5.42", "6.45 ± 3.85", "258 ± 162", "212 ± 158", "22.1 ± 17.9", "0.59 ± 0.14", "0.68 ± 0.18", "0.61 ± 0.18", "1.56 ± 0.06", "1.64 ± 0.08", "1.68 ± 0.09", "18.8 ± 12.9", "28.9 ± 15.5", "9.82 ± 11.5", "0.41 ± 0.14", "0.39 ± 0.13", "0.41 ± 0.14", "1.49 ± 0.45", "1.48 ± 0.45", "1.22 ± 0.38", "0.78 ± 0.19", "0.77 ± 0.18")
+)
+
+# 2. Render as a DT DataTable
+datatable(sway_data, 
+          colnames = c("Stabilometric variables", "Young EO", "Young EC", "Elderly EO", "Elderly EC"),
+          options = list(
+            pageLength = 32,      # Shows all rows at once
+            scrollX = TRUE,       # Horizontal scrolling for small screens
+            columnDefs = list(list(className = 'dt-center', targets = 1:4)), # Center numerical columns
+            dom = 't'             # Minimalist view: table only (no search/filter)
+          ),
+          rownames = FALSE,
+          class = 'cell-border stripe hover'
+          ) 
+
+```
+:::
+
+\
+
+### Stem and Leaf Plot
+
+This visual, tabular representation is mostly suited when presenting a few observations. The plot is created based on the leading digit (or digits) and the trailing digits. To illustrate the procedure, consider the `r n` PAM scores reported in @tbl-3-2-1. 
+
+:::: {.columns}
+::: {.column width="49%"}
+[**The leading digits, from 3 to 8, define the stem**]{style="background-color: #2A621A; color: white"}, while the [**trailing digits form the leafs**,]{style="background-color:#74B056; color: white"} [**one for each of the leading digits**.]{style="background-color:#89BE6D; color: white"}
+
+The extreme values, smallest and largest, can be readily inspected in the plot, yielding the [range](#sec-range) measure of dispersion. The shape of the distribution may be assessed as well, determined by the number of values within each leaf.
+:::
+
+::: {.column width="51%"}
+![](/include/images/part_3/ch_2/3-2-9_stem_and_leaf.png){width=70% fig-align="center"}
+:::
+::::
+
+Bins, or the stem levels, should be defined on equal intervals (every 10 scores in this example) while avoiding empty bins (no counts).
+
+:::{.callout-note title="Unsuitable for large samples"}
+*When the number of observations is large, stem and leaf plots are not effective. In such case, other visual representations would be more appropriate.*
+:::
+
+\
+
+### Histograms
+
+**Histograms** *illustrate counts for intervals (bins) of a continuous, numerical variable*---it represents the frequency distribution of numerical data. Histograms can be created directly from [frequency tables](#frequency-table). 
+
+Consider the histogram shown in @fig-3-2-10-1, created with the PAM scores reported in @tbl-3-2-2. The $x$ axis displays the variable of interest---the PAM scores in this case---split into bins. Ten bins are defined in @tbl-3-2-2. Bars (rectangles) are used to display the number of occurrences---counts (height of bars)---obtained for each bin on.
+
+::: {.callout-note title="Absolute and relative counts"}
+*The sum of counts (bars) correspond to the total number of observations. Alternatively, histograms may report relative counts, with the total sum of relative counts equaling 1 or 100%.*
+:::
+
+Histograms should not be confused with bar charts. The main distinction is the nature of the variable displayed on the $x$ axis. Bar charts (@fig-3-2-10-2) are used for counts of nominal variable while histograms show counts within ranges of numerical data.
+
+::: {.callout-tip title="Histograms $\ne$ Bar charts"}
+*There are two rules of thumb for distinguishing bar charts from histograms. For bar charts the order of bars is not critical (rearranging bars in @fig-3-2-10-2 would not matter). Also, there is typically a gap between bars in bar charts.*
+:::
+
+::: {#fig-comparison}
+:::: {.columns}
+::: {.column width="49%"}
+::: {style="text-align: center;"}
+![histogram](/include/images/part_3/ch_2/3-2-10-1_histogram.png){#fig-3-2-10-1}
+:::
+:::
+::: {.column width="2%"}
+:::
+::: {.column width="49%"}
+::: {style="text-align: center;"}
+![bar chart](/include/images/part_3/ch_2/3-2-10-2_barchart.png){#fig-3-2-10-2}
+:::
+:::
+::::
+Two graphical representation for counts
+:::
+
+\
+
+### Box plot
+
+**Box plot**, also known as **box-and-whisker plot**, *is a graphical representation summarizing the data distribution*. It shows five statistical values, including the three [quartiles](#sec-iqr) and two extreme values. 
+
+@fig-3-2-11 show an example of box plot, created by taking 18 out of the `r N` values simulated for the PAM scores. The first ($q_1$) and the third ($q_3$) quartiles define the box, while the second quartile---the median---is represented somewhere inside the box. For symmetric distributions, with close-to-zero skewness (c.f. @fig-3-2-4), the median falls in the middle of the box. The whiskers denote the minimum and the maximum values (the [range](#sec-range)) or the **non-outlier limit**^[*outlier is an observation far away from the distribution. Far away is typicaly measured as $1.5IQR$ away from the nearest quartile*], whichever is closer to the nearest quartile:
+
+$$
+\begin{aligned}
+L_W &= \max(\min(x_{1}, \dots, x_{n}), q_1-1.5IQR)\\
+U_W &= \min(\max(x_{1}, \dots, x_{n}), q_3+1.5IQR)
+\end{aligned}
+$$ {#eq-whiskers}
+
+
+In @fig-3-2-11, for example, the lower (left) whisker is defined by the minimum PAM score, whereas the upper (right) whisker is defined by the non-outlier limit, given by $q_3+1.5IQR$. This is so because the right non-outlier limit  is closer to $q_3$ than the largest observation in the data set.
+
+Box plots are particularly useful for comparing distributions, identifying outliers, and checking the degree of skewness.
+
+![Box plot or box-and-whisker plot](/include/images/part_3/ch_2/3-2-11-boxplot.png){#fig-3-2-11 width=90%}
+
+\
+
+### Error Plot {#sec-errorplot}
+
+Error plots *are composed of three statistics, one central value and two values defining the error bounds*.
+
+:::: {.columns}
+
+::: {.column width="49%"}
+Typically, the central value is given by the average across all observations (the [mean](#seg-mean)). It is represented as either the height of a bar, in such case the plot is termed **error bar plot**, or a symbol (circle, dot, square, etc). The error bounds may be defined in different ways. Most commonly the lower and upper bounds are respectively given by the mean minus the standard deviation ($\mu-\sigma$) and the mean plus the standard deviation ($\mu+\sigma$).
+:::
+::: {.column width="51%"}
+![Box plot or box-and-whisker plot](/include/images/part_3/ch_2/3-2-12-error-plot.png){#fig-3-2-12 width=90%}
+:::
+::::
+
+::: {.callout-note title="Different error bounds"}
+*Other error bounds that are often considered for creating error plots are the **standard error of the mean** and the **95% confidence interval**. These two statistics will be discussed later in the course.*
+:::
+
+::: {.callout-caution title="CAUTION: Box plot vs Error plot"}
+*Error plots will always show a symmetric representation in relation to the central (mean) value, given the two error intervals are the same. Most scientific journals require authors to use box plots and, when possible, with the single observations overlaid (cf. @fig-3-2-11), allowing readers to ascertain whether the data distribution is bell-shaped or not. This is because this bell-shape format is one of the assumption for a set of parametric techniques for testing hypothesis, as treated later in the course.*
+:::
+
+\
+
+## Summarizing Nominal and Ordinal Data
+
+When dealing with variables measured on the [nominal](#sec-nominal) or the [ordinal](#sec-ordinal) scale, we are dealing with counts. That is, the number of occurrences a given event is observed, like the number of smokers and non-smokers with and without lung cancer (cf. @tbl-3-2-4). In addition to representing nominal and ordinal data with raw counts, two other metrics are often computed---proportions and rates. 
+
+\
+
+### Proportions
+
+**Proportions** *are defined as the ratio between the number of observations with characteristic ($n_w$) and the total number of observations ($n$)*. 
+
+Taking the example of @tbl-3-2-4, the proportion of smokers with lung cancer is 0.429 (or 42.9%), whereas the proportion of non smokers with lung cancer is 14.3%. The ratio between these two proportions yields the **relative risk**^[*it measures how likely an event may occur in exposed individuals in relation to non exposed individuals*]. In the smoking example, the relative risk indicates that smokers are three times more likely to have lung cancer when compared with non-smokers.
+
+\
+
+### Rates
+
+**Rates** *are computed from ratios, with the number of events in the numerator and the number of individuals at risk over a given period in the denominator*. @tbl-3-2-5 provides an example of rates computed based on 1,000 persons developing cardiovascular disease over one year, separately for people with physically inactive and active lifestyle.
+
+:::: {.columns .small-text}
+::: {.column .dataTable-wrapper width=49%}
+```{r}
+#| echo: false
+#| label: tbl-3-2-4
+#| tbl-cap: Observed Frequencies and proportions of Smoking Habit and Lung Cancer
+
+# Create the data frame including the "Total" row and "Total" column
+smoking_dt <- data.frame(
+  Status = c("Smoker", "Non-Smoker", "Total"),
+  Lung_Cancer = c("150 (42.9%)", "50 (14.3%)", "200 (28.6%)"),
+  No_Lung_Cancer = c("200 (57.1%)", "300 (85.7%)", "500 (71.4%)"),
+  Row_Total = c("350 (100%)", "350 (100%)", "700 (100%)")
+)
+
+# Render with DT
+datatable(smoking_dt, 
+          rownames = FALSE,
+          colnames = c("Exposure Group", "Lung Cancer<br>$n$ (%)", "No Cancer<br>$n$ (%)", "Total<br>$n$ (%)"),
+          escape = FALSE,
+          options = list(dom = 't', scrollX = TRUE, columnDefs = list(list(className = 'dt-center', targets = "_all")),
+                         drawCallback = JS("function(settings) {MathJax.typeset();}")))
+```
+:::
+::: {.column width=2%}
+:::
+::: {.column width=49%}
+```{r}
+#| echo: false
+#| label: tbl-3-2-5
+#| tbl-cap: Incidence Rates of CVD by Physical Activity Group (per 1,000 Person-Years) 
+
+# Create the data frame with a "Total" marginal row
+activity_dt <- data.frame(
+  Group = c("Physically \n Inactive", "Physically \n Active", "Total \n (Marginal)"),
+  Cases = c(80, 30, 110),
+  Person_Years = c(2000, 3000, 5000),
+  Incidence_Rate_per_1k = c(40.0, 10.0, 22.0)
+)
+
+# Render with DT
+datatable(activity_dt, 
+          rownames = FALSE,
+          colnames = c("Group", "New Cases ($n$)", "Person-Time (Years)", "Incidence Rate<br>(per 1k)"),
+          options = list(dom = 't', scrollX = TRUE, 
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")),
+                         drawCallback = JS("function(settings) {MathJax.typeset();}")))
+```
+:::
+::::
+
+Two common rates reported in biomedical studies are the  **Mortality Rate** and the **Morbidity Rate**. The former is defined based on the number of all deaths (the **crude mortality rate**) or of deaths due to a specific event or disease (e.g. cancer; **specific mortality rate**) in the population (numerator), in relation to the total number of persons at risky of dying (denominator). The latter is given by the number of persons with a disease (numerator) in relation to the total number of persons at risk. Both rates are typically expressed per 1,000 or 10,000 individuals over a year.
+
+Often, rates are adjusted to eliminate the distortion effect of some extraneous factors on the relationship between exposure and outcome. One examples is that given in @tbl-3-2-6, illustrating the number of patients showing complications due to the intake of *drug A* and *drug B*. Patients are classified based on the severity of the disease, between *mild* and *severe*. Inspecting the columns three (*Drug A complications*) and five (*Drug B complications*) of @tbl-3-2-6, it appears that Drug B leads to a greater number of complications than Drug A. It is also true, however, that most of the sickest patients received Drug B. 
+
+To remove any potential confounding effect of disease severity, the number of complications is computed assuming an equal number of patients have been treated with both drugs. 
+
+This can be achieved by projecting the proportions of complications on the number of patients treated with either drug or on a standard number of patients. For example, the proportion of complications observed for Drug B is 1% for *mild patients* and 15% for *severe patients*. When projecting these proportions on the number of patients treated with Drug A, the number of complications changes as indicated in the last column of @tbl-3-2-6---the rate of complication due to Drug B turns to be smaller than that due to Drug A. 
+
+:::{style="font-size: 80%;"}
+```{r}
+#| echo: false
+#| label: tbl-3-2-6
+#| tbl-cap: Comparison of Mortality Rates - Drug A vs Drug B
+
+# 1. Create the data frame exactly as shown in the image
+# We use strings for the percentage columns to match the "8 (1%)" format
+drug_study <- data.frame(
+  Disease_Severity = c("Mild", "Severe", "TOTAL", "Rates ($\\times$ 1,000)"),
+  Drug_A_Patients = c("8000", "2000", "10,000", ""),
+  Drug_A_Complications   = c("80", "400", "480", "48"),
+  Drug_B_Patients = c("2000", "8000", "10,000", ""),
+  Drug_B_Complications   = c("20", "1200", "1220", "122"),
+  Drug_B_ProjectedComplications   = c("80", "300", "380", "38")
+  
+)
+
+# 2. Render with DT
+datatable(
+  drug_study,
+  rownames = FALSE,
+  escape = FALSE,
+  colnames = c("Disease Severity", "Patients treated with drug A", "Drug A complications", "Patients treated with drug B", "Drug B complications", "Drug B projected complications"),
+  options = list(
+    dom = 't', # Display only the table (no search/pagination)
+    ordering = FALSE, # Keep the rows in the provided order
+    columnDefs = list(
+      list(className = 'dt-center', targets = 1:4), # Center align data columns
+      list(className = 'dt-left', targets = 0)      # Left align the label column
+    ),
+    drawCallback = JS("function(settings) {
+          MathJax.typeset(); 
+        }")
+  )
+) %>%
+  # Optional: Bold the TOTAL and Crude Rate rows for visual emphasis
+  formatStyle(
+    'Disease_Severity',
+    target = 'row',
+    fontWeight = styleEqual(c("TOTAL", "Rates ($\\times$ 1,000)"), "bold")
+  )
+```
+:::
+
+:::{style="font-size: 85%;"}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-6_rates.md")
+```
+:::
+
+\
+
+### Prevalence vs Incidence
+
+Both can be computed in terms of rates or proportions and have different meanings. 
+
+Mainly, **prevalence** provides a snapshot of a given outcome (e.g. COVID-19), being computed as the number of individuals with the outcome divided by the total number of individuals. For example, if the number of COVID-19 affected persons in Turin was 3,500 in the third week of December in 2022, out of 800,000 inhabitants, COVID prevalence was 43.75 per 10,000 persons at risk. Prevalence is a highly dynamic measure, as it increases with new cases and decreases as individuals pass away or recovery from the outcome. A common analogy to illustrate this concept is that of a bathtub (@fig-3-2-13). Prevalence provides an indication on the burden of a disease on the health care system.
+
+**Incidence**, unlike prevalence, takes into account only the number of new cases with the outcome, over a given period (the numerator). That is, the amount of water entering into the bathtub per unit of time. The denominator of incidence is given by the population at risk at the start of the period. Given the COVID-19 example above, if the number of persons affected by COVID-19 from December 2022 to December 2023 was 2000, then COVID-19 incidence would be 25 cases per 10,000 person-year. Incidence is useful for monitoring how fast an outcome spreads, helpful for planning strategies to contend with the spread of the disease.
+
+![The epidemiologist's bathtub](/include/images/part_3/ch_2/3-2-13-bathtub.png){#fig-3-2-13 width=85%}
+
+\
+
+## Displaying Nominal and Ordinal Data
+
+Data measured on the nominal and ordinal scales are counts, proportions, and rates. Examples of which are provided in Tables [-@tbl-3-2-4], [-@tbl-3-2-5], and [-@tbl-3-2-6]. These  tables are known as **contingency tables**---*a tabular representation of the frequency distribution of at least two nominal and ordinal variables*. Another possibility would be creating a table listing every single observation, indicating when it presents the outcome or not. This would however result in a dramatically long table with limited practical use.
+
+Nominal and ordinal data may be represented graphically as well. The two most often considered charts for that are the Pie Chart @fig-3-2-14-1 and the Bar Chart @fig-3-2-14-2. 
+
+::: {#fig-comparison}
+
+:::: {.columns}
+
+::: {.column width="49%"}
+::: {style="text-align: center;"}
+![pie chart](/include/images/part_3/ch_2/3-2-14-1_piechart.png){#fig-3-2-14-1}
+:::
+:::
+
+::: {.column width="2%"}
+<!-- Spacer -->
+:::
+
+::: {.column width="49%"}
+::: {style="text-align: center;"}
+![bar chart](/include/images/part_3/ch_2/3-2-14-2_barchart.png){#fig-3-2-14-2}
+:::
+:::
+
+::::
+
+Counting of smoker and non-smokers, with and without lung cancer
+:::
+
+\
+
+## Relationship Between Numerical Data {#sec-scatterplot}
+
+In health sciences, it is often of interest to assess whether a variable is related to another variable. Ideally, the experimenter should be able to hypothesize the nature of the relationship expected for the two variables---it may be linear, quadratic, or exponential, for instance. 
+
+Sometimes no initial guess can be made on the relationship between variables, leaving it open for inspection. 
+
+**Scatter plots**, created by plotting different numerical variables in different axes, provide the most appropriate graphical visualization for qualitatively assessing the relationship between variables. Examples of scatter plots are shown in @fig-3-2-15
+
+![Scatter plots indicating the *strength of the relationship* betwen two variables](/include/images/part_3/ch_2/3-2-15_scatterplots.png){#fig-3-2-15}
+
+Clearly, each of the four plots shown in @fig-3-2-15 indicates whether there is a relationship between the two variables or not, and with which *strength*. For example, in the first plot the coordinates representing the two variables fall on a line with a positive slope. This indicates a perfect, linear dependence between the two variables. For the second plot, the coordinates (circles) still fall on a line with negative, and with some scattering---that is, the linear dependence is weaker when compared with the first plot. The spread of the data further increases in the third and fourth plots, indicating the linear dependence between the two variables becomes progressively weaker---no relationship would seem to exist for the last plot.
+
+\
+
+### Correlation Coefficients
+
+Even though the scatter plot is useful for readily inspecting the relationship between variables, it does not provide an objective measure for assessing the relationship strength. Correlation coefficients are computed with this purpose---to measure the strength of the relationship between variables.
+
+:::{.callout-note title="An introduction to correlation coefficients"}
+*In this chapter, the two most used correlation coefficients are defined. The testing for significance of correlation coefficients will be dealt with later in the course.*
+:::
+
+\
+
+### The Pearson Correlation Coefficient {#sec-pearson-r}
+
+It provides a *normalized measure of the linear relationship between two variables*. As an example, consider the data reported in @tbl-3-2-7 for the height and body mass variables---standard anthropometric variables in biomedical and epidemiologic studies. The Pearson Correlation Coefficient is mathematically defined as:
+
+$$
+\rho_p=\frac{\sum_{i=1}^{n} (x_i - \mu_x)(y_i - \mu_y)}{\sqrt{\sum_{i=1}^{n} (x_i - \mu_x)^2 \sum_{i=1}^{n} (y_i - \mu_y)^2}}
+$$ {#eq-pearson}
+
+where $\mu_x$ and $\mu_y$ respectively denote the mean value across all $x_i$ and $y_i$ observations (body mass and height values in Table [-@tbl-3-2-7]). The numerator corresponds to the sum of products of residuals with respect to the means, while the denominator corresponds to the product of the sum of squared residuals. 
+
+::: {style="font-size: 80%;"}
+```{r}
+#| label: tbl-3-2-7
+#| echo: false
+#| tbl-cap: Height (x, cm) and body mass (y, kg) values
+#| message: false
+#| warning: false
+
+# Example biomedical data:
+# x = body mass (kg)
+# y = height (cm)
+dat <- tibble(
+  Patient = c(1, 3, 5, 7, 9, 11, 13, 15, 17),
+  x = c(75.3, 68.5, 56.4, 52.9, 52.9, 52.9, 60.0, 38.7, 36.0),
+  y = c(190.8, 186.3, 170.8, 171.3, 168.8, 166.3, 170.4, 164.2, 161.3)
+)
+
+# Adding squared residuals
+dat <- dat %>%
+  mutate(
+    Patient = as.character(Patient),
+    x_dev2 = (x - mean(x))^2,
+    y_dev2 = (y - mean(y))^2,
+    xy_dev = (x - mean(x)) * (y - mean(y))
+  ) %>%
+  mutate(
+    across(c(x, y, x_dev2, y_dev2, xy_dev), ~ round(.x, 1))
+  )
+
+# Last row, with the sum of all values
+sum_row <- tibble(
+  Patient = "Sum",
+  x = round(sum(dat$x), 1),
+  y = round(sum(dat$y), 1),
+  x_dev2 = round(sum(dat$x_dev2), 1),
+  y_dev2 = round(sum(dat$y_dev2), 1),
+  xy_dev = round(sum(dat$xy_dev), 1)
+)
+tbl <- bind_rows(dat, sum_row) # Concatenating rows
+
+rho <- sum_row$xy_dev / (sqrt(sum_row$x_dev2) * sqrt(sum_row$y_dev2))
+
+# 2. Render with DT
+datatable(
+  tbl,
+  rownames = FALSE,
+  escape = FALSE,
+  colnames = c("Patient", "$x_i$", "$y_i$", "$(x_i-\\mu_x)^2$", "$(y_i-\\mu_y)^2$", "$(x_i-\\mu_x)(y_i-\\mu_y)$"),
+  options = list(
+    dom = 't', # Display only the table (no search/pagination)
+    columnDefs = list(
+      list(className = 'dt-center', targets = 1:4), # Center align data columns
+      list(className = 'dt-left', targets = 0)      # Left align the label column
+    ),
+    drawCallback = JS("function(settings) {
+          MathJax.typeset(); 
+        }")
+  )
+) %>%
+  formatStyle(
+    'Patient',
+    target = 'row',
+    fontWeight = styleEqual("Sum", "bold")
+  )
+```
+:::
+
+For the body mass and height example, $\rho_p$ can be computed  directly from the **Sum** values reported in the last row of the table above. 
+
+It turns out that: 
+
+$$
+\rho_p=`r tail(tbl$xy_dev,1)` / (`r round(sqrt(tail(tbl$x_dev2,1)),1)` \times `r round(sqrt(tail(tbl$y_dev2,1)),1)`) = `r round(rho,2)`
+$$
+
+But what does a $\rho_p = `r round(rho,2)`$ mean? 
+
+Judging from the scatter plot @fig-3-2-16-1 created with the data from @tbl-3-2-7, intuition suggests that body mass and height are linearly related, with a somewhat strong relationship. Pearson $\rho_p$ can be used as an objective measure in support of this intuition. The closer that $|\rho_p|$ is to $1.0$ the stronger the relationship is, with $\rho_p=\pm1.0$ indicating perfect linear relationship and $\rho_p=0$ indicating there is no linear relationship between variables.
+
+\
+
+### The Spearman Correlation Coefficient {#sec-spearman-rho}
+
+There are mainly three occasions in which the Pearson Correlation Coefficient is not appropriate to assess the relationship between variables: 
+
+- when the distribution is highly skewed, 
+- when ordinal data is used, or 
+- when the relationship between variables is not linear. 
+
+For the first case, a transformation of the data may help (e.g. taking the logarithm or the square root). For the other two cases, the **Spearman Correlation Coefficient** would be appropriate, as it assesses whether the relationship between the variables is **monotonic**. 
+
+This means that the ordering of $x$ and the ordering of $y$ observations are consistent:
+
+- monotonically increasing: $x_i < x_j \;\Rightarrow\; y_i \leq y_j \quad \forall i,j$
+- monotonically decreasing: $x_i < x_j \;\Rightarrow\; y_i \geq y_j \quad \forall i,j$
+
+The Spearman Correlation Coefficient is based on the rank of observations, making it suitable to assess the relationship between variables measured on the ordinal scale as well. 
+
+An example is given in @tbl-3-2-8, reporting how long climbers with different expertise were able to hold themselves in suspension. It may be reasonable to ask whether more experienced climbers have better endurance---that is, are able to hold their body in suspension for longer duration. Expertise is measured on the [french scale](http://aac-publications.s3.amazonaws.com/articles/aaj-13201212386-1380661619.jpg), from 1 (*less experienced*) to 9b+ (*most experienced*). By visually inspecting the scatter plot created with the suspension ($y$ axis) and grade data ($x$ axis), the relationship between both seems evident (@fig-3-2-16-2).
+
+::: {style="font-size: 80%;"}
+```{r}
+#| label: tbl-3-2-8
+#| echo: false
+#| tbl-cap: Failure time as a function of climber expertise
+#| message: false
+#| warning: false
+
+# x = dead-hang time to failure (s), continuous
+# y = climbing expertise on the French grading scale, ordinal
+dat_climber <- tibble(
+  Climber = seq(1,9),
+  x = c("6b+", "5c", "7a+", "6b", "7b", "6a+", "7a", "6c", "6a"),
+  y = c(39, 22, 49, 31, 85, 24, 47, 41, 29)
+)
+
+grade_levels <- c("5c", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+")
+dat_climber <- dat_climber %>%
+  mutate(
+    x_num = match(x, grade_levels),
+    Rank_x = rank(x_num, ties.method = "average"),
+    Rank_y = rank(y, ties.method = "average"),
+    d = Rank_x - Rank_y
+  )
+
+tbl <- dat_climber %>%
+  select(Climber, x, y, Rank_x, Rank_y, d)
+
+pearson_r <- round(cor(dat_climber$x_num, dat_climber$y, method = "pearson"),2)
+spearman_rho <- round(cor(dat_climber$x_num, dat_climber$y, method = "spearman"),2)
+
+datatable(
+  tbl,
+  rownames = FALSE,
+  escape = FALSE,
+  colnames = c("Climber","French<br>grade ($x_i$)","Suspension<br>time ($y_i$)", "Ranked $x$<br>($x_{r_i}$)", "Ranked $y$<br>($y_{r_i}$)",  "$d_i=$<br>$x_{r_i}-y_{r_i}$"),
+  extensions = "FixedHeader",
+  options = list(
+    scrollX = TRUE,
+    dom = 't', # Display only the table (no search/pagination)
+    columnDefs = list(
+      list(className = 'dt-center', targets = 0:5), # Center align data columns
+      list(className = 'dt-left', targets = 0)      # Left align the label column
+    ),
+    drawCallback = JS("function(settings) {
+          MathJax.typeset(); 
+        }")
+  )
+) 
+```
+:::
+
+First, the ordinal data (**French grade** ($x_i$) in @tbl-3-2-8) is converted to integers in increasing order, from the lowest grade (5c) to the largest (7a+) (cf. column **Ranked** $x$ ($x_{r_i}$) in @tbl-3-2-8). 
+
+Likewise, suspension time ($y_i$) and the difference ($d_i$) between the two ranked variables is computed for each individual. Given $d_i$ and the number $n=9$ of observations, the Spearman Correlation Coefficient is computed as:
+
+$$
+\rho_s = 1 - \frac{6}{n(n^2 - 1)} \sum_{i=1}^{n} d_i^2
+$$ {#eq-spearman}
+
+By applying @eq-spearman to the data in @tbl-3-2-8 (last column), we obtain:
+
+$$
+\rho_s=1-\frac{6}{9\times80}2=`r spearman_rho`
+$$
+
+::: {.callout-note title="Pearson vs Spearman"}
+*If the Pearson Correlation Coefficient was computed from data in columns 4 and 5 of @tbl-3-2-8, we would have obtained that $\rho_p=`r pearson_r`$. This is smaller than $\rho_s$, as Pearson's $\rho_p$ is sensitive to the extreme suspension time observed for the most experienced climber (cf @fig-3-2-16-2). These differences will be dealt with later in the course.*
+:::
+
+::: {#fig-comparison}
+
+:::: {.columns}
+
+::: {.column width="49%"}
+::: {style="text-align: center;"}
+![anthropometrics](/include/images/part_3/ch_2/3-2-16-1_pearson.png){#fig-3-2-16-1}
+:::
+:::
+::: {.column width="2%"}
+:::
+::: {.column width="49%"}
+::: {style="text-align: center;"}
+![anthropometrics](/include/images/part_3/ch_2/3-2-16-2_spearman.png){#fig-3-2-16-2}
+:::
+:::
+::::
+Examples of relationship between variables measured on different scales
+:::
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-2-7_correlations.md")
+```
+:::
+
+\
+
+## Mistakes When Presenting Data
+
+When presenting data or results, the goal is to ensure the desired message is transmitted effectively. That is, ensuring a broad audience understands the message as intended. To achieve this goal, it is imperative that figures are prepared with the highest aesthetic standards, from their labels to the scaling of axes.
+
+Examples illustrating issues with data presentation are provided below. Some of these figures were taken from the MSc dissertation of students in our laboratory, before they could fix these issues for their MSc defense.
+
+\
+
+### Inappropriate Axes Scaling
+
+When axes are not scaled properly, equivocal conclusions may be reached by inspecting the plots. Two examples are provided below. 
+
+- @fig-3-2-18 (panel a) shows the rate of an adverse event arising due to the standard care and to the administration of a new drug. In the *Misleading scaling* (top), a tiny absolute difference (2.1% vs 2.4%) looks dramatic because of y-axis truncation. The difference is better judged when starting the y axis from 0 (*Appropriate scaling*).
+
+- @fig-3-2-18 (panel b) illustrates the accumulation of *Troponin I*^[*protein controlling the contraction of the heart muscle*] following a damage of heart cells (heart attack). In the *Misleading scaling* example (top plot), the broad $y$ axis flatten the increase in Troponin after the symptom onset. Conversely, the timing and magnitude of Troponin accumulation is more clearly appreciated when matching $y$ axis to the observed data (*Appropriate scaling*).
+
+![Importance of scaling axes properly](/include/images/part_3/ch_2/3-2-18_scaling.png){#fig-3-2-18 width=80%}
+
+\
+
+### Compromised Readability
+
+@fig-3-2-19 was supposed to illustrate the effect of electrode position on the synergies extracted from the lower limb muscles during treadmill walking. There are many issues with this figure.
+
+- First, the figure could be split into different figures, as the comparison between electromyographic envelopes (left most and right most columns) does not contribute to transmitting the intended message.
+- Font size is too small, severely compromising understanding. Not always there is the possibility to enlarge the image for reading. Sometimes, by enlarging the figure, resolution and thus readability may be lost. *Always ensure the font size is proportional to the size of the plot*.
+- Synergies could be grouped, using traces of different colors and/or thickness, reducing the number of rows in the middle plot to four instead of eight (for example, data in the first and fifth rows could be put together).
+
+![Severely compromised readability](/include/images/part_3/ch_2/3-2-19_readability.png){#fig-3-2-19 width=100%}
+
+\
+
+### Missing Labels and Units of Measurement
+
+@fig-3-2-20 illustrates changes in torque and in the region where muscle was excited during a maximal voluntary contraction, before and after a fatiguing protocol. Left panel shows the torque, whereas the right panel shows the average of the coordinates of 64 electrodes ($8 \times 8$ arrangement) placed over the skin, weighted by the amplitude of the recorded electromyograms. 
+
+Two are the main issues here:
+
+- What is actually shown in the left panel? It could be torque, as it could be mechanical work. For which joint were these torque profiles obtained?
+- What is the unit of measurements in the right panel? Is it centimeters? Or is it a relative measure, obtained by normalizing the weighted average by e.g. the length of the segment (or muscle) under study?
+- Comparing pre-post (prima-dopo) differences in the weighted average position for each individual is difficult in two separate axes. It would be much clearer if the pre-post average positions were shown in the same plot.
+
+![Important information is missing](/include/images/part_3/ch_2/3-2-20_labels-and-units.png){#fig-3-2-20 width=100%}
+
+\
+
+### Inappropriate Unit of Measurement
+
+@fig-3-2-21 show kinematic (left) and electromyographic (right) data collected during dynamic contractions (i.e., during movement). As in the previous examples above, font size could be increased in these plots to improve readability. 
+
+Two are the most critical issues in @fig-3-2-21:
+
+- The left plot likely shows the input signal digitized by the A/D converter^[*electronic device that translates continuous physical analog signals---like angle, force, etc---into discrete numbers to be stored in memory*], not the effective joint angle. Otherwise numbers would have been represented in degrees. Even though the time profile of the signal shown may accurately reflect that of the joint angle under measurement, the lack of a proper unit of measurement dramatically affects the inspection of the trial validity. What if, for example, this was the knee joint angle during a task in which subjects were requested to flex and extend their knee by 90 deg? By looking at this figure it is not possible to ascertain that this requirement has been met. Likewise, there is no information about movement direction---does an increase in voltage correspond to flexion or extension?
+
+- The right plot shows an example of surface electromyogram, presumably collected from a muscle contributing to the kinematics shown in the left plot. There is mismatch of colors, so that readers cannot ascertain what is the *window start* and the *window end* in the figure. Also, there is no clue about what is *VLp* and *series number 1*. Ideally, figures should be self-explicative, without the need of relying on their caption for understanding. The main issue in this right plot though is with the unit of measurement reported for the electromyogram---**can you guess what the problem is?**
+
+![Inappropriate unit of measurement and innacurate information](/include/images/part_3/ch_2/3-2-21_angle-and-emgs.png){#fig-3-2-21 width=100%}

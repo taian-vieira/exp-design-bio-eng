@@ -1,0 +1,398 @@
+# Understanding Study Designs {#sec-p3-c1}
+
+*Designing a study involves planning the methodological and procedural steps necessary to collect and process data in order to address a relevant question*. Aspects such as participant recruitment, allocation to different groups, and the timing and type of measurements, among others, should be considered when planning a study.
+
+Studies may be classified according to different schemes. The two main branches for classification of studies are:
+
+-   **Observational**: studies in which participants are simply observed, at a given instant or over a period of time.
+
+-   **Experimental** in this case some form of intervention is administered to participants
+
+Each category has its pros and cons, ranging from the cost of the study to the validity of results.
+
+::: {.callout-note title="This chapter..."}
+*... defines and discusses the pros and cons of the different types of observational and experimental studies.*
+:::
+
+\
+
+## Observational Studies
+
+In this type of study, the examiner does not apply any intervention and the **variables** of interest are measured or collected directly from participants. There are *different ways to classify* **observational studies**, depending on whether the aim is limited to *describing the data* and on the *period of observation*.
+
+\
+
+### Case-Series
+
+This first type of study does not involve any hypothesis to be tested. No **inferential statistics** is applied. *These studies are limited to reporting the characteristics of a* **group** *of* **cases***, most often patients with a common exposure, treatment, or disease*. The level of evidence provided by these studies is low, as no **control group** is analyzed. Nevertheless, these studies contribute to generating new knowledge, in particular when the **cases** are exposed to or present rare conditions.
+
+One example of a case-series study is that published by [Glazer and colleagues](https://pubmed.ncbi.nlm.nih.gov/27842335/) @glazer16. They analyzed patients with **acinar cell carcinoma**^[*exocrine malignancy affecting the acinar cells, which release amylase, lipase, and protease enzymes*]
+
+Of interest was the **survival probability**—the probability that persons affected by **acinar cell carcinoma** would survive past a specific time. This probability is computed based on the survival function $S(t)$:
+
+$$
+  S(t) = \prod_{i: t_i \le t} \left( 1 - \frac{d_i}{n_i} \right)
+$$ {#eq-survival}
+
+where $n_i$ and $d_i$ respectively denote the number of subjects at risk (with **acinar cell carcinoma** in this case) and the number of events (deaths), both at time $t_i$. $n_i$ is updated for every evaluation time $t_i$, by subtracting subjects that have died and those that have been censored or lost before $t_i$. This curve yields the probability of surviving over specific time intervals.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-1-1_survival.md")
+```
+:::
+
+\
+
+### Case-Control
+
+Differently from **case series**, **case-control studies** *are designed to identify the relationship between risk factors and the outcome of interest (disease, death, or any specific condition)*. The study starts with the recruitment of *two groups of subjects*, **cases** (with the outcome of interest) and **controls** (without the outcome). Based on the clinical data available, the investigator looks back in time to assess which subjects, in both groups, were and were not exposed to potential risk factors (@fig-figure-3-1-2). **Case-control studies** are often known as **retrospective study**, owing to interest lying in a time period preceding the study itself.
+
+![Schematic representation of the time line and structure of a case-control study](/include/images/part_3/ch_1/3-1-2_case_control.jpg){#fig-figure-3-1-2 width=80%}
+
+With this approach, the relative probability of manifesting the outcome given exposure to a risk factor can be calculated using the **odds ratio**. It is computed as the ratio of two sets of **odds**, related to the outcome in the exposed and not exposed groups. Based on the illustration in @fig-figure-3-1-2, we may create the following table:
+
+```{r}
+#| label: tbl-3-1-1
+#| echo: FALSE
+#| tbl-cap: Number of occurrences for each combination of exposure and outcome manifestation.
+#| tbl-cap-location: top
+
+knitr::kable(data.frame( list(label = c("WITH outcome", "WITHOUT outcome"), counts_exposed = c(2,2), counts_unexposed = c(2, 4))), format = "html", col.names = c("","EXPOSED", "UNEXPOSED"), align = "c") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = TRUE)
+```
+
+The **odds ratio** is computed as:
+
+$$
+  OR =\frac{ex_\text{with}un_\text{without}}{ex_\text{without}un_\text{with}}
+$$ {#eq-oddratio}
+
+where $ex$ and $un$ respectively stand for exposed and unexposed subjects, and $\text{with}$ and $\text{without}$ indicate the presence or absence of the outcome. For $OR>1$, it is more likely that people exposed to the risk factor considered may manifest the outcome.
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-1-2_odds-ratio.md")
+```
+:::
+
+An important point to consider in **case-control studies** is the **matching** between groups. *To prevent age or sex from affecting results, investigators often* **match** *subjects in* **case** *and* **control** *groups*, ensuring both groups are comparable. This technique is used when specific traits are so influential that any imbalance between the groups could compromise results. *Matching* protects the study from these potential distractions.
+
+\
+
+### Cross-Sectional
+
+This is perhaps the simplest type of **observational study**, as it is often conducted over a short time period. *It provides a snapshot of what is going on, showing how things are at the moment the study is conducted*. Subjects are recruited and split into groups based on who manifests the outcome and who does not (@fig-figure-3-1-3).
+
+However, **cross-sectional studies** may last long, as the screening of different subjects may be conducted over a period of time rather than at a given instant. The point is when subjects are assessed---in **cross-sectional studies** subjects are assessed at a single instant. For example, [Anderson et al](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0193050) @anderson18 screened over 4,000 patients from 2009 to 2014, with the goal of identifying predictors of influenza. Even though the study was conducted over five years, patients were screened as they presented to the hospital.
+
+![Snapshot of what is going on in the population of interest](/include/images/part_3/ch_1/3-1-3_cross_sectional.jpg){#fig-figure-3-1-3 width=80%}
+
+**Cross-sectional studies** are mostly useful for **establishing norms**. When performing any clinical exam, like collecting a blood sample to assess the level of blood biomarkers (e.g. white blood cells, hemoglobin, platelets), results are assessed against **normative values**. *These* ***normative values*** *typically correspond to a range confining 95% of the values obtained for a* ***healthy population***. Of course, the definition of a healthy population is not unique, as the measured quantity may differ depending on, for example, the age of the subject. In this case, values are assessed against normative values for an age-matched healthy population.
+
+One interesting **cross-sectional study** in this regard is that from [Berg and colleagues](https://www.sciencedirect.com/science/article/pii/S0033062024000896?via%3Dihub) @berg24, who established normative values from 22,000 Norwegian adults from 20 to 99 years old. Considering for instance the **B**ody **M**ass **I**ndex^[*metric thought to reflect body fat based on body mass and height. It is computed as* $BMI=mass/height^2$, with height and mass measure in meters and kilograms] and the waist circumference, the authors observed the values for both body composition markers were distributed according to @fig-3-1-4. Values were more often observed nearby the **mean** value ($\mu$, center of the distribution). The number of occurrences decreased when moving away from the mean, with 68% of cases falling from $-1\sigma$ to $+1\sigma$ ($\sigma$ is the **standard deviation**). We will get back to these important **parameters**^[*element describing the characteristic of a system or, in this case, of a data distribution*] later in the book.
+
+![Distribution of BMI and waist circumference values measured for over 22,000 healthy Norwegians. This figure was created based on the data from Berg et al @berg24](/include/images/part_3/ch_1/3-1-4_body_composition.jpg){#fig-3-1-4 width=90%}
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-1-3_stds.md")
+```
+:::
+
+\
+
+### Cohort
+
+In this type of study, *experimenters recruit a group of cohorts—subjects sharing specific characteristics—and follow them over time to investigate whether the outcome may be associated with exposure to a given condition*. 
+
+Typically, two groups are analyzed: those exposed and those not exposed to potential risk factors (e.g., smokers and non-smokers). Subjects are then assessed at different time points, at the study onset and during **follow-up analysis**^[*when the same experimental units are analyzed on successive time points from the study onset*]. How many time points to consider in follow-up analysis and how long the evaluation window should be are study dependent.
+
+Most commonly, **cohort studies** are **prospective**, meaning that none of the subjects has developed outcomes of interest when the study started (@fig-3-1-5). *Evidence provided by* ***prospective cohort studies*** *is of high quality, due to the possibility of measuring and controlling all variables of interest:* ***dependent (outcome)*** *,* ***independent (predictors)*** *and* ***confounding variables****.* 
+
+![Schematic representation of the time line and structure of a cohort study](/include/images/part_3/ch_1/3-1-5_cohort.jpg){#fig-3-1-5 width=100%}
+
+Even though **incidence rate**^[*important metric in epidemiological studies, assessing how fast a disease spreads within the population at risk over a time period*] is the outcome most commonly reported in **cohort studies**, there are three main other **outcomes** of interest:
+
+- **Functional Status**: these are metrics related to physical, emotional, or social status of participants. Functional **outcomes** are usually translated into specific values to be measured, like the time subjects take to walk over a specified distance @enright03 or the degree of psychological well-being @rothmund23.
+- **Patient Satisfaction**: useful to indicate the adherence of patients to treatments. How much a procedure is painful, for instance, may determine how satisfied subjects are with the procedure itself.
+- **Cost-effectiveness**: evaluates economic **outcomes** of interventions or of different modes of treatment. The mode of treatment to be considered may not only depend on its functional outcome, but also on the cost-benefit associated with it. One example is whether to focally **administer botulinum neurotoxin**^[*blocks the relase of the acetylcholine neurotransmitter, suppressing muscle contraction*] for treating muscle spasticity.
+
+The most famous example of—and perhaps the longest—**cohort study** in history is the Framingham study. It began in 1948, in the town of Framingham, Massachusetts, when nearly 5,200 subjects gave consent to participate in the study, led by what is today known as the [National Heart, Lung, and Blood Institute](https://www.nhlbi.nih.gov/). These subjects were followed periodically, providing clinical, lifestyle, and functional data. The study was motivated by heart disease ranking first among all causes of death at that time.
+
+As reported by the [National Institutes of Health](https://www.nih.gov/) in [their document](https://www.nih.gov/sites/default/files/2025-01/framingham-heart-study.pdf) about the Framingham Heart Study:
+
+> *"Thanks to Framingham, we now know that most cardiovascular disease is caused by modifiable risk factors like smoking, high blood pressure, obesity, high cholesterol levels, and physical inactivity."*
+
+The observation period in **cohort studies** may start well before the study onset. In this case, the study is termed **historical (or retrospective) cohort**. The experimenter uses existing medical records to identify **cohorts** with and without the **outcomes** of interest. Then, from past exposure, these individuals are tracked forward in time.
+
+\
+
+## Experimental Studies
+
+**Experimental studies** *posit a rigorous scientific method for evidence assessment.* This study design involves the active manipulation of one or more independent variables (the cause) and the measurement or observation of the elicited effect on the dependent variable, while rigorously controlling for any potential extraneous factors. When the manipulated variables are treatments or drugs to be applied on human subjects in an **experimental study**,  it is termed **Clinical Trial** (@fig-3-1-6).
+
+According to the [World Health Organization](https://www.who.int/health-topics/clinical-trials#tab=tab_1):
+
+> ***Clinical Trials*** *are a type of research that studies new tests and treatments and evaluates their effects on human health outcomes. People volunteer to take part in clinical trials to test medical interventions including drugs, cells and other biological products, surgical procedures, radiological procedures, devices, behavioural treatments and preventive care.*
+
+A key aspect of **Clinical Trials** (henceforth **CTs**), as of **experimental studies**, is the presence of a **control group**. *Only if well designed can* ***CTs*** *provide the strongest cause-and-effect evidence*. 
+
+What if a new diet was to be assessed on two unmatched groups? For example, suppose subjects assigned to the intervention group---the group receiving the treatment to be tested (the new diet)---are lean, with low fat mass, while those assigned to the control group—receiving no treatment—are overweight. It would not be surprising that no differences in weight loss were to be found from baseline to follow-up analysis between groups. Even if the groups were matched, by assigning subjects with similar body mass to the two groups, not controlling for confounders could undermine the validity of results. For example, if subjects in the control group were engaged in regular physical activity during the study while those in the intervention group were not, it could be that, again, no differences in weight loss were to be observed between groups.
+
+To support researchers and experimenters in planning and conducting the strongest possible **CT**, several guidelines have been proposed. Of particular interest are those advanced by the **SPIRIT-CONSORT** group---an international group, comprising a broad range of experts, from journal editors to patient representatives. Their [guidelines](https://www.consort-spirit.org/) are provided in different forms (checklists, flow diagrams), with the goal of guiding users through the key steps of a well-designed study, from before the study commences to the documentation of results.
+
+:::{.callout-note title="Key aspects of CTs"}
+*The goal of **CTs** is to determine whether the intervention makes a difference.  Does the difference we see come from the treatment or from any other factor?  To this end, the appropriate recruitment and allocation of subjects to different groups are crucial, as is blinding experimenters and subjects.*
+:::
+
+![Clinical trial example, illustrating patient groups and blinding procedures. Created with ChatGPT (OpenAI) 2026.](/include/images/part_3/ch_1/3-1-6_ct.jpg){#fig-3-1-6 width=80%}
+
+\
+
+### Placebo Effect
+
+Before commenting on blinding and random assignment, the importance of including a control group in **CTs** should be well understood. Perhaps the clearest way to grasp the idea is to consider evidence of the **placebo effect**: this is the effect arising because subjects believe they have received an effective treatment, while in reality no treatment may have been administered (e.g. dummy pills). One of the many examples illustrating the **placebo effect** is that reported by [Spencer and colleagues](https://www.sciencedirect.com/science/article/pii/S0022103198913737) @spencer94. These authors observed that when a math exam was administered to two classes of students, both with equally qualified men and women, the performance of male and female students depended on whether they were told that the exam had been shown to be sex-neutral.
+
+\
+
+### Blinding
+
+The presence of a **control group** is not the only aspect to be observed in **CTs**.  Whether subjects and experimenters are aware or not of the treatment,  respectively received or delivered, may dramatically affect the study results. The procedure of withholding information about the treatment is termed **blinding**. As shown in @fig-3-1-6, studies may be **single-** or **double-blinded**. In the former case, only participants are unaware of the group to which they are assigned, intervention or control. In the latter case, both participants and experimenters are unaware of the assignment. **Double-blinded studies** yield stronger evidence than **single-blinded studies**.
+
+One out of many examples about the importance of **blinding** regards the surgical procedure of ligating the mammary artery to relieve chest pain. Until the first half of the XX century, it was believed that ligation of mammary artery could relieve subjects from **angina pectoris**^[*chest pain mainly due to a lack of oxygenation of the heart muscles*]. Expectation was that coronary flow would increase due to collateral channels proximal to the ligation site. There was no evidence, however, supporting the increase in coronary flow, suggesting that the relief of chest pain in response to the surgical procedure was likely due to a **placebo effect**. [Cobb and colleagues](https://www.nejm.org/doi/full/10.1056/NEJM195905282602204) @cobb59 demonstrated this was likely the case, designing a **double-blinded study**, with both doctors and patients unaware of which patients had the mammary artery ligated or a simple skin incision. They observed that half of ligated and half of nonligated patients reported significant subjective improvements.
+
+\
+
+### Subjects' Assignment
+
+Just like **blinding**, the proper assignment of participants to intervention and control groups is crucial to avoid bias. *Proper assignment is achieved by ensuring that every subject has an equal probability of being assigned to either group*: this technique is termed **random assignment**. There are many examples of bias resulting from the lack of random assignment:
+
+- It was believed that connecting the portal artery to the vena cava could reduce blood pressure in the liver of cirrhotic subjects^[*scarring of the liver, resulting from chronic conditions like alcohol abuse*]. [Grace et al](https://www.sciencedirect.com/science/article/abs/pii/S0016508566801294) @grace66 assessed over 50 studies employing the portal cava shunt operation, observing that enthusiasm with the outcome of the surgery was reported mainly in studies without controls and without random assignment.
+- In Lanarkshire, Scotland, an experiment has been conducted to assess whether providing free milk to schoolchildren could affect their body weight. William Gosset^[*more commonly known as STUDENT*], published a [paper](https://www.jstor.org/stable/2332424) @student31 commenting that schoolchildren assigned to the control group were heavier than those in the free milk intervention group at the start of the experiment, suggesting that teachers may have assigned undernourished children to the intervention group.
+- Another example was the notion that women taking hormone replacement therapy had lower risk of developing coronary heart disease. This concept was born from observational studies, which did not consider that women taking hormone replacement tended to have a higher socioeconomic status, were more likely to engage in physical activity, and often had a healthier diet.
+
+Only by giving every participant an equal chance of being assigned to any group can researchers protect the study from **selection bias**—*when differences between participants are not only due to receiving the treatment or not (or being exposed or not in* ***observational studies****)*.
+
+\
+
+### Randomized Controlled Trials {#sec-rct}
+
+ **Controlled Trials** employing techniques for the random assignment of subjects to groups are termed **Randomized Controlled Trials** (**RCTs**). **RCTs** provide the strongest evidence for inferring causation, ensuring differences observed between groups are indeed due to the intervention. As quoted by [Kang et al](https://nata.kglmeridian.com/view/journals/attr/43/2/article-p215.xml) @kang08:
+ 
+ > *By employing randomization, researchers offer each participant an equal chance of being assigned to groups, which makes the groups comparable on the dependent variable by eliminating potential bias.*
+ 
+Different techniques can be applied for random assignment of participants, some of which are detailed below:
+
+- **Simple Randomization**: the decision of whether assigning a subject to the control or intervention group is made based on a random event, like tossing a coin, throwing a dice (@fig-3-1-7), or using random number generators in computer programs. Even though simple, this technique may result in groups with different numbers of subjects.
+- **Block Randomization**: subjects are first split into blocks and then randomized within each block until the desired number of participants per group is reached. This technique is often employed for ensuring equal **sample size**^[*number of experimental units (subjects in **CTs**) recruited to participate in a study*] between groups (i.e., 1:1 allocation).
+- **Stratified Randomization**: as in block randomization, this technique consists of separating subjects into **strata**---that is, non-overlapping groups defined based on a given characteristic (e.g. age, body mass, disease severity). Subjects are allocated to each **stratum** based on simple randomization, balancing characteristics across groups.
+- **Cluster Randomization**: in this case randomization applies to groups (clusters) of subjects rather than to single subjects. Hospitals, neighborhoods, cities, among others, are example of clusters.
+- **Systematic Randomization**: subjects are selected according to their position in a list. For example, every 5-th subject in a list is taken. 
+
+![Example of three techniques for simple randomization.](/include/images/part_3/ch_1/3-1-7_simple-randomization.jpg){#fig-3-1-7 width=95%}
+
+\
+
+### Definition of Controls
+
+Just as there are different blinding and assignment procedures, controls can be defined in different ways. 
+
+\
+
+#### Placebo Concurrent and No-Treatment Control {#sec-placebo-control}
+
+The most effective control design is the **Placebo Concurrent Control**. 
+
+*With this design, the two groups receive a treatment. The intervention group receives the active treatment, which is expected to have an effect on the outcome, while the other group receive a* ***dummy*** *treatment (***placebo***)*.  
+
+**Concurrent** because both groups are assessed simultaneously, ensuring the same environmental and clinical conditions. For example, the concurrent assessment ensures the same clinical staff would be following the two groups, reducing bias. 
+
+Sometimes, the control group does not receive any treatment at all, leading to the **No-Treatment Control** design. This design is often considered when [blinding][Blinding] is not possible. For example, it would not be possible to *blind* subjects when testing for the effectiveness of a new lumbar spinal surgery against conservative management of chronic back pain. Patients would know whether they have undergone the surgery or not. This is true as long as performing a fake incision, on the control group, is considered unethical today.  
+
+\
+
+#### Active Control {-}
+
+Sometimes, the treatment offered to the control group is an existing treatment rather than a *dummy* treatment. This is often the case when not treating patients in the control group is unethical.  When patients in the control group receives the standard treatment, the study is said to use **Active (or Positive) Controls**. 
+
+In this type of study, the new treatment is compared against the standard treatment. *That is, patients in the intervention group receive the new treatment only, or the new treatment and the standard treatment, whereas those in the control group receives the standard treatment only*. 
+
+An example is the use of serious game^[*game which purpose is not only entertainment*] based on surface electromyograms (EMGs) to improve gait of cerebral palsy children. The rationale is that by learning to selective excite their dorsiflexion muscles while relaxing their plantarflexor muscles, the children may achieve smoother clearance during the swing phase of gait. [Boulay and colleagues](https://www.mdpi.com/1424-8220/24/5/1513) @boulay24 tested this hypothesis, comparing the gait pattern of cerebral palsy children treated with the standard physiotherapy and EMG serious game against that of children receiving only the standard physiotherapy treatment.
+
+\
+
+#### Self-Controlled and Cross-Over {-}
+
+Another control possibility is that of comparing the outcome assessed on different time points (follow-up assessment) with respect to that assessed upon the study onset (baseline assessment). In this case, subjects act as their own control, thus resulting in a **Self-Controlled study design**. 
+
+As subjects assessed are the same, factors like sex, habits, and genetics, among others, are controlled for. The main drawnback of this control design is that it is limited to relatively short time periods, within which the characteristics of the tested individuals do not change. For example, chronic effects are difficult to be assessed with this design. 
+
+An example of self-controlled study is that of [Cabral et al](https://link.springer.com/article/10.1007/s00421-020-04520-4) @cabral20, who assessed neural and mechanical responses on a group of subjects, before and after inducing muscle damage with an eccentric-contraction protocol. 
+
+On occasions, self-controlled may be combined with a placebo or active control group into a **Cross-Over study design**, characterized by:
+
+1. an initial period in which the self-controlled group receives the new treatment (and the standard one if applicable) while the other group receives none (placebo) or the standard treatment (active control).
+2. a subsequent washout period during which the new treatment is not applied, ensuring any effect due to the new treatment does not carry over to following evaluation sessions
+3. a final period during which the placebo (or active) control group becomes the self-control group and viceversa.
+
+An example of Cross-Over design is the study of Boulay et al @boulay24 cited above, in which, in different moments, the two groups of cerebral palsy children received the serious game treatment. This design is also suited for testing different new treatment (e.g. different drugs), repating points from 1 to 3 according to the number of treatments to be assessed.
+
+\
+
+#### Dose-Response and Historical Control {-}
+
+When interest lies in the appropriate dose of a given treatment, patients may be randomized so that different groups receive different treatment doses. *The outcome (response) for the groups receiving different doses is then compared against that for a group of subjects receiving no treatment*. This is termed the **Dose-Response Control study design**.
+
+Finally, the response to a given treatment may be compared with that from patients treated in another occasion, reported in previous studies. This design is termed **Historical (or External) Control** and is mainly useful for testing treatments of rare diseases.
+
+\
+
+## Testing Your Skill
+
+:::{.small-text}
+```{r echo=FALSE, results='asis'}
+exams2forms("../include/exercises/3-1-4_study-designs.md")
+```
+:::
+
+\
+
+
+
+## Pros and Cons
+
+There is no perfect study design. All designs have pros and cons, which should be weighed carefully before determining the most appropriate design to address the problem of interest. The panels below summarize the advantages and disadvantages associated with **observational studies** and **Clinical Trials**.
+
+::: {.panel-tabset .small-text}
+
+##### Case-Series {-}
+
+:::: {.columns}
+::: {.column .card .pros-text width="49%"}
+
+**PROS**
+
+- **low-cost** when compared with all other study designs
+- **fast approach** to assess new and rare diseases, in particular when only a few cases are available
+- provide the basis for **generating new hypothesis** to be tested in subsequent studies
+- being of feasible implementation, **information can be disseminated promptly**
+:::
+::: {.column width="2%"} 
+:::
+::: {.column .card .cons-text width="49%"}
+**CONS**
+
+- **lack of a control group**, with limited indication on the exposure-outcome relationship
+- vulnerable to **selection bias**, as the recruited subjects may be unrepresentative of the general population
+- **limited data**, as medical records may be inaccurate or incomplete 
+:::
+::::
+
+##### Case-Controls {-}
+
+:::: {.columns}
+::: {.column .card .pros-text width="49%"}
+**PROS**
+
+- **low-cost** and **quick** to implement when compared to **cohort** studies
+- **effective for long-latency outcomes**, related mainly to rare diseases, given *cases* are identified upon the study start
+- if medical records allow, **different exposures of risk factors** can be analyzed
+- **no follow-up issues**, as being retrospective there is no risk that subjects drop out from the study
+:::
+::: {.column width="2%"}
+:::
+::: {.column .card .cons-text width="49%"}
+**CONS**
+
+- vulnerable to **recall bias**, as it relies on the existence of accurate medical records
+- difficult to recruit subjects exposed but without the outcome (**controls**), leading to **selection bias**
+- **not possible to compute rate or risk of outcome** (e.g. @eq-survival), as participants are not followed over time
+- unlike **cohort** studies, **only a single outcome can be assessed**
+- **causality cannot be established**, as it is unclear whether exposure took place before the outcome
+:::
+::::
+
+##### Cross-Sectional {-}
+
+:::: {.columns}
+::: {.column .card .pros-text width="49%"}
+**PROS**
+
+- useful for **establishing public health plans**, as this study design provides data on the burden of a disease (resource allocation)
+- are **highly efficient and inexpensive** when compared to retrospective and prospective studies, given data is collected in a single time frame
+- provide the basis for **generating new hypothesis** to be tested in subsequent studies
+- given data is collected directly from recruited participants, there is **no drop-out issues** and **multiple variables can be assessed** (e.g. anthropometric and demographic data, health status)
+:::
+::: {.column width="2%"}
+:::
+::: {.column .card .cons-text width="49%"}
+**CONS**
+
+- **no causality** is the biggest issue with **cross-sectional** studies, as associations but not cause-and-effect (e.g. *did exposure lead to the outcome?*) relationships can be established
+- **time effect is ambiguous**, as it is not possible to determine which came first, exposure or outcome
+- **prevalence**^[*number of people with the outcome*] **but not** **incidence**^[*number of people developing the outcome (new cases) over time*] can be computed
+- as data is collected at a single time frame, whether it captures the long-term trend in the population or is mainly affected by temporary factors is an issue (**snapshot bias**).
+- vulnerable to **no-response bias**, as participants may differ substantially from those who did not wish to participate in the study
+- vulnerable to **recall bias**, if data is obtained from self-reporting or questionaires
+:::
+::::
+
+##### Cohort {-}
+
+:::: {.columns}
+::: {.column .card .pros-text width="49%"}
+**PROS**
+
+- **less vulnerable to recall bias**, as exposure is recorded on the study start rather than reported by the subject
+- as subjects are followed in time, **multiple outcomes** may be observed to a single exposure
+- **increased confidence** on whether exposure to a given condition may be associated with the outcome (temporality and causality)
+- **confidence is greater in prospective** than retrospective cohort studies, but **retrospective cohorts can be more easily applied**
+:::
+::: {.column width="2%"}
+:::
+::: {.column .card .cons-text width="49%"}
+**CONS**
+
+- **issues with patient follow-up**, as some may move somewhere else or simply withdraw from the study
+- **long time** to execute and **high cost**, arising mainly from the follow-up analysis
+- **unsuited for rare diseases**, as a large number of subjects would be required to yield results of **statistical significance**^[*will get back to this point later in the course*]
+- **confounders**, arising from unmeasured factors (e.g. environment) in prospective cohorts or to inaccurate or incomplete records in retrospective cohorts
+:::
+::::
+
+##### Clinical Trials {-}
+
+:::: {.columns}
+::: {.column .card .pros-text width="49%"}
+**PROS**
+
+- **minimization of bias**, in particular if [blinding][Blinding], [random assignment][Randomized Controlled Trials] and [proper control][Definition of Controls] designs are considered
+- **causality may be established**, as cause-and-effect relationships between outcome and treatments can be determined directly
+- **high internal validity**^[*internal validity is related to how confidently the results reported in a study point to a cause-and-effect relationship rather than to external factors or confounders*], given rigorous criteria may be applied to ensure the tested sample is homogeneous, minimizing the effect of confounding factors on the outcome
+- the experimental protocol is detailed to the point of ensuring the **standardized replication** of the study, including the intervention and evaluation procedures.
+:::
+::: {.column width="2%"}
+:::
+::: {.column .card .cons-text width="49%"}
+**CONS**
+
+- sample homogeneity may result in **compromised external validity**^[*the extent to which results can be generalized beyond the context of the study: different subjects, conditions, time, etc*]
+- with the some many procedural aspects to define and conduct, CTs are often **expensive and require long duration** to be completed.  
+- **long time** to execute and **high cost**, arising mainly from the follow-up analysis
+- **subjected to ethical issues**, as withholding treatment (placebo control) and random assignment of participants (e.g. during emergency medicine) may not be applied in certain conditions
+:::
+::::
+:::
+
+## Review and Meta-Analysis
+
+One final point to touch is the hierarchy of evidence provided by different study designs. The top two quality studies are none of those so far dealt with in this chapter---**Review** and **Meta-Analysis** (@fig-3-1-9). 
+
+*Both* ***Reviews*** *and* ***Meta-Analyses*** *studies provide a comprehensive and structured synthesis of what is know about a specific argument in the scientific literature*. 
+
+The main difference is that **Reviews** provide a qualitative, narrative account on the problem. The studies analyzed in a systematic **Review** may diverge in the procedures employed for data collection and analysis.
+
+**Meta-Analysis**, conversely, uses quantitative statistical techniques to analyze the results from studies with comparable quantitative data, computing an overall effect size. More specifically, Meta-Analyses mathematically pool the results from different studies, often from or following a systematic Review, to compute an average effect for a given treatment. Meta-Analysis results are reported in a **Forest Plot**, which corresponds to a graphical display of results from the multiple studies analyzed, along with the combined average result. Forest plots provide information about the quality of studies included in the Meta-Analysis and the **statistical significance**^[*explored in @sec-ch3] of findings.
+
+![Hierarchy of evidence  in the health science literature.](/include/images/part_3/ch_1/3-1-9_meta-analysis.jpg){#fig-3-1-9 width=70%}
