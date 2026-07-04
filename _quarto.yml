@@ -1,5 +1,7 @@
 project:
   type: book
+  resources:
+    - LICENSE
 
 book:
   title: "Experimental Design in Biomedical Engineering"
@@ -14,7 +16,7 @@ book:
     style: docked
     background: light
   page-footer:
-    left: "© 2026 Taian Martins Vieira • [CC BY-NC 4.0](https://creativecommons.org)"
+    left: "© 2026 Taian Martins. Licensed under [CC BY-NC-SA 4.0](LICENSE)."
     center: "Built with **R**, **OJS**, & [Quarto](https://quarto.org/)"
     right: 
       - icon: github
