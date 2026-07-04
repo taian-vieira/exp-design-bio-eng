@@ -20,10 +20,10 @@ book:
     center: "Built with **R**, **OJS**, & [Quarto](https://quarto.org/)"
     right: 
       - icon: github
-        href: https://github.com/
+        href: https://github.com/taian-vieira/exp-design-bio-eng
         aria-label: "View Source Code"
       - icon: bug
-        href: https://github.com/issues
+        href: https://github.com/taian-vieira/exp-design-bio-eng/issues
         aria-label: "Report a Bug or Typo"
     background: light
     border: true
