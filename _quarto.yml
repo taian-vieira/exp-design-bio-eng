@@ -10,7 +10,7 @@ book:
   search: true
   #repo-url: https://github.com/jjallaire/hopr/
   #repo-actions: [edit]
-  downloads: [pdf, epub]
+  downloads: [epub]
   sharing: [twitter, facebook]
   sidebar:
     style: docked
