@@ -71,12 +71,34 @@ format:
     css: [include/cssfiles/bootstrap.css, include/cssfiles/webex.css]
     include-after-body: include/cssfiles/webex.js
     include-in-header: 
-      text: |
-        <script type="text/javascript">
-          MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-          };
-        </script>
+      - text: |
+          <script type="text/javascript">
+            MathJax = {
+              tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+            };
+          </script>
+          <script type="text/javascript">
+            window.hypothesisConfig = function () {
+              return {
+                theme: 'classic',     # <-- CHANGED TO CLASSIC TO FORCE VISIBLE HANDLES
+                openSidebar: false,
+                groups: ['BBAZe1o8']
+              };
+            };
+          </script>
+          <script type="text/javascript">
+            (function() {
+              var s = document.createElement('script');
+              s.src = 'https:' + '//hypothes.is/embed.js';
+              s.async = true;
+              document.head.appendChild(s);
+            })();
+          </script>
+          <style type="text/css">
+            hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
+              z-index: 99999 !important;
+            }
+          </style>
 
 categories:
   - Biomedical Engineering
