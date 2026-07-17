@@ -91,7 +91,10 @@ ul.task-list li input[type="checkbox"] {
         // Force your group to be the baseline structural authority
         // Note: Use lowercase letters for your 8-character ID here!
         groups: ['bbaze1o8'],
-        
+        onLoginRequest: function() {
+          alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
+        },
+      
         // Strips away the global Public channel entirely
         // This changes Hypothesis into an isolated course sandbox
         grantToken: function() {
