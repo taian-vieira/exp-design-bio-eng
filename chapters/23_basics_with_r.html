@@ -137,16 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     return {
       theme: 'classic',
       openSidebar: false,
-      
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
-      services: [{
-        apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['BBAZe1o8'] 
-        onLoginRequest: function() {
-          alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-        }
-      }]
+      groups: ['BBAZe1o8'],
+      onLoginRequest: function() {
+        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
+      }
     };
   };
 </script>
@@ -158,11 +152,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     document.head.appendChild(s);
   })();
 </script>
+<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
+
+<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    const observer = new MutationObserver((mutations) => {
+      // Look deep inside the Hypothesis iframe container panel
+      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
+      if (iframe && iframe.contentDocument) {
+        // Find the selectable dropdown list elements for the Public scope
+        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
+        publicTabs.forEach(el => {
+          // Vaporize the public button so it can never be selected or seen
+          el.style.setProperty('display', 'none', 'important');
+        });
+      }
+    });
+    // Keep scanning the page canvas silently in the background
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -880,8 +895,8 @@ Table&nbsp;6.1: Interactive table illustrating how a data frame looks.
 </figcaption>
 <div aria-describedby="tbl-2-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a0159371154a05b1b869" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a0159371154a05b1b869">{"x":{"filter":"none","vertical":false,"data":[["observation  1","observation  2","observation  3","observation  4","observation  5"],["Sarah","Rob","Ted","Jessica","John"],["female","male","male","female","male"],[31,25,28,47,30],[6.1,5.2,5.7,7.1,6.3],[false,false,false,true,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th><\/th>\n      <th>Subject<\/th>\n      <th>Gender<\/th>\n      <th>Age<\/th>\n      <th>$v_x \\text{ (m/s)}$<\/th>\n      <th>Parkinsonian<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"c..observation..1....observation..2....observation..3....observation..4...","targets":0},{"name":"c..Sarah....Rob....Ted....Jessica....John..","targets":1},{"name":"structure.c.1L..2L..2L..1L..2L...levels...c..female....male....class....factor..","targets":2},{"name":"c.31L..25L..28L..47L..30L.","targets":3},{"name":"c.6.1..5.2..5.7..7.1..6.3.","targets":4},{"name":"c.FALSE..FALSE..FALSE..TRUE..FALSE.","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9188dacc75178039a542" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9188dacc75178039a542">{"x":{"filter":"none","vertical":false,"data":[["observation  1","observation  2","observation  3","observation  4","observation  5"],["Sarah","Rob","Ted","Jessica","John"],["female","male","male","female","male"],[31,25,28,47,30],[6.1,5.2,5.7,7.1,6.3],[false,false,false,true,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th><\/th>\n      <th>Subject<\/th>\n      <th>Gender<\/th>\n      <th>Age<\/th>\n      <th>$v_x \\text{ (m/s)}$<\/th>\n      <th>Parkinsonian<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"c..observation..1....observation..2....observation..3....observation..4...","targets":0},{"name":"c..Sarah....Rob....Ted....Jessica....John..","targets":1},{"name":"structure.c.1L..2L..2L..1L..2L...levels...c..female....male....class....factor..","targets":2},{"name":"c.31L..25L..28L..47L..30L.","targets":3},{"name":"c.6.1..5.2..5.7..7.1..6.3.","targets":4},{"name":"c.FALSE..FALSE..FALSE..TRUE..FALSE.","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>

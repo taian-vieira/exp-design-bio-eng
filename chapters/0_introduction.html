@@ -102,16 +102,10 @@ div.csl-indent {
     return {
       theme: 'classic',
       openSidebar: false,
-      
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
-      services: [{
-        apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['BBAZe1o8'] 
-        onLoginRequest: function() {
-          alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-        }
-      }]
+      groups: ['BBAZe1o8'],
+      onLoginRequest: function() {
+        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
+      }
     };
   };
 </script>
@@ -123,11 +117,32 @@ div.csl-indent {
     document.head.appendChild(s);
   })();
 </script>
+<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
+
+<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    const observer = new MutationObserver((mutations) => {
+      // Look deep inside the Hypothesis iframe container panel
+      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
+      if (iframe && iframe.contentDocument) {
+        // Find the selectable dropdown list elements for the Public scope
+        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
+        publicTabs.forEach(el => {
+          // Vaporize the public button so it can never be selected or seen
+          el.style.setProperty('display', 'none', 'important');
+        });
+      }
+    });
+    // Keep scanning the page canvas silently in the background
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+</script>
 
 
 <link rel="stylesheet" href="../include/cssfiles/bootstrap.css">
@@ -435,8 +450,8 @@ div.csl-indent {
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><strong>Lifestyle is a confounder because:</strong></p>
-<div id="webex-ca6e7a92702662e85d67de200695d41f" class="webex-radiogroup" data-answer="OFAaVRtRFQJq">
-<label><input type="radio" autocomplete="off" name="ca6e7a92702662e85d67de200695d41f"><span><em>rest heart rate depends on lifestyle</em></span></label><label><input type="radio" autocomplete="off" name="ca6e7a92702662e85d67de200695d41f"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="ca6e7a92702662e85d67de200695d41f"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="ca6e7a92702662e85d67de200695d41f"><span><em>people drinking coffee are physically inactive</em></span></label>
+<div id="webex-e5644fe03956fe55a6240d1c9215f175" class="webex-radiogroup" data-answer="PgUaBRhWSQBu">
+<label><input type="radio" autocomplete="off" name="e5644fe03956fe55a6240d1c9215f175"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="e5644fe03956fe55a6240d1c9215f175"><span><em>rest heart rate depends on lifestyle</em></span></label><label><input type="radio" autocomplete="off" name="e5644fe03956fe55a6240d1c9215f175"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="e5644fe03956fe55a6240d1c9215f175"><span><em>people drinking coffee are physically inactive</em></span></label>
 </div>
 </div>
 </div>
