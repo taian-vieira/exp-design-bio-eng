@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8ed81ad457df518d41c819b234513d36.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2c8d71db4d056fff4a87fcadc2b2ddaf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,21 +92,53 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<link href="../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
 <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
 <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
 <script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
+
 <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
 <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
 <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
 <script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
 <link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
 <script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
 <script type="text/javascript">
   MathJax = {
     tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
   };
 </script>
+<script type="text/javascript">
+  window.hypothesisConfig = function () {
+    return {
+      theme: 'classic',     # <-- CHANGED TO CLASSIC TO FORCE VISIBLE HANDLES
+      openSidebar: false,
+      groups: ['BBAZe1o8']
+    };
+  };
+</script>
+<script type="text/javascript">
+  (function() {
+    var s = document.createElement('script');
+    s.src = 'https:' + '//hypothes.is/embed.js';
+    s.async = true;
+    document.head.appendChild(s);
+  })();
+</script>
+<style type="text/css">
+  hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
+    z-index: 99999 !important;
+  }
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -168,26 +200,10 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Experimental Design in Biomedical Engineering</a> 
         <div class="sidebar-tools-main">
+    <a href="../Experimental-Design-in-Biomedical-Engineering.epub" title="Download ePub" class="quarto-navigation-tool px-1" aria-label="Download ePub"><i class="bi bi-journal"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.pdf">
-              <i class="bi bi-file-pdf pe-1"></i>
-            Download PDF
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="../Experimental-Design-in-Biomedical-Engineering.epub">
-              <i class="bi bi-journal pe-1"></i>
-            Download ePub
-            </a>
-          </li>
-      </ul>
-    </div>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
@@ -460,13 +476,13 @@ window.Quarto = {
 <h5 class="anchored" data-anchor-id="weight-loss">Weight loss</h5>
 <p>Interest may lie in assessing whether diet or exercise is more effective for weight loss. Two groups of individuals with similar characteristics were recruited, as shown in the figure.</p>
 <p>The study compares the mean weight loss observed in the two groups.</p>
-<p><img src="../include/images/part_3/ch_5/example-1_weight-loss.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="..\include/images/part_3/ch_5/example-1_weight-loss.png" class="img-fluid" style="width:100.0%"></p>
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Based on the figure above and considering the question—“Which intervention would lead to greater weight loss?”— what would be the null and the alternative hypotheses?</em></p>
-<div id="webex-a88f9d80cae3ca56e63ecbc1e24d170a" class="webex-radiogroup" data-answer="OggUVxVUFABPUTg=">
-<label><input type="radio" autocomplete="off" name="a88f9d80cae3ca56e63ecbc1e24d170a"><span><span class="math inline">\(H_0: \mu_d = 0, \mu_e = 0\)</span>, <span class="math inline">\(H_1: \mu_d=\mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="a88f9d80cae3ca56e63ecbc1e24d170a"><span><span class="math inline">\(H_0: \mu_d = \mu_e\)</span>, <span class="math inline">\(H_1: \mu_d \ne \mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="a88f9d80cae3ca56e63ecbc1e24d170a"><span><span class="math inline">\(H_0: \mu_d = 0, \mu_e = 0\)</span>, <span class="math inline">\(H_1: \mu_d \ne \mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="a88f9d80cae3ca56e63ecbc1e24d170a"><span><span class="math inline">\(H_0: \mu_d = \mu_e\)</span>, <span class="math inline">\(H_1: \mu_d &lt; \mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="a88f9d80cae3ca56e63ecbc1e24d170a"><span><em>none of the above</em></span></label>
+<div id="webex-731355590e16524c0141101c575e5ade" class="webex-radiogroup" data-answer="bAMdAhkFGQkcVWw=">
+<label><input type="radio" autocomplete="off" name="731355590e16524c0141101c575e5ade"><span><span class="math inline">\(H_0: \mu_d = 0, \mu_e = 0\)</span>, <span class="math inline">\(H_1: \mu_d=\mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="731355590e16524c0141101c575e5ade"><span><span class="math inline">\(H_0: \mu_d = \mu_e\)</span>, <span class="math inline">\(H_1: \mu_d \ne \mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="731355590e16524c0141101c575e5ade"><span><span class="math inline">\(H_0: \mu_d = 0, \mu_e = 0\)</span>, <span class="math inline">\(H_1: \mu_d \ne \mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="731355590e16524c0141101c575e5ade"><span><span class="math inline">\(H_0: \mu_d = \mu_e\)</span>, <span class="math inline">\(H_1: \mu_d &lt; \mu_e\)</span></span></label><label><input type="radio" autocomplete="off" name="731355590e16524c0141101c575e5ade"><span><em>none of the above</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -482,13 +498,13 @@ window.Quarto = {
 <h5 class="anchored" data-anchor-id="jump-height">Jump Height</h5>
 <p>The height achieved in a vertical jump is a key performance variable in many sports. Could it be that basketball players jump higher, on average, than volleyball players?</p>
 <p>A study was conducted on professional players in both sports, controlling for relevant confounders (e.g.&nbsp;body mass, experience). The mean jump height was measured for the two groups.</p>
-<p><img src="../include/images/part_3/ch_5/example-2_jump-height.png" class="img-fluid" style="width:80.0%"></p>
+<p><img src="..\include/images/part_3/ch_5/example-2_jump-height.png" class="img-fluid" style="width:80.0%"></p>
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Based on the figure and the question posed above what would be the null and the alternative hypotheses?</em></p>
-<div id="webex-ac0d8ac5a5b3ab58831182786d01ae27" class="webex-radiogroup" data-answer="OlMcVBRRTwRNBT8=">
-<label><input type="radio" autocomplete="off" name="ac0d8ac5a5b3ab58831182786d01ae27"><span><span class="math inline">\(H_0: \mu_b = 0, \mu_v = 0\)</span>, <span class="math inline">\(H_1: \mu_b=\mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="ac0d8ac5a5b3ab58831182786d01ae27"><span><span class="math inline">\(H_0: \mu_b = \mu_v\)</span>, <span class="math inline">\(H_1: \mu_b \ne \mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="ac0d8ac5a5b3ab58831182786d01ae27"><span><span class="math inline">\(H_0: \mu_b = 0, \mu_v = 0\)</span>, <span class="math inline">\(H_1: \mu_b \ne \mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="ac0d8ac5a5b3ab58831182786d01ae27"><span><span class="math inline">\(H_0: \mu_b = \mu_v\)</span>, <span class="math inline">\(H_1: \mu_b &gt; \mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="ac0d8ac5a5b3ab58831182786d01ae27"><span><em>none of the above</em></span></label>
+<div id="webex-4ef14257f8178a2edddb1d882583a643" class="webex-radiogroup" data-answer="b1VKARgCGQZKCGw=">
+<label><input type="radio" autocomplete="off" name="4ef14257f8178a2edddb1d882583a643"><span><span class="math inline">\(H_0: \mu_b = 0, \mu_v = 0\)</span>, <span class="math inline">\(H_1: \mu_b=\mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="4ef14257f8178a2edddb1d882583a643"><span><span class="math inline">\(H_0: \mu_b = \mu_v\)</span>, <span class="math inline">\(H_1: \mu_b \ne \mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="4ef14257f8178a2edddb1d882583a643"><span><span class="math inline">\(H_0: \mu_b = 0, \mu_v = 0\)</span>, <span class="math inline">\(H_1: \mu_b \ne \mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="4ef14257f8178a2edddb1d882583a643"><span><span class="math inline">\(H_0: \mu_b = \mu_v\)</span>, <span class="math inline">\(H_1: \mu_b &gt; \mu_v\)</span></span></label><label><input type="radio" autocomplete="off" name="4ef14257f8178a2edddb1d882583a643"><span><em>none of the above</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -506,15 +522,15 @@ window.Quarto = {
 <p>Two independent groups of male and female individuals, matched by training status, health, age, and body mass, were recruited and asked to run at constant speed until exhaustion.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../include/images/part_3/ch_5/example-3_endurance.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+<p><img src="..\include/images/part_3/ch_5/example-3_endurance.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
 </figure>
 </div>
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>What are the possible variables that could be considered to assess sex-differences in endurance?</em></p>
-<div id="webex-de41fdfc58c907265577ed51533e0323" class="webex-checkboxgroup" data-answer="P1UYAEpVSlMZCU8JbQ==">
-<label><input type="checkbox" autocomplete="off" name="de41fdfc58c907265577ed51533e0323"><span><em>strength</em></span></label><label><input type="checkbox" autocomplete="off" name="de41fdfc58c907265577ed51533e0323"><span><em>time to exhaustion</em></span></label><label><input type="checkbox" autocomplete="off" name="de41fdfc58c907265577ed51533e0323"><span><em>mean heart rate</em></span></label><label><input type="checkbox" autocomplete="off" name="de41fdfc58c907265577ed51533e0323"><span><em>stride length</em></span></label><label><input type="checkbox" autocomplete="off" name="de41fdfc58c907265577ed51533e0323"><span><em>blood lactate</em></span></label><label><input type="checkbox" autocomplete="off" name="de41fdfc58c907265577ed51533e0323"><span><em>step frequency</em></span></label>
+<div id="webex-9f3b1a5d8ad88b4136a589b283479830" class="webex-checkboxgroup" data-answer="YlYfUx1QGVQUUEgIZQ==">
+<label><input type="checkbox" autocomplete="off" name="9f3b1a5d8ad88b4136a589b283479830"><span><em>strength</em></span></label><label><input type="checkbox" autocomplete="off" name="9f3b1a5d8ad88b4136a589b283479830"><span><em>time to exhaustion</em></span></label><label><input type="checkbox" autocomplete="off" name="9f3b1a5d8ad88b4136a589b283479830"><span><em>mean heart rate</em></span></label><label><input type="checkbox" autocomplete="off" name="9f3b1a5d8ad88b4136a589b283479830"><span><em>stride length</em></span></label><label><input type="checkbox" autocomplete="off" name="9f3b1a5d8ad88b4136a589b283479830"><span><em>blood lactate</em></span></label><label><input type="checkbox" autocomplete="off" name="9f3b1a5d8ad88b4136a589b283479830"><span><em>step frequency</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -633,8 +649,8 @@ Table&nbsp;13.1: Serve height for male and female volleyball players
 </figcaption>
 <div aria-describedby="tbl-3-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-10fbfa8ec6d6f863e0b6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-10fbfa8ec6d6f863e0b6">{"x":{"filter":"none","vertical":false,"data":[["40.1","41","35.1","36.1","38.8","45.1","67.3",null,null,null,"$\\overline{x}=$ 43.4","$s_x=$ 11.1"],["71.5","85.1","66","48","59.4","58.8","80.5","71","73.6","65.8","$\\overline{y}=$ 68","$s_y=$ 10.9"],[1,2,3,4,5,6,7,8,9,10,11,12]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Female<br>($x_i$, $n=7$)<\/th>\n      <th>Male<br>($y_i$, $m=10$)<\/th>\n      <th><\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","pageLength":12,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"visible":false,"targets":2},{"name":"women","targets":0},{"name":"men","targets":1},{"name":"row_id","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100],"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[2]; $(this.api().cell(row, 0).node()).css({'font-weight':value == 11 ? \"bold\" : value == 12 ? \"bold\" : null,'background-color':value == 11 ? \"#add8e6\" : value == 12 ? \"#add8e6\" : null});\nvar value=data[2]; $(this.api().cell(row, 1).node()).css({'font-weight':value == 11 ? \"bold\" : value == 12 ? \"bold\" : null,'background-color':value == 11 ? \"#add8e6\" : value == 12 ? \"#add8e6\" : null});\n}"}},"evals":["options.drawCallback","options.rowCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-765d624aa57b03b1a5bd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-765d624aa57b03b1a5bd">{"x":{"filter":"none","vertical":false,"data":[["40.1","41","35.1","36.1","38.8","45.1","67.3",null,null,null,"$\\overline{x}=$ 43.4","$s_x=$ 11.1"],["71.5","85.1","66","48","59.4","58.8","80.5","71","73.6","65.8","$\\overline{y}=$ 68","$s_y=$ 10.9"],[1,2,3,4,5,6,7,8,9,10,11,12]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Female<br>($x_i$, $n=7$)<\/th>\n      <th>Male<br>($y_i$, $m=10$)<\/th>\n      <th><\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","pageLength":12,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"visible":false,"targets":2},{"name":"women","targets":0},{"name":"men","targets":1},{"name":"row_id","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100],"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[2]; $(this.api().cell(row, 0).node()).css({'font-weight':value == 11 ? \"bold\" : value == 12 ? \"bold\" : null,'background-color':value == 11 ? \"#add8e6\" : value == 12 ? \"#add8e6\" : null});\nvar value=data[2]; $(this.api().cell(row, 1).node()).css({'font-weight':value == 11 ? \"bold\" : value == 12 ? \"bold\" : null,'background-color':value == 11 ? \"#add8e6\" : value == 12 ? \"#add8e6\" : null});\n}"}},"evals":["options.drawCallback","options.rowCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -654,7 +670,7 @@ Table&nbsp;13.1: Serve height for male and female volleyball players
 <div id="fig-3-5-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_3/ch_5/3-5-1_jump-height.png" class="img-fluid figure-img" style="width:80.0%">
+<img src="..\include/images/part_3/ch_5/3-5-1_jump-height.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.1: Assumption for jump height calculation using the flight time method.
@@ -669,12 +685,12 @@ Figure&nbsp;13.1: Assumption for jump height calculation using the flight time m
 </p>
 <p>Considering the data reported in <a href="#tbl-3-5-1" class="quarto-xref">Table&nbsp;<span>13.1</span></a>, address the following points:</p>
 <ol type="1">
-<li><p><em>The assumed null hypothesis for the population mean difference <span class="math inline">\(\mu_d\)</span> in jump height is:</em> <select class="webex-select" id="webex-3594a21df43f66f5d51fe0359e818aed" data-answer="aAUVBE0DHVQ7"><option value="blank"></option><option>\(H_0: \mu_d = \mu_x - \mu_y\)</option><option>\(H_1: \mu_d = 0\)</option><option>\(H_0: \mu_d = 0\)</option><option>\(H_1: \mu_d &gt; 0\)</option></select></p></li>
-<li><p><em>What is the appropriate test statistic?</em> <select class="webex-select" id="webex-016977ffd32bdaf388fc698dfad9930f" data-answer="awEaCBsHOw=="><option value="blank"></option><option>z-score</option><option>t value</option><option>y-x</option></select></p></li>
-<li><p><em>For <span class="math inline">\(\alpha = 0.05\)</span>, determine the critical value <span class="math inline">\(t_c =\)</span></em> <input class="webex-solveme nospaces" id="webex-06854adee6fd17ef2189a99009674553" data-tol="0.01" size="20" data-answer="axQKGwVSRjg="></p></li>
-<li><p><em>Compute the test statistic <span class="math inline">\(t =\)</span></em> <input class="webex-solveme nospaces" id="webex-259c47bf26f20de88545bb63185f3ca8" data-tol="0.01" size="20" data-answer="aRcUVxoCV0Rv"></p></li>
+<li><p><em>The assumed null hypothesis for the population mean difference <span class="math inline">\(\mu_d\)</span> in jump height is:</em> <select class="webex-select" id="webex-48541bd5f9fe31b9af479d0eb4140315" data-answer="bwgZBB1TSAU7"><option value="blank"></option><option>\(H_0: \mu_d = \mu_x - \mu_y\)</option><option>\(H_1: \mu_d = 0\)</option><option>\(H_0: \mu_d = 0\)</option><option>\(H_1: \mu_d &gt; 0\)</option></select></p></li>
+<li><p><em>What is the appropriate test statistic?</em> <select class="webex-select" id="webex-704e9d59af1ace797294c96e55214343" data-answer="bAAYVBVUaA=="><option value="blank"></option><option>z-score</option><option>t value</option><option>y-x</option></select></p></li>
+<li><p><em>For <span class="math inline">\(\alpha = 0.05\)</span>, determine the critical value <span class="math inline">\(t_c =\)</span></em> <input class="webex-solveme nospaces" id="webex-ccc4cfebb62ee2344186a78cb73b4d5f" data-tol="0.01" size="20" data-answer="OEFRGlJVRz8="></p></li>
+<li><p><em>Compute the test statistic <span class="math inline">\(t =\)</span></em> <input class="webex-solveme nospaces" id="webex-186d7b78713daaa339f6f3ce778eca69" data-tol="0.01" size="20" data-answer="ahobUBlXAhpq"></p></li>
 </ol>
-<p><em>Given that the <span class="math inline">\(t\)</span> value obtained is</em> <select class="webex-select" id="webex-55a5dcbcab409269bbb8326711c73803" data-answer="bgRNBTk="><option value="blank"></option><option>greater</option><option>smaller</option></select> <em>the critical value, the null hypothesis is</em> <select class="webex-select" id="webex-473745dc4f1ea1735c997dc3bb64476e" data-answer="bwYfB2k="><option value="blank"></option><option>rejected</option><option>not rejected</option></select></p>
+<p><em>Given that the <span class="math inline">\(t\)</span> value obtained is</em> <select class="webex-select" id="webex-341cbd01355c1761bf33344ad62bde8f" data-answer="aAUdUz8="><option value="blank"></option><option>greater</option><option>smaller</option></select> <em>the critical value, the null hypothesis is</em> <select class="webex-select" id="webex-53b868710f0af53c84bc503e8faec606" data-answer="bgJOCGs="><option value="blank"></option><option>rejected</option><option>not rejected</option></select></p>
 </section>
 <div class="webex-solution">
 <p><strong>1. The null hypothesis</strong></p>
@@ -738,7 +754,7 @@ CI_{\mu_Y} &amp;= \overline{y} \pm t_{m-1,\,1-\frac{\alpha}{2}} \frac{s_y}{\sqrt
 <div id="fig-3-5-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_3/ch_5/3-5-2_error-plot.png" class="img-fluid figure-img" style="width:100.0%">
+<img src="..\include/images/part_3/ch_5/3-5-2_error-plot.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.2: Error plots for the jump height data.
@@ -799,7 +815,7 @@ t = \frac{(\overline{X}-\overline{Y}) - (\mu_X-\mu_Y)}{\sqrt{\frac{s_X^2}{n} + \
 <h4 class="anchored" data-anchor-id="hypothesis-testing-with-unpaired-design-and-unequal-variances">Hypothesis Testing with Unpaired Design and Unequal Variances</h4>
 <p><em>When the data are heteroskedastic, a correction to the degrees of freedom associated with the test statistic is necessary.</em></p>
 <p><em>What is the critical value of the <span class="math inline">\(t\)</span>-distribution associated with the test statistic in <a href="#eq-t-unequal-variances" class="quarto-xref">Equation&nbsp;<span>13.4</span></a>?</em></p>
-<p><input class="webex-solveme nospaces" id="webex-187c46fedffff7fc5d16190ac4ea1b42" data-tol="0.01" size="20" data-answer="ahoFTQUARDg="></p>
+<p><input class="webex-solveme nospaces" id="webex-e6dd8ea3fad0eb940aec4a1c6417a3ab" data-tol="0.01" size="20" data-answer="PhRWSglTQ24="></p>
 </section>
 <div class="webex-solution">
 <p>The critical value depends on <span class="math inline">\(\alpha\)</span> and on the degrees of freedom <span class="math inline">\(\nu\)</span>. Given the sample sizes <span class="math inline">\(n = 7\)</span> and <span class="math inline">\(m = 10\)</span>, the Welch–Satterthwaite correction (<a href="#eq-dof-correction" class="quarto-xref">Equation&nbsp;<span>13.5</span></a>) yields:</p>
@@ -850,7 +866,7 @@ t_{\nu, 1-\alpha/2} = t_{13, 0.975} = 2.16
 <div id="fig-3-5-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-5-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_3/ch_5/3-5-3_box-plot.png" class="img-fluid figure-img" style="width:80.0%">
+<img src="..\include/images/part_3/ch_5/3-5-3_box-plot.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.3: Box plots for the jump height data, including an additional value in the female group (<span class="math inline">\(x_8=95.2 \text{ cm}\)</span>).
@@ -873,8 +889,8 @@ Table&nbsp;13.2: Raw and ranked jump height data for male and female volleyball 
 </figcaption>
 <div aria-describedby="tbl-3-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-bbc73b070ea55cc37d16" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bbc73b070ea55cc37d16">{"x":{"filter":"none","vertical":false,"data":[[40.1,41,35.1,null,null,null,null,null],[71.5,85.09999999999999,66,48,59.4,null,null,null],[40.1,41,35.1,71.5,85.09999999999999,66,48,59.4],[2,3,1,7,8,6,4,5],[2,3,1,null,null,null,null,null],[7,8,6,4,5,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Raw data female<br>($x_i$, $n=3$)<\/th>\n      <th>Raw data male<br>($y_i$, $m=5$)<\/th>\n      <th>Grouped data<br>($z_i \\in {x_i,y_i}$)<\/th>\n      <th>Ranked data<br>($r_i = rank(z)$)<\/th>\n      <th>Ranked data female<br>($r_{x_i}$, $n=3$)<\/th>\n      <th>Ranked data male<br>($r_{y_i}$, $m=5$)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","pageLength":8,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"women","targets":0},{"name":"men","targets":1},{"name":"grouped_data","targets":2},{"name":"ranks","targets":3},{"name":"femaler","targets":4},{"name":"maler","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-0bb1c592643d3ea47d05" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0bb1c592643d3ea47d05">{"x":{"filter":"none","vertical":false,"data":[[40.1,41,35.1,null,null,null,null,null],[71.5,85.09999999999999,66,48,59.4,null,null,null],[40.1,41,35.1,71.5,85.09999999999999,66,48,59.4],[2,3,1,7,8,6,4,5],[2,3,1,null,null,null,null,null],[7,8,6,4,5,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Raw data female<br>($x_i$, $n=3$)<\/th>\n      <th>Raw data male<br>($y_i$, $m=5$)<\/th>\n      <th>Grouped data<br>($z_i \\in {x_i,y_i}$)<\/th>\n      <th>Ranked data<br>($r_i = rank(z)$)<\/th>\n      <th>Ranked data female<br>($r_{x_i}$, $n=3$)<\/th>\n      <th>Ranked data male<br>($r_{y_i}$, $m=5$)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","pageLength":8,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"women","targets":0},{"name":"men","targets":1},{"name":"grouped_data","targets":2},{"name":"ranks","targets":3},{"name":"femaler","targets":4},{"name":"maler","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -911,7 +927,7 @@ P(i) = \frac{1}{n_a} = \frac{1}{56} = 0.0178571
 <div id="fig-3-5-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-5-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_3/ch_5/3-5-4_rank-assignments.png" class="img-fluid figure-img" style="width:100.0%">
+<img src="..\include/images/part_3/ch_5/3-5-4_rank-assignments.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.4: Examples of 4 out of the 56 possible assignments of ranks and the corresponding value of the test statistic <span class="math inline">\(W\)</span>.
@@ -944,7 +960,7 @@ P(W \le 6) = \frac{1}{56} = 0.0178571
 <div id="fig-3-5-5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-5-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_3/ch_5/3-5-5_W-distribution.png" class="img-fluid figure-img" style="width:100.0%">
+<img src="..\include/images/part_3/ch_5/3-5-5_W-distribution.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.5: Distribution of the test statistic <span class="math inline">\(W\)</span> under the null hypothesis of equally likely assignment of ranks between groups.
@@ -955,8 +971,8 @@ Figure&nbsp;13.5: Distribution of the test statistic <span class="math inline">\
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>A statistical power of <span class="math inline">\(25\%\)</span> indicates that:</em></p>
-<div id="webex-215f861e3f7b4be842cb8c1c7d444e33" class="webex-radiogroup" data-answer="aQEZVhQHHVUfVmo=">
-<label><input type="radio" autocomplete="off" name="215f861e3f7b4be842cb8c1c7d444e33"><span>there is a <span class="math inline">\(25\%\)</span> probability of rejecting <span class="math inline">\(H_0\)</span> when it is true</span></label><label><input type="radio" autocomplete="off" name="215f861e3f7b4be842cb8c1c7d444e33"><span>there is a <span class="math inline">\(25\%\)</span> probability of not rejecting <span class="math inline">\(H_0\)</span> when it is false</span></label><label><input type="radio" autocomplete="off" name="215f861e3f7b4be842cb8c1c7d444e33"><span>the statistical test is unlikely to detect a true effect</span></label><label><input type="radio" autocomplete="off" name="215f861e3f7b4be842cb8c1c7d444e33"><span>the sample size is sufficient to detect the expected effect</span></label><label><input type="radio" autocomplete="off" name="215f861e3f7b4be842cb8c1c7d444e33"><span>none of the above</span></label>
+<div id="webex-5a60df3506820b616c161d602e404b95" class="webex-radiogroup" data-answer="blEaAEhXHwUcBmU=">
+<label><input type="radio" autocomplete="off" name="5a60df3506820b616c161d602e404b95"><span>there is a <span class="math inline">\(25\%\)</span> probability of rejecting <span class="math inline">\(H_0\)</span> when it is true</span></label><label><input type="radio" autocomplete="off" name="5a60df3506820b616c161d602e404b95"><span>there is a <span class="math inline">\(25\%\)</span> probability of not rejecting <span class="math inline">\(H_0\)</span> when it is false</span></label><label><input type="radio" autocomplete="off" name="5a60df3506820b616c161d602e404b95"><span>the statistical test is unlikely to detect a true effect</span></label><label><input type="radio" autocomplete="off" name="5a60df3506820b616c161d602e404b95"><span>the sample size is sufficient to detect the expected effect</span></label><label><input type="radio" autocomplete="off" name="5a60df3506820b616c161d602e404b95"><span>none of the above</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1148,7 +1164,7 @@ n = \left\lceil \frac{1+a}{a}
 \right\rceil
 \]</span></p>
 <p>Given that <span class="math inline">\(z_{1-\alpha} = 1.645\)</span> and <span class="math inline">\(z_{\beta} = -0.842\)</span>, what is the required sample size for the first group?</p>
-<p><input class="webex-solveme nospaces" id="webex-e4370b4fabd38ed80491d5b68ff6c489" data-tol="0" size="20" data-answer="PhYABRI/"></p>
+<p><input class="webex-solveme nospaces" id="webex-ff744b186f991272d6753f117f616b67" data-tol="0" size="20" data-answer="PUQEBhY/"></p>
 </div>
 <div class="webex-solution">
 <p>The required sample size for the first group is:</p>
@@ -1219,587 +1235,1171 @@ m = \lceil an \rceil
 </main> <!-- /main -->
 <script>
 
+
+
 /* definition of content for the buttons */
+
 const webex_buttons = {check_hidden:          "<b>&check;</b>",
+
                        check_hidden_alt:      "Check answer",
+
                        check_shown:           "<b>&lsh;</b>",
+
                        check_shown_alt:       "Hide check",
+
                        check_of_total:        "/",
+
                        solution:              "<b>&quest;</b>",
+
                        solution_alt:          "Correct solution",
+
                        question_next:         "<b>&#8634;</b>",
+
                        question_next_alt:     "Next question",
+
                        question_previous:     "",
+
                        question_previous_alt: ""}
 
 
+
+
+
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   document.querySelectorAll(".webex-total_correct").forEach(total => {
+
     p = total.closest(".webex-box");
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
+
     /* no specific class on input node, thus searching via query selector */
+
     var checkboxgroups = p.querySelectorAll("div[class=webex-checkboxgroup] input[type=checkbox]").length
 
+
+
     /* show number of correct / total number of answers */
+
     total.innerHTML = correct + "&nbsp;" + webex_buttons.check_of_total + "&nbsp;" + (solvemes + radiogroups + checkboxgroups + selects);
+
   });
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answer");
 
+
+
   //var cl = elem.parentElement.classList;
+
   var cl = this.closest(".webex-box").classList;
+
   if (cl.contains("unchecked")) {
+
     cl.remove("unchecked");
+
     this.innerHTML = webex_buttons.check_shown; //"Hide check";
+
     if (webex_buttons.check_shown_alt.length > 0) this.setAttribute("title", webex_buttons.check_shown_alt);
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = webex_buttons.check_hidden; //"Check answer";
+
     if (webex_buttons.check_hidden_alt.length > 0) this.setAttribute("title", webex_buttons.check_hidden_alt);
+
   }
+
 }
+
+
 
 /* helper functions for checking the webex ID */
+
 const id_checker = {"fmt": new RegExp("[g-zG-Z]"),
+
                     "load": function(e) { return e.getAttribute("id").match("(?<=(-)).*$")[0]; },
+
                     "eval": new TextEncoder(),
+
                     "dval": new TextDecoder()}
 
+
+
 /* Show/hide correct solution */
+
 solution_func = function() {
+
   console.log("webex: show/hide solution");
 
+
+
   var div = this.closest(".webex-question").querySelector(".webex-solution");
+
   var cl = div.classList;
 
+
+
   if (cl.contains("visible")) {
+
     cl.remove("visible");
+
   } else {
+
     cl.add("visible");
+
   }
+
 }
 
+
+
 /* function to check if the real answer is numeric */
+
 convert_to_numeric = function(x) {
+
   if (typeof x == "string") {
+
     /* do nothing */
+
   } else if (x.length == 1) {
+
     /* take first element */
+
     x = x[0]
+
   } else {
+
     return NaN;
+
   }
 
+
+
   /* remove spaces for easier parsing */
+
   x = x.replace(/\s/g, "");
 
+
+
   /* Define patterns for different formats, note that spaces have been removed above */
+
   const patterns = [
+
     {regex: /^[+-]?\d+(\.\d{3})*,\d+$/, decimal: ",", thousand: "." },  // Format: "1.100.100.100,3"
+
     {regex: /^[+-]?\d+(,\d{3})*\.\d+$/, decimal: ".", thousand: "," },  // Format: "1,100,100,100.3"
+
     {regex: /^[+-]?\d+(\.|\.\d+)?$/, decimal: "." },                    // Format: "1100100100.5" or "1100100100."
+
     {regex: /^[+-]?\d+(,|,\d+)$/, decimal: "," }                        // Format: "1100100100,5" or "1100100100,"
+
   ];
 
 
+
+
+
   /* testing all regular expressions, convert to float if possible */
+
   for (const { regex, decimal, thousand } of patterns) {
+
     if (regex.test(x)) {
+
       let numeric = x;
+
       if (thousand) numeric = numeric.replace(new RegExp(`\\${thousand}`, "g"), "");
+
       numeric = numeric.replace(decimal, ".");
+
       return parseFloat(numeric);
+
     }
+
   }
+
+
 
   /* input of length 1 but none of the known formats, return NaN */
+
   return NaN;
+
 }
+
+
 
 /* Checking webex ID, returns formalsol */
+
 check_id = function(e) {
+
   /* loading webex ID */
+
   var id = id_checker["load"](e);
 
+
+
   /* extracting answer */
+
   let answer = e.dataset.answer;
 
+
+
   /* checking unique id, prepare and return array */
+
   if (!id_checker["fmt"].test(id)) {
+
     const a = id_checker["eval"].encode(atob(answer));
+
     const b = id_checker["eval"].encode(id);
+
     const res = a.map((byte, index) => byte^b[index % b.length]);
+
     answer = id_checker["dval"].decode(res);
+
     /* Replacing &amp; with ' before parsing */
+
     answer = answer.replaceAll("&apos;", "'");
+
   }
+
+
 
   return JSON.parse(answer);
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   /* avoid that keyup and keychange twice execute this function within nms = 10
+
    * ms, clearing inputTimer and add timeout */
+
   console.log("webex: check solveme");
 
+
+
   /* float, precision for checking numeric answers */
+
   const eps = 0.00000000000001;
 
+
+
   /* get last checked user answer */
+
   const question = this.closest(".webex-question")
 
+
+
   /* extracting classes */
+
   var cl = this.classList;
+
   var my_answer = this.value;
 
+
+
   /* extracting classes */
+
   var cl = this.classList;
 
+
+
   /* empty answer? Job done */
+
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
     return false;
+
   }
+
+
 
   /* Find closest (parent) webex-question */
+
   let formalsols = check_id(this)
 
+
+
   /* by default we assume the users' answer is incorrect */
+
   var user_answer_correct = false;
 
+
+
   /* check if the correct answer is numeric, i.e. if 
+
    * formalsols is of length 1 containing one single numeric
+
    * value in a known format, else, NaN is returned */
+
   const num_formalsol = convert_to_numeric(formalsols);
+
   const num_my_answer = convert_to_numeric(my_answer);
 
+
+
   /* if the correct answer is numeric (float), the user's answer
+
    * must also be numeric. If not, it is wrong. Else we can
+
    * compare floating point numbers */
+
   if (!isNaN(num_formalsol) && !isNaN(num_my_answer)) {
+
     /* check if the real answer and the user input are numerically the same;
+
      * adding 'delta' to avoid precision issues */
+
     var diff = Math.abs(num_formalsol - num_my_answer);
+
     if (diff < parseFloat(this.dataset.tol) + eps) { user_answer_correct = true; }
 
+
+
   /* if the question contains regex, a regular expression is used
+
    * to evaluate the users answer. Allows for multiple regular expressions */
+
   } else if (cl.contains("regex")) {
+
     for (let i = 0; i < formalsols.length; i++) {
+
         let regex = new RegExp(formalsols[i], cl.contains("ignorecase") ? "i" : "");
+
         if (regex.test(my_answer)) { user_answer_correct = true; break; }
+
     }
+
+
 
   /* else we evaluate on 'string level', considering the creators preferences
+
    * regarding set options */
+
   } else {
+
     /* modify/prepare answer */
+
     if (cl.contains("ignorecase")) { my_answer = my_answer.toLowerCase(); }
+
     if (cl.contains("nospaces"))   { my_answer = my_answer.replace(/ /g, ""); }
 
+
+
     /* if the real answer includes user input - correct */
+
     if (formalsols.includes(my_answer)) {
+
       user_answer_correct = true;
+
   
+
       // added regex bit
+
       if (cl.contains("regex")) {
+
         answer_regex = RegExp(formalsols.join("|"))
+
         if (answer_regex.test(my_answer)) {
+
           cl.add("webex-correct");
+
         }
+
       }
+
     }
+
   }
+
+
 
   if (user_answer_correct) {
+
       cl.add("webex-correct");
+
       cl.remove("webex-incorrect");
+
   } else {
+
       cl.add("webex-incorrect");
+
       cl.remove("webex-correct");
+
   }
+
+
 
   update_total_correct();
 
+
+
 }
+
+
 
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
 
+
+
   var options   = [];
+
   Array.from(this.querySelectorAll("option")).forEach((option, index) => {
+
     if (!option.hasAttribute("value") || !option.getAttribute("value") === "blank") {
+
       options.push(option);
+
     }
+
   });
+
+
 
   /* get selected option */
+
   function get_selected(options) { return options.findIndex(option => option.selected); }
+
   var option_index = get_selected(options)
 
+
+
   /* loading webex ID */
+
   var formalsol = check_id(this)
 
+
+
   /* add class for current selection */
+
   this.classList.remove("webex-incorrect");
+
   this.classList.remove("webex-correct");
+
   if (option_index >= 0) {
+
     this.classList.add(formalsol[option_index] === 1 ? "webex-correct" : "webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   /* get real answer (binary integer array) */
+
   var id = e.target.getAttribute("name");
+
   var group = document.querySelector(".webex-radiogroup[id='webex-" + id + "']");
+
   var formalsol = check_id(group)
 
+
+
   /* check which radiobuttion is selected (user answer) */
+
   function get_checked(radios) {
+
     return radios.findIndex(radios => radios.checked);
+
   }
+
   var radios = Array.from(group.querySelectorAll("input[type='radio']"))
+
   var radio_index = get_checked(radios);
 
+
+
   /* remove existing classes */
+
   radios.forEach(radio => {
+
     let cl = radio.closest("label").classList
+
     cl.remove("webex-incorrect");
+
     cl.remove("webex-correct");
+
   });
 
+
+
   /* add class for current selection */
+
   let cl = radios[radio_index].closest("label").classList
+
   if (formalsol[radio_index] === 1) {
+
       cl.add("webex-correct");
+
   } else {
+
       cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
+
 
 
 /* function for checking checkboxgroups answers */
+
 checkboxgroups_func = function(e) {
+
   console.log("webex: check checkboxgroups");
 
+
+
   /* get real answer (binary integer array) */
+
   var group = document.querySelector(".webex-checkboxgroup[id='" + this.id + "']");
+
   var formalsol = check_id(group);
 
+
+
   /* check which checkbox is checked (user answer) */
+
   function get_checked(group) {
+
       const checkboxes = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
       return checkboxes.reduce((indices, checkbox, index) => {
+
           if (checkbox.checked) indices.push(index);
+
           return indices;
+
       }, []);
+
   }
+
   var checks = Array.from(group.querySelectorAll("input[type='checkbox']"));
+
   var check_index = get_checked(group);
 
+
+
   checks.forEach((e, index) => {
+
     var label = e.parentNode;
+
     var ans = formalsol[index];
+
     if ((e.checked && ans === 1) || (!e.checked && ans === 0)) {
+
         label.setAttribute("class", "webex-correct")
+
     } else {
+
         label.setAttribute("class", "webex-incorrect")
+
     }
+
   });
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* shuffling array (thanks to stack overflow)
+
  * If argument x is an integer we create an integer sequence
+
  * from 0, 1, ..., (x - 1) and return a shuffled version. If
+
  * the input is an array, we simply shuffle it */
+
 shuffle_array = function(x) {
+
    if (Number.isInteger(x) && !isNaN(x)) {
+
      x = Array.from({length: x}, (v, i) => i);
+
    }
+
    let shuffled = x.map(value => ({ value, sort: Math.random() }))
+
         .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+
    return shuffled;
+
 }
+
+
 
 /* ---------------------------------------------------------
+
  * ---------------------------------------------------------
+
  * --------------------------------------------------------- */
+
 window.onload = function() {
+
   //console.log("webex: onload");
 
+
+
   /* setting up buttons and actions to show/hide answers */
+
   document.querySelectorAll(".webex-check").forEach(section => {
+
     section.classList.add("unchecked");
 
+
+
     /* ul to take up the list items with buttons */
+
     let button_ul = document.createElement("ul");
+
     button_ul.setAttribute("class", "webex-button-list");
+
     section.appendChild(button_ul);
 
+
+
     /* button to _check_ if answers given are correct */
+
     let li_check = document.createElement("li");
+
     button_ul.appendChild(li_check); /* add list item to ul */
+
     let btn_check = document.createElement("button");
+
     btn_check.innerHTML = webex_buttons.check_hidden;  // "Check answer";
+
     btn_check.setAttribute("class", "webex-button webex-button-check");
+
     if (webex_buttons.check_hidden_alt.length > 0) btn_check.setAttribute("title", webex_buttons.check_hidden_alt);
+
     btn_check.onclick = check_func;
+
     li_check.appendChild(btn_check);
 
+
+
     /* span to show current number of points (when _check_ active) */
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     li_check.appendChild(spn);
 
+
+
     /* button to show the _solution_ if there is one */
+
     var has_solution = section.parentNode.querySelectorAll(".webex-solution").length > 0;
+
     if (has_solution) {
+
       let li_solution = document.createElement("li");
+
       button_ul.appendChild(li_solution); /* add list item to ul */
+
       let btn_solution = document.createElement("button");
+
       btn_solution.innerHTML = webex_buttons.solution; // "Correct answer";
+
       btn_solution.setAttribute("class", "webex-button webex-button-solution");
+
       if (webex_buttons.solution_alt.length > 0) btn_solution.setAttribute("title", webex_buttons.solution_alt);
+
       btn_solution.onclick = solution_func;
+
       li_solution.appendChild(btn_solution);
+
     }
 
+
+
   });
+
+
 
   /* set up webex-solveme inputs */
+
   document.querySelectorAll(".webex-solveme").forEach(solveme => {
+
     solveme.setAttribute("autocomplete","off");
+
     solveme.setAttribute("autocorrect", "off");
+
     solveme.setAttribute("autocapitalize", "off");
+
     solveme.setAttribute("spellcheck", "false");
+
     solveme.value = "";
 
+
+
     /* adjust answer for 'no spaces' (ignore spaces) */
+
     if (solveme.classList.contains("nospaces")) {
+
       solveme.dataset.answer = solveme.dataset.answer.replace(/ /g, "");
+
     }
+
+
 
     /* attach checking function, triggered on key up, change, and when
+
      * elemnt is out of focus. Only evaluated once by tracking changes
+
      * via variable solveme_last_user_answer */
+
     solveme.addEventListener("keyup",  solveme_func);
+
     solveme.addEventListener("change", solveme_func);
+
     solveme.addEventListener("blur",   solveme_func);
 
+
+
     /* adding span to show correct/incorrect icon */
+
     solveme.insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   });
+
+
 
   /* set up radiogroups (single choice questions with display = "buttons") */
+
   document.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
     radiogroup.onchange = radiogroups_func;
+
   });
+
+
 
   /* set up checkboxgroups (multiple choice questions with display = "buttons") */
+
   document.querySelectorAll(".webex-checkboxgroup").forEach(checkboxgroup => {
+
     checkboxgroup.onchange = checkboxgroups_func;
+
   });
+
+
 
   /* set up selects (dropdown menus) */
+
   document.querySelectorAll(".webex-select").forEach(select => {
+
     select.onchange = select_func;
+
     /* append webex-icon for correct/incorrect icons */
+
     var elem = document.createElement("span")
+
     elem.classList.add("webex-icon")
+
     select.parentNode.appendChild(elem)
+
   });
+
+
 
   /* change to next/previous question if multiple are available */
+
   function handleQuestionClick(group, questions, step) {
+
     return async function() {
+
       /* get question order as integer vector */
+
       let questionOrder = group.dataset.questionOrder.split(",").map(str => parseInt(str));
 
+
+
       /* current question/position */
+
       let currentPosition = parseInt(group.dataset.currentPosition);
 
+
+
       /* Hide the current question */
+
       questions.forEach(question => { question.classList.remove("active"); });
 
+
+
       /* Move to the next question index */
+
       currentPosition = (currentPosition + step) % questionOrder.length;
+
       if (currentPosition < 0) currentPosition = currentPosition + questionOrder.length
 
+
+
       /* Display the new question */
+
       questions[questionOrder[currentPosition]].classList.add("active");
 
+
+
       // Update the currentPosition data attribute on the group div
+
       group.dataset.currentPosition = currentPosition;
+
     };
+
   }
+
+
 
   document.querySelectorAll(".webex-group").forEach(group => {
+
     const questions = Array.from(group.querySelectorAll(".webex-question"));
 
+
+
     /* Create vector with question order. If the webex-group does
+
      * not have class '.noshuffle' we will randomly shuffle the order */
+
     let questionOrder = Array.from({length: questions.length}, (v, i) => i);
+
     if (!group.classList.contains("noshuffle")) {
+
       questionOrder = shuffle_array(questionOrder);
+
     }
 
+
+
     /* take start position (if set) or start at 0 */
+
     const currentPosition = parseInt(group.getAttribute("data-start-position")) || 0;
 
+
+
     /* show the default question for each group */
+
     questions[questionOrder[currentPosition]].classList.add("active");
 
+
+
     /* store random order of questions as well as current position */
+
     group.dataset.questionOrder   = questionOrder;
+
     group.dataset.currentPosition = currentPosition;
 
+
+
     /* find all webex-questions, search for .webex-button-list and
+
      * populate the list with necessary <li><button>...</button></li> elements */
+
     questions.forEach(question => {
+
         let button_ul = question.querySelector("ul.webex-button-list");
 
+
+
         let li_next = document.createElement("li");
+
         let nextButton = document.createElement("button");
+
         nextButton.setAttribute("class", "webex-button webex-button-next");
+
         if (webex_buttons.question_next_alt.length > 0) nextButton.setAttribute("title", webex_buttons.question_next_alt);
+
         nextButton.innerHTML = webex_buttons.question_next; // "Next question";
+
         nextButton.addEventListener("click", handleQuestionClick(group, questions, 1));
+
         li_next.appendChild(nextButton);
 
+
+
         let li_previous = document.createElement("li");
+
         let previousButton = document.createElement("button");
+
         previousButton.setAttribute("class", "webex-button webex-button-previous");
+
         if (webex_buttons.question_previous_alt.length > 0) previousButton.setAttribute("title", webex_buttons.question_previous_alt);
+
         previousButton.innerHTML = webex_buttons.question_previous; // "Previous question";
+
         previousButton.addEventListener("click", handleQuestionClick(group, questions, -1));
+
         li_previous.appendChild(previousButton);
 
+
+
         if (webex_buttons.question_previous.length > 0) button_ul.appendChild(li_previous);
+
         if (webex_buttons.question_next.length > 0) button_ul.appendChild(li_next);
+
     });
+
   });
+
+
 
   /* Development options */
+
   document.querySelectorAll(".webex-question.check").forEach(question => {
+
       question.querySelector(".webex-button-check").click()
+
   });
+
   document.querySelectorAll(".webex-question.solution").forEach(question => {
+
       let btn = question.querySelector(".webex-button-solution");
+
       if (btn !== null) { btn.click(); }
+
   });
+
+
 
   /* Pre-filling <input> fields */
+
   document.querySelectorAll(".webex-question.prefill").forEach(question => {
+
       question.querySelectorAll("input.webex-solveme").forEach(solveme => {
+
           let x = JSON.parse(solveme.dataset.answer);
+
           solveme.value = x[0];
+
           /* Trigger the on change event */
+
           solveme.dispatchEvent(new Event("change"));
+
       });
+
+
 
       /* Pre-filling radiogroups, that is for schoice questions */
+
       question.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
+
           let x = JSON.parse(radiogroup.dataset.answer);
+
           let idx = x.indexOf(1);
+
           let radios = radiogroup.querySelectorAll('input[type="radio"]');
+
           radios[idx].checked = true;
+
           /* Trigger the on change event */
+
           radios[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
       });
+
+
 
       /* Pre-filling checkboxgroups, that is for schoice questions w/ dropdown menus */
+
       question.querySelectorAll(".webex-select").forEach(dropdown => {
+
           let x = JSON.parse(dropdown.dataset.answer);
+
           let idx = x.indexOf(1) + 1; /* +1 to skip the first blank option */
+
           let options = dropdown.querySelectorAll("option");
+
           options[idx].selected = true;
+
           /* Trigger the on change event */
+
           options[idx].dispatchEvent(new Event("change", { bubbles: true }));
+
       });
+
+
 
       /* Pre-filling checkboxgroups, that is for mchoice questions */
+
       question.querySelectorAll(".webex-checkboxgroup").forEach(radiogroup => {
+
           let x = JSON.parse(radiogroup.dataset.answer);
+
           let checkboxes = radiogroup.querySelectorAll('input[type="checkbox"]');
+
           for (let i = 0; i < checkboxes.length; i++) {
+
               checkboxes[i].checked = x[i];
+
           }
+
           /* Trigger the on change event */
+
           checkboxes[0].dispatchEvent(new Event("change", { bubbles: true }));
+
       });
+
   });
+
+
 
   /* Show set tolerance (devel option) */
+
   function calc_width(x, txt, offset = 20) {
+
       /* We do the following:
+
        * Create a new span, insert the value we need in the .tolerance
+
        * input node, and calculate its offsetWidth. Then remove it
+
        * again; this is just used to calculate the required width. */
+
       var cwtmp = document.createElement("span");
+
       x.appendChild(cwtmp);
+
       cwtmp.innerHTML = txt || "";
+
       var w = parseInt(cwtmp.getBoundingClientRect().width) + offset;
+
       cwtmp.remove();
+
       return w;
+
   }
 
+
+
   /* If tolerance should be shown (devel option) we calculate:
+
    * - the width required to properly display the solution
+
    * - the width required to properly display the tolerance
+
    * - add a new element to display the tolerance
+
    * - reduce the width of the solution input box. */
+
   document.querySelectorAll(".webex-question.tolerance").forEach(question => {
+
       question.querySelectorAll("input[data-tol]").forEach(elem => {
+
           var w = null;
 
+
+
           /* Add new element showing the tolerance */
+
           let tol = document.createElement("input");
+
           tol.type = "text"; // <inpyt type="text">
+
           tol.disabled = true; // Disable input element
+
           tol.classList.add("tolerance"); // Appending class
+
           tol.value = "Â± " + elem.getAttribute("data-tol");
 
+
+
           /* Add new node */
+
           elem.parentNode.insertBefore(tol, elem)
 
+
+
           var body     = document.querySelector("body");
+
           //tol.value = "Â± " + "0.0000007";
+
           //tol.value = "Â± " + "0.07";
+
           w    = calc_width(body, tol.value);
+
           wold = parseInt(elem.getBoundingClientRect().width);
+
           wmin = calc_width(body, elem.value);
 
+
+
           /* Calculate required width of the 'tolerance' node, and the
+
            * reduction of the original 'input' node */
+
           let wnew = Math.max(wmin, wold - w);
+
           tol.style.width  = w + "px";
+
           elem.style.width = wnew + "px";
+
       });
+
   });
 
+
+
   update_total_correct();
+
 }
+
+
 
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
