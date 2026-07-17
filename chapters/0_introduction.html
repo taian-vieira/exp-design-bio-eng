@@ -103,11 +103,19 @@ div.csl-indent {
       theme: 'classic',
       openSidebar: false,
       
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      // --- MANDATORY NATIVE WORKSPACE ENFORCEMENT ---
       services: [{
         apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['bbaze1o8'] 
+        
+        // Force your group to be the baseline structural authority
+        // Note: Use lowercase letters for your 8-character ID here!
+        groups: ['bbaze1o8'],
+        
+        // Strips away the global Public channel entirely
+        // This changes Hypothesis into an isolated course sandbox
+        grantToken: function() {
+          return Promise.resolve(null);
+        }
       }]
     };
   };
@@ -432,8 +440,8 @@ div.csl-indent {
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><strong>Lifestyle is a confounder because:</strong></p>
-<div id="webex-65156d1ea25fff961ae56ededf8b5773" class="webex-radiogroup" data-answer="bQQdBRpUHVU8">
-<label><input type="radio" autocomplete="off" name="65156d1ea25fff961ae56ededf8b5773"><span><em>rest heart rate depends on lifestyle</em></span></label><label><input type="radio" autocomplete="off" name="65156d1ea25fff961ae56ededf8b5773"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="65156d1ea25fff961ae56ededf8b5773"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="65156d1ea25fff961ae56ededf8b5773"><span><em>people drinking coffee are physically inactive</em></span></label>
+<div id="webex-0d70cc1748a777303133c3e33c6da5ce" class="webex-radiogroup" data-answer="a1QbAE9THQZp">
+<label><input type="radio" autocomplete="off" name="0d70cc1748a777303133c3e33c6da5ce"><span><em>people drinking coffee are physically inactive</em></span></label><label><input type="radio" autocomplete="off" name="0d70cc1748a777303133c3e33c6da5ce"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="0d70cc1748a777303133c3e33c6da5ce"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="0d70cc1748a777303133c3e33c6da5ce"><span><em>rest heart rate depends on lifestyle</em></span></label>
 </div>
 </div>
 </div>

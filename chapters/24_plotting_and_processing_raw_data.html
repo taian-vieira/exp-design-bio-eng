@@ -158,11 +158,19 @@ div.csl-indent {
       theme: 'classic',
       openSidebar: false,
       
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      // --- MANDATORY NATIVE WORKSPACE ENFORCEMENT ---
       services: [{
         apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['bbaze1o8'] 
+        
+        // Force your group to be the baseline structural authority
+        // Note: Use lowercase letters for your 8-character ID here!
+        groups: ['bbaze1o8'],
+        
+        // Strips away the global Public channel entirely
+        // This changes Hypothesis into an isolated course sandbox
+        grantToken: function() {
+          return Promise.resolve(null);
+        }
       }]
     };
   };
@@ -1220,8 +1228,8 @@ Table&nbsp;7.1: CoG standard deviation and speed for the two files provided.
 </figcaption>
 <div aria-describedby="tbl-2-4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-5deb1e3f943e4304e1a0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5deb1e3f943e4304e1a0">{"x":{"filter":"none","vertical":false,"data":[["standing_eyes_open","standing_eyes_closed"],[1.219216802404721,1.005186447129433],[0.9010729831512064,0.6842581899848735],[0.8002792955836808,0.4486225579242993],[1.066249331311139,0.8928504514062843]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>File processed<\/th>\n      <th>$\\sigma_x \\textrm{(cm)}$<\/th>\n      <th>$\\sigma_y \\textrm{(cm)}$<\/th>\n      <th>$v_x \\textrm{(cm/s)}$<\/th>\n      <th>$v_y \\textrm{(cm/s)}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"targets":1,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":2,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"test_condition","targets":0},{"name":"v_x","targets":1},{"name":"v_y","targets":2},{"name":"sigma_x","targets":3},{"name":"sigma_y","targets":4}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render","options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6f14525e61a0e1ff54fa" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6f14525e61a0e1ff54fa">{"x":{"filter":"none","vertical":false,"data":[["standing_eyes_open","standing_eyes_closed"],[1.219216802404721,1.005186447129433],[0.9010729831512064,0.6842581899848735],[0.8002792955836808,0.4486225579242993],[1.066249331311139,0.8928504514062843]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>File processed<\/th>\n      <th>$\\sigma_x \\textrm{(cm)}$<\/th>\n      <th>$\\sigma_y \\textrm{(cm)}$<\/th>\n      <th>$v_x \\textrm{(cm/s)}$<\/th>\n      <th>$v_y \\textrm{(cm/s)}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"targets":1,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":2,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"test_condition","targets":0},{"name":"v_x","targets":1},{"name":"v_y","targets":2},{"name":"sigma_x","targets":3},{"name":"sigma_y","targets":4}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render","options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>

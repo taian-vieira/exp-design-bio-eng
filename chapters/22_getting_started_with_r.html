@@ -118,11 +118,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       theme: 'classic',
       openSidebar: false,
       
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      // --- MANDATORY NATIVE WORKSPACE ENFORCEMENT ---
       services: [{
         apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['bbaze1o8'] 
+        
+        // Force your group to be the baseline structural authority
+        // Note: Use lowercase letters for your 8-character ID here!
+        groups: ['bbaze1o8'],
+        
+        // Strips away the global Public channel entirely
+        // This changes Hypothesis into an isolated course sandbox
+        grantToken: function() {
+          return Promise.resolve(null);
+        }
       }]
     };
   };

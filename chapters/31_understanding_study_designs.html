@@ -107,11 +107,19 @@ div.csl-indent {
       theme: 'classic',
       openSidebar: false,
       
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      // --- MANDATORY NATIVE WORKSPACE ENFORCEMENT ---
       services: [{
         apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['bbaze1o8'] 
+        
+        // Force your group to be the baseline structural authority
+        // Note: Use lowercase letters for your 8-character ID here!
+        groups: ['bbaze1o8'],
+        
+        // Strips away the global Public channel entirely
+        // This changes Hypothesis into an isolated course sandbox
+        grantToken: function() {
+          return Promise.resolve(null);
+        }
       }]
     };
   };
@@ -500,8 +508,8 @@ window.Quarto = {
 </div>
 </div>
 <p><em>Which of the following statements provides a more accurate interpretation for this figure?</em></p>
-<div id="webex-7aa3c381fa257b420d48089a79407cc3" class="webex-radiogroup" data-answer="bFFNAk8DFAE7">
-<label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>Survival probability is the same regardless of the treatment received</span></label><label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>At least 50% of patients with acinar carcinoma survive over 12 months</span></label><label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>Younger patients with acinar cell carcinoma have higher probability of survival</span></label><label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>Radiotherapy prolongs survival by 40 months</span></label>
+<div id="webex-df2ec84fffb145c70719504c1d83074e" class="webex-radiogroup" data-answer="P1YeVE8IGFY7">
+<label><input type="radio" autocomplete="off" name="df2ec84fffb145c70719504c1d83074e"><span>Survival probability is the same regardless of the treatment received</span></label><label><input type="radio" autocomplete="off" name="df2ec84fffb145c70719504c1d83074e"><span>At least 50% of patients with acinar carcinoma survive over 12 months</span></label><label><input type="radio" autocomplete="off" name="df2ec84fffb145c70719504c1d83074e"><span>Younger patients with acinar cell carcinoma have higher probability of survival</span></label><label><input type="radio" autocomplete="off" name="df2ec84fffb145c70719504c1d83074e"><span>Radiotherapy prolongs survival by 40 months</span></label>
 </div>
 </div>
 </div>
@@ -566,7 +574,7 @@ Table&nbsp;9.1: Number of occurrences for each combination of exposure and outco
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>For the example data provided in <a href="#tbl-3-1-1" class="quarto-xref">Table&nbsp;<span>9.1</span></a> above, the odds ratio is</em></p>
-<p><input class="webex-solveme nospaces" id="webex-6c56bb629a1735bed0bc4f0b8ea7aa6b" data-tol="0" size="20" data-answer="bUEHFD8="></p>
+<p><input class="webex-solveme nospaces" id="webex-69ba8c5608d306a32e76f4e2e5dbb1ed" data-tol="0" size="20" data-answer="bRtQQ2U="></p>
 </div>
 <div class="webex-solution">
 <p>Given that:</p>
@@ -614,8 +622,8 @@ Figure&nbsp;9.3: Distribution of BMI and waist circumference values measured for
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>The mean values for BMI and for the waist circumference can be defined directly by inspecting <a href="#fig-3-1-4" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>. <strong>What are the standard deviations for BMI and waist circumference?</strong></em></p>
-<div id="webex-9c8945dfd7c9b02f698014c3f0c30bc1" class="webex-radiogroup" data-answer="YlMUCRgESFY5">
-<label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>20.3 kg/m<sup>2</sup>, 76.3 cm</span></label><label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>None of the above</span></label><label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>5.1 kg/m<sup>2</sup>, 14.0 cm</span></label><label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>30.5 kg/m<sup>2</sup>, 104.3 cm</span></label>
+<div id="webex-005d8064df897333ed3fa27266429223" class="webex-radiogroup" data-answer="awAZVBQBGgQ5">
+<label><input type="radio" autocomplete="off" name="005d8064df897333ed3fa27266429223"><span>None of the above</span></label><label><input type="radio" autocomplete="off" name="005d8064df897333ed3fa27266429223"><span>20.3 kg/m<sup>2</sup>, 76.3 cm</span></label><label><input type="radio" autocomplete="off" name="005d8064df897333ed3fa27266429223"><span>5.1 kg/m<sup>2</sup>, 14.0 cm</span></label><label><input type="radio" autocomplete="off" name="005d8064df897333ed3fa27266429223"><span>30.5 kg/m<sup>2</sup>, 104.3 cm</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -802,9 +810,9 @@ Figure&nbsp;9.6: Example of three techniques for simple randomization.
 <div class="webex-check webex-box">
 <p><img src="..\include/images/part_3/ch_1/3-1-8_self-and-no-treatment-control.jpg" class="img-fluid" style="width:100.0%"></p>
 <p><em>Based on the illustration above, what can be said about …</em></p>
-<p><em>… the study design? It is</em> <select class="webex-select" id="webex-3ed703a0f2ef698981d7db575c8c6cfd" data-answer="aFVIBxwDTQE7"><option value="blank"></option><option>a non-randomized clinical trial</option><option>an RCT study</option><option>a Case-control study</option><option>not possible to answer</option></select></p>
-<p><em>… the use of controls? It used</em> <select class="webex-select" id="webex-d25d1317d87a6dd533176bb295689648" data-answer="PwIZVR0DHQc5"><option value="blank"></option><option>Concurrent Controls</option><option>No-Treatment Controls</option><option>Dose-Response Controls</option><option>none of the above</option></select></p>
-<p><em>… the use of blinding? This is a double-blinded study:</em> <select class="webex-select" id="webex-4e6f244222d29b3361adc5d8ea6a2891" data-answer="b1UaV28="><option value="blank"></option><option>true</option><option>false</option></select></p>
+<p><em>… the study design? It is</em> <select class="webex-select" id="webex-8894a9b723ca9b32e5c0ca0a1ae0dad2" data-answer="YwgVBE0JTgZv"><option value="blank"></option><option>a non-randomized clinical trial</option><option>an RCT study</option><option>a Case-control study</option><option>not possible to answer</option></select></p>
+<p><em>… the use of controls? It used</em> <select class="webex-select" id="webex-f2ef6e97777b820e2ea3a3b3d29d3bbb" data-answer="PQJJVxpVFQdq"><option value="blank"></option><option>Concurrent Controls</option><option>No-Treatment Controls</option><option>Dose-Response Controls</option><option>none of the above</option></select></p>
+<p><em>… the use of blinding? This is a double-blinded study:</em> <select class="webex-select" id="webex-51a484b956e4fd19a983e1cccbde0385" data-answer="bgFNBWU="><option value="blank"></option><option>true</option><option>false</option></select></p>
 </div>
 <div class="webex-solution">
 <p>The figure illustrates an interventional longitudinal study design. However, there is no information indicating whether subjects were randomized between groups. Therefore, the study cannot be classified as a randomized controlled trial (RCT).</p>

@@ -160,11 +160,19 @@ div.csl-indent {
       theme: 'classic',
       openSidebar: false,
       
-      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      // --- MANDATORY NATIVE WORKSPACE ENFORCEMENT ---
       services: [{
         apiUrl: 'https://hypothes.is',
-        // Force your group to be the baseline environment
-        groups: ['bbaze1o8'] 
+        
+        // Force your group to be the baseline structural authority
+        // Note: Use lowercase letters for your 8-character ID here!
+        groups: ['bbaze1o8'],
+        
+        // Strips away the global Public channel entirely
+        // This changes Hypothesis into an isolated course sandbox
+        grantToken: function() {
+          return Promise.resolve(null);
+        }
       }]
     };
   };
@@ -629,16 +637,16 @@ window.Quarto = {
 <ol type="1">
 <li><em>The response variable</em></li>
 </ol>
-<p><select class="webex-select" id="webex-953e088018dd87de329687fa7bf4c9bb" data-answer="YgUfVRwJFABs"><option value="blank"></option><option>blood pressure</option><option>heart rate</option><option>time of relieve</option><option>degree of headache</option></select></p>
+<p><select class="webex-select" id="webex-687bd0207a296070824a94f41d3c5331" data-answer="bQgbUkgBHgBq"><option value="blank"></option><option>blood pressure</option><option>heart rate</option><option>time of relieve</option><option>degree of headache</option></select></p>
 <ol start="2" type="1">
 <li><em>The factor</em></li>
 </ol>
-<p><select class="webex-select" id="webex-b84068049df694a4174ca5ddff1c6585" data-answer="OQgYARoIHARk"><option value="blank"></option><option>time to relieve</option><option>headache medicine</option><option>groups of subjects</option><option>degree of headache</option></select></p>
+<p><select class="webex-select" id="webex-55e48734d2c18726a468734b3c407c35" data-answer="bgVJBRQHHwQ5"><option value="blank"></option><option>time to relieve</option><option>headache medicine</option><option>groups of subjects</option><option>degree of headache</option></select></p>
 <ol start="3" type="1">
 <li><em>The levels of the factor</em></li>
 </ol>
-<div id="webex-9f56f7fe4db778a721cd58a451b1e5ef" class="webex-checkboxgroup" data-answer="YlYZB0oHSlQYVU4HGwg8">
-<label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>Comfort</span></label><label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>Paracetamol</span></label><label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>degree of headache</span></label><label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>Tylenol</span></label><label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>Placebo</span></label><label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>time to relieve</span></label><label><input type="checkbox" autocomplete="off" name="9f56f7fe4db778a721cd58a451b1e5ef"><span>dose of medicine</span></label>
+<div id="webex-d09a17ed9fea593189c8546d645edb17" class="webex-checkboxgroup" data-answer="PwAVUB0HSVUVV0lRGQlu">
+<label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>Comfort</span></label><label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>Paracetamol</span></label><label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>degree of headache</span></label><label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>Tylenol</span></label><label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>Placebo</span></label><label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>time to relieve</span></label><label><input type="checkbox" autocomplete="off" name="d09a17ed9fea593189c8546d645edb17"><span>dose of medicine</span></label>
 </div>
 </div>
 </div>
@@ -661,8 +669,8 @@ window.Quarto = {
 </figure>
 </div>
 <p><em>This figure, from the study of Yanguang et al <span class="citation" data-cites="yanguang21">[<a href="references.html#ref-yanguang21" role="doc-biblioref">2</a>]</span>, illustrates the time during which subjects were able to stand on a single leg with eyes closed.</em></p>
-<p><em>How many factors do you see in the figure? </em> <select class="webex-select" id="webex-a17fc611a98643118b8d8c30446780ba" data-answer="OgEbV08GHQE8"><option value="blank"></option><option>1</option><option>2</option><option>3</option><option>4</option></select></p>
-<p><em>How many levels, in total (including all factors), do you see? </em> <select class="webex-select" id="webex-92ec335c6d7b145e995004cb0727f2e8" data-answer="YgJJUx8DGVMaVWo="><option value="blank"></option><option>1</option><option>2</option><option>3</option><option>4</option><option>10</option></select></p>
+<p><em>How many factors do you see in the figure? </em> <select class="webex-select" id="webex-cbf66f123cd2f5e079f75bd96174fdeb" data-answer="OFJKBxpWHQJu"><option value="blank"></option><option>1</option><option>2</option><option>3</option><option>4</option></select></p>
+<p><em>How many levels, in total (including all factors), do you see? </em> <select class="webex-select" id="webex-07bdbdc0b62b263458e3d5189ced99ea" data-answer="awdOVE5UTwBOB28="><option value="blank"></option><option>1</option><option>2</option><option>3</option><option>4</option><option>10</option></select></p>
 </div>
 <div class="webex-solution">
 <p>This is a two-way layout, mixing repeated measures with groups.</p>
@@ -700,8 +708,8 @@ Table&nbsp;14.1: Simulated 6-min walk distance (m).
 </figcaption>
 <div aria-describedby="tbl-3-6-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-c29f0d60f50f9791cd47" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c29f0d60f50f9791cd47">{"x":{"filter":"none","vertical":false,"data":[[463,457,454,454,455,454,452,456,460,454],[450,452,451,451,454,449,453,447,448,448],[438,438,441,445,442,447,442,440,447,440]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Standard<br>physiotherapy<\/th>\n      <th>Balance<br>training<\/th>\n      <th>Strength<br>training<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"pageLength":10,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Standard.physiotherapy","targets":0},{"name":"Balance.training","targets":1},{"name":"Strength.training","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-876bb87e63ec9888c489" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-876bb87e63ec9888c489">{"x":{"filter":"none","vertical":false,"data":[[463,457,454,454,455,454,452,456,460,454],[450,452,451,451,454,449,453,447,448,448],[438,438,441,445,442,447,442,440,447,440]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Standard<br>physiotherapy<\/th>\n      <th>Balance<br>training<\/th>\n      <th>Strength<br>training<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"pageLength":10,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Standard.physiotherapy","targets":0},{"name":"Balance.training","targets":1},{"name":"Strength.training","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -1301,8 +1309,8 @@ Table&nbsp;14.2: One-way ANOVA table created for data in <a href="#tbl-3-6-1" cl
 </figcaption>
 <div aria-describedby="tbl-3-6-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-20148d003ba40079f4f6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-20148d003ba40079f4f6">{"x":{"filter":"none","vertical":false,"data":[["Between groups<br>(training type)","Within groups<br>(residuals)"],["$\\nu_\\text{B}$ = 2","$\\nu_\\text{W}$ = 27"],["$SS_\\text{B}$ = 978.2","$SS_\\text{W}$ = 247"],["$MS_\\text{B}$ = 489.1","$MS_\\text{W}$ = 9.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source of Variation<\/th>\n      <th>Degrees of Freedom<\/th>\n      <th>Sum of Squares<\/th>\n      <th>Mean Square<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"Source of Variation","targets":0},{"name":"Degrees of Freedom","targets":1},{"name":"Sum of Squares","targets":2},{"name":"Mean Square","targets":3}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-8414a4c7f636f6157c05" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8414a4c7f636f6157c05">{"x":{"filter":"none","vertical":false,"data":[["Between groups<br>(training type)","Within groups<br>(residuals)"],["$\\nu_\\text{B}$ = 2","$\\nu_\\text{W}$ = 27"],["$SS_\\text{B}$ = 978.2","$SS_\\text{W}$ = 247"],["$MS_\\text{B}$ = 489.1","$MS_\\text{W}$ = 9.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source of Variation<\/th>\n      <th>Degrees of Freedom<\/th>\n      <th>Sum of Squares<\/th>\n      <th>Mean Square<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"Source of Variation","targets":0},{"name":"Degrees of Freedom","targets":1},{"name":"Sum of Squares","targets":2},{"name":"Mean Square","targets":3}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -1393,9 +1401,9 @@ F = \frac{SS_B / (I-1)}{SS_W / \sum_{i=1}^I (J_i - 1)}
 </tbody>
 </table>
 <p><em>Compute the missing quantities.</em></p>
-<p><em>What is the value of the between-group mean square (<span class="math inline">\(MS_\text{B}\)</span>)?</em> <select class="webex-select" id="webex-186cfbe29cecf05e5687d2d0e3e8d20f" data-answer="agkaU0pSSQIVU0lTOw=="><option value="blank"></option><option>0.0403</option><option>0.0094</option><option>0.00094</option><option>4.29</option><option>42.9</option><option>2.06</option></select></p>
-<p><em>What is the value of the within-group mean square (<span class="math inline">\(MS_\text{W}\)</span>)?</em> <select class="webex-select" id="webex-3212cdf285308d22f9e7995ef7d3d050" data-answer="aAIdAk9VSgIUBR8AZQ=="><option value="blank"></option><option>0.0403</option><option>0.0094</option><option>0.00094</option><option>4.29</option><option>42.9</option><option>2.06</option></select></p>
-<p><em>What is the value of the F-ratio?</em> <select class="webex-select" id="webex-4e98cbffb7473125be37d139f4c5a8be" data-answer="b1UVCE9SSlZOBhgHbg=="><option value="blank"></option><option>0.0403</option><option>0.0094</option><option>0.00094</option><option>4.29</option><option>42.9</option><option>2.06</option></select></p>
+<p><em>What is the value of the between-group mean square (<span class="math inline">\(MS_\text{B}\)</span>)?</em> <select class="webex-select" id="webex-deffb6adc272060e106d4b2f9127cdde" data-answer="P1RKVk4GTVRPAhsCbQ=="><option value="blank"></option><option>0.0403</option><option>0.0094</option><option>0.00094</option><option>4.29</option><option>42.9</option><option>2.06</option></select></p>
+<p><em>What is the value of the within-group mean square (<span class="math inline">\(MS_\text{W}\)</span>)?</em> <select class="webex-select" id="webex-d1ae9fe7b23852dc76dda70c96ea160a" data-answer="PwFNVRVXSQdOAh8IaA=="><option value="blank"></option><option>0.0403</option><option>0.0094</option><option>0.00094</option><option>4.29</option><option>42.9</option><option>2.06</option></select></p>
+<p><em>What is the value of the F-ratio?</em> <select class="webex-select" id="webex-7954c7d2bbf253c2133d0dd02aa00290" data-answer="bAkZBE8HSAJOU0oCaA=="><option value="blank"></option><option>0.0403</option><option>0.0094</option><option>0.00094</option><option>4.29</option><option>42.9</option><option>2.06</option></select></p>
 <hr>
 </div>
 <div class="webex-solution">
@@ -1514,7 +1522,7 @@ t_{2,3} &amp;= \frac{450.3 - 442}{\sqrt{9.1\left(\frac{1}{10} + \frac{1}{10}\rig
 <p><span class="math display">\[
 P\left(t&gt;|t_{1,2}|\right) \times 2 = 2.9649452\times 10^{-4}
 \]</span></p>
-<p><em>we can say that patients undergoring physiotherapy walk over</em> <select class="webex-select" id="webex-117f989246fd85f45fdfa77a00add002" data-answer="agAbVhUIZA=="><option value="blank"></option><option>significantly different</option><option>significantly larger</option><option>significantly smaller</option></select> <em>distances than those undergoing balance training.</em></p>
+<p><em>we can say that patients undergoring physiotherapy walk over</em> <select class="webex-select" id="webex-ea815ea1a28ba3e33505217e594b99fc" data-answer="PlAUARlVPA=="><option value="blank"></option><option>significantly different</option><option>significantly larger</option><option>significantly smaller</option></select> <em>distances than those undergoing balance training.</em></p>
 <hr>
 </div>
 <div class="webex-solution">
@@ -1683,8 +1691,8 @@ Table&nbsp;14.3: Simulated 6-min walk distance (m) for the stretch training grou
 </figcaption>
 <div aria-describedby="tbl-3-6-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-0552e616a43422e07c42" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0552e616a43422e07c42">{"x":{"filter":"none","vertical":false,"data":[[455,453,451,454,452,453,450,452]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Stretch<br>training<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"pageLength":8,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Stretch.training","targets":0}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a63baa9443a45b3fcd28" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a63baa9443a45b3fcd28">{"x":{"filter":"none","vertical":false,"data":[[455,453,451,454,452,453,450,452]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Stretch<br>training<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"pageLength":8,"ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Stretch.training","targets":0}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -1835,8 +1843,8 @@ Table&nbsp;14.4: Family-Wise Error Rate correction
 </figcaption>
 <div aria-describedby="tbl-3-6-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-82a219571b3ceee88233" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-82a219571b3ceee88233">{"x":{"filter":"none","vertical":false,"data":[[4,8,16,25,50],[0.185,0.337,0.5600000000000001,0.723,0.923],[0.049,0.049,0.049,0.049,0.049]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number of paired tests ($n_c$)<\/th>\n      <th>FWER without Bonferroni<\/th>\n      <th>FWER with Bonferroni<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"nc","targets":0},{"name":"without_bonferroni","targets":1},{"name":"with_bonferroni","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-17faff95cc13fa09c255" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-17faff95cc13fa09c255">{"x":{"filter":"none","vertical":false,"data":[[4,8,16,25,50],[0.185,0.337,0.5600000000000001,0.723,0.923],[0.049,0.049,0.049,0.049,0.049]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number of paired tests ($n_c$)<\/th>\n      <th>FWER without Bonferroni<\/th>\n      <th>FWER with Bonferroni<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"nc","targets":0},{"name":"without_bonferroni","targets":1},{"name":"with_bonferroni","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -1972,8 +1980,8 @@ Table&nbsp;14.5: Row and ranked subset of walk distance data shown in <a href="#
 </figcaption>
 <div aria-describedby="tbl-3-6-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-61d29abdf07d543d33f4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-61d29abdf07d543d33f4">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[[463,457,454,454,455,454],[15,14,10.5,10.5,13,10.5],[450,452,451,451,454,null],[5,8,6.5,6.5,10.5,null],[438,438,441,445,null,null],[1.5,1.5,3,4,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th colspan=\"2\">\n        Standard Physio\n        <br/>\n        <i>J<sub>1<\/sub> = 6<\/i>\n      <\/th>\n      <th colspan=\"2\">\n        Balance training\n        <br/>\n        <i>J<sub>2<\/sub> = 5<\/i>\n      <\/th>\n      <th colspan=\"2\">\n        Strength training\n        <br/>\n        <i>J<sub>3<\/sub> = 4<\/i>\n      <\/th>\n    <\/tr>\n    <tr>\n      <th>$y_{1j}$<\/th>\n      <th>$r_{1j}$<\/th>\n      <th>$y_{2j}$<\/th>\n      <th>$r_{2j}$<\/th>\n      <th>$y_{3j}$<\/th>\n      <th>$r_{3j}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Y1","targets":0},{"name":"R1","targets":1},{"name":"Y2","targets":2},{"name":"R2","targets":3},{"name":"Y3","targets":4},{"name":"R3","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e0f7df22e7dfa935e66a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e0f7df22e7dfa935e66a">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[[463,457,454,454,455,454],[15,14,10.5,10.5,13,10.5],[450,452,451,451,454,null],[5,8,6.5,6.5,10.5,null],[438,438,441,445,null,null],[1.5,1.5,3,4,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th colspan=\"2\">\n        Standard Physio\n        <br/>\n        <i>J<sub>1<\/sub> = 6<\/i>\n      <\/th>\n      <th colspan=\"2\">\n        Balance training\n        <br/>\n        <i>J<sub>2<\/sub> = 5<\/i>\n      <\/th>\n      <th colspan=\"2\">\n        Strength training\n        <br/>\n        <i>J<sub>3<\/sub> = 4<\/i>\n      <\/th>\n    <\/tr>\n    <tr>\n      <th>$y_{1j}$<\/th>\n      <th>$r_{1j}$<\/th>\n      <th>$y_{2j}$<\/th>\n      <th>$r_{2j}$<\/th>\n      <th>$y_{3j}$<\/th>\n      <th>$r_{3j}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Y1","targets":0},{"name":"R1","targets":1},{"name":"Y2","targets":2},{"name":"R2","targets":3},{"name":"Y3","targets":4},{"name":"R3","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -2035,8 +2043,8 @@ P(K&gt;k_\text{adj}) = 0.003
 <div class="webex-check webex-box">
 <p><em>Which of the post-hoc analysis listed below would be indicated for the pairwise comprisons?</em></p>
 <hr>
-<div id="webex-d56ed06e1e67be3d444cfaed7ef680ba" class="webex-radiogroup" data-answer="PwUaVEgAGlUdVWs=">
-<label><input type="radio" autocomplete="off" name="d56ed06e1e67be3d444cfaed7ef680ba"><span>Fisher LSD</span></label><label><input type="radio" autocomplete="off" name="d56ed06e1e67be3d444cfaed7ef680ba"><span>Bonferroni method</span></label><label><input type="radio" autocomplete="off" name="d56ed06e1e67be3d444cfaed7ef680ba"><span>Tukey–Kramer</span></label><label><input type="radio" autocomplete="off" name="d56ed06e1e67be3d444cfaed7ef680ba"><span>Dunnett test</span></label><label><input type="radio" autocomplete="off" name="d56ed06e1e67be3d444cfaed7ef680ba"><span>none of them</span></label>
+<div id="webex-4811665afc260548d6ace2cc01eab6fd" class="webex-radiogroup" data-answer="bwgdABoGGVFKU28=">
+<label><input type="radio" autocomplete="off" name="4811665afc260548d6ace2cc01eab6fd"><span>Fisher LSD</span></label><label><input type="radio" autocomplete="off" name="4811665afc260548d6ace2cc01eab6fd"><span>Bonferroni method</span></label><label><input type="radio" autocomplete="off" name="4811665afc260548d6ace2cc01eab6fd"><span>Tukey–Kramer</span></label><label><input type="radio" autocomplete="off" name="4811665afc260548d6ace2cc01eab6fd"><span>Dunnett test</span></label><label><input type="radio" autocomplete="off" name="4811665afc260548d6ace2cc01eab6fd"><span>none of them</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -2244,19 +2252,19 @@ F \sim F(\nu_\text{I},\nu_\text{E})
 </table>
 <div class="columns">
 <div class="column small-text" style="width:20%;">
-<p><span class="math inline">\(\nu_E =\)</span> <input class="webex-solveme nospaces" id="webex-55acf15d011ee9f83128e5d1b8981083" data-tol="0" size="20" data-answer="bhdXQTs="></p>
+<p><span class="math inline">\(\nu_E =\)</span> <input class="webex-solveme nospaces" id="webex-0b24193d1abfac87172411317cb18a6b" data-tol="0" size="20" data-answer="a0AEFmw="></p>
 </div><div class="column small-text" style="width:20%;">
-<p><span class="math inline">\(SS_\text{E} =\)</span> <input class="webex-solveme nospaces" id="webex-340db4b6e17066a302264fcd13b43bba" data-tol="0.1" size="20" data-answer="aBYBUUwBQGs="></p>
+<p><span class="math inline">\(SS_\text{E} =\)</span> <input class="webex-solveme nospaces" id="webex-9940281c6abdc1e500588d9fca058520" data-tol="0.1" size="20" data-answer="YhsFBRwNEz4="></p>
 </div><div class="column small-text" style="width:20%;">
-<p><span class="math inline">\(MS_\text{E} =\)</span> <input class="webex-solveme nospaces" id="webex-107cea142d8a966b8e15d0b39c4b8d7e" data-tol="0.1" size="20" data-answer="ahIFTVNDbA=="></p>
+<p><span class="math inline">\(MS_\text{E} =\)</span> <input class="webex-solveme nospaces" id="webex-e6915c85640c6ce29f360e37af312cc8" data-tol="0.1" size="20" data-answer="PhQLHwNBZQ=="></p>
 </div><div class="column small-text" style="width:20%;">
-<p><span class="math inline">\(f =\)</span> <input class="webex-solveme nospaces" id="webex-70fdb41a274164b3d449705767959fb8" data-tol="0.2" size="20" data-answer="bBJXUkwHEzw="></p>
+<p><span class="math inline">\(f =\)</span> <input class="webex-solveme nospaces" id="webex-2e9bdce89b2c68f7c87d842ee61ff909" data-tol="0.2" size="20" data-answer="aUcIVEpQR2U="></p>
 </div><div class="column small-text" style="width:20%;">
-<p><span class="math inline">\(P(F_{2,\nu_\text{E}} &gt; f)\)</span> = <input class="webex-solveme nospaces" id="webex-cb29a62710c582cafcaefb86b4a122c2" data-tol="0.001" size="20" data-answer="OEACF1EGBhVs"></p>
+<p><span class="math inline">\(P(F_{2,\nu_\text{E}} &gt; f)\)</span> = <input class="webex-solveme nospaces" id="webex-8caa8a0f822ee3222dbb38cc706021ed" data-tol="0.001" size="20" data-answer="Y0FRTwhRBERl"></p>
 </div>
 </div>
 <p><em>What is your decision?</em></p>
-<p><select class="webex-select" id="webex-094d43ae7cd717084f88848a8c5f43bc" data-answer="awgYVGk="><option value="blank"></option><option>Reject \(H_0\): there is evidence of a significant diet effect.</option><option>Do not reject \(H_0\): there is no evidence of a significant diet effect.</option></select></p>
+<p><select class="webex-select" id="webex-ba041a19e2def5e17f3039a7329ea8ea" data-answer="OVAcBGw="><option value="blank"></option><option>Reject \(H_0\): there is evidence of a significant diet effect.</option><option>Do not reject \(H_0\): there is no evidence of a significant diet effect.</option></select></p>
 </div>
 <div class="webex-solution">
 <p>The degrees of freedom of residuals as well as the residual sum of squares are obtained from the identities:</p>
@@ -2317,8 +2325,8 @@ Table&nbsp;14.6: Raw and ranked body mass data shown in <a href="#fig-3-6-11" cl
 </figcaption>
 <div aria-describedby="tbl-3-6-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-38c3a59570b226383c47" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-38c3a59570b226383c47">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[[1,2,3,4],[103,78,84,91],[98,76,78,91],[94,74,76,88],[1,2,3,4],[3,3,3,2.5],[2,2,2,2.5],[1,1,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th colspan=\"4\">\n        Raw body mass $(J=4)$\n        <th colspan=\"4\">Ranked body mass $(J=4)$<\/th>\n      <\/th>\n    <\/tr>\n    <tr>\n      <th>#<\/th>\n      <th>$y_{1j}$<\/th>\n      <th>$y_{2j}$<\/th>\n      <th>$y_{3j}$<\/th>\n      <th>#<\/th>\n      <th>$r_{1j}$<\/th>\n      <th>$r_{2j}$<\/th>\n      <th>$r_{3j}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Person","targets":0},{"name":"baseline","targets":1},{"name":"threewks","targets":2},{"name":"sixwks","targets":3},{"name":"rPerson","targets":4},{"name":"rbaseline","targets":5},{"name":"rthreewks","targets":6},{"name":"rsixwks","targets":7}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f846d83540dc53856905" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f846d83540dc53856905">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[[1,2,3,4],[103,78,84,91],[98,76,78,91],[94,74,76,88],[1,2,3,4],[3,3,3,2.5],[2,2,2,2.5],[1,1,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th colspan=\"4\">\n        Raw body mass $(J=4)$\n        <th colspan=\"4\">Ranked body mass $(J=4)$<\/th>\n      <\/th>\n    <\/tr>\n    <tr>\n      <th>#<\/th>\n      <th>$y_{1j}$<\/th>\n      <th>$y_{2j}$<\/th>\n      <th>$y_{3j}$<\/th>\n      <th>#<\/th>\n      <th>$r_{1j}$<\/th>\n      <th>$r_{2j}$<\/th>\n      <th>$r_{3j}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Person","targets":0},{"name":"baseline","targets":1},{"name":"threewks","targets":2},{"name":"sixwks","targets":3},{"name":"rPerson","targets":4},{"name":"rbaseline","targets":5},{"name":"rthreewks","targets":6},{"name":"rsixwks","targets":7}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -2421,8 +2429,8 @@ Table&nbsp;14.7: Gait speed (m/s) for different groups of patients with differen
 </figcaption>
 <div aria-describedby="tbl-3-6-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-6c1063e26d636791f6e5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-6c1063e26d636791f6e5">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[["control","control","control","control","control","treatment","treatment","treatment","treatment","treatment"],[0.67,0.71,0.66,0.78,0.72,0.67,0.74,0.75,0.74,0.7],[0.67,0.74,0.75,0.74,0.7,0.67,0.63,0.62,0.66,0.67],[0.49,0.49,0.45,0.35,0.48,0.57,0.57,0.57,0.5,0.6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th rowspan=\"2\">\n        Groups ($I=2$)\n        <br/>\n        ($i=1 \\text{: control}$)\n        <br/>\n        ($i=2 \\text{: treatment}$)\n      <\/th>\n      <th colspan=\"3\">Stroke Severity $(J=3)$<\/th>\n    <\/tr>\n    <tr>\n      <th>Minor ($j=1$)<\/th>\n      <th>Moderate ($j=2$)<\/th>\n      <th>Severe ($j=3$)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"group","targets":0},{"name":"minor","targets":1},{"name":"moderate","targets":2},{"name":"severe","targets":3}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-43f80a83409e56ff5d14" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-43f80a83409e56ff5d14">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[["control","control","control","control","control","treatment","treatment","treatment","treatment","treatment"],[0.67,0.71,0.66,0.78,0.72,0.67,0.74,0.75,0.74,0.7],[0.67,0.74,0.75,0.74,0.7,0.67,0.63,0.62,0.66,0.67],[0.49,0.49,0.45,0.35,0.48,0.57,0.57,0.57,0.5,0.6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th rowspan=\"2\">\n        Groups ($I=2$)\n        <br/>\n        ($i=1 \\text{: control}$)\n        <br/>\n        ($i=2 \\text{: treatment}$)\n      <\/th>\n      <th colspan=\"3\">Stroke Severity $(J=3)$<\/th>\n    <\/tr>\n    <tr>\n      <th>Minor ($j=1$)<\/th>\n      <th>Moderate ($j=2$)<\/th>\n      <th>Severe ($j=3$)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"group","targets":0},{"name":"minor","targets":1},{"name":"moderate","targets":2},{"name":"severe","targets":3}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -2479,8 +2487,8 @@ Figure&nbsp;14.13: Hypothetical examples of mean values for two levels of factor
 <p><img src="..\include/images/part_3/ch_6/group-disease-interaction.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-<div id="webex-023bc53ea27ea1dc318f406ce00d534a" class="webex-radiogroup" data-answer="awIfU08FH1U8">
-<label><input type="radio" autocomplete="off" name="023bc53ea27ea1dc318f406ce00d534a"><span><em>treatment effect depends on stroke severity.</em></span></label><label><input type="radio" autocomplete="off" name="023bc53ea27ea1dc318f406ce00d534a"><span><em>treatment seems more effective for the more severely affected patient.</em></span></label><label><input type="radio" autocomplete="off" name="023bc53ea27ea1dc318f406ce00d534a"><span><em>no interaction is evident from this plot.</em></span></label><label><input type="radio" autocomplete="off" name="023bc53ea27ea1dc318f406ce00d534a"><span><em>gait speed decreases with stroke severity regardless of the group tested.</em></span></label>
+<div id="webex-c91c7b7ecbc1873f5183b02c9ce0a9d4" class="webex-radiogroup" data-answer="OAgdUxtSG1U+">
+<label><input type="radio" autocomplete="off" name="c91c7b7ecbc1873f5183b02c9ce0a9d4"><span><em>treatment seems more effective for the more severely affected patient.</em></span></label><label><input type="radio" autocomplete="off" name="c91c7b7ecbc1873f5183b02c9ce0a9d4"><span><em>treatment effect depends on stroke severity.</em></span></label><label><input type="radio" autocomplete="off" name="c91c7b7ecbc1873f5183b02c9ce0a9d4"><span><em>no interaction is evident from this plot.</em></span></label><label><input type="radio" autocomplete="off" name="c91c7b7ecbc1873f5183b02c9ce0a9d4"><span><em>gait speed decreases with stroke severity regardless of the group tested.</em></span></label>
 </div>
 </section>
 </div>
@@ -2623,8 +2631,8 @@ SS_{\text{IJ}} = K\sum_{i=1}^I\sum_{j=1}^J \left(\overline{Y}_{ij.}-\overline{Y}
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>What would be an alternative approach to compute <span class="math inline">\(SS_\text{E}\)</span>?</em></p>
-<div id="webex-c08e7c38ef64c861dc7c9ab0f609b9dc" class="webex-radiogroup" data-answer="OAEUVRtTbg==">
-<label><input type="radio" autocomplete="off" name="c08e7c38ef64c861dc7c9ab0f609b9dc"><span><span class="math inline">\(SS_\text{tot}-SS_\text{I}-SS_\text{J}-SS_\text{IJ}\)</span></span></label><label><input type="radio" autocomplete="off" name="c08e7c38ef64c861dc7c9ab0f609b9dc"><span><em>There is no alternative approach.</em></span></label><label><input type="radio" autocomplete="off" name="c08e7c38ef64c861dc7c9ab0f609b9dc"><span><span class="math inline">\(K\sum_i\sum_j\left(\overline{Y}_{ij.}-\overline{Y}_{...}\right)^2\)</span></span></label>
+<div id="webex-d2dc35e80fc587f7f9b307103653e06f" class="webex-radiogroup" data-answer="PwNIUx8FOA==">
+<label><input type="radio" autocomplete="off" name="d2dc35e80fc587f7f9b307103653e06f"><span><span class="math inline">\(SS_\text{tot}-SS_\text{I}-SS_\text{J}-SS_\text{IJ}\)</span></span></label><label><input type="radio" autocomplete="off" name="d2dc35e80fc587f7f9b307103653e06f"><span><em>There is no alternative approach.</em></span></label><label><input type="radio" autocomplete="off" name="d2dc35e80fc587f7f9b307103653e06f"><span><span class="math inline">\(K\sum_i\sum_j\left(\overline{Y}_{ij.}-\overline{Y}_{...}\right)^2\)</span></span></label>
 </div>
 </div>
 </div>
@@ -2737,8 +2745,8 @@ Table&nbsp;14.8: Two-way ANOVA table created for data in <a href="#tbl-3-6-7" cl
 </figcaption>
 <div aria-describedby="tbl-3-6-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-1871f0a476a7b51df072" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1871f0a476a7b51df072">{"x":{"filter":"none","vertical":false,"data":[["Factor $I$<br>(additive effect)","Factor $J$<br>(additive effect)","Factor $I\\times J$<br>(interaction effect)","Error term<br>(residuals)"],["$\\nu_\\text{I}$ = 1","$\\nu_\\text{J}$ = 2","$\\nu_\\text{IJ}$ = 2","$\\nu_\\text{E}$ = 24"],["$SS_\\text{I}$ = 0.0247","$SS_\\text{J}$ = 0.2156","$SS_\\text{IJ}$ = 0.0122","$SS_\\text{E}$ = 0.0552"],["$MS_\\text{I}$ = 0.0247","$MS_\\text{J}$ = 0.1078","$MS_\\text{IJ}$ = 0.0061","$MS_\\text{E}$ = 0.0023"],["$f$ = 10.74","$f$ = 46.87","$f$ = 2.65",""],["0.0032","5.15e-09","0.0912",null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source of Variation<\/th>\n      <th>Degrees of Freedom<\/th>\n      <th>Sum of Squares<\/th>\n      <th>Mean Square<\/th>\n      <th>F-Ratio<\/th>\n      <th>p-value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"Source of Variation","targets":0},{"name":"Degrees of Freedom","targets":1},{"name":"Sum of Squares","targets":2},{"name":"Mean Square","targets":3},{"name":"F-Ratio","targets":4},{"name":"p-value","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-556aaefcb8f591f7553f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-556aaefcb8f591f7553f">{"x":{"filter":"none","vertical":false,"data":[["Factor $I$<br>(additive effect)","Factor $J$<br>(additive effect)","Factor $I\\times J$<br>(interaction effect)","Error term<br>(residuals)"],["$\\nu_\\text{I}$ = 1","$\\nu_\\text{J}$ = 2","$\\nu_\\text{IJ}$ = 2","$\\nu_\\text{E}$ = 24"],["$SS_\\text{I}$ = 0.0247","$SS_\\text{J}$ = 0.2156","$SS_\\text{IJ}$ = 0.0122","$SS_\\text{E}$ = 0.0552"],["$MS_\\text{I}$ = 0.0247","$MS_\\text{J}$ = 0.1078","$MS_\\text{IJ}$ = 0.0061","$MS_\\text{E}$ = 0.0023"],["$f$ = 10.74","$f$ = 46.87","$f$ = 2.65",""],["0.0032","5.15e-09","0.0912",null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source of Variation<\/th>\n      <th>Degrees of Freedom<\/th>\n      <th>Sum of Squares<\/th>\n      <th>Mean Square<\/th>\n      <th>F-Ratio<\/th>\n      <th>p-value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"Source of Variation","targets":0},{"name":"Degrees of Freedom","targets":1},{"name":"Sum of Squares","targets":2},{"name":"Mean Square","targets":3},{"name":"F-Ratio","targets":4},{"name":"p-value","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -2749,8 +2757,8 @@ Table&nbsp;14.8: Two-way ANOVA table created for data in <a href="#tbl-3-6-7" cl
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Based on the two-way ANOVA table above for the gait speed data, which null hypotheses should be rejected?</em></p>
-<div id="webex-dc13f4957139f41c7e070be951d3365c" class="webex-radiogroup" data-answer="P1MdA0oEFQQbAW4=">
-<label><input type="radio" autocomplete="off" name="dc13f4957139f41c7e070be951d3365c"><span><span class="math inline">\(H_{0I}: \alpha_i = 0 \text{ for all } i\)</span></span></label><label><input type="radio" autocomplete="off" name="dc13f4957139f41c7e070be951d3365c"><span><span class="math inline">\(H_{0J}: \beta_j = 0 \text{ for all } j\)</span></span></label><label><input type="radio" autocomplete="off" name="dc13f4957139f41c7e070be951d3365c"><span><em>none of them</em></span></label><label><input type="radio" autocomplete="off" name="dc13f4957139f41c7e070be951d3365c"><span><span class="math inline">\(H_{0I}\)</span> and <span class="math inline">\(H_{0J}\)</span></span></label><label><input type="radio" autocomplete="off" name="dc13f4957139f41c7e070be951d3365c"><span><span class="math inline">\(H_{0IJ}: \delta_{ij} = 0 \text{ for all } i,j\)</span></span></label>
+<div id="webex-5cce9e9007b3fe65c3db69f319b13cdf" class="webex-radiogroup" data-answer="blNPVRVUFQAcBz8=">
+<label><input type="radio" autocomplete="off" name="5cce9e9007b3fe65c3db69f319b13cdf"><span><span class="math inline">\(H_{0I}: \alpha_i = 0 \text{ for all } i\)</span></span></label><label><input type="radio" autocomplete="off" name="5cce9e9007b3fe65c3db69f319b13cdf"><span><em>none of them</em></span></label><label><input type="radio" autocomplete="off" name="5cce9e9007b3fe65c3db69f319b13cdf"><span><span class="math inline">\(H_{0I}\)</span> and <span class="math inline">\(H_{0J}\)</span></span></label><label><input type="radio" autocomplete="off" name="5cce9e9007b3fe65c3db69f319b13cdf"><span><span class="math inline">\(H_{0IJ}: \delta_{ij} = 0 \text{ for all } i,j\)</span></span></label><label><input type="radio" autocomplete="off" name="5cce9e9007b3fe65c3db69f319b13cdf"><span><span class="math inline">\(H_{0J}: \beta_j = 0 \text{ for all } j\)</span></span></label>
 </div>
 </div>
 </div>
@@ -2858,8 +2866,8 @@ Table&nbsp;14.9: Two-way ANOVA table created for the mixed design. Control and t
 </figcaption>
 <div aria-describedby="tbl-3-6-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-4030e307925bed61e863" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4030e307925bed61e863">{"x":{"filter":"none","vertical":false,"data":[["Factor $I$<br>(time effect)","Factor $J$<br>(stroke severity)","Factor $I\\times J$<br>(interaction effect)","Subjects within $J$<br>(random effect)","Error term<br>(residuals)"],["$\\nu_\\text{I}$ = 1","$\\nu_\\text{J}$ = 2","$\\nu_\\text{IJ}$ = 2","$\\nu_\\text{JK}$ = 12","$\\nu_\\text{E}$ = 12"],["$SS_\\text{I}$ = 0.0247","$SS_\\text{J}$ = 0.2156","$SS_\\text{IJ}$ = 0.0122","$SS_\\text{JK}$ = 0.0396","$SS_\\text{E}$ = 0.0166"],["$MS_\\text{I}$ = 0.0247","$MS_\\text{J}$ = 0.1078","$MS_\\text{IJ}$ = 0.0061","$MS_\\text{JK}$ = 0.0033","$MS_\\text{E}$ = 0.0014"],["$f=\\frac{MS_\\text{I}}{MS_\\text{E}}$= 17.64","$f=\\frac{MS_\\text{J}}{MS_\\text{JK}}$= 32.67","$f=\\frac{MS_\\text{IJ}}{MS_\\text{E}}$= 4.36","",""],["0.0012","1.40e-05","0.0377",null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source of Variation<\/th>\n      <th>Degrees of Freedom<\/th>\n      <th>Sum of Squares<\/th>\n      <th>Mean Square<\/th>\n      <th>F-Ratio<\/th>\n      <th>p-value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"16.6666666666667%","targets":"_all"},{"name":"Source of Variation","targets":0},{"name":"Degrees of Freedom","targets":1},{"name":"Sum of Squares","targets":2},{"name":"Mean Square","targets":3},{"name":"F-Ratio","targets":4},{"name":"p-value","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-eb2ac0489d2592ec4586" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-eb2ac0489d2592ec4586">{"x":{"filter":"none","vertical":false,"data":[["Factor $I$<br>(time effect)","Factor $J$<br>(stroke severity)","Factor $I\\times J$<br>(interaction effect)","Subjects within $J$<br>(random effect)","Error term<br>(residuals)"],["$\\nu_\\text{I}$ = 1","$\\nu_\\text{J}$ = 2","$\\nu_\\text{IJ}$ = 2","$\\nu_\\text{JK}$ = 12","$\\nu_\\text{E}$ = 12"],["$SS_\\text{I}$ = 0.0247","$SS_\\text{J}$ = 0.2156","$SS_\\text{IJ}$ = 0.0122","$SS_\\text{JK}$ = 0.0396","$SS_\\text{E}$ = 0.0166"],["$MS_\\text{I}$ = 0.0247","$MS_\\text{J}$ = 0.1078","$MS_\\text{IJ}$ = 0.0061","$MS_\\text{JK}$ = 0.0033","$MS_\\text{E}$ = 0.0014"],["$f=\\frac{MS_\\text{I}}{MS_\\text{E}}$= 17.64","$f=\\frac{MS_\\text{J}}{MS_\\text{JK}}$= 32.67","$f=\\frac{MS_\\text{IJ}}{MS_\\text{E}}$= 4.36","",""],["0.0012","1.40e-05","0.0377",null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Source of Variation<\/th>\n      <th>Degrees of Freedom<\/th>\n      <th>Sum of Squares<\/th>\n      <th>Mean Square<\/th>\n      <th>F-Ratio<\/th>\n      <th>p-value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"16.6666666666667%","targets":"_all"},{"name":"Source of Variation","targets":0},{"name":"Degrees of Freedom","targets":1},{"name":"Sum of Squares","targets":2},{"name":"Mean Square","targets":3},{"name":"F-Ratio","targets":4},{"name":"p-value","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -2914,10 +2922,10 @@ Figure&nbsp;14.16: Pairwise assessment of pre-post differences in gait speed. Th
 <p><em>This figure illustrates an even more complex design, including a control group receiving only standard physiotherapy. The treatment group receives both the standard care and the new intervention.</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><select class="webex-select" id="webex-9c4f217f030473aa01d2da7a9d35d6da" data-answer="YlMYVh4AG1Zt"><option value="blank"></option><option>One-Way with repeated measures</option><option>Two-way with mixed effects</option><option>Three-way with mixed effects</option><option>Two-way with fixed effects</option></select></p>
+<p><select class="webex-select" id="webex-a6fffd8cc8f3033a294a02496a9f2637" data-answer="OgZKVkpVFFM+"><option value="blank"></option><option>One-Way with repeated measures</option><option>Two-way with mixed effects</option><option>Three-way with mixed effects</option><option>Two-way with fixed effects</option></select></p>
 <p><em>Which ANOVA Layout is this?</em></p>
 </div><div class="column" style="width:50%;">
-<p><select class="webex-select" id="webex-17d160ace4fe175f5ef19cd9d4ed3686" data-answer="agdIABoAPA=="><option value="blank"></option><option>Recruiting more subjects</option><option>Turning it into a crossover design</option><option>Assessing only healthy subjects</option></select></p>
+<p><select class="webex-select" id="webex-d5398d672b881748b71c0be447169da8" data-answer="PwUfCBRUaw=="><option value="blank"></option><option>Recruiting more subjects</option><option>Turning it into a crossover design</option><option>Assessing only healthy subjects</option></select></p>
 <p><em>How could this design be modified to be more ethically viable?</em></p>
 </div>
 </div>
@@ -3047,8 +3055,8 @@ Table&nbsp;14.10: Gait speed (m/s) for different groups of patients with differe
 </figcaption>
 <div aria-describedby="tbl-3-6-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-d1a7d2ec4c192ce5d626" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d1a7d2ec4c192ce5d626">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[["control","control","control","control","treatment","treatment"],[0.67,0.71,0.66,0.72,0.57,0.6],[0.45,0.35,null,null,0.67,0.75]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th rowspan=\"2\" style=\"width: 70px;\">\n        Groups ($I=2$)\n        <br/>\n        ($i=1 \\text{: control}$)\n        <br/>\n        ($i=2 \\text{: treat.}$)\n      <\/th>\n      <th colspan=\"2\">Stroke Severity $(J=2)$<\/th>\n    <\/tr>\n    <tr>\n      <th>\n        Minor\n        <br/>\n        ($j=1$)\n      <\/th>\n      <th>\n        Severe\n        <br/>\n        ($j=2$)\n      <\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"scrollX":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"group","targets":0},{"name":"minor","targets":1},{"name":"severe","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4eff68a235468cb05b16" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4eff68a235468cb05b16">{"x":{"filter":"none","vertical":false,"class":"cell-border","data":[["control","control","control","control","treatment","treatment"],[0.67,0.71,0.66,0.72,0.57,0.6],[0.45,0.35,null,null,0.67,0.75]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th rowspan=\"2\" style=\"width: 70px;\">\n        Groups ($I=2$)\n        <br/>\n        ($i=1 \\text{: control}$)\n        <br/>\n        ($i=2 \\text{: treat.}$)\n      <\/th>\n      <th colspan=\"2\">Stroke Severity $(J=2)$<\/th>\n    <\/tr>\n    <tr>\n      <th>\n        Minor\n        <br/>\n        ($j=1$)\n      <\/th>\n      <th>\n        Severe\n        <br/>\n        ($j=2$)\n      <\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"scrollX":false,"searching":false,"ordering":false,"info":false,"autoWidth":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"group","targets":0},{"name":"minor","targets":1},{"name":"severe","targets":2}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
