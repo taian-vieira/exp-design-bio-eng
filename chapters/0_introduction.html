@@ -100,9 +100,15 @@ div.csl-indent {
 <script type="text/javascript">
   window.hypothesisConfig = function () {
     return {
-      theme: 'classic',     # <-- CHANGED TO CLASSIC TO FORCE VISIBLE HANDLES
+      theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8']
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['BBAZe1o8'] 
+      }]
     };
   };
 </script>
@@ -426,8 +432,8 @@ div.csl-indent {
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><strong>Lifestyle is a confounder because:</strong></p>
-<div id="webex-35f563a3bdb3797f0e81920e89974928" class="webex-radiogroup" data-answer="aAVKBRoCTQM/">
-<label><input type="radio" autocomplete="off" name="35f563a3bdb3797f0e81920e89974928"><span><em>people drinking coffee are physically inactive</em></span></label><label><input type="radio" autocomplete="off" name="35f563a3bdb3797f0e81920e89974928"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="35f563a3bdb3797f0e81920e89974928"><span><em>rest heart rate depends on lifestyle</em></span></label><label><input type="radio" autocomplete="off" name="35f563a3bdb3797f0e81920e89974928"><span><em>coffee affects our mood</em></span></label>
+<div id="webex-e401c695230301b5661f87086ac64b5d" class="webex-radiogroup" data-answer="PgQcAU8GFQRv">
+<label><input type="radio" autocomplete="off" name="e401c695230301b5661f87086ac64b5d"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="e401c695230301b5661f87086ac64b5d"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="e401c695230301b5661f87086ac64b5d"><span><em>people drinking coffee are physically inactive</em></span></label><label><input type="radio" autocomplete="off" name="e401c695230301b5661f87086ac64b5d"><span><em>rest heart rate depends on lifestyle</em></span></label>
 </div>
 </div>
 </div>

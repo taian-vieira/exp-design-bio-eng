@@ -100,9 +100,15 @@ div.csl-indent {
 <script type="text/javascript">
   window.hypothesisConfig = function () {
     return {
-      theme: 'classic',     # <-- CHANGED TO CLASSIC TO FORCE VISIBLE HANDLES
+      theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8']
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['BBAZe1o8'] 
+      }]
     };
   };
 </script>

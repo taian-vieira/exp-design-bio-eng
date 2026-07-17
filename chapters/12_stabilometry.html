@@ -100,9 +100,15 @@ div.csl-indent {
 <script type="text/javascript">
   window.hypothesisConfig = function () {
     return {
-      theme: 'classic',     # <-- CHANGED TO CLASSIC TO FORCE VISIBLE HANDLES
+      theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8']
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['BBAZe1o8'] 
+      }]
     };
   };
 </script>
@@ -474,8 +480,8 @@ Figure&nbsp;2.1: The human quiet standing posture and a key muscle involved in s
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Can we readily tell which muscles are active and when?</em></p>
-<div id="webex-f77785a43a26422b50aee234d2197c2d" class="webex-radiogroup" data-answer="PQcbBxQFTQUfUW8=">
-<label><input type="radio" autocomplete="off" name="f77785a43a26422b50aee234d2197c2d"><span><em>only flexors (<span class="math inline">\(\uparrow\)</span> and <span class="math inline">\(\downarrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="f77785a43a26422b50aee234d2197c2d"><span><em>only extensors (<span class="math inline">\(\uparrow\)</span> and <span class="math inline">\(\downarrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="f77785a43a26422b50aee234d2197c2d"><span><em>flexors (<span class="math inline">\(\downarrow\)</span>), extensors (<span class="math inline">\(\uparrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="f77785a43a26422b50aee234d2197c2d"><span><em>it is not possible to say</em></span></label><label><input type="radio" autocomplete="off" name="f77785a43a26422b50aee234d2197c2d"><span><em>flexors (<span class="math inline">\(\uparrow\)</span>), extensors (<span class="math inline">\(\downarrow\)</span>)</em></span></label>
+<div id="webex-f3db5fb44cab6772ffafbf1d63e053d9" class="webex-radiogroup" data-answer="PQNIUxlWTgQYUzw=">
+<label><input type="radio" autocomplete="off" name="f3db5fb44cab6772ffafbf1d63e053d9"><span><em>flexors (<span class="math inline">\(\uparrow\)</span>), extensors (<span class="math inline">\(\downarrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="f3db5fb44cab6772ffafbf1d63e053d9"><span><em>it is not possible to say</em></span></label><label><input type="radio" autocomplete="off" name="f3db5fb44cab6772ffafbf1d63e053d9"><span><em>flexors (<span class="math inline">\(\downarrow\)</span>), extensors (<span class="math inline">\(\uparrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="f3db5fb44cab6772ffafbf1d63e053d9"><span><em>only flexors (<span class="math inline">\(\uparrow\)</span> and <span class="math inline">\(\downarrow\)</span>)</em></span></label><label><input type="radio" autocomplete="off" name="f3db5fb44cab6772ffafbf1d63e053d9"><span><em>only extensors (<span class="math inline">\(\uparrow\)</span> and <span class="math inline">\(\downarrow\)</span>)</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -567,8 +573,8 @@ Figure&nbsp;2.3: Example of a stabilometric trial (left) and of the quantities i
 <div class="webex-check webex-box">
 <p><em>Different force-plate manufacturers exist, and their systems typically provide direct access to the measured forces and moments.</em></p>
 <p><em>Supposing the force plate you are using provides the three (<span class="math inline">\(x,y,z\)</span>) components of each of the four force vectors shown in <a href="#fig-1-2-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>, how would you compute the body weight (<span class="math inline">\(W_{\text{b}}\)</span>) from these quantities?</em></p>
-<div id="webex-9ebfd5f4788221f8e88a0b2ef2a75a22" class="webex-radiogroup" data-answer="YlVOVkgEOw==">
-<label><input type="radio" autocomplete="off" name="9ebfd5f4788221f8e88a0b2ef2a75a22"><span><em>by summing the magnitudes of the four force vectors</em></span></label><label><input type="radio" autocomplete="off" name="9ebfd5f4788221f8e88a0b2ef2a75a22"><span><em>not possible to compute because the body mass is not known</em></span></label><label><input type="radio" autocomplete="off" name="9ebfd5f4788221f8e88a0b2ef2a75a22"><span><em>by summing the four vertical force components and taking the magnitude of the result</em></span></label>
+<div id="webex-232c73f9cf644b18466bb148cdad46e7" class="webex-radiogroup" data-answer="aQMeUhsDOw==">
+<label><input type="radio" autocomplete="off" name="232c73f9cf644b18466bb148cdad46e7"><span><em>by summing the magnitudes of the four force vectors</em></span></label><label><input type="radio" autocomplete="off" name="232c73f9cf644b18466bb148cdad46e7"><span><em>by summing the four vertical force components and taking the magnitude of the result</em></span></label><label><input type="radio" autocomplete="off" name="232c73f9cf644b18466bb148cdad46e7"><span><em>not possible to compute because the body mass is not known</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
