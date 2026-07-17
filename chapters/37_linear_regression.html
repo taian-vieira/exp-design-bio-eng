@@ -138,6 +138,9 @@ div.csl-indent {
         apiUrl: 'https://hypothes.is',
         // Force your group to be the baseline environment
         groups: ['BBAZe1o8'] 
+        onLoginRequest: function() {
+          alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
+        }
       }]
     };
   };
@@ -747,9 +750,9 @@ s &amp;= 12.6 \text{ bpm}
 <p><em>Compute the 95% prediction interval for the next individual’s maximal heart rate. Enter the lower and upper limits (in bpm) rounded to one decimal place.</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Lower limit: <input class="webex-solveme nospaces" id="webex-6f3a133eaaf13a4b27931f404627361f" data-tol="0.2" size="20" data-answer="bUQCVQUdB0c8"></p>
+<p>Lower limit: <input class="webex-solveme nospaces" id="webex-137415cbe75a7329cb74617daaefc280" data-tol="0.2" size="20" data-answer="ahEGAAUbV0A4"></p>
 </div><div class="column" style="width:50%;">
-<p>Upper limit: <input class="webex-solveme nospaces" id="webex-97c966cd4cf5ee3eab3c96d1fd93ff20" data-tol="0.2" size="20" data-answer="YhVSAA4YV0Zp"></p>
+<p>Upper limit: <input class="webex-solveme nospaces" id="webex-503a18b2b0c85f6fb413f8e3f4e2674a" data-tol="0.2" size="20" data-answer="bhICWAkWVhA/"></p>
 </div>
 </div>
 </section>
@@ -793,7 +796,7 @@ t_{19,0.975}=2.093,
 </div><div class="column" style="width:2%;">
 
 </div><div class="column" style="width:24%;">
-<p><select class="webex-select" id="webex-f2bfa24c240c9d18c96cd31666a6a47c" data-answer="PQJOVk0CGFIeBG0="><option value="blank"></option><option>Body Mass Index</option><option>fitness level</option><option>Height</option><option>Age</option><option>body mass</option></select></p>
+<p><select class="webex-select" id="webex-a304219367652c58b7a9fd7109f93153" data-answer="OgMcBB4BFQIaB2s="><option value="blank"></option><option>Body Mass Index</option><option>fitness level</option><option>Height</option><option>Age</option><option>body mass</option></select></p>
 </div>
 </div>
 </div>
@@ -911,8 +914,8 @@ y_i = \mu_i + \varepsilon_i = \beta_0 + \beta_1 x_i + \varepsilon_i, \qquad \var
 </figure>
 </div>
 <p><em>Based on the covariance values reported, is it possible to conclude that body mass is more strongly associated with height than with lean body mass?</em></p>
-<div id="webex-2fbd59bc11d5a29ce9951120979e7d47" class="webex-radiogroup" data-answer="aVZOVWg=">
-<label><input type="radio" autocomplete="off" name="2fbd59bc11d5a29ce9951120979e7d47"><span>Yes</span></label><label><input type="radio" autocomplete="off" name="2fbd59bc11d5a29ce9951120979e7d47"><span>No</span></label>
+<div id="webex-c67da55273cfed15327bb270336338d5" class="webex-radiogroup" data-answer="OAYbVTw=">
+<label><input type="radio" autocomplete="off" name="c67da55273cfed15327bb270336338d5"><span>Yes</span></label><label><input type="radio" autocomplete="off" name="c67da55273cfed15327bb270336338d5"><span>No</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -993,8 +996,8 @@ s_r = \sqrt{\frac{1-r^2}{n-2}}
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Given the maximal heart rate and age data shown in <a href="#fig-3-7-2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>, what would be the null hypothesis and the alternative hypothesis for the correlation coefficient?</em></p>
-<div id="webex-814eed31b557f354b5ee7e0b0c0f9d26" class="webex-radiogroup" data-answer="YwEYVUlUHwBOBWg=">
-<label><input type="radio" autocomplete="off" name="814eed31b557f354b5ee7e0b0c0f9d26"><span><span class="math inline">\(H_0: r = 0, \, H_1: \rho \ne 0\)</span></span></label><label><input type="radio" autocomplete="off" name="814eed31b557f354b5ee7e0b0c0f9d26"><span><span class="math inline">\(H_0: r = 0, \, H_1: \rho &lt; 0\)</span></span></label><label><input type="radio" autocomplete="off" name="814eed31b557f354b5ee7e0b0c0f9d26"><span><span class="math inline">\(H_0: r = 0, \, H_1: r &lt; 0\)</span></span></label><label><input type="radio" autocomplete="off" name="814eed31b557f354b5ee7e0b0c0f9d26"><span><span class="math inline">\(H_0: \rho = 0, \, H_1: \rho &lt; 0\)</span></span></label><label><input type="radio" autocomplete="off" name="814eed31b557f354b5ee7e0b0c0f9d26"><span><span class="math inline">\(H_0: \rho = 0, \, H_1: \rho \ne 0\)</span></span></label>
+<div id="webex-c5a8081c8a16acbdf8237995936b2be8" class="webex-radiogroup" data-answer="OAVNCBwIHVIUUWw=">
+<label><input type="radio" autocomplete="off" name="c5a8081c8a16acbdf8237995936b2be8"><span><span class="math inline">\(H_0: r = 0, \, H_1: \rho \ne 0\)</span></span></label><label><input type="radio" autocomplete="off" name="c5a8081c8a16acbdf8237995936b2be8"><span><span class="math inline">\(H_0: r = 0, \, H_1: \rho &lt; 0\)</span></span></label><label><input type="radio" autocomplete="off" name="c5a8081c8a16acbdf8237995936b2be8"><span><span class="math inline">\(H_0: r = 0, \, H_1: r &lt; 0\)</span></span></label><label><input type="radio" autocomplete="off" name="c5a8081c8a16acbdf8237995936b2be8"><span><span class="math inline">\(H_0: \rho = 0, \, H_1: \rho &lt; 0\)</span></span></label><label><input type="radio" autocomplete="off" name="c5a8081c8a16acbdf8237995936b2be8"><span><span class="math inline">\(H_0: \rho = 0, \, H_1: \rho \ne 0\)</span></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1139,8 +1142,8 @@ P\left(Z&lt;z_{z_r}\right)=P\left(Z&lt;-2.721\right) = 0.003
 <div class="webex-check webex-box">
 <p><em>Based on the <span class="math inline">\(p\)</span>-value just obtained, what would be your conclusion about the relationship between maximal heart rate and age?</em></p>
 <p><em>The correlation between the two variables is:</em></p>
-<div id="webex-15492e88fa90c828d3d2bd31c2692686" class="webex-radiogroup" data-answer="agUYCR5VFAhKUGQ=">
-<label><input type="radio" autocomplete="off" name="15492e88fa90c828d3d2bd31c2692686"><span><em>significantly negative with <span class="math inline">\(r&lt;0\)</span></em></span></label><label><input type="radio" autocomplete="off" name="15492e88fa90c828d3d2bd31c2692686"><span><em>not significant, as <span class="math inline">\(P(\rho&lt;-0.70)&gt;\alpha\)</span></em></span></label><label><input type="radio" autocomplete="off" name="15492e88fa90c828d3d2bd31c2692686"><span><em>significantly positive with <span class="math inline">\(r&gt;0\)</span></em></span></label><label><input type="radio" autocomplete="off" name="15492e88fa90c828d3d2bd31c2692686"><span><em>not significant, as <span class="math inline">\(P(\rho&lt;-0.70)&lt;\alpha\)</span></em></span></label><label><input type="radio" autocomplete="off" name="15492e88fa90c828d3d2bd31c2692686"><span><em>significantly negative with <span class="math inline">\(\rho&lt;-0.70\)</span></em></span></label>
+<div id="webex-5ca7b9822b661d67b4830b4d7be33ce3" class="webex-radiogroup" data-answer="blNNB04JFAIeU2s=">
+<label><input type="radio" autocomplete="off" name="5ca7b9822b661d67b4830b4d7be33ce3"><span><em>significantly negative with <span class="math inline">\(r&lt;0\)</span></em></span></label><label><input type="radio" autocomplete="off" name="5ca7b9822b661d67b4830b4d7be33ce3"><span><em>not significant, as <span class="math inline">\(P(\rho&lt;-0.70)&gt;\alpha\)</span></em></span></label><label><input type="radio" autocomplete="off" name="5ca7b9822b661d67b4830b4d7be33ce3"><span><em>significantly positive with <span class="math inline">\(r&gt;0\)</span></em></span></label><label><input type="radio" autocomplete="off" name="5ca7b9822b661d67b4830b4d7be33ce3"><span><em>not significant, as <span class="math inline">\(P(\rho&lt;-0.70)&lt;\alpha\)</span></em></span></label><label><input type="radio" autocomplete="off" name="5ca7b9822b661d67b4830b4d7be33ce3"><span><em>significantly negative with <span class="math inline">\(\rho&lt;-0.70\)</span></em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1509,8 +1512,8 @@ SS_\text{E}
 SS_\text{E} = S_{yy} - \frac{S_{xy}^2}{S_{xx}}=SS_\text{tot}-SS_\text{R}
 \]</span></p>
 <p><em>What therefore can be said about <span class="math inline">\(SS_\text{E}\)</span> and <span class="math inline">\(SS_\text{tot}\)</span>?</em></p>
-<div id="webex-8e1b4f5e9edcba4cbd0b2eb58c8c1cd1" class="webex-radiogroup" data-answer="Y1UdUhhXGVVk">
-<label><input type="radio" autocomplete="off" name="8e1b4f5e9edcba4cbd0b2eb58c8c1cd1"><span><span class="math inline">\(SS_\text{E}=SS_\text{tot}\)</span></span></label><label><input type="radio" autocomplete="off" name="8e1b4f5e9edcba4cbd0b2eb58c8c1cd1"><span><em>none of the above</em></span></label><label><input type="radio" autocomplete="off" name="8e1b4f5e9edcba4cbd0b2eb58c8c1cd1"><span><span class="math inline">\(SS_\text{E}&lt;SS_\text{tot}\)</span></span></label><label><input type="radio" autocomplete="off" name="8e1b4f5e9edcba4cbd0b2eb58c8c1cd1"><span><span class="math inline">\(SS_\text{E}&gt;SS_\text{tot}\)</span></span></label>
+<div id="webex-7d8ba8d6ce00e31678b08826b38a475b" class="webex-radiogroup" data-answer="bFQUUk0JSAY+">
+<label><input type="radio" autocomplete="off" name="7d8ba8d6ce00e31678b08826b38a475b"><span><span class="math inline">\(SS_\text{E}=SS_\text{tot}\)</span></span></label><label><input type="radio" autocomplete="off" name="7d8ba8d6ce00e31678b08826b38a475b"><span><em>none of the above</em></span></label><label><input type="radio" autocomplete="off" name="7d8ba8d6ce00e31678b08826b38a475b"><span><span class="math inline">\(SS_\text{E}&lt;SS_\text{tot}\)</span></span></label><label><input type="radio" autocomplete="off" name="7d8ba8d6ce00e31678b08826b38a475b"><span><span class="math inline">\(SS_\text{E}&gt;SS_\text{tot}\)</span></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1693,10 +1696,10 @@ s^2 &amp;= MS_\text{E} = \frac{SS_\text{E}}{n-2} = 27.5
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><em>The <span class="math inline">\(t\)</span> value is:</em></p>
-<p><input class="webex-solveme nospaces" id="webex-b5e68e49affd5655beeabd0e42282d1e" data-tol="0.2" size="20" data-answer="ORdIDxZTFmQ="></p>
+<p><input class="webex-solveme nospaces" id="webex-bcd447c863d82e3d38cbe26117dd6fb6" data-tol="0.2" size="20" data-answer="OUFJDRoBQWU="></p>
 </div><div class="column" style="width:50%;">
 <p><em>The conclusion is to:</em></p>
-<p><select class="webex-select" id="webex-4f67ff04c3891c8ed5c7b42ff5e2ab7d" data-answer="b1caB0pWHAQ+"><option value="blank"></option><option>reject \(H_0: \beta_1 = 0\)</option><option>reject \(H_1: \beta_1 &gt; 0\)</option><option>reject \(H_0: \beta_1 \ne 0\)</option><option>reject \(H_1: \beta_1 = 0\)</option></select></p>
+<p><select class="webex-select" id="webex-c0f653588db5ea83059772035c1cf9d0" data-answer="OAFKBhkDGQhl"><option value="blank"></option><option>reject \(H_0: \beta_1 = 0\)</option><option>reject \(H_1: \beta_1 &gt; 0\)</option><option>reject \(H_0: \beta_1 \ne 0\)</option><option>reject \(H_1: \beta_1 = 0\)</option></select></p>
 </div>
 </div>
 </section>
@@ -1845,8 +1848,8 @@ Figure&nbsp;15.9: 95% intervals associated with the prediction of the mean respo
 </div>
 </div>
 <p><em>Which variable from the list below would be the most plausible additional predictor for improving the regression model?</em></p>
-<div id="webex-f2813c6c2e19f9aba6b10ba2c0d7209c" class="webex-radiogroup" data-answer="PQMUAR9TGlMeVWw=">
-<label><input type="radio" autocomplete="off" name="f2813c6c2e19f9aba6b10ba2c0d7209c"><span><em>body mass</em></span></label><label><input type="radio" autocomplete="off" name="f2813c6c2e19f9aba6b10ba2c0d7209c"><span><em>fitness level</em></span></label><label><input type="radio" autocomplete="off" name="f2813c6c2e19f9aba6b10ba2c0d7209c"><span><em>body height</em></span></label><label><input type="radio" autocomplete="off" name="f2813c6c2e19f9aba6b10ba2c0d7209c"><span><em>heart rate</em></span></label><label><input type="radio" autocomplete="off" name="f2813c6c2e19f9aba6b10ba2c0d7209c"><span><em>age</em></span></label>
+<div id="webex-0f1161cd4963277d34be6eafa9c0604c" class="webex-radiogroup" data-answer="a1cdARoBT1QYCWs=">
+<label><input type="radio" autocomplete="off" name="0f1161cd4963277d34be6eafa9c0604c"><span><em>body mass</em></span></label><label><input type="radio" autocomplete="off" name="0f1161cd4963277d34be6eafa9c0604c"><span><em>fitness level</em></span></label><label><input type="radio" autocomplete="off" name="0f1161cd4963277d34be6eafa9c0604c"><span><em>body height</em></span></label><label><input type="radio" autocomplete="off" name="0f1161cd4963277d34be6eafa9c0604c"><span><em>heart rate</em></span></label><label><input type="radio" autocomplete="off" name="0f1161cd4963277d34be6eafa9c0604c"><span><em>age</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -2051,21 +2054,21 @@ Figure&nbsp;15.10: Anaerobic power as a function of body mass and height.
 <tbody>
 <tr class="odd">
 <td>Regression</td>
-<td><span class="math inline">\(\nu_\text{R}=\)</span> <select class="webex-select" id="webex-d184ae0531ab82e5d87f788f9827f16e" data-answer="PwAUBE1VHAUfATw="><option value="blank"></option><option>2</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
+<td><span class="math inline">\(\nu_\text{R}=\)</span> <select class="webex-select" id="webex-48f107b4fd2fe6a804b1adeb146373cc" data-answer="bwlKARwHTgRKVG8="><option value="blank"></option><option>2</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
 <td><span class="math inline">\(SS_\text{R} =\)</span> 5020581</td>
-<td><span class="math inline">\(MS_\text{R}=\)</span> <select class="webex-select" id="webex-48611aa1a03238156d2fc4d8770cbeff" data-answer="bwgaAR1QTQE8"><option value="blank"></option><option>99</option><option>1690</option><option>2510290</option><option>264330</option></select></td>
-<td><select class="webex-select" id="webex-a45fbc64aecc3da75fb9e1d7b0ace759" data-answer="OgQZV05TGgQ8"><option value="blank"></option><option>2971</option><option>25254</option><option>28225</option><option>29710</option></select></td>
+<td><span class="math inline">\(MS_\text{R}=\)</span> <select class="webex-select" id="webex-6d773150bfc16541d14ca46e2b6447c7" data-answer="bVQbBx8AGQA/"><option value="blank"></option><option>99</option><option>1690</option><option>2510290</option><option>264330</option></select></td>
+<td><select class="webex-select" id="webex-b32260c1396f1c6d5cc736f19725137d" data-answer="OQMeAxoATwFu"><option value="blank"></option><option>2971</option><option>25254</option><option>28225</option><option>29710</option></select></td>
 </tr>
 <tr class="even">
 <td>Residual</td>
-<td><span class="math inline">\(\nu_\text{E}=\)</span> <select class="webex-select" id="webex-0c88eb23322e63d1ad89246980799e24" data-answer="a1MUCUlSHgMfAm8="><option value="blank"></option><option>2</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
-<td><span class="math inline">\(SS_\text{E}=\)</span> <select class="webex-select" id="webex-536e934a6c9e373011570a400ca5a784" data-answer="bgMaVBUDGFFr"><option value="blank"></option><option>99</option><option>1690</option><option>2510290</option><option>264330</option></select></td>
-<td><span class="math inline">\(MS_\text{E}=\)</span> <select class="webex-select" id="webex-4a4696e326f0abee73f9cb3fbbdbb429" data-answer="b1AYBhUGSQNv"><option value="blank"></option><option>99</option><option>1690</option><option>2510290</option><option>264330</option></select></td>
+<td><span class="math inline">\(\nu_\text{E}=\)</span> <select class="webex-select" id="webex-240dffb0bba410e611f67cfa160d79d6" data-answer="aQQcVUpWTgBOUjw="><option value="blank"></option><option>2</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
+<td><span class="math inline">\(SS_\text{E}=\)</span> <select class="webex-select" id="webex-81105f0aeed8fe5e87e51cef61afb52e" data-answer="YwEdARlWHFE4"><option value="blank"></option><option>99</option><option>1690</option><option>2510290</option><option>264330</option></select></td>
+<td><span class="math inline">\(MS_\text{E}=\)</span> <select class="webex-select" id="webex-016dbd3f4d96c90e6dc419a6ee0e391d" data-answer="awAaVE5UH1Zp"><option value="blank"></option><option>99</option><option>1690</option><option>2510290</option><option>264330</option></select></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Total</td>
-<td><span class="math inline">\(\nu_\text{tot}=\)</span> <select class="webex-select" id="webex-e6573efa7ca21417f98c8a6ac04a67a4" data-answer="PgYZBx9VSlAbUzw="><option value="blank"></option><option>2</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
+<td><span class="math inline">\(\nu_\text{tot}=\)</span> <select class="webex-select" id="webex-46aeb8de91f7e2e9c895a46658e2392f" data-answer="bwZNVU4ISFQVATs="><option value="blank"></option><option>2</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
 <td><span class="math inline">\(SS_\text{tot}=\)</span> 5022270</td>
 <td></td>
 <td></td>
@@ -2074,7 +2077,7 @@ Figure&nbsp;15.10: Anaerobic power as a function of body mass and height.
 </table>
 </div>
 <p><em>Based on the value obtained for the F-ratio, your conclusion would be that…</em></p>
-<p><select class="webex-select" id="webex-f8f3c2934351cacbcc2c8109b144015b" data-answer="PQhKAk8CZA=="><option value="blank"></option><option>body mass alone significantly explains anaerobic power</option><option>both body mass and jump height significantly explain anaerobic power</option><option>the model does not contribute to explaining anaerobic power</option></select></p>
+<p><select class="webex-select" id="webex-24b89d0882bae67bbd2d72a85c799445" data-answer="aQROCRVUbQ=="><option value="blank"></option><option>body mass alone significantly explains anaerobic power</option><option>both body mass and jump height significantly explain anaerobic power</option><option>the model does not contribute to explaining anaerobic power</option></select></p>
 </div>
 <div class="webex-solution">
 <p>The regression model has two predictors: body mass and jump height. Therefore,</p>
@@ -2261,7 +2264,7 @@ t_{\nu=17,1-\frac{\alpha}{2}=0.95} = 2.11
 \end{aligned}
 \]</span></p>
 <p><em>Based on the appropriate <span class="math inline">\(t\)</span>-value, compute the 95% Confidence Interval for <span class="math inline">\(\beta_1\)</span></em></p>
-<p><span class="math inline">\(CI_{95\%}\left(\beta_1\right) = (\)</span> <input class="webex-solveme nospaces" id="webex-6caf4930b8934e3fa10a42f7fdafcb0c" data-tol="0.1" size="20" data-answer="bUFVUhoMEW0=">, <input class="webex-solveme nospaces" id="webex-5940c8363679c09309f48bc6e18d4e96" data-tol="0.1" size="20" data-answer="bhsABk0NEWs="> <span class="math inline">\()\)</span></p>
+<p><span class="math inline">\(CI_{95\%}\left(\beta_1\right) = (\)</span> <input class="webex-solveme nospaces" id="webex-14bf9b3eeed1d884237adf59265ae0d9" data-tol="0.1" size="20" data-answer="ahZWUhdXETg=">, <input class="webex-solveme nospaces" id="webex-fc8055641becfcbeb35122c0509f5763" data-tol="0.1" size="20" data-answer="PUEMBhsAFGk="> <span class="math inline">\()\)</span></p>
 </section>
 <div class="webex-solution">
 <p>The 95% confidence interval for <span class="math inline">\(\beta_1\)</span> is defined by:</p>
@@ -2357,9 +2360,9 @@ s_{\hat{y}_0} = \sqrt{s^2 + \mathbf{x}_0 \hat{\Sigma} \mathbf{x}_0^T} = 15.8 \te
 <p><em>what would be the extremes defining this interval?</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><em>The lower extreme is: <input class="webex-solveme nospaces" id="webex-d707e1cab2385caeb315fb4fc5c369d8" data-tol="0.1" size="20" data-answer="PxUDAlECTVhAbw=="></em></p>
+<p><em>The lower extreme is: <input class="webex-solveme nospaces" id="webex-cd47623d868b4caa912a4547ef9986f5" data-tol="0.1" size="20" data-answer="OEYHAgIBHV0aaw=="></em></p>
 </div><div class="column" style="width:50%;">
-<p><em>The upper extreme is: <input class="webex-solveme nospaces" id="webex-194cb6580a1cb121a7cd1c02834203fc" data-tol="0.1" size="20" data-answer="ahsHVVMGGwwSPA=="></em></p>
+<p><em>The upper extreme is: <input class="webex-solveme nospaces" id="webex-50fc1bfcda8b61a805c4888582a6d8d7" data-tol="0.1" size="20" data-answer="bhJVVQBSSFdGPA=="></em></p>
 </div>
 </div>
 </div>
@@ -2990,8 +2993,8 @@ R_k^2 = 0 \qquad \Rightarrow \qquad \text{VIF}_k = 1.
 </figure>
 </div>
 <p><em>What is the most appropriate conclusion?</em></p>
-<div id="webex-9e470e91b7338d44e6b79837e201bfe1" class="webex-radiogroup" data-answer="YlUYBhxVFQE/">
-<label><input type="radio" autocomplete="off" name="9e470e91b7338d44e6b79837e201bfe1"><span>All explanatory variables should be removed from the model.</span></label><label><input type="radio" autocomplete="off" name="9e470e91b7338d44e6b79837e201bfe1"><span>There is evidence of severe multicollinearity between body mass (<span class="math inline">\(X_2\)</span>) and BMI (<span class="math inline">\(X_3\)</span>), suggesting that one of them should be excluded from the model.</span></label><label><input type="radio" autocomplete="off" name="9e470e91b7338d44e6b79837e201bfe1"><span>Jump height (<span class="math inline">\(X_1\)</span>) should be excluded from the model because its VIF is greater than 1.</span></label><label><input type="radio" autocomplete="off" name="9e470e91b7338d44e6b79837e201bfe1"><span>The reduced model should be discarded because the VIF values are smaller than those of the full model.</span></label>
+<div id="webex-c1360f8e9bd940a184df016b2bd62e06" class="webex-radiogroup" data-answer="OAEfBxxWFFVk">
+<label><input type="radio" autocomplete="off" name="c1360f8e9bd940a184df016b2bd62e06"><span>All explanatory variables should be removed from the model.</span></label><label><input type="radio" autocomplete="off" name="c1360f8e9bd940a184df016b2bd62e06"><span>There is evidence of severe multicollinearity between body mass (<span class="math inline">\(X_2\)</span>) and BMI (<span class="math inline">\(X_3\)</span>), suggesting that one of them should be excluded from the model.</span></label><label><input type="radio" autocomplete="off" name="c1360f8e9bd940a184df016b2bd62e06"><span>Jump height (<span class="math inline">\(X_1\)</span>) should be excluded from the model because its VIF is greater than 1.</span></label><label><input type="radio" autocomplete="off" name="c1360f8e9bd940a184df016b2bd62e06"><span>The reduced model should be discarded because the VIF values are smaller than those of the full model.</span></label>
 </div>
 </section>
 <div class="webex-solution">

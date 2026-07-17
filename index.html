@@ -89,6 +89,9 @@ ul.task-list li input[type="checkbox"] {
         apiUrl: 'https://hypothes.is',
         // Force your group to be the baseline environment
         groups: ['BBAZe1o8'] 
+        onLoginRequest: function() {
+          alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
+        }
       }]
     };
   };
