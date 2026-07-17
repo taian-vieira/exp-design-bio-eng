@@ -159,10 +159,13 @@ div.csl-indent {
     return {
       theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8'],
-      onLoginRequest: function() {
-        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-      }
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['bbaze1o8'] 
+      }]
     };
   };
 </script>
@@ -174,32 +177,11 @@ div.csl-indent {
     document.head.appendChild(s);
   })();
 </script>
-<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
-
-<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    const observer = new MutationObserver((mutations) => {
-      // Look deep inside the Hypothesis iframe container panel
-      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
-      if (iframe && iframe.contentDocument) {
-        // Find the selectable dropdown list elements for the Public scope
-        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
-        publicTabs.forEach(el => {
-          // Vaporize the public button so it can never be selected or seen
-          el.style.setProperty('display', 'none', 'important');
-        });
-      }
-    });
-    // Keep scanning the page canvas silently in the background
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -648,8 +630,8 @@ Table&nbsp;11.1: Disease severity by treatment
 </figcaption>
 <div aria-describedby="tbl-3-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a0ddb2f182a10dca6405" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a0ddb2f182a10dca6405">{"x":{"filter":"none","vertical":false,"data":[["Mild","Moderate","Severe","Total"],[1200,1100,700,3000],[900,1200,900,3000],[2100,2300,1600,6000]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Severity<br>level<\/th>\n      <th>Treat. A (#)<\/th>\n      <th>Treat. B (#)<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"name":"Severity<br>level","targets":0},{"name":"Treat. A (#)","targets":1},{"name":"Treat. B (#)","targets":2},{"name":"Total","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':value == \"Total\" ? \"bold\" : null});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b23d99071b576501b052" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b23d99071b576501b052">{"x":{"filter":"none","vertical":false,"data":[["Mild","Moderate","Severe","Total"],[1200,1100,700,3000],[900,1200,900,3000],[2100,2300,1600,6000]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Severity<br>level<\/th>\n      <th>Treat. A (#)<\/th>\n      <th>Treat. B (#)<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"name":"Severity<br>level","targets":0},{"name":"Treat. A (#)","targets":1},{"name":"Treat. B (#)","targets":2},{"name":"Total","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':value == \"Total\" ? \"bold\" : null});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -666,8 +648,8 @@ Table&nbsp;11.2: Blood glucose level and gender
 </figcaption>
 <div aria-describedby="tbl-3-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-d2599a2843cf2d64cd8b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d2599a2843cf2d64cd8b">{"x":{"filter":"none","vertical":false,"data":[["Normal","Prediabetes","Diabetes","Total"],[0.325,0.11,0.065,0.5],[0.325,0.11,0.065,0.5],[0.65,0.22,0.13,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Glucose<br>level<\/th>\n      <th>Males (♂)<\/th>\n      <th>Females (♀)<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"targets":1,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\", null);\n  }"},{"targets":2,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\", null);\n  }"},{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\", null);\n  }"},{"className":"dt-right","targets":[1,2,3]},{"name":"Glucose<br>Category","targets":0},{"name":"Males","targets":1},{"name":"Females","targets":2},{"name":"Total","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':value == \"Total\" ? \"bold\" : null});\n}"}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.rowCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-407b7d9fadba7264c2ad" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-407b7d9fadba7264c2ad">{"x":{"filter":"none","vertical":false,"data":[["Normal","Prediabetes","Diabetes","Total"],[0.325,0.11,0.065,0.5],[0.325,0.11,0.065,0.5],[0.65,0.22,0.13,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Glucose<br>level<\/th>\n      <th>Males (♂)<\/th>\n      <th>Females (♀)<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"targets":1,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\", null);\n  }"},{"targets":2,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\", null);\n  }"},{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\", null);\n  }"},{"className":"dt-right","targets":[1,2,3]},{"name":"Glucose<br>Category","targets":0},{"name":"Males","targets":1},{"name":"Females","targets":2},{"name":"Total","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-weight':value == \"Total\" ? \"bold\" : null});\n}"}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.rowCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -749,10 +731,10 @@ P(A\cap B)=P(A)P(B)
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
-<p><em>What about the data in <a href="#tbl-3-3-1" class="quarto-xref">Table&nbsp;<span>11.1</span></a>? Can we say that receiving either treatment, A or B, would affect the probability of being classified as Mild, Moderate, or Severe?</em> <select class="webex-select" id="webex-c12a83cc591389fdaa7ca2785d4c9842" data-answer="OAAeUWU="><option value="blank"></option><option>yes</option><option>no</option></select></p>
-<p><em>What is the probability of having a severe disease and having received Treatment A <span class="math inline">\(P(\text{Severe}\cap \text{Treat. A}\)</span>?</em> <select class="webex-select" id="webex-fee8fe642419828c44db94dc1de8c1c5" data-answer="PVVJCUpVaw=="><option value="blank"></option><option>23.3%</option><option>11.7%</option><option>26.7%</option></select></p>
-<p><em>What is the probability of having a Severe disease <span class="math inline">\(P(\text{Severe})\)</span></em> <select class="webex-select" id="webex-a23c178612043c7c8069568048b1cd76" data-answer="OgIfUx0GZQ=="><option value="blank"></option><option>23.3%</option><option>11.7%</option><option>26.7%</option></select></p>
-<p><em>What is the probability of having a Severe disease given Treatment A has been received <span class="math inline">\(P(\text{Severe}|\text{Treat. A})\)</span></em> <select class="webex-select" id="webex-f9c242c1af89de996de9f7e47d57a108" data-answer="PQhPAhgCPg=="><option value="blank"></option><option>23.3%</option><option>11.7%</option><option>26.7%</option></select></p>
+<p><em>What about the data in <a href="#tbl-3-3-1" class="quarto-xref">Table&nbsp;<span>11.1</span></a>? Can we say that receiving either treatment, A or B, would affect the probability of being classified as Mild, Moderate, or Severe?</em> <select class="webex-select" id="webex-5fc1326565ecec1f932811d3a9380207" data-answer="bldPAW4="><option value="blank"></option><option>yes</option><option>no</option></select></p>
+<p><em>What is the probability of having a severe disease and having received Treatment A <span class="math inline">\(P(\text{Severe}\cap \text{Treat. A}\)</span>?</em> <select class="webex-select" id="webex-c266eb78776e2fb701b52ec37c96a5a7" data-answer="OAIaB0lSag=="><option value="blank"></option><option>23.3%</option><option>11.7%</option><option>26.7%</option></select></p>
+<p><em>What is the probability of having a Severe disease <span class="math inline">\(P(\text{Severe})\)</span></em> <select class="webex-select" id="webex-2d405d19363a8d6d54200b9849e8459f" data-answer="aVQYABlVbA=="><option value="blank"></option><option>23.3%</option><option>11.7%</option><option>26.7%</option></select></p>
+<p><em>What is the probability of having a Severe disease given Treatment A has been received <span class="math inline">\(P(\text{Severe}|\text{Treat. A})\)</span></em> <select class="webex-select" id="webex-cd3ed4bfc9b07a273cb900efc4e9d461" data-answer="OFUfVUgEPw=="><option value="blank"></option><option>23.3%</option><option>11.7%</option><option>26.7%</option></select></p>
 </div>
 <div class="webex-solution">
 <p>Yes, outcomes in <a href="#tbl-3-3-1" class="quarto-xref">Table&nbsp;<span>11.1</span></a> are dependent. Knowing which treatment has been delivered affects how likely the patient is to be classified as Mild, Moderate, or Severe. This is justified by <span class="math inline">\(P(Severe|Treat. A) \ne P(Severe)\)</span> as shown below.</p>
@@ -924,8 +906,8 @@ Figure&nbsp;11.3: Non-probability sampling methods (AI-generated illustration cr
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>What is the probability that any of the 2,700 scans available is selected?</em></p>
-<div id="webex-dfbc5245b04bc75a8c3d7a3d96076973" class="webex-radiogroup" data-answer="P1dOUxkCGAU/">
-<label><input type="radio" autocomplete="off" name="dfbc5245b04bc75a8c3d7a3d96076973"><span><em>0.067</em></span></label><label><input type="radio" autocomplete="off" name="dfbc5245b04bc75a8c3d7a3d96076973"><span><em>0</em></span></label><label><input type="radio" autocomplete="off" name="dfbc5245b04bc75a8c3d7a3d96076973"><span><em>0.006</em></span></label><label><input type="radio" autocomplete="off" name="dfbc5245b04bc75a8c3d7a3d96076973"><span><em>none of the above</em></span></label>
+<div id="webex-bd51fdfca9f44b627a9bd63697c59321" class="webex-radiogroup" data-answer="OVUZAUpUSlM8">
+<label><input type="radio" autocomplete="off" name="bd51fdfca9f44b627a9bd63697c59321"><span><em>0.067</em></span></label><label><input type="radio" autocomplete="off" name="bd51fdfca9f44b627a9bd63697c59321"><span><em>0</em></span></label><label><input type="radio" autocomplete="off" name="bd51fdfca9f44b627a9bd63697c59321"><span><em>0.006</em></span></label><label><input type="radio" autocomplete="off" name="bd51fdfca9f44b627a9bd63697c59321"><span><em>none of the above</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1008,8 +990,8 @@ P(\text{a given subject is selected}) = \frac{n}{N}.
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>If 50 scans were lost due to technical reasons (i.e., <span class="math inline">\(N=2650\)</span>), the step <span class="math inline">\(k\)</span> would not be an integer anymore (<span class="math inline">\(k=2650/180=14.7\)</span>. A workaround is necessary. Considering the random starting at <span class="math inline">\(11\)</span>, what option below for the first 4 scans would represent an appropriate workaround for a non-integer <span class="math inline">\(k\)</span>?</em></p>
-<div id="webex-2957b8462b91bf9b14f20c3e97b2496b" class="webex-radiogroup" data-answer="aQgZB04IGAZv">
-<label><input type="radio" autocomplete="off" name="2957b8462b91bf9b14f20c3e97b2496b"><span><span class="math inline">\(\{11, 26, 40, 55, 70, 84\}\)</span></span></label><label><input type="radio" autocomplete="off" name="2957b8462b91bf9b14f20c3e97b2496b"><span><span class="math inline">\(\{10, 25, 39, 54, 69, 84\}\)</span></span></label><label><input type="radio" autocomplete="off" name="2957b8462b91bf9b14f20c3e97b2496b"><span><span class="math inline">\(\{11, 28, 45, 62, 79\}\)</span></span></label><label><input type="radio" autocomplete="off" name="2957b8462b91bf9b14f20c3e97b2496b"><span><em>none of the above</em></span></label>
+<div id="webex-1a4f059c77a635fa9ee94e7db49d510d" class="webex-radiogroup" data-answer="alAYVhwFFVNq">
+<label><input type="radio" autocomplete="off" name="1a4f059c77a635fa9ee94e7db49d510d"><span><span class="math inline">\(\{11, 26, 40, 55, 70, 84\}\)</span></span></label><label><input type="radio" autocomplete="off" name="1a4f059c77a635fa9ee94e7db49d510d"><span><span class="math inline">\(\{10, 25, 39, 54, 69, 84\}\)</span></span></label><label><input type="radio" autocomplete="off" name="1a4f059c77a635fa9ee94e7db49d510d"><span><span class="math inline">\(\{11, 28, 45, 62, 79\}\)</span></span></label><label><input type="radio" autocomplete="off" name="1a4f059c77a635fa9ee94e7db49d510d"><span><em>none of the above</em></span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1062,8 +1044,8 @@ Figure&nbsp;11.4: Two probability sampling methods (AI-generated illustration cr
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Why is it important to assign recruited subjects randomly to different groups? Because it helps:</em></p>
-<div id="webex-0e9ba107cc3583628f57ad10e9c02e72" class="webex-radiogroup" data-answer="a1UVU00BHAc+">
-<label><input type="radio" autocomplete="off" name="0e9ba107cc3583628f57ad10e9c02e72"><span><em>the collection of high-quality data</em></span></label><label><input type="radio" autocomplete="off" name="0e9ba107cc3583628f57ad10e9c02e72"><span><em>control for systematic differences between groups</em></span></label><label><input type="radio" autocomplete="off" name="0e9ba107cc3583628f57ad10e9c02e72"><span><em>the collection of a large data set</em></span></label><label><input type="radio" autocomplete="off" name="0e9ba107cc3583628f57ad10e9c02e72"><span><em>the optimization of resources</em></span></label>
+<div id="webex-6e8a029ce3023cf1da81912e17ff9652" class="webex-radiogroup" data-answer="bVUUUBwCFVM4">
+<label><input type="radio" autocomplete="off" name="6e8a029ce3023cf1da81912e17ff9652"><span><em>the collection of high-quality data</em></span></label><label><input type="radio" autocomplete="off" name="6e8a029ce3023cf1da81912e17ff9652"><span><em>control for systematic differences between groups</em></span></label><label><input type="radio" autocomplete="off" name="6e8a029ce3023cf1da81912e17ff9652"><span><em>the collection of a large data set</em></span></label><label><input type="radio" autocomplete="off" name="6e8a029ce3023cf1da81912e17ff9652"><span><em>the optimization of resources</em></span></label>
 </div>
 </div>
 </div>
@@ -1162,8 +1144,8 @@ Figure&nbsp;11.5: From the whole (population) to the part (sample)
 <div class="webex-check webex-box">
 <p><img src="..\include/images/part_3/ch_3/freq-vs-prob-distribution.png" class="img-fluid" style="width:85.0%"></p>
 <p><em>Considering the figure above:</em></p>
-<p><em>Are the plots showing frequency or probability distributions?</em> <select class="webex-select" id="webex-0f5e1fd5ed88e695a17c57e9f0a87a7e" data-answer="a1YZVR1WSAQ4"><option value="blank"></option><option>frequency distribution</option><option>probability distribution</option><option>none of two distributions</option><option>both distributions are shown</option></select></p>
-<p><em>Do rectangles illustrate a histogram or a bar chart?</em> <select class="webex-select" id="webex-8c10faf08903c4c586e9e88918c50ea5" data-answer="Y1MdAUpRSgBl"><option value="blank"></option><option>bar chart</option><option>histogram</option><option>none of them</option><option>both of them</option></select></p>
+<p><em>Are the plots showing frequency or probability distributions?</em> <select class="webex-select" id="webex-8391eafebfa340080045a2f9a19e60ef" data-answer="YwMVAUlRSlQ/"><option value="blank"></option><option>frequency distribution</option><option>probability distribution</option><option>none of two distributions</option><option>both distributions are shown</option></select></p>
+<p><em>Do rectangles illustrate a histogram or a bar chart?</em> <select class="webex-select" id="webex-1c4891d1b8aaac84c754e6cd8c698306" data-answer="alMYCRUBSAE/"><option value="blank"></option><option>bar chart</option><option>histogram</option><option>none of them</option><option>both of them</option></select></p>
 </div>
 <div class="webex-solution">
 <p>Histograms are shown, given the random variable blood pressure is defined over a continuous interval. It is true that histrograms should not be represented with gaps between bars.</p>
@@ -1237,7 +1219,7 @@ P(X \geq 2) = \sum_{k=2}^3 P(X=k)=\binom{3}{2} 0.7^2 \times 0.3^1 + \binom{3}{3}
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
-<p><em>Supposing 10 patients have been vaccinated, what would be the probability that at least two were immune?</em> <select class="webex-select" id="webex-29a18d402120abe0f5a5925432d9c8db" data-answer="aQlNARRVGABv"><option value="blank"></option><option>0.38278</option><option>0.00159</option><option>0.99986</option><option>0.00145</option></select></p>
+<p><em>Supposing 10 patients have been vaccinated, what would be the probability that at least two were immune?</em> <select class="webex-select" id="webex-ef753f23613045e8af4f574c2a165ee2" data-answer="PlYbBR9XHgNr"><option value="blank"></option><option>0.38278</option><option>0.00159</option><option>0.99986</option><option>0.00145</option></select></p>
 </div>
 <div class="webex-solution">
 <p>Calculating the probability of at least 2 patients developing immunity directly would require summing the probabilities of 2, 3, 4, …, up to 10 patients becoming immune.</p>
@@ -1493,8 +1475,8 @@ Z \sim \mathcal{N}(0, 1)
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>The notation <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span> means that:</em></p>
-<div id="webex-c7764df3018a3d33198a1fd284a964cd" class="webex-radiogroup" data-answer="OAcbBxhUSgNt">
-<label><input type="radio" autocomplete="off" name="c7764df3018a3d33198a1fd284a964cd"><span><em><span class="math inline">\(Z\)</span> is a Normal distribution</em></span></label><label><input type="radio" autocomplete="off" name="c7764df3018a3d33198a1fd284a964cd"><span><em><span class="math inline">\(Z\)</span> is a random variable with <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span></em></span></label><label><input type="radio" autocomplete="off" name="c7764df3018a3d33198a1fd284a964cd"><span><em><span class="math inline">\(Z\)</span> and <span class="math inline">\(X\)</span> have the same distribution</em></span></label><label><input type="radio" autocomplete="off" name="c7764df3018a3d33198a1fd284a964cd"><span><em>none of the above</em></span></label>
+<div id="webex-524b081b0dd1dab7770838aa0db6d768" class="webex-radiogroup" data-answer="bgIYUxwIHVJt">
+<label><input type="radio" autocomplete="off" name="524b081b0dd1dab7770838aa0db6d768"><span><em><span class="math inline">\(Z\)</span> is a Normal distribution</em></span></label><label><input type="radio" autocomplete="off" name="524b081b0dd1dab7770838aa0db6d768"><span><em><span class="math inline">\(Z\)</span> is a random variable with <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span></em></span></label><label><input type="radio" autocomplete="off" name="524b081b0dd1dab7770838aa0db6d768"><span><em><span class="math inline">\(Z\)</span> and <span class="math inline">\(X\)</span> have the same distribution</em></span></label><label><input type="radio" autocomplete="off" name="524b081b0dd1dab7770838aa0db6d768"><span><em>none of the above</em></span></label>
 </div>
 </div>
 </div>
@@ -1881,10 +1863,10 @@ Figure&nbsp;11.9: Sampling distribution of the BMI for three different sample si
 <p><em>A sample of <span class="math inline">\(n=25\)</span> athletes is recruited.</em></p>
 <p><em>Assume the sample mean <span class="math inline">\(\overline{X}\)</span> is approximately Normally distributed.</em></p>
 <ol type="1">
-<li><em>What is the mean of the sampling distribution of <span class="math inline">\(\overline{X}\)</span>?</em> <input class="webex-solveme nospaces" id="webex-ce2f0a3ef9367d0c3e9f52b1d90e6167" data-tol="0.01" size="20" data-answer="OEcCRG0="></li>
-<li><em>What is the standard error of the mean? <input class="webex-solveme nospaces" id="webex-caf55c35e680c203e6d10fb596bf9a52" data-tol="0.01" size="20" data-answer="OENWF2g="></em></li>
-<li><em>What is the probability that the sample mean resting heart rate is <strong>greater than 55 bpm</strong>?</em> <input class="webex-solveme nospaces" id="webex-d132f04b86751f759eaa6ffc9c8af88d" data-tol="0.01" size="20" data-answer="PxMDEDs="></li>
-<li><em>What is the probability that the sample mean resting heart rate is <strong>between 50 and 54 bpm</strong>?</em> <input class="webex-solveme nospaces" id="webex-2b9faf56f704d704bc8f142b954a6e36" data-tol="0.01" size="20" data-answer="aUAJRDw="></li>
+<li><em>What is the mean of the sampling distribution of <span class="math inline">\(\overline{X}\)</span>?</em> <input class="webex-solveme nospaces" id="webex-805f0d5e807bfa39f9e2c76ae75ff2cd" data-tol="0.01" size="20" data-answer="YxIFRG0="></li>
+<li><em>What is the standard error of the mean? <input class="webex-solveme nospaces" id="webex-15e9f5731336b33cd36d87cc85fa334d" data-tol="0.01" size="20" data-answer="ahdVGzs="></em></li>
+<li><em>What is the probability that the sample mean resting heart rate is <strong>greater than 55 bpm</strong>?</em> <input class="webex-solveme nospaces" id="webex-28642344b61f7709f25c568a494e5cdc" data-tol="0.01" size="20" data-answer="aRoGFm8="></li>
+<li><em>What is the probability that the sample mean resting heart rate is <strong>between 50 and 54 bpm</strong>?</em> <input class="webex-solveme nospaces" id="webex-13533e335081ddba1ca04d93f63c6d01" data-tol="0.01" size="20" data-answer="ahEFEW4="></li>
 </ol>
 </div>
 <div class="webex-solution">

@@ -159,10 +159,13 @@ div.csl-indent {
     return {
       theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8'],
-      onLoginRequest: function() {
-        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-      }
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['bbaze1o8'] 
+      }]
     };
   };
 </script>
@@ -174,32 +177,11 @@ div.csl-indent {
     document.head.appendChild(s);
   })();
 </script>
-<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
-
-<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    const observer = new MutationObserver((mutations) => {
-      // Look deep inside the Hypothesis iframe container panel
-      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
-      if (iframe && iframe.contentDocument) {
-        // Find the selectable dropdown list elements for the Public scope
-        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
-        publicTabs.forEach(el => {
-          // Vaporize the public button so it can never be selected or seen
-          el.style.setProperty('display', 'none', 'important');
-        });
-      }
-    });
-    // Keep scanning the page canvas silently in the background
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -972,8 +954,8 @@ t_c &amp;= t_{\nu,\,1-\alpha/2}, \quad \text{two-tailed test}
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
-<p><em>What would be the <span class="math inline">\(t\)</span> value if the sample size was <span class="math inline">\(n=6\)</span>, excluding the first six subjects in <a href="#tbl-3-4-1" class="quarto-xref">Table&nbsp;<span>12.1</span></a>?</em> <input class="webex-solveme nospaces" id="webex-c0373f8adec6e63d3259ed2a42b4e022" data-tol="0.01" size="20" data-answer="OBIDGQVVGjw="></p>
-<p><em>Would the decision to reject <span class="math inline">\(H_0\)</span> stand?</em> <select class="webex-select" id="webex-ef7a7ad95a16aeaa8d4ce21e4b52f2bd" data-answer="PlcbUWo="><option value="blank"></option><option>no</option><option>yes</option></select></p>
+<p><em>What would be the <span class="math inline">\(t\)</span> value if the sample size was <span class="math inline">\(n=6\)</span>, excluding the first six subjects in <a href="#tbl-3-4-1" class="quarto-xref">Table&nbsp;<span>12.1</span></a>?</em> <input class="webex-solveme nospaces" id="webex-e01994582caeaec95d5a77a9f53ecfc9" data-tol="0.01" size="20" data-answer="PhIBFw8HF2U="></p>
+<p><em>Would the decision to reject <span class="math inline">\(H_0\)</span> stand?</em> <select class="webex-select" id="webex-7c06ed454b72b7aedca6b6b7e6d32b20" data-answer="bFIcBjg="><option value="blank"></option><option>no</option><option>yes</option></select></p>
 </div>
 <div class="webex-solution">
 <p>If data was collected only the first 6 subjects in <a href="#tbl-3-4-1" class="quarto-xref">Table&nbsp;<span>12.1</span></a>, we would have that:</p>
@@ -1439,12 +1421,12 @@ Table&nbsp;12.3: Percent of Platelet Aggregation
 <p><br>
 </p>
 <ol type="1">
-<li><p><em>The assumed null hypothesis for the population difference <span class="math inline">\(\mu_d\)</span> in aggregation is:</em> <select class="webex-select" id="webex-3163d91c121f2e8f74866dcb965954de" data-answer="aAEaA0gIHVNs"><option value="blank"></option><option>\(H_0: \mu_d = y - x\)</option><option>\(H_1: \mu_d = 0\)</option><option>\(H_0: \mu_d = 0\)</option><option>\(H_1: \mu_d &gt; 0\)</option></select></p></li>
-<li><p><em>What is the appropriate test statistic?</em> <select class="webex-select" id="webex-05d59f3a99eecc8ca3c47b67357731de" data-answer="awVIBBVWbg=="><option value="blank"></option><option>z-score</option><option>t value</option><option>y-x</option></select></p></li>
-<li><p><em>For <span class="math inline">\(\alpha = 0.05\)</span>, determine the critical value <span class="math inline">\(t_c =\)</span></em> <input class="webex-solveme nospaces" id="webex-6b64c148215fe551158ecf70bd2b7bc7" data-tol="0.01" size="20" data-answer="bUAHGlsCBwkDAwxEOA=="></p></li>
-<li><p><em>Compute the test statistic <span class="math inline">\(t =\)</span></em> <input class="webex-solveme nospaces" id="webex-cb4fad3206c3e5b72f806df60931f55a" data-tol="0.01" size="20" data-answer="OEAHSFNQAwoEBVUROA=="></p></li>
+<li><p><em>The assumed null hypothesis for the population difference <span class="math inline">\(\mu_d\)</span> in aggregation is:</em> <select class="webex-select" id="webex-cee56c9cba2b9bac0e7d0d3cf7d1f408" data-answer="OFVJBRpSFVM/"><option value="blank"></option><option>\(H_0: \mu_d = y - x\)</option><option>\(H_1: \mu_d = 0\)</option><option>\(H_0: \mu_d = 0\)</option><option>\(H_1: \mu_d &gt; 0\)</option></select></p></li>
+<li><p><em>What is the appropriate test statistic?</em> <select class="webex-select" id="webex-a546ff079cb1053e2ebc185022d9dda4" data-answer="OgUYB0pWbQ=="><option value="blank"></option><option>z-score</option><option>t value</option><option>y-x</option></select></p></li>
+<li><p><em>For <span class="math inline">\(\alpha = 0.05\)</span>, determine the critical value <span class="math inline">\(t_c =\)</span></em> <input class="webex-solveme nospaces" id="webex-aef8f92d0fcb6143aee41dbc665159a1" data-tol="0.01" size="20" data-answer="OkdXFl4KAVUBVFpAaw=="></p></li>
+<li><p><em>Compute the test statistic <span class="math inline">\(t =\)</span></em> <input class="webex-solveme nospaces" id="webex-0685c204984270fdee36262853e59fab" data-tol="0.01" size="20" data-answer="axQLG1EGAAwNCwIQag=="></p></li>
 </ol>
-<p><em>Given that the <span class="math inline">\(t\)</span> value obtained is</em> <select class="webex-select" id="webex-429e406f5eaaf531f5bab299a83ba9fc" data-answer="bwMVVWk="><option value="blank"></option><option>greater</option><option>smaller</option></select> <em>the critical value, the null hypothesis is</em> <select class="webex-select" id="webex-901d92aefd88d5abfdddcfbf4a72ea36" data-answer="YgEdVGQ="><option value="blank"></option><option>rejected</option><option>not rejected</option></select></p>
+<p><em>Given that the <span class="math inline">\(t\)</span> value obtained is</em> <select class="webex-select" id="webex-afc54c0955f7c67c9da04d775703367d" data-answer="OldPBWk="><option value="blank"></option><option>greater</option><option>smaller</option></select> <em>the critical value, the null hypothesis is</em> <select class="webex-select" id="webex-9fec78ffb5cc41e1f4de538af903d592" data-answer="YldJU2o="><option value="blank"></option><option>rejected</option><option>not rejected</option></select></p>
 </section>
 <div class="webex-solution">
 <p><strong>1. The null hypothesis</strong></p>
@@ -1472,8 +1454,8 @@ t = \frac{\overline{d}-0}{s_d / \sqrt{n}} = 3.24
 </p>
 <p>Assuming the data shown in <a href="#tbl-3-4-3" class="quarto-xref">Table&nbsp;<span>12.3</span></a> are independent and Normally distributed, compute:</p>
 <ol type="1">
-<li><p><em>The lower</em> <input class="webex-solveme nospaces" id="webex-79634c1e1252d6a2d7ca03a8970daba6" data-tol="0.01" size="20" data-answer="bBsCHQ1bEzg="> <em>and the upper</em> <input class="webex-solveme nospaces" id="webex-a926bd27313eda16ba17308ea6abf858" data-tol="0.01" size="20" data-answer="OhsADkxUABVu"> <em>bounds of the 95% confidence interval for <span class="math inline">\(\mu_d\)</span>.</em></p></li>
-<li><p><em>The lower</em> <input class="webex-solveme nospaces" id="webex-4f67b45aa4f4636b0b9b9b6c8b36e3b0" data-tol="0.01" size="20" data-answer="b0QbB0wEAEM8"> <em>and the upper</em> <input class="webex-solveme nospaces" id="webex-78d1171dba73d8afc74c1a860005428b" data-tol="0.01" size="20" data-answer="bBpXAh8HBEY/"> <em>bounds of the 99% confidence interval for <span class="math inline">\(\mu_d\)</span>.</em></p></li>
+<li><p><em>The lower</em> <input class="webex-solveme nospaces" id="webex-6db578a4994c5c1832d97a4cbf35cce2" data-tol="0.01" size="20" data-answer="bUZWGw4AQ2k="> <em>and the upper</em> <input class="webex-solveme nospaces" id="webex-eae9e8d6a9b8a228c834f56efe61d616" data-tol="0.01" size="20" data-answer="PkNXAUsIVhQ8"> <em>bounds of the 95% confidence interval for <span class="math inline">\(\mu_d\)</span>.</em></p></li>
+<li><p><em>The lower</em> <input class="webex-solveme nospaces" id="webex-09a84e2e00a50d10a34ed0c54f9453a8" data-tol="0.01" size="20" data-answer="axtMCBpVB0dt"> <em>and the upper</em> <input class="webex-solveme nospaces" id="webex-ce4fc432e45f86aa4fcfebe66cec1b8e" data-tol="0.01" size="20" data-answer="OEcHVU0EBhA4"> <em>bounds of the 99% confidence interval for <span class="math inline">\(\mu_d\)</span>.</em></p></li>
 </ol>
 </section>
 <div class="webex-solution">
@@ -1796,7 +1778,7 @@ Figure&nbsp;12.7: Possible outcomes for inferential statistics. Created with Cha
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>In the context of experimental design, gathering more evidence to support statistical inference would correspond to:</em></p>
-<p><select class="webex-select" id="webex-c03b29cd2be0c3f732fef580f4dfba6e" data-answer="OAEfUh4JPg=="><option value="blank"></option><option>increasing sample size</option><option>collecting additional data after inspecting the results</option><option>decreasing both \(\alpha\) and \(\beta\) while keeping the sample size fixed</option></select></p>
+<p><select class="webex-select" id="webex-20ff4881ed62fec553331651e824cdc8" data-answer="aQFKVhgIZQ=="><option value="blank"></option><option>increasing sample size</option><option>collecting additional data after inspecting the results</option><option>decreasing both \(\alpha\) and \(\beta\) while keeping the sample size fixed</option></select></p>
 </div>
 <div class="webex-solution">
 <p>In experimental design, gathering more evidence typically corresponds to increasing the sample size, as a larger sample provides more information and increases the precision of estimates, thereby improving statistical power.</p>
@@ -1891,7 +1873,7 @@ Z = \frac{\overline{D} - \mu_D}{\sigma_D / \sqrt{n}}
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>How can the probability of a Type I error be decreased within the framework of hypothesis testing?</em></p>
-<p><select class="webex-select" id="webex-babad1c4cc51a16b472aee852bad16e9" data-answer="OVFOUUgBTwRPUmg="><option value="blank"></option><option>increasing sample size</option><option>increasing \(\beta\)</option><option>decreasing \(\beta\)</option><option>increasing \(\alpha\)</option><option>decreasing \(\alpha\)</option></select></p>
+<p><select class="webex-select" id="webex-59f277a941d34f33f6d6854856fd6ca7" data-answer="bglKAhsHTQkYADk="><option value="blank"></option><option>increasing sample size</option><option>increasing \(\beta\)</option><option>decreasing \(\beta\)</option><option>increasing \(\alpha\)</option><option>decreasing \(\alpha\)</option></select></p>
 </div>
 <div class="webex-solution">
 <p>Since <span class="math inline">\(\alpha\)</span> represents the probability of a Type I error, decreasing <span class="math inline">\(\alpha\)</span> directly reduces the probability of making such an error.</p>
@@ -1901,8 +1883,8 @@ Z = \frac{\overline{D} - \mu_D}{\sigma_D / \sqrt{n}}
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>How can the probability of a Type II error be decreased within the framework of hypothesis testing?</em></p>
-<div id="webex-ea6d1fe381f03b8f55f488537a9d7a17" class="webex-checkboxgroup" data-answer="PlAaVB1WSQIUATs=">
-<label><input type="checkbox" autocomplete="off" name="ea6d1fe381f03b8f55f488537a9d7a17"><span>increasing sample size</span></label><label><input type="checkbox" autocomplete="off" name="ea6d1fe381f03b8f55f488537a9d7a17"><span>increasing <span class="math inline">\(\beta\)</span></span></label><label><input type="checkbox" autocomplete="off" name="ea6d1fe381f03b8f55f488537a9d7a17"><span>decreasing <span class="math inline">\(\beta\)</span></span></label><label><input type="checkbox" autocomplete="off" name="ea6d1fe381f03b8f55f488537a9d7a17"><span>increasing <span class="math inline">\(\alpha\)</span></span></label><label><input type="checkbox" autocomplete="off" name="ea6d1fe381f03b8f55f488537a9d7a17"><span>decreasing <span class="math inline">\(\alpha\)</span></span></label>
+<div id="webex-13b6ec37405ec7979b15aee8bfb526b4" class="webex-checkboxgroup" data-answer="agJOBklTHwYYAGg=">
+<label><input type="checkbox" autocomplete="off" name="13b6ec37405ec7979b15aee8bfb526b4"><span>increasing sample size</span></label><label><input type="checkbox" autocomplete="off" name="13b6ec37405ec7979b15aee8bfb526b4"><span>increasing <span class="math inline">\(\beta\)</span></span></label><label><input type="checkbox" autocomplete="off" name="13b6ec37405ec7979b15aee8bfb526b4"><span>decreasing <span class="math inline">\(\beta\)</span></span></label><label><input type="checkbox" autocomplete="off" name="13b6ec37405ec7979b15aee8bfb526b4"><span>increasing <span class="math inline">\(\alpha\)</span></span></label><label><input type="checkbox" autocomplete="off" name="13b6ec37405ec7979b15aee8bfb526b4"><span>decreasing <span class="math inline">\(\alpha\)</span></span></label>
 </div>
 </div>
 <div class="webex-solution">

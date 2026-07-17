@@ -126,10 +126,13 @@ div.csl-indent {
     return {
       theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8'],
-      onLoginRequest: function() {
-        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-      }
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['bbaze1o8'] 
+      }]
     };
   };
 </script>
@@ -141,32 +144,11 @@ div.csl-indent {
     document.head.appendChild(s);
   })();
 </script>
-<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
-
-<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    const observer = new MutationObserver((mutations) => {
-      // Look deep inside the Hypothesis iframe container panel
-      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
-      if (iframe && iframe.contentDocument) {
-        // Find the selectable dropdown list elements for the Public scope
-        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
-        publicTabs.forEach(el => {
-          // Vaporize the public button so it can never be selected or seen
-          el.style.setProperty('display', 'none', 'important');
-        });
-      }
-    });
-    // Keep scanning the page canvas silently in the background
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -566,8 +548,8 @@ Figure&nbsp;10.1: Example of electrocardiogram from a healthy subject. Heart rat
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Can you tell how many variables are illustrated in this figure?</em></p>
-<div id="webex-23d6f6372fbc512162e01d069e97de38" class="webex-radiogroup" data-answer="aQNIBkoHHwdv">
-<label><input type="radio" autocomplete="off" name="23d6f6372fbc512162e01d069e97de38"><span>three</span></label><label><input type="radio" autocomplete="off" name="23d6f6372fbc512162e01d069e97de38"><span>four</span></label><label><input type="radio" autocomplete="off" name="23d6f6372fbc512162e01d069e97de38"><span>five</span></label><label><input type="radio" autocomplete="off" name="23d6f6372fbc512162e01d069e97de38"><span>six</span></label>
+<div id="webex-f59802a5602ee6855a2e1e30c43405fc" class="webex-radiogroup" data-answer="PQUVCBwDTQVr">
+<label><input type="radio" autocomplete="off" name="f59802a5602ee6855a2e1e30c43405fc"><span>three</span></label><label><input type="radio" autocomplete="off" name="f59802a5602ee6855a2e1e30c43405fc"><span>four</span></label><label><input type="radio" autocomplete="off" name="f59802a5602ee6855a2e1e30c43405fc"><span>five</span></label><label><input type="radio" autocomplete="off" name="f59802a5602ee6855a2e1e30c43405fc"><span>six</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -620,8 +602,8 @@ Figure&nbsp;10.1: Example of electrocardiogram from a healthy subject. Heart rat
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>Temperature may be measured on a ratio scale, depending on</em></p>
-<div id="webex-ce605c45aa531d00ec6378cb990d5378" class="webex-radiogroup" data-answer="OFUaARlTaQ==">
-<label><input type="radio" autocomplete="off" name="ce605c45aa531d00ec6378cb990d5378"><span>where it is meaasured</span></label><label><input type="radio" autocomplete="off" name="ce605c45aa531d00ec6378cb990d5378"><span>the unit of measurement</span></label><label><input type="radio" autocomplete="off" name="ce605c45aa531d00ec6378cb990d5378"><span>the number of measurements</span></label>
+<div id="webex-4e78a0b2646711ff4ac7cde73429d56a" class="webex-radiogroup" data-answer="b1UbCU0APw==">
+<label><input type="radio" autocomplete="off" name="4e78a0b2646711ff4ac7cde73429d56a"><span>where it is meaasured</span></label><label><input type="radio" autocomplete="off" name="4e78a0b2646711ff4ac7cde73429d56a"><span>the unit of measurement</span></label><label><input type="radio" autocomplete="off" name="4e78a0b2646711ff4ac7cde73429d56a"><span>the number of measurements</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -749,8 +731,8 @@ p\left(x_i\right)=P\left(X=x_i\right)
 <div class="small-text">
 <div class="webex-question">
 <div class="webex-check webex-box">
-<p><em>If the first observation in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a> was 95 instead of 36, what would be the new mean value?</em> <input class="webex-solveme nospaces" id="webex-31a37c6eecdf65f0cf26447cb95f7da4" data-tol="0.1" size="20" data-answer="aBNUBxlVFDg="></p>
-<p><em>Is it necessary to know all 20 values to recompute the mean with the new entry?</em> <select class="webex-select" id="webex-5389a8cd8d50079a9350e3c133e426e8" data-answer="bgMUCDw="><option value="blank"></option><option>yes</option><option>no</option></select></p>
+<p><em>If the first observation in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a> was 95 instead of 36, what would be the new mean value?</em> <input class="webex-solveme nospaces" id="webex-3909a97c59eb247c130a238d8789cb4c" data-tol="0.1" size="20" data-answer="aBsFDU8PFT4="></p>
+<p><em>Is it necessary to know all 20 values to recompute the mean with the new entry?</em> <select class="webex-select" id="webex-7788b5793c076b78b33500d745c72b71" data-answer="bAcUCT8="><option value="blank"></option><option>yes</option><option>no</option></select></p>
 </div>
 <div class="webex-solution">
 <p>Given the <span class="math inline">\(\mu = 51.6\)</span> computed over the 20 values in <a href="#tbl-3-2-1" class="quarto-xref">Table&nbsp;<span>10.1</span></a>, to compute the updated mean (<span class="math inline">\(\mu_u\)</span>) with the new entry it would be sufficient to: <span class="math inline">\(\mu_u=(\mu \times n - 36 + 95)/n = 54.6\)</span></p>
@@ -830,7 +812,7 @@ Figure&nbsp;10.3: The relationship between the three central tendency measures (
 
 </div><div class="column" style="width:38%;">
 <p><em>A survey with 750 participants provided this distribution for how many cups of coffee were taken on a daily basis.</em> <em>What would be the most likely relationship between the mean (<span class="math inline">\(\mu\)</span>), the median (<span class="math inline">\(\eta\)</span>), and the mode (<span class="math inline">\(M\)</span>)</em></p>
-<p><select class="webex-select" id="webex-6e26efaef852f3cc29acd052f27d931d" data-answer="bVUeBklXTVU7"><option value="blank"></option><option>\(\mu = \eta = M\)</option><option>\(M &lt; \mu = \eta\)</option><option>\(M &lt; \eta &lt; \mu\)</option><option>\(\eta &lt; \mu = M\)</option></select></p>
+<p><select class="webex-select" id="webex-7c93eeed877c4c7069379e57be61ef42" data-answer="bFMVA0lUSVRl"><option value="blank"></option><option>\(\mu = \eta = M\)</option><option>\(M &lt; \mu = \eta\)</option><option>\(M &lt; \eta &lt; \mu\)</option><option>\(\eta &lt; \mu = M\)</option></select></p>
 </div>
 </div>
 </div>
@@ -896,7 +878,7 @@ CoV = \frac{\sigma}{\mu} \times 100
 <div style="font-size: 85%;">
 <div class="webex-question">
 <div class="webex-check webex-box">
-<p><img src="..\include/images/part_3/ch_2/3-2-6_cov.png" class="img-fluid" style="width:100.0%"> <em>The figure above illustrates the elbow flexion force measured while two stroke patients were contracting their biceps brachii muscle at a constant level.</em> <em>Mean and standard deviation value for the steady-state force region (plateau) are indicated.</em> <em>Patient A exhibits </em> <select class="webex-select" id="webex-4ace68755bd2de607ba2d1bbae446e36" data-answer="b1BPVRoIag=="><option value="blank"></option><option>more stable</option><option>less stable</option><option>comparable</option></select> <em>force control when compared to Patient B.</em></p>
+<p><img src="..\include/images/part_3/ch_2/3-2-6_cov.png" class="img-fluid" style="width:100.0%"> <em>The figure above illustrates the elbow flexion force measured while two stroke patients were contracting their biceps brachii muscle at a constant level.</em> <em>Mean and standard deviation value for the steady-state force region (plateau) are indicated.</em> <em>Patient A exhibits </em> <select class="webex-select" id="webex-6d8d4b9e7bca1c4302f3106f71137a45" data-answer="bVUUVBhSZA=="><option value="blank"></option><option>more stable</option><option>less stable</option><option>comparable</option></select> <em>force control when compared to Patient B.</em></p>
 </div>
 </div>
 </div>
@@ -1247,8 +1229,8 @@ Table&nbsp;10.6: Comparison of Mortality Rates - Drug A vs Drug B
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>What statements would be correct considering the information presented in </em> <a href="#tbl-3-2-4" class="quarto-xref">Table&nbsp;<span>10.4</span></a> <em>and</em> <a href="#tbl-3-2-5" class="quarto-xref">Table&nbsp;<span>10.5</span></a></p>
-<div id="webex-97333afec38a3d08b0a90c83543018f8" class="webex-checkboxgroup" data-answer="YgYfAh9RSlRPAmU=">
-<label><input type="checkbox" autocomplete="off" name="97333afec38a3d08b0a90c83543018f8"><span><em>571 out of 1,000 smokers have no lung cancer</em></span></label><label><input type="checkbox" autocomplete="off" name="97333afec38a3d08b0a90c83543018f8"><span><em>The proportion of lung cancer is 28.6%</em></span></label><label><input type="checkbox" autocomplete="off" name="97333afec38a3d08b0a90c83543018f8"><span><em>4% persons with CVD are inactive</em></span></label><label><input type="checkbox" autocomplete="off" name="97333afec38a3d08b0a90c83543018f8"><span><em>100 per 10,000 active people develop CVD over a year</em></span></label><label><input type="checkbox" autocomplete="off" name="97333afec38a3d08b0a90c83543018f8"><span><em>110 case of CVD are registered over a year</em></span></label>
+<div id="webex-87441626981c160add94552f4bb4ebc7" class="webex-checkboxgroup" data-answer="YwYYBR0GHgcVCWw=">
+<label><input type="checkbox" autocomplete="off" name="87441626981c160add94552f4bb4ebc7"><span><em>571 out of 1,000 smokers have no lung cancer</em></span></label><label><input type="checkbox" autocomplete="off" name="87441626981c160add94552f4bb4ebc7"><span><em>The proportion of lung cancer is 28.6%</em></span></label><label><input type="checkbox" autocomplete="off" name="87441626981c160add94552f4bb4ebc7"><span><em>4% persons with CVD are inactive</em></span></label><label><input type="checkbox" autocomplete="off" name="87441626981c160add94552f4bb4ebc7"><span><em>100 per 10,000 active people develop CVD over a year</em></span></label><label><input type="checkbox" autocomplete="off" name="87441626981c160add94552f4bb4ebc7"><span><em>110 case of CVD are registered over a year</em></span></label>
 </div>
 </div>
 </div>
@@ -1493,9 +1475,9 @@ Figure&nbsp;10.11: Examples of relationship between variables measured on differ
 <div class="webex-check webex-box">
 <p><img src="..\include/images/part_3/ch_2/3-2-17_spearman_vs_pearson.png" class="img-fluid" style="width:100.0%"></p>
 <p><em>Based on the figure above, complete the empty boxes below with the correct plot number</em></p>
-<p><select class="webex-select" id="webex-8f8a8e608a732f4012e75431e3d55d9c" data-answer="Y1YUURRUaw=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>When the data are roughly elliptically distributed and there are no prominent outliers, the Spearman correlation and Pearson correlation give similar values.</em></p>
-<p><select class="webex-select" id="webex-20348aea68ab90ed48b53af4c353d230" data-answer="aQEfBBRROA=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>A unit Spearman correlation results when the two variables being compared are monotonically related, even if their relationship is not linear.</em></p>
-<p><select class="webex-select" id="webex-05ff08fbd82fa3e10acdaaeaabc57729" data-answer="awVKVxwIOw=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>Spearman <span class="math inline">\(\rho_s\)</span> is less sensitive than Pearson <span class="math inline">\(\rho_p\)</span> to strong outliers in the samples’ tails. That is because Spearman coefficient limits the outlier to its rank.</em></p>
+<p><select class="webex-select" id="webex-c0cced50f555c66e01a05be3e288483d" data-answer="OABPU0lVaA=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>When the data are roughly elliptically distributed and there are no prominent outliers, the Spearman correlation and Pearson correlation give similar values.</em></p>
+<p><select class="webex-select" id="webex-25d43c3dfdb7e934a8f7f5a252ab53d4" data-answer="aQRIBB9Tbg=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>A unit Spearman correlation results when the two variables being compared are monotonically related, even if their relationship is not linear.</em></p>
+<p><select class="webex-select" id="webex-f3892369bdb5081c35300b2f18c46b7b" data-answer="PQMUCB4Daw=="><option value="blank"></option><option>1</option><option>2</option><option>3</option></select> <em>Spearman <span class="math inline">\(\rho_s\)</span> is less sensitive than Pearson <span class="math inline">\(\rho_p\)</span> to strong outliers in the samples’ tails. That is because Spearman coefficient limits the outlier to its rank.</em></p>
 </div>
 </div>
 </div>

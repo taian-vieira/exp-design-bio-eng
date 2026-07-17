@@ -106,10 +106,13 @@ div.csl-indent {
     return {
       theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8'],
-      onLoginRequest: function() {
-        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-      }
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['bbaze1o8'] 
+      }]
     };
   };
 </script>
@@ -121,32 +124,11 @@ div.csl-indent {
     document.head.appendChild(s);
   })();
 </script>
-<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
-
-<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    const observer = new MutationObserver((mutations) => {
-      // Look deep inside the Hypothesis iframe container panel
-      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
-      if (iframe && iframe.contentDocument) {
-        // Find the selectable dropdown list elements for the Public scope
-        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
-        publicTabs.forEach(el => {
-          // Vaporize the public button so it can never be selected or seen
-          el.style.setProperty('display', 'none', 'important');
-        });
-      }
-    });
-    // Keep scanning the page canvas silently in the background
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -518,8 +500,8 @@ window.Quarto = {
 </div>
 </div>
 <p><em>Which of the following statements provides a more accurate interpretation for this figure?</em></p>
-<div id="webex-72b1af910c1d4c414086297ac8603624" class="webex-radiogroup" data-answer="bAJOAU1XFQFt">
-<label><input type="radio" autocomplete="off" name="72b1af910c1d4c414086297ac8603624"><span>Younger patients with acinar cell carcinoma have higher probability of survival</span></label><label><input type="radio" autocomplete="off" name="72b1af910c1d4c414086297ac8603624"><span>Radiotherapy prolongs survival by 40 months</span></label><label><input type="radio" autocomplete="off" name="72b1af910c1d4c414086297ac8603624"><span>At least 50% of patients with acinar carcinoma survive over 12 months</span></label><label><input type="radio" autocomplete="off" name="72b1af910c1d4c414086297ac8603624"><span>Survival probability is the same regardless of the treatment received</span></label>
+<div id="webex-7aa3c381fa257b420d48089a79407cc3" class="webex-radiogroup" data-answer="bFFNAk8DFAE7">
+<label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>Survival probability is the same regardless of the treatment received</span></label><label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>At least 50% of patients with acinar carcinoma survive over 12 months</span></label><label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>Younger patients with acinar cell carcinoma have higher probability of survival</span></label><label><input type="radio" autocomplete="off" name="7aa3c381fa257b420d48089a79407cc3"><span>Radiotherapy prolongs survival by 40 months</span></label>
 </div>
 </div>
 </div>
@@ -584,7 +566,7 @@ Table&nbsp;9.1: Number of occurrences for each combination of exposure and outco
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>For the example data provided in <a href="#tbl-3-1-1" class="quarto-xref">Table&nbsp;<span>9.1</span></a> above, the odds ratio is</em></p>
-<p><input class="webex-solveme nospaces" id="webex-12dcbd3a7c87e8c2312947aba9a716bc" data-tol="0" size="20" data-answer="ahBWQT8="></p>
+<p><input class="webex-solveme nospaces" id="webex-6c56bb629a1735bed0bc4f0b8ea7aa6b" data-tol="0" size="20" data-answer="bUEHFD8="></p>
 </div>
 <div class="webex-solution">
 <p>Given that:</p>
@@ -632,8 +614,8 @@ Figure&nbsp;9.3: Distribution of BMI and waist circumference values measured for
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><em>The mean values for BMI and for the waist circumference can be defined directly by inspecting <a href="#fig-3-1-4" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>. <strong>What are the standard deviations for BMI and waist circumference?</strong></em></p>
-<div id="webex-d9c0a84eb40c423b2af12b4de1f541cb" class="webex-radiogroup" data-answer="PwlPAU0IGFU/">
-<label><input type="radio" autocomplete="off" name="d9c0a84eb40c423b2af12b4de1f541cb"><span>30.5 kg/m<sup>2</sup>, 104.3 cm</span></label><label><input type="radio" autocomplete="off" name="d9c0a84eb40c423b2af12b4de1f541cb"><span>5.1 kg/m<sup>2</sup>, 14.0 cm</span></label><label><input type="radio" autocomplete="off" name="d9c0a84eb40c423b2af12b4de1f541cb"><span>20.3 kg/m<sup>2</sup>, 76.3 cm</span></label><label><input type="radio" autocomplete="off" name="d9c0a84eb40c423b2af12b4de1f541cb"><span>None of the above</span></label>
+<div id="webex-9c8945dfd7c9b02f698014c3f0c30bc1" class="webex-radiogroup" data-answer="YlMUCRgESFY5">
+<label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>20.3 kg/m<sup>2</sup>, 76.3 cm</span></label><label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>None of the above</span></label><label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>5.1 kg/m<sup>2</sup>, 14.0 cm</span></label><label><input type="radio" autocomplete="off" name="9c8945dfd7c9b02f698014c3f0c30bc1"><span>30.5 kg/m<sup>2</sup>, 104.3 cm</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -820,9 +802,9 @@ Figure&nbsp;9.6: Example of three techniques for simple randomization.
 <div class="webex-check webex-box">
 <p><img src="..\include/images/part_3/ch_1/3-1-8_self-and-no-treatment-control.jpg" class="img-fluid" style="width:100.0%"></p>
 <p><em>Based on the illustration above, what can be said about …</em></p>
-<p><em>… the study design? It is</em> <select class="webex-select" id="webex-aa28f45a7d5bd4ab5562f45999e87c3d" data-answer="OlEeCEoEGVBq"><option value="blank"></option><option>a non-randomized clinical trial</option><option>an RCT study</option><option>a Case-control study</option><option>not possible to answer</option></select></p>
-<p><em>… the use of controls? It used</em> <select class="webex-select" id="webex-065c07bcc0603a02996a28c41d43ca0f" data-answer="awYZUhwHTlM+"><option value="blank"></option><option>Concurrent Controls</option><option>No-Treatment Controls</option><option>Dose-Response Controls</option><option>none of the above</option></select></p>
-<p><em>… the use of blinding? This is a double-blinded study:</em> <select class="webex-select" id="webex-3de0d35ffbc03fca6f2faae6caa7ac4a" data-answer="aFRJATk="><option value="blank"></option><option>true</option><option>false</option></select></p>
+<p><em>… the study design? It is</em> <select class="webex-select" id="webex-3ed703a0f2ef698981d7db575c8c6cfd" data-answer="aFVIBxwDTQE7"><option value="blank"></option><option>a non-randomized clinical trial</option><option>an RCT study</option><option>a Case-control study</option><option>not possible to answer</option></select></p>
+<p><em>… the use of controls? It used</em> <select class="webex-select" id="webex-d25d1317d87a6dd533176bb295689648" data-answer="PwIZVR0DHQc5"><option value="blank"></option><option>Concurrent Controls</option><option>No-Treatment Controls</option><option>Dose-Response Controls</option><option>none of the above</option></select></p>
+<p><em>… the use of blinding? This is a double-blinded study:</em> <select class="webex-select" id="webex-4e6f244222d29b3361adc5d8ea6a2891" data-answer="b1UaV28="><option value="blank"></option><option>true</option><option>false</option></select></p>
 </div>
 <div class="webex-solution">
 <p>The figure illustrates an interventional longitudinal study design. However, there is no information indicating whether subjects were randomized between groups. Therefore, the study cannot be classified as a randomized controlled trial (RCT).</p>

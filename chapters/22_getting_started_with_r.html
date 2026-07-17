@@ -117,10 +117,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     return {
       theme: 'classic',
       openSidebar: false,
-      groups: ['BBAZe1o8'],
-      onLoginRequest: function() {
-        alert("Welcome! Please log into your Hypothesis account and ensure you have joined our private course group using the invitation link provided on the homepage/syllabus.");
-      }
+      
+      // --- LOCK OUT PUBLIC AND FOCUS EXCLUSIVELY ON YOUR CLASSROOM ---
+      services: [{
+        apiUrl: 'https://hypothes.is',
+        // Force your group to be the baseline environment
+        groups: ['bbaze1o8'] 
+      }]
     };
   };
 </script>
@@ -132,32 +135,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     document.head.appendChild(s);
   })();
 </script>
-<!-- FORCE INTERACTIVE LAYERS TO THE ABSOLUTE FRONT -->
 <style type="text/css">
   hypothesis-adder, .hypothesis-adder, .hypothesis-sidebar-container {
     z-index: 99999 !important;
   }
 </style>
-
-<!-- --- EXTRA SECURITY LAYER: HIDE THE PUBLIC OPTION --- -->
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    const observer = new MutationObserver((mutations) => {
-      // Look deep inside the Hypothesis iframe container panel
-      const iframe = document.querySelector('.hypothesis-sidebar-container iframe');
-      if (iframe && iframe.contentDocument) {
-        // Find the selectable dropdown list elements for the Public scope
-        const publicTabs = iframe.contentDocument.querySelectorAll('[id*="public"], [class*="public"], .share-dialog');
-        publicTabs.forEach(el => {
-          // Vaporize the public button so it can never be selected or seen
-          el.style.setProperty('display', 'none', 'important');
-        });
-      }
-    });
-    // Keep scanning the page canvas silently in the background
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
 
 
 <link rel="stylesheet" href="../include/cssfiles/bootstrap.css">
