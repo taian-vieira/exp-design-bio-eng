@@ -24,7 +24,7 @@ In our case, we collected smartphone orientation data while participants stood q
 
 Once we have plausible answers to these---and possibly other---questions, we can visually inspect the data for artifacts. This prior understanding helps us recognize whether the recorded signals are consistent with the expected physiological behavior.
 
-We will begin by loading the raw data from a `csv` file into the R workspace, as described in the [**Loading CoG data**](@sec-loading-data) section.
+We will begin by loading the raw data from a `csv` file into the R workspace, as described in the [**Loading CoG data**](#sec-loading-data) section.
 
 ```{r}
 df <- read.csv(file.path(getwd(), "phyphox_data", "standing_eyes_open", "postural_sways.csv"))
@@ -212,8 +212,8 @@ In this tutorial, we will work with postural sway data. Although no specific res
 
 The processing consists of two main steps:
 
--   [Pre-processing Sway Data](@sec-preprocessing)
--   [Computing the Variables of Interest](@sec-computing-cog-metrics)
+-   [Pre-processing Sway Data](#sec-preprocessing)
+-   [Computing the Variables of Interest](#sec-computing-cog-metrics)
 
 \
 
@@ -221,7 +221,7 @@ The processing consists of two main steps:
 
 Before computing any postural metric, we must ensure that the raw data have been properly prepared. Otherwise, the resulting metrics may have questionable validity. For example, recording duration is known to significantly influence postural metrics computed in both the time and frequency domains [@carpenter01]. One way to minimize this effect is to standardize the duration of the recordings before computing the desired metrics.
 
-In this tutorial, we will therefore perform two pre-processing procedures: [**trimming**](@sec-trimming-sway-data) and [**demeaning**](@sec-demeaning-sway-data).
+In this tutorial, we will therefore perform two pre-processing procedures: [**trimming**](#sec-trimming-sway-data) and [**demeaning**](#sec-demeaning-sway-data).
 
 \
 
@@ -430,7 +430,7 @@ xy_prime <- eigen(Sigma)  # computing eigenvalues and eigenvectors of Sigma
 xy_prime
 ```
 
-`xy_prime` is a [List](@sec-list) containing two named elements: `values` and `vectors`. The eigenvalues are stored in `xy_prime$values` in decreasing order, while the corresponding eigenvectors are stored in `xy_prime$vectors`.
+`xy_prime` is a [List](#sec-list) containing two named elements: `values` and `vectors`. The eigenvalues are stored in `xy_prime$values` in decreasing order, while the corresponding eigenvectors are stored in `xy_prime$vectors`.
 
 :::{.callout-note title="What do these `values` and `vectors` represent?"}
 *The **eigenvalues** stored in `xy_prime$values` correspond to the variances of the CoG coordinates in the transformed reference system defined by $x'$ and $y'$. Consequently, the covariance matrix in this reference system is $\Lambda=\mathrm{diag}(\lambda_1^2,\lambda_2^2)$.*
@@ -619,7 +619,7 @@ We changed reference system by multiplying the $x$ and $y$ coordinates of the el
 
 #### Computing the CoG Elliptic Area {#sec-compute-ea}
 
-After identifying the axes of the ellipse that best fits the CoG data (see [Preliminaries on the Elliptic Area](@sec-eapreliminaries)), we compute the elliptic area $EA$ using @eq-copea, restated here:
+After identifying the axes of the ellipse that best fits the CoG data (see [Preliminaries on the Elliptic Area](#sec-eapreliminaries)), we compute the elliptic area $EA$ using @eq-copea, restated here:
 
 $$
    EA = \pi k^2 \sqrt{\lambda_1 \lambda_2}
@@ -640,7 +640,7 @@ EA
 
 Computing these stabilometric metrics simply requires translating the equations introduced in @sec-sv into code. They are restated below for convenience.
 
-Several procedures could be used to compute these two metrics. Both require processing all $N=`r sf*dur`$ CoG samples, corresponding to the $30\textrm{ s}$ processing window defined when [Trimming Sway Data](@sec-trimming-sway-data). Since loops in R will only be introduced in @sec-ch25, we will use a different approach here.
+Several procedures could be used to compute these two metrics. Both require processing all $N=`r sf*dur`$ CoG samples, corresponding to the $30\textrm{ s}$ processing window defined when [Trimming Sway Data](#sec-trimming-sway-data). Since loops in R will only be introduced in @sec-ch25, we will use a different approach here.
 
 :::{.callout-note title="Do it yourself"}
 *Unlike the Elliptic Area, no code will be provided for computing these two metrics. This task is left as an exercise at the end of this chapter.*
@@ -676,7 +676,7 @@ $$
 
 where $x_\textrm{cog}$ and $\bar{x}_\textrm{cog}$ denote, respectively, the CoG coordinate and the mean CoG position in the frontal plane^[*as for Mean CoG Speed, replace $x_\textrm{cog}$ with $y_\textrm{cog}$ to compute CoG Standard Deviation in the sagittal plane.*] (medio-lateral direction).
 
-Notice that $\bar{x}_\textrm{cog}=0$ because of the [Demeaning Sway Data](@sec-demeaning-sway-data) procedure described above. Therefore, in this case, the *Standard Deviation* and *Root Mean Square* values coincide.
+Notice that $\bar{x}_\textrm{cog}=0$ because of the [Demeaning Sway Data](#sec-demeaning-sway-data) procedure described above. Therefore, in this case, the *Standard Deviation* and *Root Mean Square* values coincide.
 
 :::{.callout-note title="$N$ or $N-1$?"}
 *Some authors use a slightly different definition of standard deviation, with $N-1$ instead of $N$ in the denominator.*
@@ -690,7 +690,7 @@ Notice that $\bar{x}_\textrm{cog}=0$ because of the [Demeaning Sway Data](@sec-d
 
 Compute the Mean CoG Speed ($v_{x_\textrm{cog}}$ and $v_{y_\textrm{cog}}$) and the CoG Standard Deviation ($\sigma_{x_\textrm{cog}}$ and $\sigma_{y_\textrm{cog}}$) for the two `csv` files available in the course material, separately for the medio-lateral ($x$) and antero-posterior ($y$) directions.
 
--   Remember to do this after [trimming](@sec-trimming-sway-data) and [demeaning](@sec-demeaning-sway-data) the data.
+-   Remember to do this after [trimming](#sec-trimming-sway-data) and [demeaning](#sec-demeaning-sway-data) the data.
 -   The R [`sd()`](https://rdrr.io/r/stats/sd.html) function is not allowed for computing $\sigma_{y_\textrm{cog}}$.
 -   The R functions and operators suggested for this task are [`diff()`](https://rdrr.io/r/base/diff.html), [`sum()`](https://rdrr.io/r/base/sum.html), [`mean()`](https://rdrr.io/r/base/mean.html), [`^`](https://rdrr.io/r/base/Arithmetic.html), and [`%*%`](https://rdrr.io/r/base/matmult.html).
 
