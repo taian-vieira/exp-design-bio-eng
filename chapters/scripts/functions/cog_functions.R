@@ -22,7 +22,7 @@ compute_cog_metrics <- function (df_raw_data) {
   xy_prime <- eigen(Sigma)  # computing eigenvalues and eigenvectors
   lambda <- sqrt(xy_prime$values) # square root of eigen values
   eigvec <- xy_prime$vectors      # eigen vectors
-  a_cog <- pi * 1.96^2 * prod(lambda) # elliptic area
+  ea <- pi * 1.96^2 * prod(lambda) # elliptic area
   
   # updating df_cog with mean speed values
   v_x <- sf * mean(abs(diff(x_cog))) # x
@@ -32,7 +32,7 @@ compute_cog_metrics <- function (df_raw_data) {
   sigma_x <- sqrt((t(x_cog) %*% x_cog) / (dur*sf-1) ) # x
   sigma_y <- sqrt((t(y_cog) %*% y_cog) / (dur*sf-1) ) # y  
   
-  return(a_cog)
+  return(ea)
 }
 
 update_data_frame_with_cog_metrics <- function (df_raw_data, df_cog, count) {
@@ -58,7 +58,7 @@ update_data_frame_with_cog_metrics <- function (df_raw_data, df_cog, count) {
   xy_prime <- eigen(Sigma)  # computing eigenvalues and eigenvectors
   lambda <- sqrt(xy_prime$values) # square root of eigen values
   eigvec <- xy_prime$vectors      # eigen vectors
-  df_cog$a_cog[count] <<- pi * 1.96^2 * prod(lambda) # elliptic area
+  df_cog$ea[count] <<- pi * 1.96^2 * prod(lambda) # elliptic area
 
   # updating df_cog with mean speed values
   df_cog$v_x[count] <<- sf * mean(abs(diff(x_cog))) # x

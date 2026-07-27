@@ -10,7 +10,7 @@ df_cog = data.frame(
   subject = character(n), 
   eyes = factor(character(n), levels = c("open", "closed")), 
   standing_on = factor(character(n), levels = c("single leg", "both legs")),
-  a_cog = double(n),    # elliptic area
+  ea = double(n),    # elliptic area
   v_x = double(n),      # mean speed in x direction
   v_y = double(n),      # mean speed in y direction
   sigma_x = double(n),  # st. deviation in x direction
@@ -57,7 +57,7 @@ for (i in sub_folders){ # outer loop (over subjects' folders)
     # xy_prime = eigen(Sigma)  # computing eigenvalues and eigenvectors
     # lambda = sqrt(xy_prime$values) # square root of eigen values
     # eigvec = xy_prime$vectors      # eigen vectors
-    # df_cog$a_cog[count] = pi * 1.96^2 * prod(lambda) # elliptic area
+    # df_cog$ea[count] = pi * 1.96^2 * prod(lambda) # elliptic area
     # 
     # # updating df_cog with mean speed values
     # df_cog$v_x[count] = sf * mean(abs(diff(x_cog))) # x
