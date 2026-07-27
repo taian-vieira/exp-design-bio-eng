@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Automating Raw Data Processing – Experimental Design in Biomedical Engineering</title>
+<title>6&nbsp; Automating Raw Data Processing – Experimental Design in Biomedical Engineering</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/31_understanding_study_designs.html" rel="next">
+<link href="../chapters/references.html" rel="next">
 <link href="../chapters/24_plotting_and_processing_raw_data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2c8d71db4d056fff4a87fcadc2b2ddaf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8ed81ad457df518d41c819b234513d36.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,26 +107,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-
+<link href="../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-
 <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-
 <script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
-
 <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-
 <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-
 <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-
 <script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-
 <link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-
 <script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-
 <script type="text/javascript">
   MathJax = {
     tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
@@ -176,7 +166,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/21_example_data.html">Part 2: R Tutorial</a></li><li class="breadcrumb-item"><a href="../chapters/25_automating_raw_data_processing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/21_example_data.html">Part 2: R Tutorial</a></li><li class="breadcrumb-item"><a href="../chapters/25_automating_raw_data_processing.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -227,12 +217,6 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/0_introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Experimental Design</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -244,20 +228,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/11_physiology_of_posture_control.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/12_stabilometry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/13_phyphox_posture_experiment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">PhyPhox SmartPosture Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">PhyPhox SmartPosture Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -274,31 +246,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/21_example_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Example Data: Postural Sways</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Example Data: Postural Sways</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22_getting_started_with_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/23_basics_with_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Basics with R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Basics with R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/24_plotting_and_processing_raw_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/25_automating_raw_data_processing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></a>
   </div>
 </li>
       </ul>
@@ -306,65 +278,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 3: The Theory Behind Experimental Design</span></a>
+ <span class="menu-text">Part 4: Bibliography</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/31_understanding_study_designs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/32_summarizing_and_presenting_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summarizing and Presenting Data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/33_population_sample_data_distribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Population, Sample, and Data Distribution</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/34_one_group.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inference, Error, Power, and Sample Size - One Group</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/35_two_groups.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference, Power, and Sample Size - Two Group</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/36_anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Balanced and Unbalanced Designs over Two Groups</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/37_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Predicting Outcomes with Linear Regression</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 4: Bibliography</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
@@ -375,13 +294,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/a1_ethical_considerations.html" class="sidebar-item-text sidebar-link">
@@ -400,35 +319,35 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-organizing-cog-raw-data" id="toc-sec-organizing-cog-raw-data" class="nav-link active" data-scroll-target="#sec-organizing-cog-raw-data"><span class="header-section-number">8.1</span> Organizing CoG Raw Data</a>
+  <li><a href="#sec-organizing-cog-raw-data" id="toc-sec-organizing-cog-raw-data" class="nav-link active" data-scroll-target="#sec-organizing-cog-raw-data"><span class="header-section-number">6.1</span> Organizing CoG Raw Data</a>
   <ul>
   <li><a href="#relative-paths-with-an-r-project" id="toc-relative-paths-with-an-r-project" class="nav-link" data-scroll-target="#relative-paths-with-an-r-project">Relative Paths with an R Project</a></li>
   <li><a href="#accessing-files-and-directories" id="toc-accessing-files-and-directories" class="nav-link" data-scroll-target="#accessing-files-and-directories">Accessing Files and Directories</a></li>
   </ul></li>
-  <li><a href="#sec-looping" id="toc-sec-looping" class="nav-link" data-scroll-target="#sec-looping"><span class="header-section-number">8.2</span> Looping over Directories and Files</a>
+  <li><a href="#sec-looping" id="toc-sec-looping" class="nav-link" data-scroll-target="#sec-looping"><span class="header-section-number">6.2</span> Looping over Directories and Files</a>
   <ul>
   <li><a href="#sec-nestingloops" id="toc-sec-nestingloops" class="nav-link" data-scroll-target="#sec-nestingloops">Nesting <strong>for</strong> Loops</a></li>
   <li><a href="#initializing-the-output-data-frame" id="toc-initializing-the-output-data-frame" class="nav-link" data-scroll-target="#initializing-the-output-data-frame">Initializing the Output Data Frame</a></li>
   <li><a href="#retrieving-participant-ids-and-test-conditions" id="toc-retrieving-participant-ids-and-test-conditions" class="nav-link" data-scroll-target="#retrieving-participant-ids-and-test-conditions">Retrieving Participant IDs and Test Conditions</a></li>
   </ul></li>
-  <li><a href="#sec-rscripts" id="toc-sec-rscripts" class="nav-link" data-scroll-target="#sec-rscripts"><span class="header-section-number">8.3</span> R Script (<code>main</code>)</a>
+  <li><a href="#sec-rscripts" id="toc-sec-rscripts" class="nav-link" data-scroll-target="#sec-rscripts"><span class="header-section-number">6.3</span> R Script (<code>main</code>)</a>
   <ul>
   <li><a href="#sec-source-scripts" id="toc-sec-source-scripts" class="nav-link" data-scroll-target="#sec-source-scripts">Running R Scripts</a></li>
   </ul></li>
-  <li><a href="#sec-rfunctions" id="toc-sec-rfunctions" class="nav-link" data-scroll-target="#sec-rfunctions"><span class="header-section-number">8.4</span> Creating R Functions</a>
+  <li><a href="#sec-rfunctions" id="toc-sec-rfunctions" class="nav-link" data-scroll-target="#sec-rfunctions"><span class="header-section-number">6.4</span> Creating R Functions</a>
   <ul>
   <li><a href="#sec-update-by-value" id="toc-sec-update-by-value" class="nav-link" data-scroll-target="#sec-update-by-value">Updating CoG Metrics by Value</a></li>
   </ul></li>
-  <li><a href="#exercise-putting-it-all-together" id="toc-exercise-putting-it-all-together" class="nav-link" data-scroll-target="#exercise-putting-it-all-together"><span class="header-section-number">8.5</span> Exercise: Putting It All Together</a></li>
+  <li><a href="#exercise-putting-it-all-together" id="toc-exercise-putting-it-all-together" class="nav-link" data-scroll-target="#exercise-putting-it-all-together"><span class="header-section-number">6.5</span> Exercise: Putting It All Together</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/21_example_data.html">Part 2: R Tutorial</a></li><li class="breadcrumb-item"><a href="../chapters/25_automating_raw_data_processing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/21_example_data.html">Part 2: R Tutorial</a></li><li class="breadcrumb-item"><a href="../chapters/25_automating_raw_data_processing.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ch25" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></h1>
+<h1 class="title"><span id="sec-ch25" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating Raw Data Processing</span></span></h1>
   <div class="quarto-categories">
     <div class="quarto-category">Biomedical Engineering</div>
     <div class="quarto-category">Applied Statistics</div>
@@ -449,26 +368,26 @@ window.Quarto = {
 </header>
 
 
-<p>In <a href="24_plotting_and_processing_raw_data.html" class="quarto-xref"><span>Chapter 7</span></a>, we saw how to use R to compute metrics for assessing postural sway. From smartphone orientation data, we computed the CoG Elliptic Area, Mean CoG Speed, and CoG Standard Deviation.</p>
+<p>In <a href="24_plotting_and_processing_raw_data.html" class="quarto-xref"><span>Chapter 5</span></a>, we saw how to use R to compute metrics for assessing postural sway. From smartphone orientation data, we computed the CoG Elliptic Area, Mean CoG Speed, and CoG Standard Deviation.</p>
 <p>Briefly, this chapter covers:</p>
 <ul>
-<li><a href="@sec-organizing-cog-raw-data">Data Organization</a>, discussing the importance of organizing files and scripts.</li>
-<li><a href="@sec-looping">Looping Over Files</a>, processing raw data by iterating over all available files.</li>
-<li><a href="@sec-rscripts">Creating R Scripts</a>, placing the complete code in a standalone text file (<em>R script</em>) that can be run in RStudio.</li>
-<li><a href="@sec-rfunctions">Custom Functions in R</a>, making code simpler and more readable with custom functions.</li>
+<li><a href="#sec-organizing-cog-raw-data">Data Organization</a>, discussing the importance of organizing files and scripts.</li>
+<li><a href="#sec-looping">Looping Over Files</a>, processing raw data by iterating over all available files.</li>
+<li><a href="#sec-rscripts">Creating R Scripts</a>, placing the complete code in a standalone text file (<em>R script</em>) that can be run in RStudio.</li>
+<li><a href="#sec-rfunctions">Custom Functions in R</a>, making code simpler and more readable with custom functions.</li>
 </ul>
-<p>By the end of this chapter, students should be able to create a <a href="@sec-dataframes">data frame</a> containing all <em>variables</em> of interest, including the test conditions and the <em>CoG-related variables</em>. <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>8.1</span></a> outlines the structure of the <em>data frame</em> to be created after processing the raw CoG data.</p>
+<p>By the end of this chapter, students should be able to create a <a href="23_basics_with_r.html#sec-dataframes">data frame</a> containing all <em>variables</em> of interest, including the test conditions and the <em>CoG-related variables</em>. <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>6.1</span></a> outlines the structure of the <em>data frame</em> to be created after processing the raw CoG data.</p>
 <div class="dataTable-wrapper small-text">
 <div class="cell">
 <div id="tbl-2-5-1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.1: Outline of the data frame we should create by the end of this Chapter.
+Table&nbsp;6.1: Outline of the data frame we should create by the end of this Chapter.
 </figcaption>
 <div aria-describedby="tbl-2-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-973b038695f4c2628691" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-973b038695f4c2628691">{"x":{"filter":"none","vertical":false,"data":[["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Subject<\/th>\n      <th>Eyes<\/th>\n      <th>Standing on<\/th>\n      <th>$EA$<\/th>\n      <th>$v_x \\textrm{(cm/s)}$<\/th>\n      <th>$v_y \\textrm{(cm/s)}$<\/th>\n      <th>$\\sigma_x \\textrm{(cm)}$<\/th>\n      <th>$\\sigma_y \\textrm{(cm)}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"X1","targets":0},{"name":"X2","targets":1},{"name":"X3","targets":2},{"name":"X4","targets":3},{"name":"X5","targets":4},{"name":"X6","targets":5},{"name":"X7","targets":6},{"name":"X8","targets":7}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2bf00c917a9c15debcd6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2bf00c917a9c15debcd6">{"x":{"filter":"none","vertical":false,"data":[["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"],["NA","NA","NA"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Subject<\/th>\n      <th>Eyes<\/th>\n      <th>Standing on<\/th>\n      <th>$EA$<\/th>\n      <th>$v_x \\textrm{(cm/s)}$<\/th>\n      <th>$v_y \\textrm{(cm/s)}$<\/th>\n      <th>$\\sigma_x \\textrm{(cm)}$<\/th>\n      <th>$\\sigma_y \\textrm{(cm)}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"X1","targets":0},{"name":"X2","targets":1},{"name":"X3","targets":2},{"name":"X4","targets":3},{"name":"X5","targets":4},{"name":"X6","targets":5},{"name":"X7","targets":6},{"name":"X8","targets":7}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -486,13 +405,13 @@ Table&nbsp;8.1: Outline of the data frame we should create by the end of this Ch
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>We strongly recommend working with the material provided in the compressed folder available <a href="..\include/download/working_data.zip" download="working_data.zip">here</a> and illustrated in <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</em></p>
+<p><em>We strongly recommend working with the material provided in the compressed folder available <a href="../include/download/working_data.zip" download="working_data.zip">here</a> and illustrated in <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</em></p>
 </div>
 </div>
 <p><br>
 </p>
-<section id="sec-organizing-cog-raw-data" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="sec-organizing-cog-raw-data"><span class="header-section-number">8.1</span> Organizing CoG Raw Data</h2>
+<section id="sec-organizing-cog-raw-data" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-organizing-cog-raw-data"><span class="header-section-number">6.1</span> Organizing CoG Raw Data</h2>
 <p>Data organization is as important as any other step in a project. By data organization, we do not mean only where files are stored, but also how the project is structured: how files are named, how folders are arranged, and how scripts refer to the data. <em>To illustrate the importance of data organization, we will use the structure of the shared files as an example.</em></p>
 <p>Inside the compressed folder that can be downloaded from the link above, you should find two folders:</p>
 <ul>
@@ -510,14 +429,14 @@ Table&nbsp;8.1: Outline of the data frame we should create by the end of this Ch
 </ul></li>
 <li><p><code>scripts</code>, where the R files used to process the raw data and analyze the processed data will be stored.</p></li>
 </ul>
-<p>After downloading these two folders, <em>place both inside any parent directory you prefer</em>. We will refer to this parent directory as the <code>project</code> directory. On my computer, as illustrated in <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, the <code>project</code> directory is named <code>exp_design_bio_eng</code>.</p>
+<p>After downloading these two folders, <em>place both inside any parent directory you prefer</em>. We will refer to this parent directory as the <code>project</code> directory. On my computer, as illustrated in <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>, the <code>project</code> directory is named <code>exp_design_bio_eng</code>.</p>
 <div id="fig-2-5-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-1_data_organization.png" class="img-fluid figure-img" style="width:60.0%">
+<img src="../include/images/part_2/ch_5/2-5-1_data_organization.png" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.1: Structure of the files in the compressed folder, which can be downloaded <a href="..\include/download/working_data.zip" download="working_data.zip">here</a>.
+Figure&nbsp;6.1: Structure of the files in the compressed folder, which can be downloaded <a href="../include/download/working_data.zip" download="working_data.zip">here</a>.
 </figcaption>
 </figure>
 </div>
@@ -528,29 +447,29 @@ Figure&nbsp;8.1: Structure of the files in the compressed folder, which can be d
 <section id="relative-paths-with-an-r-project" class="level3">
 <h3 class="anchored" data-anchor-id="relative-paths-with-an-r-project">Relative Paths with an R Project</h3>
 <p>Absolute paths uniquely identify the location of files or directories on a computer. Because they depend on the directory structure of a particular machine, they differ from one computer to another. After downloading the shared data, the absolute path to the <code>data</code> folder on your computer will therefore differ from the corresponding path on mine. Consequently, any scripts you write and place in the <code>scripts</code> folder may fail when run on a different computer because the absolute paths stored in the scripts will no longer be valid (<em>or even on your own computer if the project is moved to another location in the future</em>).</p>
-<p>Ideally, the scripts we write should reference files and folders using paths that are <em>relative</em> to the <code>project</code> directory. We can achieve this by creating an <strong>R Project</strong>. To do so, click <strong>File</strong> → <strong>New Project…</strong> in the RStudio menu. This opens the <strong>New Project Wizard</strong>, shown in <a href="#fig-2-5-2" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>.</p>
+<p>Ideally, the scripts we write should reference files and folders using paths that are <em>relative</em> to the <code>project</code> directory. We can achieve this by creating an <strong>R Project</strong>. To do so, click <strong>File</strong> → <strong>New Project…</strong> in the RStudio menu. This opens the <strong>New Project Wizard</strong>, shown in <a href="#fig-2-5-2" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>.</p>
 <div id="fig-2-5-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-2_r_project_wizard.png" class="img-fluid figure-img" style="width:70.0%">
+<img src="../include/images/part_2/ch_5/2-5-2_r_project_wizard.png" class="img-fluid figure-img" style="width:70.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.2: Creating a new R Project.
+Figure&nbsp;6.2: Creating a new R Project.
 </figcaption>
 </figure>
 </div>
-<p>Select <strong>Existing Directory</strong> and then choose the <code>project</code> directory containing the <code>data</code> and <code>scripts</code> folders. RStudio will create an <code>.Rproj</code> file, named after the <code>project</code> directory, inside that directory (see Figures <a href="#fig-2-5-1" class="quarto-xref"><span>8.1</span></a> and <a href="#fig-2-5-3" class="quarto-xref"><span>8.3</span></a>).</p>
+<p>Select <strong>Existing Directory</strong> and then choose the <code>project</code> directory containing the <code>data</code> and <code>scripts</code> folders. RStudio will create an <code>.Rproj</code> file, named after the <code>project</code> directory, inside that directory (see Figures <a href="#fig-2-5-1" class="quarto-xref"><span>6.1</span></a> and <a href="#fig-2-5-3" class="quarto-xref"><span>6.3</span></a>).</p>
 <div id="fig-2-5-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-3_r_project_folder_with_rproj_file.png" class="img-fluid figure-img" style="width:95.0%">
+<img src="../include/images/part_2/ch_5/2-5-3_r_project_folder_with_rproj_file.png" class="img-fluid figure-img" style="width:95.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.3: Project directory containing the newly created <code>.Rproj</code> file.
+Figure&nbsp;6.3: Project directory containing the newly created <code>.Rproj</code> file.
 </figcaption>
 </figure>
 </div>
-<p>We will not discuss the details of an <strong>R Project</strong> here<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The important point is that <em>whenever you open the <code>.Rproj</code> file in RStudio, the corresponding project directory is automatically set as the current Working Directory</em> (see the <a href="@sec-files">Files</a> section in <a href="22_getting_started_with_r.html" class="quarto-xref"><span>Chapter 5</span></a>). You can verify this by querying the current Working Directory with the <a href="https://rdrr.io/r/base/getwd.html"><code>getwd()</code></a> function.</p>
+<p>We will not discuss the details of an <strong>R Project</strong> here<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The important point is that <em>whenever you open the <code>.Rproj</code> file in RStudio, the corresponding project directory is automatically set as the current Working Directory</em> (see the <a href="22_getting_started_with_r.html#sec-files">Files</a> section in <a href="22_getting_started_with_r.html" class="quarto-xref"><span>Chapter 3</span></a>). You can verify this by querying the current Working Directory with the <a href="https://rdrr.io/r/base/getwd.html"><code>getwd()</code></a> function.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -582,7 +501,7 @@ Figure&nbsp;8.3: Project directory containing the newly created <code>.Rproj</co
 <pre><code>[1] "s_020966" "s_111370"</code></pre>
 </div>
 </div>
-<p>As expected (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>), the <code>data</code> directory contains two subdirectories: <code>s_020966</code> and <code>s_111370</code>.</p>
+<p>As expected (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>), the <code>data</code> directory contains two subdirectories: <code>s_020966</code> and <code>s_111370</code>.</p>
 <p>Going one step further, we can list the files contained in each of these folders. For brevity, we show only the contents of the <code>s_020966</code> directory using the <a href="https://rdrr.io/r/base/list.files.html"><code>list.files()</code></a> function.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"s_020966"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -593,15 +512,15 @@ Figure&nbsp;8.3: Project directory containing the newly created <code>.Rproj</co
 [4] "single_leg_eyes_open.xls"  </code></pre>
 </div>
 </div>
-<p>Notice that the <a href="https://rdrr.io/r/base/file.path.html"><code>file.path()</code></a> function is used to combine <code>data</code> and <code>s_020966</code>. This function automatically uses the correct path separator for the operating system on which the code is running, making the script portable across Windows, macOS, and Linux. As expected, four <code>xls</code> files are listed (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>).</p>
-<p>We are now ready to automate access to the four <code>xls</code> files generated according to the PhyPhox tutorial described in <a href="13_phyphox_posture_experiment.html" class="quarto-xref"><span>Chapter 3</span></a>. These files contain the raw CoG data, and each of them will be processed following the procedures introduced in the chapter <a href="@sec-ch24">Plotting and Processing Raw Data</a>.</p>
+<p>Notice that the <a href="https://rdrr.io/r/base/file.path.html"><code>file.path()</code></a> function is used to combine <code>data</code> and <code>s_020966</code>. This function automatically uses the correct path separator for the operating system on which the code is running, making the script portable across Windows, macOS, and Linux. As expected, four <code>xls</code> files are listed (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
+<p>We are now ready to automate access to the four <code>xls</code> files generated according to the PhyPhox tutorial described in <a href="13_phyphox_posture_experiment.html" class="quarto-xref"><span>Chapter 1</span></a>. These files contain the raw CoG data, and each of them will be processed following the procedures introduced in the chapter <a href="24_plotting_and_processing_raw_data.html">Plotting and Processing Raw Data</a>.</p>
 <p><br>
 </p>
 </section>
 </section>
-<section id="sec-looping" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="sec-looping"><span class="header-section-number">8.2</span> Looping over Directories and Files</h2>
-<p>Given the organization of the CoG raw data shown in <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, we can use <strong>nested loops</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to process one file at a time for each participant.</p>
+<section id="sec-looping" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-looping"><span class="header-section-number">6.2</span> Looping over Directories and Files</h2>
+<p>Given the organization of the CoG raw data shown in <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>, we can use <strong>nested loops</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to process one file at a time for each participant.</p>
 <p><br>
 </p>
 <section id="sec-nestingloops" class="level3">
@@ -636,14 +555,14 @@ i = 2, k = 3, subject folder: s_111370, xls file: single_leg_eyes_closed.xls
 i = 2, k = 4, subject folder: s_111370, xls file: single_leg_eyes_open.xls</code></pre>
 </div>
 </div>
-<p>We first define two variables, <code>sub_folders</code> and <code>xls_files</code>, which store the names of the participant folders (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>) and the <code>xls</code> files contained in each folder, respectively.</p>
+<p>We first define two variables, <code>sub_folders</code> and <code>xls_files</code>, which store the names of the participant folders (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>) and the <code>xls</code> files contained in each folder, respectively.</p>
 <p>Next, we create two <strong>for loops</strong> using the syntax:</p>
 <pre><code>for (sequence to loop over){
   statements
 }</code></pre>
 <p>Inside the <strong>inner loop</strong>, we use the <a href="https://rdrr.io/r/base/cat.html"><code>cat()</code></a> function to display the values of the iteration variables <code>i</code> and <code>k</code>, together with the corresponding elements of <code>sub_folders</code> and <code>xls_files</code>.</p>
 <p>This approach is not ideal because it requires manually specifying the names of all participant folders and files. Moreover, not every participant necessarily has four <code>xls</code> files. For example, data acquisition may have been interrupted or a participant may have withdrawn before completing all experimental conditions.</p>
-<p>A more robust approach is to obtain the folder and file names directly using the <a href="https://rdrr.io/r/base/list.files.html"><code>list.dirs()</code></a> and <a href="https://rdrr.io/r/base/list.files.html"><code>list.files()</code></a> functions, provided that the data are organized as described in <a href="@sec-organizing-cog-raw-data">Organizing CoG Raw Data</a> (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>).</p>
+<p>A more robust approach is to obtain the folder and file names directly using the <a href="https://rdrr.io/r/base/list.files.html"><code>list.dirs()</code></a> and <a href="https://rdrr.io/r/base/list.files.html"><code>list.files()</code></a> functions, provided that the data are organized as described in <a href="#sec-organizing-cog-raw-data">Organizing CoG Raw Data</a> (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sub_folders <span class="ot">&lt;-</span> <span class="fu">list.dirs</span>(<span class="st">"data"</span>, <span class="at">recursive =</span> <span class="cn">FALSE</span>, <span class="at">full.names =</span> <span class="cn">FALSE</span>) <span class="co"># directories inside the project folder</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -675,7 +594,7 @@ subject folder: s_111370, xls file: single_legs_eyes_closed.xls</code></pre>
 </section>
 <section id="initializing-the-output-data-frame" class="level3">
 <h3 class="anchored" data-anchor-id="initializing-the-output-data-frame">Initializing the Output Data Frame</h3>
-<p>The output <em>data frame</em> should follow the structure shown in <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>8.1</span></a>. There are two common approaches:</p>
+<p>The output <em>data frame</em> should follow the structure shown in <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>6.1</span></a>. There are two common approaches:</p>
 <ul>
 <li>initialize an empty <em>data frame</em> and add one row at a time while looping over participant folders and files;</li>
 <li>initialize a <em>sufficiently large data frame</em> containing placeholder values (<code>NA</code>, <code>0</code>, <code>""</code>, etc.), update its rows as the files are processed, and remove any unused rows at the end.</li>
@@ -695,7 +614,7 @@ subject folder: s_111370, xls file: single_legs_eyes_closed.xls</code></pre>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="fu">character</span>(n), </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">eyes =</span> <span class="fu">factor</span>(<span class="fu">character</span>(n), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"open"</span>, <span class="st">"closed"</span>)), </span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">standing_on =</span> <span class="fu">factor</span>(<span class="fu">character</span>(n), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"single leg"</span>, <span class="st">"both legs"</span>)),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_cog =</span> <span class="fu">double</span>(n),    <span class="co"># elliptic area</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ea =</span> <span class="fu">double</span>(n),    <span class="co"># elliptic area</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_x =</span> <span class="fu">double</span>(n),      <span class="co"># mean speed in x direction</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_y =</span> <span class="fu">double</span>(n),      <span class="co"># mean speed in y direction</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_x =</span> <span class="fu">double</span>(n),  <span class="co"># st. deviation in x direction</span></span>
@@ -707,15 +626,15 @@ subject folder: s_111370, xls file: single_legs_eyes_closed.xls</code></pre>
  $ subject    : chr  "" "" "" "" ...
  $ eyes       : Factor w/ 2 levels "open","closed": NA NA NA NA NA NA NA NA NA NA
  $ standing_on: Factor w/ 2 levels "single leg","both legs": NA NA NA NA NA NA NA NA NA NA
- $ a_cog      : num  0 0 0 0 0 0 0 0 0 0
+ $ ea         : num  0 0 0 0 0 0 0 0 0 0
  $ v_x        : num  0 0 0 0 0 0 0 0 0 0
  $ v_y        : num  0 0 0 0 0 0 0 0 0 0
  $ sigma_x    : num  0 0 0 0 0 0 0 0 0 0
  $ sigma_y    : num  0 0 0 0 0 0 0 0 0 0</code></pre>
 </div>
 </div>
-<p>The <code>subject</code> column is initialized by calling the <a href="https://rdrr.io/r/base/character.html"><code>character()</code></a> function with <code>n</code> elements. The <code>eyes</code> and <code>standing_on</code> columns are initialized as <strong>factors</strong> using the <a href="https://rdrr.io/r/base/factor.html"><code>factor()</code></a> function, with <code>n</code> missing entries and the appropriate factor levels (see the <a href="@sec-factor"><strong>Factors</strong></a> section). Finally, the five CoG-related variables are initialized as numeric vectors of type <a href="https://rdrr.io/r/base/double.html"><code>double()</code></a>, each containing <code>n</code> zeros.</p>
-<p>Inside the <strong>inner loop</strong>, we can now populate <code>df_cog</code> as each file is processed. For every observation, we must determine the values of the eight variables (columns) listed in <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>8.1</span></a>. We begin by extracting information about the participant and the experimental condition.</p>
+<p>The <code>subject</code> column is initialized by calling the <a href="https://rdrr.io/r/base/character.html"><code>character()</code></a> function with <code>n</code> elements. The <code>eyes</code> and <code>standing_on</code> columns are initialized as <strong>factors</strong> using the <a href="https://rdrr.io/r/base/factor.html"><code>factor()</code></a> function, with <code>n</code> missing entries and the appropriate factor levels (see the <a href="23_basics_with_r.html#sec-factor"><strong>Factors</strong></a> section). Finally, the five CoG-related variables are initialized as numeric vectors of type <a href="https://rdrr.io/r/base/double.html"><code>double()</code></a>, each containing <code>n</code> zeros.</p>
+<p>Inside the <strong>inner loop</strong>, we can now populate <code>df_cog</code> as each file is processed. For every observation, we must determine the values of the eight variables (columns) listed in <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>6.1</span></a>. We begin by extracting information about the participant and the experimental condition.</p>
 <p><br>
 </p>
 </section>
@@ -733,8 +652,8 @@ subject folder: s_111370, xls file: single_legs_eyes_closed.xls</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>For the approach presented here to work, folders and files must follow a consistent naming convention (see <a href="#sec-organizing-cog-raw-data" class="quarto-xref"><span>Section 8.1</span></a>).</em></p>
-<p><em>The experimental protocol considered for collecting postural sways data, for example, does not impose any convention for the name of files. However, it requires that the base of support and the standing condition are set appropriately in the SmartPosture experiment (see <a href="13_phyphox_posture_experiment.html#sec-exp-protocol" class="quarto-xref"><span>Section 3.5</span></a>)</em></p>
+<p><em>For the approach presented here to work, folders and files must follow a consistent naming convention (see <a href="#sec-organizing-cog-raw-data" class="quarto-xref"><span>Section 6.1</span></a>).</em></p>
+<p><em>The experimental protocol considered for collecting postural sways data, for example, does not impose any convention for the name of files. However, it requires that the base of support and the standing condition are set appropriately in the SmartPosture experiment (see <a href="13_phyphox_posture_experiment.html#sec-exp-protocol" class="quarto-xref"><span>Section 1.5</span></a>)</em></p>
 <p><em>Regardless of the convention adopted in a study, following it consistently greatly facilitates data processing.</em></p>
 </div>
 </div>
@@ -848,67 +767,67 @@ subject: 111370, standing on: single leg, eyes: closed</code></pre>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>df_cog <span class="ot">&lt;-</span> df_cog[<span class="dv">1</span><span class="sc">:</span>count, ] <span class="co"># keeping only count observations</span></span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>df_cog</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  subject   eyes standing_on a_cog v_x v_y sigma_x sigma_y
-1  020966 closed   both legs     0   0   0       0       0
-2  020966   open   both legs     0   0   0       0       0
-3  020966 closed  single leg     0   0   0       0       0
-4  020966   open  single leg     0   0   0       0       0
-5  111370 closed   both legs     0   0   0       0       0
-6  111370   open   both legs     0   0   0       0       0
-7  111370   open  single leg     0   0   0       0       0
-8  111370 closed  single leg     0   0   0       0       0</code></pre>
+<pre><code>  subject   eyes standing_on ea v_x v_y sigma_x sigma_y
+1  020966 closed   both legs  0   0   0       0       0
+2  020966   open   both legs  0   0   0       0       0
+3  020966 closed  single leg  0   0   0       0       0
+4  020966   open  single leg  0   0   0       0       0
+5  111370 closed   both legs  0   0   0       0       0
+6  111370   open   both legs  0   0   0       0       0
+7  111370   open  single leg  0   0   0       0       0
+8  111370 closed  single leg  0   0   0       0       0</code></pre>
 </div>
 </div>
 <p><br>
 </p>
 </section>
 </section>
-<section id="sec-rscripts" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="sec-rscripts"><span class="header-section-number">8.3</span> R Script (<code>main</code>)</h2>
-<p>In the previous section, we populated the first three columns of the <code>df_cog</code> <em>data frame</em> shown in <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>8.1</span></a>. We must now complete the remaining columns by computing the CoG metrics selected to characterize postural control.</p>
-<p>The procedures required to compute these variables from the smartphone orientation data were presented in detail in <a href="24_plotting_and_processing_raw_data.html" class="quarto-xref"><span>Chapter 7</span></a>. Inside the nested loops, we therefore need to perform the following processing steps:</p>
+<section id="sec-rscripts" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-rscripts"><span class="header-section-number">6.3</span> R Script (<code>main</code>)</h2>
+<p>In the previous section, we populated the first three columns of the <code>df_cog</code> <em>data frame</em> shown in <a href="#tbl-2-5-1" class="quarto-xref">Table&nbsp;<span>6.1</span></a>. We must now complete the remaining columns by computing the CoG metrics selected to characterize postural control.</p>
+<p>The procedures required to compute these variables from the smartphone orientation data were presented in detail in <a href="24_plotting_and_processing_raw_data.html" class="quarto-xref"><span>Chapter 5</span></a>. Inside the nested loops, we therefore need to perform the following processing steps:</p>
 <ul>
 <li><strong>Pre-processing the sway data</strong>
 <ul>
-<li><a href="@sec-trimming-sway-data">Trimming</a>: removing the initial transient and standardizing the number of CoG samples;</li>
-<li><a href="@sec-demeaning-sway-data">Demeaning</a>: removing the mean CoG position, which is not of practical interest.</li>
+<li><a href="24_plotting_and_processing_raw_data.html#sec-trimming-sway-data">Trimming</a>: removing the initial transient and standardizing the number of CoG samples;</li>
+<li><a href="24_plotting_and_processing_raw_data.html#sec-demeaning-sway-data">Demeaning</a>: removing the mean CoG position, which is not of practical interest.</li>
 </ul></li>
 <li><strong>Computing the CoG metrics</strong>
 <ul>
-<li><a href="@sec-compute-ea">Elliptic Area</a>;</li>
-<li><a href="@sec-computing-v">Mean CoG Speed</a> in the frontal and sagittal planes;</li>
-<li><a href="@sec-computing-sigma">CoG Standard Deviation</a> in the frontal and sagittal planes.</li>
+<li><a href="24_plotting_and_processing_raw_data.html#sec-compute-ea">Elliptic Area</a>;</li>
+<li><a href="24_plotting_and_processing_raw_data.html#sec-computing-v">Mean CoG Speed</a> in the frontal and sagittal planes;</li>
+<li><a href="24_plotting_and_processing_raw_data.html#sec-computing-sigma">CoG Standard Deviation</a> in the frontal and sagittal planes.</li>
 </ul></li>
 </ul>
 <p>So far, we have entered our code directly in the <strong>R Console</strong>. We will now create an <strong>R script</strong>, where all processing steps required to compute the CoG variables will be stored.</p>
 <p>An <strong>R script</strong> is simply a plain text file containing R code. There are two common ways to create one:</p>
 <ul>
-<li>from <strong>File → New File → R Script</strong> (see <a href="#fig-2-5-4" class="quarto-xref">Figure&nbsp;<span>8.4</span></a>);</li>
+<li>from <strong>File → New File → R Script</strong> (see <a href="#fig-2-5-4" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>);</li>
 </ul>
 <div id="fig-2-5-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-4_r_file_from_file_toolbar.png" class="img-fluid figure-img">
+<img src="../include/images/part_2/ch_5/2-5-4_r_file_from_file_toolbar.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.4: “Exploring the <em>File</em> toolbar.
+Figure&nbsp;6.4: “Exploring the <em>File</em> toolbar.
 </figcaption>
 </figure>
 </div>
 <ul>
-<li>or by clicking the <strong>New File</strong> icon in the upper-left corner of the RStudio window (see <a href="#fig-2-5-5" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>).</li>
+<li>or by clicking the <strong>New File</strong> icon in the upper-left corner of the RStudio window (see <a href="#fig-2-5-5" class="quarto-xref">Figure&nbsp;<span>6.5</span></a>).</li>
 </ul>
 <div id="fig-2-5-5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-5_r_file_from_new_file_icon.png" class="img-fluid figure-img" style="width:30.0%">
+<img src="../include/images/part_2/ch_5/2-5-5_r_file_from_new_file_icon.png" class="img-fluid figure-img" style="width:30.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.5: Creating a new R script from the <strong>File</strong> toolbar.
+Figure&nbsp;6.5: Creating a new R script from the <strong>File</strong> toolbar.
 </figcaption>
 </figure>
 </div>
-<p>Either method creates a blank script named <em>Untitled1</em>. Save this file as <code>main.R</code> inside the <code>scripts</code> directory (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>).</p>
+<p>Either method creates a blank script named <em>Untitled1</em>. Save this file as <code>main.R</code> inside the <code>scripts</code> directory (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
 <p>The script developed below retrieves the participant metadata (registration number and test conditions) and computes the CoG Elliptic Area for each <code>xls</code> file.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># for reading xls files</span></span>
@@ -922,7 +841,7 @@ Figure&nbsp;8.5: Creating a new R script from the <strong>File</strong> toolbar.
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="fu">character</span>(n), </span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">eyes =</span> <span class="fu">factor</span>(<span class="fu">character</span>(n), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"open"</span>, <span class="st">"closed"</span>)), </span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">standing_on =</span> <span class="fu">factor</span>(<span class="fu">character</span>(n), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"single leg"</span>, <span class="st">"both legs"</span>)),</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_cog =</span> <span class="fu">double</span>(n),    <span class="co"># elliptic area</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ea =</span> <span class="fu">double</span>(n),    <span class="co"># elliptic area</span></span>
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_x =</span> <span class="fu">double</span>(n),      <span class="co"># mean CoG speed in x direction</span></span>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_y =</span> <span class="fu">double</span>(n),      <span class="co"># mean CoG speed in y direction</span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_x =</span> <span class="fu">double</span>(n),  <span class="co"># CoG st. deviation in x direction</span></span>
@@ -966,7 +885,7 @@ Figure&nbsp;8.5: Creating a new R script from the <strong>File</strong> toolbar.
 <span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>    xy_prime <span class="ot">&lt;-</span> <span class="fu">eigen</span>(E)  <span class="co"># computing eigenvalues and eigenvectors</span></span>
 <span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>    lambda <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(xy_prime<span class="sc">$</span>values) <span class="co"># square root of eigen values</span></span>
 <span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>    eigvec <span class="ot">&lt;-</span> xy_prime<span class="sc">$</span>vectors      <span class="co"># eigen vectors</span></span>
-<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    df_cog<span class="sc">$</span>a_cog[count] <span class="ot">&lt;-</span> pi <span class="sc">*</span> <span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">prod</span>(lambda) <span class="co"># elliptic area (containing 85% of CoP samples)</span></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    df_cog<span class="sc">$</span>ea[count] <span class="ot">&lt;-</span> pi <span class="sc">*</span> <span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">prod</span>(lambda) <span class="co"># elliptic area (containing 85% of CoP samples)</span></span>
 <span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -977,14 +896,14 @@ Figure&nbsp;8.5: Creating a new R script from the <strong>File</strong> toolbar.
 </p>
 <section id="sec-source-scripts" class="level3">
 <h3 class="anchored" data-anchor-id="sec-source-scripts">Running R Scripts</h3>
-<p><em>In R, running a script is commonly referred to as <strong>sourcing</strong> the script.</em> An R script can be sourced by clicking the <strong>Source</strong> button in the upper-right corner of the <strong>Editor</strong> pane, or by clicking the arrow immediately to its right (Figure <a href="#fig-2-5-6" class="quarto-xref">Figure&nbsp;<span>8.6</span></a>).</p>
+<p><em>In R, running a script is commonly referred to as <strong>sourcing</strong> the script.</em> An R script can be sourced by clicking the <strong>Source</strong> button in the upper-right corner of the <strong>Editor</strong> pane, or by clicking the arrow immediately to its right (Figure <a href="#fig-2-5-6" class="quarto-xref">Figure&nbsp;<span>6.6</span></a>).</p>
 <div id="fig-2-5-6" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-6_sourcing_r_script.png" class="img-fluid figure-img">
+<img src="../include/images/part_2/ch_5/2-5-6_sourcing_r_script.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.6: Sourcing (running) R Scripts.
+Figure&nbsp;6.6: Sourcing (running) R Scripts.
 </figcaption>
 </figure>
 </div>
@@ -994,11 +913,11 @@ Figure&nbsp;8.6: Sourcing (running) R Scripts.
 <li><strong>Source</strong> (mac: ⌘ + ⇧ + S; windows: Ctrl + Shift + S)</li>
 <li><strong>Source with Echo</strong> (mac: ⌘ + ⇧ + ↵; windows: Ctrl + Shift + Enter)</li>
 </ul>
-<p>Try it yourself. Source the <code>main.R</code> script after copying the code <a href="@sec-main-script">provided above</a>, then inspect the first six columns of <code>df_cog</code>:</p>
+<p>Try it yourself. Source the <code>main.R</code> script after copying the code <a href="#sec-main-script">provided above</a>, then inspect the first six columns of <code>df_cog</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_cog[, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  subject   eyes standing_on      a_cog v_x v_y
+<pre><code>  subject   eyes standing_on         ea v_x v_y
 1  020966 closed   both legs   3.353546   0   0
 2  020966   open   both legs   2.656370   0   0
 3  020966 closed  single leg  96.561258   0   0
@@ -1014,8 +933,8 @@ Figure&nbsp;8.6: Sourcing (running) R Scripts.
 </p>
 </section>
 </section>
-<section id="sec-rfunctions" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="sec-rfunctions"><span class="header-section-number">8.4</span> Creating R Functions</h2>
+<section id="sec-rfunctions" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-rfunctions"><span class="header-section-number">6.4</span> Creating R Functions</h2>
 <p>Code should be as clean, concise, and readable as possible. This makes it easier both for others to understand and maintain your code and for you to revisit it in the future. Numerous style guides for R programming are available; one example is <a href="https://cran.r-project.org/web/packages/rockchalk/vignettes/Rstyle.pdf">this guide</a>.</p>
 <p>Rather than allowing <code>main.R</code> to become long and difficult to read, we will move the computation of the CoG variables into a separate <strong>R function</strong>.</p>
 <p>The general syntax for defining a function in R is:</p>
@@ -1023,13 +942,13 @@ Figure&nbsp;8.6: Sourcing (running) R Scripts.
   statements
   return(value_to_be_returned)
 }</code></pre>
-<p>There are two common ways in which an R function can update <code>df_cog</code>: <strong>by value</strong> or <strong>by reference</strong>. The later approach is discouraged (see <a href="#tip-by-reference" class="quarto-xref">Tip&nbsp;<span>8.1</span></a>).</p>
+<p>There are two common ways in which an R function can update <code>df_cog</code>: <strong>by value</strong> or <strong>by reference</strong>. The later approach is discouraged (see <a href="#tip-by-reference" class="quarto-xref">Tip&nbsp;<span>6.1</span></a>).</p>
 <p><br>
 </p>
 <section id="sec-update-by-value" class="level3">
 <h3 class="anchored" data-anchor-id="sec-update-by-value">Updating CoG Metrics by Value</h3>
 <p>With this approach, the function computes the desired metrics from the raw data and returns them to the calling code. The returned values are then assigned to the appropriate row of <code>df_cog</code>.</p>
-<p>To do this, we move the portion of code in <code>main.R</code> responsible for computing the CoG metrics into a new R script. Save this script as <code>cog_functions.R</code> inside the <code>functions</code> folder (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>).</p>
+<p>To do this, we move the portion of code in <code>main.R</code> responsible for computing the CoG metrics into a new R script. Save this script as <code>cog_functions.R</code> inside the <code>functions</code> folder (see <a href="#fig-2-5-1" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>compute_cog_metrics <span class="ot">&lt;-</span> <span class="cf">function</span> (df_raw_data) {</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1054,25 +973,25 @@ Figure&nbsp;8.6: Sourcing (running) R Scripts.
 <span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  xy_prime <span class="ot">&lt;-</span> <span class="fu">eigen</span>(E)  <span class="co"># computing eigenvalues and eigenvectors</span></span>
 <span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  lambda <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(xy_prime<span class="sc">$</span>values) <span class="co"># square root of eigen values</span></span>
 <span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  eigvec <span class="ot">&lt;-</span> xy_prime<span class="sc">$</span>vectors      <span class="co"># eigen vectors</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  a_cog <span class="ot">&lt;-</span> pi <span class="sc">*</span> <span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">prod</span>(lambda) <span class="co"># elliptic area</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  ea <span class="ot">&lt;-</span> pi <span class="sc">*</span> <span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">prod</span>(lambda) <span class="co"># elliptic area</span></span>
 <span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(a_cog)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ea)</span>
 <span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Examining the function reveals that:</p>
 <ul>
 <li>the CoG metrics are computed by the function <code>compute_cog_metrics()</code>;</li>
 <li>the function has a single input parameter (<code>df_raw_data</code>), whose argument should be a data frame containing the raw CoG data;</li>
-<li>the function contains essentially the same code previously included in <code>main.R</code>, with one important addition: the statement <code>return(a_cog)</code>, which returns the computed CoG Elliptic Area.</li>
+<li>the function contains essentially the same code previously included in <code>main.R</code>, with one important addition: the statement <code>return(ea)</code>, which returns the computed CoG Elliptic Area.</li>
 </ul>
 <p>Before this function can be used, the R script containing it must be sourced. Once this has been done, <code>compute_cog_metrics()</code> becomes available in the current R session and should appear in the <strong>Environment</strong> pane (or can be listed with the <a href="https://rdrr.io/r/base/ls.html"><code>ls()</code></a> function).</p>
 <div id="fig-2-5-7" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-5-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\include/images/part_2/ch_5/2-5-7_function_in_r_environment.png" class="img-fluid figure-img" style="width:98.0%">
+<img src="../include/images/part_2/ch_5/2-5-7_function_in_r_environment.png" class="img-fluid figure-img" style="width:98.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-5-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.7: Sourcing R files with functions. All functions defined in these R files will be visible in the R Environment.
+Figure&nbsp;6.7: Sourcing R files with functions. All functions defined in these R files will be visible in the R Environment.
 </figcaption>
 </figure>
 </div>
@@ -1089,7 +1008,7 @@ Figure&nbsp;8.7: Sourcing R files with functions. All functions defined in these
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="fu">character</span>(n), </span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">eyes =</span> <span class="fu">factor</span>(<span class="fu">character</span>(n), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"open"</span>, <span class="st">"closed"</span>)), </span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">standing_on =</span> <span class="fu">factor</span>(<span class="fu">character</span>(n), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"single leg"</span>, <span class="st">"both legs"</span>)),</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_cog =</span> <span class="fu">double</span>(n),    <span class="co"># elliptic area</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ea =</span> <span class="fu">double</span>(n),    <span class="co"># elliptic area</span></span>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_x =</span> <span class="fu">double</span>(n),      <span class="co"># mean speed in x direction</span></span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_y =</span> <span class="fu">double</span>(n),      <span class="co"># mean speed in y direction</span></span>
 <span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_x =</span> <span class="fu">double</span>(n),  <span class="co"># st. deviation in x direction</span></span>
@@ -1120,14 +1039,14 @@ Figure&nbsp;8.7: Sourcing R files with functions. All functions defined in these
 <span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>df_cog <span class="ot">&lt;-</span> df_cog[<span class="dv">1</span><span class="sc">:</span>count, ] <span class="co"># keeping only count observations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>To use <code>compute_cog_metrics()</code> in the <a href="@sec-rscripts"><code>main.R</code></a> script, we need to modify <code>main.R</code> accordingly.</p>
+<p>To use <code>compute_cog_metrics()</code> in the <a href="#sec-rscripts"><code>main.R</code></a> script, we need to modify <code>main.R</code> accordingly.</p>
 <p>The resulting <code>main.R</code> script is shorter, cleaner, and easier to maintain. Notice that <code>cog_functions.R</code> must be sourced near the beginning of <code>main.R</code> so that the function used to compute the CoG metrics is loaded into the current R session before it is called.</p>
 <p>Many other approaches could be used to update <code>df_cog</code> after calling <code>compute_cog_metrics()</code>. Feel free to explore some of these alternatives.</p>
 <p>Finally, inspect the first four columns of <code>df_cog</code> to verify that both the participant metadata and the CoG Elliptic Area have been computed correctly.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_cog[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  subject   eyes standing_on      a_cog
+<pre><code>  subject   eyes standing_on         ea
 1  020966 closed   both legs   3.353546
 2  020966   open   both legs   2.656370
 3  020966 closed  single leg  96.561258
@@ -1144,7 +1063,7 @@ Figure&nbsp;8.7: Sourcing R files with functions. All functions defined in these
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning&nbsp;8.1: About updating by reference
+Warning&nbsp;6.1: About updating by reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1155,27 +1074,27 @@ Warning&nbsp;8.1: About updating by reference
 </p>
 </section>
 </section>
-<section id="exercise-putting-it-all-together" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="exercise-putting-it-all-together"><span class="header-section-number">8.5</span> Exercise: Putting It All Together</h2>
-<p>Using the approach presented in this chapter—updating <code>df_cog</code> <a href="@sec-update-by-value">by value</a>—modify the <code>compute_cog_metrics()</code> function to:</p>
+<section id="exercise-putting-it-all-together" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="exercise-putting-it-all-together"><span class="header-section-number">6.5</span> Exercise: Putting It All Together</h2>
+<p>Using the approach presented in this chapter—updating <code>df_cog</code> <a href="#sec-update-by-value">by value</a>—modify the <code>compute_cog_metrics()</code> function to:</p>
 <ul>
 <li><p>compute the remaining four CoG variables (Mean CoG Speed and Standard Deviation in both the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> directions);</p></li>
 <li><p>save <code>df_cog</code> to a <code>csv</code> file using the <a href="https://rdrr.io/r/utils/write.table.html"><code>write.csv()</code></a> function. Set both the <code>row.names</code> and <code>quote</code> arguments to <code>FALSE</code>, and choose any suitable name for the output <code>csv</code> file.</p></li>
 </ul>
 <p><br>
 </p>
-<p>After correctly processing the raw CoG data, <a href="#tbl-2-5-2" class="quarto-xref">Table&nbsp;<span>8.2</span></a> should resemble the table below.</p>
+<p>After correctly processing the raw CoG data, <a href="#tbl-2-5-2" class="quarto-xref">Table&nbsp;<span>6.2</span></a> should resemble the table below.</p>
 <div class="dataTable-wrapper small-text">
 <div class="cell">
 <div id="tbl-2-5-2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.2: CoG variables, computed for the two example subjects.
+Table&nbsp;6.2: CoG variables, computed for the two example subjects.
 </figcaption>
 <div aria-describedby="tbl-2-5-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-0a8e548f2bd8f599cde6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0a8e548f2bd8f599cde6">{"x":{"filter":"none","vertical":false,"data":[["020966","020966","020966","020966","111370","111370","111370","111370"],["closed","open","closed","open","closed","open","open","closed"],["both legs","both legs","single leg","single leg","both legs","both legs","single leg","single leg"],[3.353546330062479,2.656370246885773,96.56125824852305,60.97641340730375,6.407616931917058,4.027538839510655,8.745130236597406,130.4140484133801],[1.210536791975665,0.8221926109302379,12.00915778431117,4.861386071273132,1.831740373862562,1.421390282192522,4.236871114244307,10.44112412389503],[0.6767221209927172,0.6438847246376608,5.261232783877225,3.475813940478159,1.463064750098013,1.78141351142088,2.956697797425936,9.860128868675693],[0.7848049846211645,0.452259234586344,5.386117201524018,3.587052016893438,1.086612353320229,0.3899797282112648,1.158987310399507,5.007421735821211],[0.3690949424522326,0.4931387893637452,1.530660178316831,2.009658001317868,0.5426874505601508,0.8781948003499549,0.6356315350250243,2.662685997482412]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Subject<\/th>\n      <th>Eyes<\/th>\n      <th>Standing on<\/th>\n      <th>$EA$<\/th>\n      <th>$v_x \\textrm{(cm/s)}$<\/th>\n      <th>$v_y \\textrm{(cm/s)}$<\/th>\n      <th>$\\sigma_x \\textrm{(cm)}$<\/th>\n      <th>$\\sigma_y \\textrm{(cm)}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":6,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":7,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"subject","targets":0},{"name":"eyes","targets":1},{"name":"standing_on","targets":2},{"name":"a_cog","targets":3},{"name":"v_x","targets":4},{"name":"v_y","targets":5},{"name":"sigma_x","targets":6},{"name":"sigma_y","targets":7}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render","options.columnDefs.4.render","options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a432445ab6139d750389" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a432445ab6139d750389">{"x":{"filter":"none","vertical":false,"data":[["020966","020966","020966","020966","111370","111370","111370","111370"],["closed","open","closed","open","closed","open","open","closed"],["both legs","both legs","single leg","single leg","both legs","both legs","single leg","single leg"],[3.353546330062479,2.656370246885773,96.56125824852305,60.97641340730375,6.407616931917058,4.027538839510655,8.745130236597406,130.4140484133801],[1.210536791975665,0.8221926109302379,12.00915778431117,4.861386071273132,1.831740373862562,1.421390282192522,4.236871114244307,10.44112412389503],[0.6767221209927172,0.6438847246376608,5.261232783877225,3.475813940478159,1.463064750098013,1.78141351142088,2.956697797425936,9.860128868675693],[0.7848049846211645,0.452259234586344,5.386117201524018,3.587052016893438,1.086612353320229,0.3899797282112648,1.158987310399507,5.007421735821211],[0.3690949424522326,0.4931387893637452,1.530660178316831,2.009658001317868,0.5426874505601508,0.8781948003499549,0.6356315350250243,2.662685997482412]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Subject<\/th>\n      <th>Eyes<\/th>\n      <th>Standing on<\/th>\n      <th>$EA$<\/th>\n      <th>$v_x \\textrm{(cm/s)}$<\/th>\n      <th>$v_y \\textrm{(cm/s)}$<\/th>\n      <th>$\\sigma_x \\textrm{(cm)}$<\/th>\n      <th>$\\sigma_y \\textrm{(cm)}$<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"t","ordering":false,"columnDefs":[{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":6,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"targets":7,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 1, 3, \",\", \".\", null);\n  }"},{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"subject","targets":0},{"name":"eyes","targets":1},{"name":"standing_on","targets":2},{"name":"ea","targets":3},{"name":"v_x","targets":4},{"name":"v_y","targets":5},{"name":"sigma_x","targets":6},{"name":"sigma_y","targets":7}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render","options.columnDefs.4.render","options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -1198,1171 +1117,587 @@ Table&nbsp;8.2: CoG variables, computed for the two example subjects.
 </main> <!-- /main -->
 <script>
 
-
-
 /* definition of content for the buttons */
-
 const webex_buttons = {check_hidden:          "<b>&check;</b>",
-
                        check_hidden_alt:      "Check answer",
-
                        check_shown:           "<b>&lsh;</b>",
-
                        check_shown_alt:       "Hide check",
-
                        check_of_total:        "/",
-
                        solution:              "<b>&quest;</b>",
-
                        solution_alt:          "Correct solution",
-
                        question_next:         "<b>&#8634;</b>",
-
                        question_next_alt:     "Next question",
-
                        question_previous:     "",
-
                        question_previous_alt: ""}
 
 
-
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   document.querySelectorAll(".webex-total_correct").forEach(total => {
-
     p = total.closest(".webex-box");
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
-
     /* no specific class on input node, thus searching via query selector */
-
     var checkboxgroups = p.querySelectorAll("div[class=webex-checkboxgroup] input[type=checkbox]").length
 
-
-
     /* show number of correct / total number of answers */
-
     total.innerHTML = correct + "&nbsp;" + webex_buttons.check_of_total + "&nbsp;" + (solvemes + radiogroups + checkboxgroups + selects);
-
   });
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answer");
 
-
-
   //var cl = elem.parentElement.classList;
-
   var cl = this.closest(".webex-box").classList;
-
   if (cl.contains("unchecked")) {
-
     cl.remove("unchecked");
-
     this.innerHTML = webex_buttons.check_shown; //"Hide check";
-
     if (webex_buttons.check_shown_alt.length > 0) this.setAttribute("title", webex_buttons.check_shown_alt);
-
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = webex_buttons.check_hidden; //"Check answer";
-
     if (webex_buttons.check_hidden_alt.length > 0) this.setAttribute("title", webex_buttons.check_hidden_alt);
-
   }
-
 }
-
-
 
 /* helper functions for checking the webex ID */
-
 const id_checker = {"fmt": new RegExp("[g-zG-Z]"),
-
                     "load": function(e) { return e.getAttribute("id").match("(?<=(-)).*$")[0]; },
-
                     "eval": new TextEncoder(),
-
                     "dval": new TextDecoder()}
 
-
-
 /* Show/hide correct solution */
-
 solution_func = function() {
-
   console.log("webex: show/hide solution");
 
-
-
   var div = this.closest(".webex-question").querySelector(".webex-solution");
-
   var cl = div.classList;
 
-
-
   if (cl.contains("visible")) {
-
     cl.remove("visible");
-
   } else {
-
     cl.add("visible");
-
   }
-
 }
 
-
-
 /* function to check if the real answer is numeric */
-
 convert_to_numeric = function(x) {
-
   if (typeof x == "string") {
-
     /* do nothing */
-
   } else if (x.length == 1) {
-
     /* take first element */
-
     x = x[0]
-
   } else {
-
     return NaN;
-
   }
 
-
-
   /* remove spaces for easier parsing */
-
   x = x.replace(/\s/g, "");
 
-
-
   /* Define patterns for different formats, note that spaces have been removed above */
-
   const patterns = [
-
     {regex: /^[+-]?\d+(\.\d{3})*,\d+$/, decimal: ",", thousand: "." },  // Format: "1.100.100.100,3"
-
     {regex: /^[+-]?\d+(,\d{3})*\.\d+$/, decimal: ".", thousand: "," },  // Format: "1,100,100,100.3"
-
     {regex: /^[+-]?\d+(\.|\.\d+)?$/, decimal: "." },                    // Format: "1100100100.5" or "1100100100."
-
     {regex: /^[+-]?\d+(,|,\d+)$/, decimal: "," }                        // Format: "1100100100,5" or "1100100100,"
-
   ];
 
 
-
-
-
   /* testing all regular expressions, convert to float if possible */
-
   for (const { regex, decimal, thousand } of patterns) {
-
     if (regex.test(x)) {
-
       let numeric = x;
-
       if (thousand) numeric = numeric.replace(new RegExp(`\\${thousand}`, "g"), "");
-
       numeric = numeric.replace(decimal, ".");
-
       return parseFloat(numeric);
-
     }
-
   }
-
-
 
   /* input of length 1 but none of the known formats, return NaN */
-
   return NaN;
-
 }
-
-
 
 /* Checking webex ID, returns formalsol */
-
 check_id = function(e) {
-
   /* loading webex ID */
-
   var id = id_checker["load"](e);
 
-
-
   /* extracting answer */
-
   let answer = e.dataset.answer;
 
-
-
   /* checking unique id, prepare and return array */
-
   if (!id_checker["fmt"].test(id)) {
-
     const a = id_checker["eval"].encode(atob(answer));
-
     const b = id_checker["eval"].encode(id);
-
     const res = a.map((byte, index) => byte^b[index % b.length]);
-
     answer = id_checker["dval"].decode(res);
-
     /* Replacing &amp; with ' before parsing */
-
     answer = answer.replaceAll("&apos;", "'");
-
   }
-
-
 
   return JSON.parse(answer);
-
 }
-
-
 
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   /* avoid that keyup and keychange twice execute this function within nms = 10
-
    * ms, clearing inputTimer and add timeout */
-
   console.log("webex: check solveme");
 
-
-
   /* float, precision for checking numeric answers */
-
   const eps = 0.00000000000001;
 
-
-
   /* get last checked user answer */
-
   const question = this.closest(".webex-question")
 
-
-
   /* extracting classes */
-
   var cl = this.classList;
-
   var my_answer = this.value;
 
-
-
   /* extracting classes */
-
   var cl = this.classList;
 
-
-
   /* empty answer? Job done */
-
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
     return false;
-
   }
-
-
 
   /* Find closest (parent) webex-question */
-
   let formalsols = check_id(this)
 
-
-
   /* by default we assume the users' answer is incorrect */
-
   var user_answer_correct = false;
 
-
-
   /* check if the correct answer is numeric, i.e. if 
-
    * formalsols is of length 1 containing one single numeric
-
    * value in a known format, else, NaN is returned */
-
   const num_formalsol = convert_to_numeric(formalsols);
-
   const num_my_answer = convert_to_numeric(my_answer);
 
-
-
   /* if the correct answer is numeric (float), the user's answer
-
    * must also be numeric. If not, it is wrong. Else we can
-
    * compare floating point numbers */
-
   if (!isNaN(num_formalsol) && !isNaN(num_my_answer)) {
-
     /* check if the real answer and the user input are numerically the same;
-
      * adding 'delta' to avoid precision issues */
-
     var diff = Math.abs(num_formalsol - num_my_answer);
-
     if (diff < parseFloat(this.dataset.tol) + eps) { user_answer_correct = true; }
 
-
-
   /* if the question contains regex, a regular expression is used
-
    * to evaluate the users answer. Allows for multiple regular expressions */
-
   } else if (cl.contains("regex")) {
-
     for (let i = 0; i < formalsols.length; i++) {
-
         let regex = new RegExp(formalsols[i], cl.contains("ignorecase") ? "i" : "");
-
         if (regex.test(my_answer)) { user_answer_correct = true; break; }
-
     }
-
-
 
   /* else we evaluate on 'string level', considering the creators preferences
-
    * regarding set options */
-
   } else {
-
     /* modify/prepare answer */
-
     if (cl.contains("ignorecase")) { my_answer = my_answer.toLowerCase(); }
-
     if (cl.contains("nospaces"))   { my_answer = my_answer.replace(/ /g, ""); }
 
-
-
     /* if the real answer includes user input - correct */
-
     if (formalsols.includes(my_answer)) {
-
       user_answer_correct = true;
-
   
-
       // added regex bit
-
       if (cl.contains("regex")) {
-
         answer_regex = RegExp(formalsols.join("|"))
-
         if (answer_regex.test(my_answer)) {
-
           cl.add("webex-correct");
-
         }
-
       }
-
     }
-
   }
-
-
 
   if (user_answer_correct) {
-
       cl.add("webex-correct");
-
       cl.remove("webex-incorrect");
-
   } else {
-
       cl.add("webex-incorrect");
-
       cl.remove("webex-correct");
-
   }
-
-
 
   update_total_correct();
 
-
-
 }
-
-
 
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
 
-
-
   var options   = [];
-
   Array.from(this.querySelectorAll("option")).forEach((option, index) => {
-
     if (!option.hasAttribute("value") || !option.getAttribute("value") === "blank") {
-
       options.push(option);
-
     }
-
   });
-
-
 
   /* get selected option */
-
   function get_selected(options) { return options.findIndex(option => option.selected); }
-
   var option_index = get_selected(options)
 
-
-
   /* loading webex ID */
-
   var formalsol = check_id(this)
 
-
-
   /* add class for current selection */
-
   this.classList.remove("webex-incorrect");
-
   this.classList.remove("webex-correct");
-
   if (option_index >= 0) {
-
     this.classList.add(formalsol[option_index] === 1 ? "webex-correct" : "webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   /* get real answer (binary integer array) */
-
   var id = e.target.getAttribute("name");
-
   var group = document.querySelector(".webex-radiogroup[id='webex-" + id + "']");
-
   var formalsol = check_id(group)
 
-
-
   /* check which radiobuttion is selected (user answer) */
-
   function get_checked(radios) {
-
     return radios.findIndex(radios => radios.checked);
-
   }
-
   var radios = Array.from(group.querySelectorAll("input[type='radio']"))
-
   var radio_index = get_checked(radios);
 
-
-
   /* remove existing classes */
-
   radios.forEach(radio => {
-
     let cl = radio.closest("label").classList
-
     cl.remove("webex-incorrect");
-
     cl.remove("webex-correct");
-
   });
 
-
-
   /* add class for current selection */
-
   let cl = radios[radio_index].closest("label").classList
-
   if (formalsol[radio_index] === 1) {
-
       cl.add("webex-correct");
-
   } else {
-
       cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
-
 
 
 /* function for checking checkboxgroups answers */
-
 checkboxgroups_func = function(e) {
-
   console.log("webex: check checkboxgroups");
 
-
-
   /* get real answer (binary integer array) */
-
   var group = document.querySelector(".webex-checkboxgroup[id='" + this.id + "']");
-
   var formalsol = check_id(group);
 
-
-
   /* check which checkbox is checked (user answer) */
-
   function get_checked(group) {
-
       const checkboxes = Array.from(group.querySelectorAll("input[type='checkbox']"));
-
       return checkboxes.reduce((indices, checkbox, index) => {
-
           if (checkbox.checked) indices.push(index);
-
           return indices;
-
       }, []);
-
   }
-
   var checks = Array.from(group.querySelectorAll("input[type='checkbox']"));
-
   var check_index = get_checked(group);
 
-
-
   checks.forEach((e, index) => {
-
     var label = e.parentNode;
-
     var ans = formalsol[index];
-
     if ((e.checked && ans === 1) || (!e.checked && ans === 0)) {
-
         label.setAttribute("class", "webex-correct")
-
     } else {
-
         label.setAttribute("class", "webex-incorrect")
-
     }
-
   });
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* shuffling array (thanks to stack overflow)
-
  * If argument x is an integer we create an integer sequence
-
  * from 0, 1, ..., (x - 1) and return a shuffled version. If
-
  * the input is an array, we simply shuffle it */
-
 shuffle_array = function(x) {
-
    if (Number.isInteger(x) && !isNaN(x)) {
-
      x = Array.from({length: x}, (v, i) => i);
-
    }
-
    let shuffled = x.map(value => ({ value, sort: Math.random() }))
-
         .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
-
    return shuffled;
-
 }
-
-
 
 /* ---------------------------------------------------------
-
  * ---------------------------------------------------------
-
  * --------------------------------------------------------- */
-
 window.onload = function() {
-
   //console.log("webex: onload");
 
-
-
   /* setting up buttons and actions to show/hide answers */
-
   document.querySelectorAll(".webex-check").forEach(section => {
-
     section.classList.add("unchecked");
 
-
-
     /* ul to take up the list items with buttons */
-
     let button_ul = document.createElement("ul");
-
     button_ul.setAttribute("class", "webex-button-list");
-
     section.appendChild(button_ul);
 
-
-
     /* button to _check_ if answers given are correct */
-
     let li_check = document.createElement("li");
-
     button_ul.appendChild(li_check); /* add list item to ul */
-
     let btn_check = document.createElement("button");
-
     btn_check.innerHTML = webex_buttons.check_hidden;  // "Check answer";
-
     btn_check.setAttribute("class", "webex-button webex-button-check");
-
     if (webex_buttons.check_hidden_alt.length > 0) btn_check.setAttribute("title", webex_buttons.check_hidden_alt);
-
     btn_check.onclick = check_func;
-
     li_check.appendChild(btn_check);
 
-
-
     /* span to show current number of points (when _check_ active) */
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     li_check.appendChild(spn);
 
-
-
     /* button to show the _solution_ if there is one */
-
     var has_solution = section.parentNode.querySelectorAll(".webex-solution").length > 0;
-
     if (has_solution) {
-
       let li_solution = document.createElement("li");
-
       button_ul.appendChild(li_solution); /* add list item to ul */
-
       let btn_solution = document.createElement("button");
-
       btn_solution.innerHTML = webex_buttons.solution; // "Correct answer";
-
       btn_solution.setAttribute("class", "webex-button webex-button-solution");
-
       if (webex_buttons.solution_alt.length > 0) btn_solution.setAttribute("title", webex_buttons.solution_alt);
-
       btn_solution.onclick = solution_func;
-
       li_solution.appendChild(btn_solution);
-
     }
 
-
-
   });
-
-
 
   /* set up webex-solveme inputs */
-
   document.querySelectorAll(".webex-solveme").forEach(solveme => {
-
     solveme.setAttribute("autocomplete","off");
-
     solveme.setAttribute("autocorrect", "off");
-
     solveme.setAttribute("autocapitalize", "off");
-
     solveme.setAttribute("spellcheck", "false");
-
     solveme.value = "";
 
-
-
     /* adjust answer for 'no spaces' (ignore spaces) */
-
     if (solveme.classList.contains("nospaces")) {
-
       solveme.dataset.answer = solveme.dataset.answer.replace(/ /g, "");
-
     }
-
-
 
     /* attach checking function, triggered on key up, change, and when
-
      * elemnt is out of focus. Only evaluated once by tracking changes
-
      * via variable solveme_last_user_answer */
-
     solveme.addEventListener("keyup",  solveme_func);
-
     solveme.addEventListener("change", solveme_func);
-
     solveme.addEventListener("blur",   solveme_func);
 
-
-
     /* adding span to show correct/incorrect icon */
-
     solveme.insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   });
-
-
 
   /* set up radiogroups (single choice questions with display = "buttons") */
-
   document.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
-
     radiogroup.onchange = radiogroups_func;
-
   });
-
-
 
   /* set up checkboxgroups (multiple choice questions with display = "buttons") */
-
   document.querySelectorAll(".webex-checkboxgroup").forEach(checkboxgroup => {
-
     checkboxgroup.onchange = checkboxgroups_func;
-
   });
-
-
 
   /* set up selects (dropdown menus) */
-
   document.querySelectorAll(".webex-select").forEach(select => {
-
     select.onchange = select_func;
-
     /* append webex-icon for correct/incorrect icons */
-
     var elem = document.createElement("span")
-
     elem.classList.add("webex-icon")
-
     select.parentNode.appendChild(elem)
-
   });
-
-
 
   /* change to next/previous question if multiple are available */
-
   function handleQuestionClick(group, questions, step) {
-
     return async function() {
-
       /* get question order as integer vector */
-
       let questionOrder = group.dataset.questionOrder.split(",").map(str => parseInt(str));
 
-
-
       /* current question/position */
-
       let currentPosition = parseInt(group.dataset.currentPosition);
 
-
-
       /* Hide the current question */
-
       questions.forEach(question => { question.classList.remove("active"); });
 
-
-
       /* Move to the next question index */
-
       currentPosition = (currentPosition + step) % questionOrder.length;
-
       if (currentPosition < 0) currentPosition = currentPosition + questionOrder.length
 
-
-
       /* Display the new question */
-
       questions[questionOrder[currentPosition]].classList.add("active");
 
-
-
       // Update the currentPosition data attribute on the group div
-
       group.dataset.currentPosition = currentPosition;
-
     };
-
   }
-
-
 
   document.querySelectorAll(".webex-group").forEach(group => {
-
     const questions = Array.from(group.querySelectorAll(".webex-question"));
 
-
-
     /* Create vector with question order. If the webex-group does
-
      * not have class '.noshuffle' we will randomly shuffle the order */
-
     let questionOrder = Array.from({length: questions.length}, (v, i) => i);
-
     if (!group.classList.contains("noshuffle")) {
-
       questionOrder = shuffle_array(questionOrder);
-
     }
 
-
-
     /* take start position (if set) or start at 0 */
-
     const currentPosition = parseInt(group.getAttribute("data-start-position")) || 0;
 
-
-
     /* show the default question for each group */
-
     questions[questionOrder[currentPosition]].classList.add("active");
 
-
-
     /* store random order of questions as well as current position */
-
     group.dataset.questionOrder   = questionOrder;
-
     group.dataset.currentPosition = currentPosition;
 
-
-
     /* find all webex-questions, search for .webex-button-list and
-
      * populate the list with necessary <li><button>...</button></li> elements */
-
     questions.forEach(question => {
-
         let button_ul = question.querySelector("ul.webex-button-list");
 
-
-
         let li_next = document.createElement("li");
-
         let nextButton = document.createElement("button");
-
         nextButton.setAttribute("class", "webex-button webex-button-next");
-
         if (webex_buttons.question_next_alt.length > 0) nextButton.setAttribute("title", webex_buttons.question_next_alt);
-
         nextButton.innerHTML = webex_buttons.question_next; // "Next question";
-
         nextButton.addEventListener("click", handleQuestionClick(group, questions, 1));
-
         li_next.appendChild(nextButton);
 
-
-
         let li_previous = document.createElement("li");
-
         let previousButton = document.createElement("button");
-
         previousButton.setAttribute("class", "webex-button webex-button-previous");
-
         if (webex_buttons.question_previous_alt.length > 0) previousButton.setAttribute("title", webex_buttons.question_previous_alt);
-
         previousButton.innerHTML = webex_buttons.question_previous; // "Previous question";
-
         previousButton.addEventListener("click", handleQuestionClick(group, questions, -1));
-
         li_previous.appendChild(previousButton);
 
-
-
         if (webex_buttons.question_previous.length > 0) button_ul.appendChild(li_previous);
-
         if (webex_buttons.question_next.length > 0) button_ul.appendChild(li_next);
-
     });
-
   });
-
-
 
   /* Development options */
-
   document.querySelectorAll(".webex-question.check").forEach(question => {
-
       question.querySelector(".webex-button-check").click()
-
   });
-
   document.querySelectorAll(".webex-question.solution").forEach(question => {
-
       let btn = question.querySelector(".webex-button-solution");
-
       if (btn !== null) { btn.click(); }
-
   });
-
-
 
   /* Pre-filling <input> fields */
-
   document.querySelectorAll(".webex-question.prefill").forEach(question => {
-
       question.querySelectorAll("input.webex-solveme").forEach(solveme => {
-
           let x = JSON.parse(solveme.dataset.answer);
-
           solveme.value = x[0];
-
           /* Trigger the on change event */
-
           solveme.dispatchEvent(new Event("change"));
-
       });
-
-
 
       /* Pre-filling radiogroups, that is for schoice questions */
-
       question.querySelectorAll(".webex-radiogroup").forEach(radiogroup => {
-
           let x = JSON.parse(radiogroup.dataset.answer);
-
           let idx = x.indexOf(1);
-
           let radios = radiogroup.querySelectorAll('input[type="radio"]');
-
           radios[idx].checked = true;
-
           /* Trigger the on change event */
-
           radios[idx].dispatchEvent(new Event("change", { bubbles: true }));
-
       });
-
-
 
       /* Pre-filling checkboxgroups, that is for schoice questions w/ dropdown menus */
-
       question.querySelectorAll(".webex-select").forEach(dropdown => {
-
           let x = JSON.parse(dropdown.dataset.answer);
-
           let idx = x.indexOf(1) + 1; /* +1 to skip the first blank option */
-
           let options = dropdown.querySelectorAll("option");
-
           options[idx].selected = true;
-
           /* Trigger the on change event */
-
           options[idx].dispatchEvent(new Event("change", { bubbles: true }));
-
       });
-
-
 
       /* Pre-filling checkboxgroups, that is for mchoice questions */
-
       question.querySelectorAll(".webex-checkboxgroup").forEach(radiogroup => {
-
           let x = JSON.parse(radiogroup.dataset.answer);
-
           let checkboxes = radiogroup.querySelectorAll('input[type="checkbox"]');
-
           for (let i = 0; i < checkboxes.length; i++) {
-
               checkboxes[i].checked = x[i];
-
           }
-
           /* Trigger the on change event */
-
           checkboxes[0].dispatchEvent(new Event("change", { bubbles: true }));
-
       });
-
   });
-
-
 
   /* Show set tolerance (devel option) */
-
   function calc_width(x, txt, offset = 20) {
-
       /* We do the following:
-
        * Create a new span, insert the value we need in the .tolerance
-
        * input node, and calculate its offsetWidth. Then remove it
-
        * again; this is just used to calculate the required width. */
-
       var cwtmp = document.createElement("span");
-
       x.appendChild(cwtmp);
-
       cwtmp.innerHTML = txt || "";
-
       var w = parseInt(cwtmp.getBoundingClientRect().width) + offset;
-
       cwtmp.remove();
-
       return w;
-
   }
 
-
-
   /* If tolerance should be shown (devel option) we calculate:
-
    * - the width required to properly display the solution
-
    * - the width required to properly display the tolerance
-
    * - add a new element to display the tolerance
-
    * - reduce the width of the solution input box. */
-
   document.querySelectorAll(".webex-question.tolerance").forEach(question => {
-
       question.querySelectorAll("input[data-tol]").forEach(elem => {
-
           var w = null;
 
-
-
           /* Add new element showing the tolerance */
-
           let tol = document.createElement("input");
-
           tol.type = "text"; // <inpyt type="text">
-
           tol.disabled = true; // Disable input element
-
           tol.classList.add("tolerance"); // Appending class
-
           tol.value = "Â± " + elem.getAttribute("data-tol");
 
-
-
           /* Add new node */
-
           elem.parentNode.insertBefore(tol, elem)
 
-
-
           var body     = document.querySelector("body");
-
           //tol.value = "Â± " + "0.0000007";
-
           //tol.value = "Â± " + "0.07";
-
           w    = calc_width(body, tol.value);
-
           wold = parseInt(elem.getBoundingClientRect().width);
-
           wmin = calc_width(body, elem.value);
 
-
-
           /* Calculate required width of the 'tolerance' node, and the
-
            * reduction of the original 'input' node */
-
           let wnew = Math.max(wmin, wold - w);
-
           tol.style.width  = w + "px";
-
           elem.style.width = wnew + "px";
-
       });
-
   });
 
-
-
   update_total_correct();
-
 }
-
-
 
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
@@ -2768,12 +2103,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/24_plotting_and_processing_raw_data.html" class="pagination-link" aria-label="Plotting and Processing Raw Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Plotting and Processing Raw Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/31_understanding_study_designs.html" class="pagination-link" aria-label="Understanding Study Designs">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Understanding Study Designs</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
