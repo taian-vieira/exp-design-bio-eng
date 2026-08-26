@@ -57,12 +57,14 @@ book:
         - chapters/references.qmd
   appendices:
     - chapters/a1_ethical_considerations.qmd
+    - chapters/a2_interactive_r_tutorials.qmd
 
 bibliography: book.bib
 csl: elsevier-vancouver.csl
 
 format:
   html:
+    link-external-newwindow: true
     footnotes-hover: true
     number-sections: true
     number-depth: 2
