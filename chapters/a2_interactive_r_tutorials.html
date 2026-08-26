@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; The Physiology of Human Standing Posture – Experimental Design in Biomedical Engineering</title>
+<title>Appendix B — Interactive R Tutorials – Experimental Design in Biomedical Engineering</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,27 +23,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -53,8 +68,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/12_stabilometry.html" rel="next">
-<link href="../chapters/0_introduction.html" rel="prev">
+<link href="../chapters/a1_ethical_considerations.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,7 +126,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/11_physiology_of_posture_control.html">Part 1: Smart Posture</a></li><li class="breadcrumb-item"><a href="../chapters/11_physiology_of_posture_control.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/a1_ethical_considerations.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/a2_interactive_r_tutorials.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Interactive R Tutorials</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -180,7 +194,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/11_physiology_of_posture_control.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/11_physiology_of_posture_control.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></span></a>
   </div>
 </li>
@@ -326,7 +340,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/a2_interactive_r_tutorials.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/a2_interactive_r_tutorials.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Interactive R Tutorials</span></span></a>
   </div>
 </li>
@@ -342,29 +356,29 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-study-posture-control" id="toc-why-study-posture-control" class="nav-link active" data-scroll-target="#why-study-posture-control"><span class="header-section-number">1.1</span> Why Study Posture Control?</a></li>
-  <li><a href="#meeting-postural-demands-provides-evidence-of-postural-control" id="toc-meeting-postural-demands-provides-evidence-of-postural-control" class="nav-link" data-scroll-target="#meeting-postural-demands-provides-evidence-of-postural-control"><span class="header-section-number">1.2</span> Meeting Postural Demands Provides Evidence of Postural Control</a></li>
-  <li><a href="#the-definition-of-postural-control" id="toc-the-definition-of-postural-control" class="nav-link" data-scroll-target="#the-definition-of-postural-control"><span class="header-section-number">1.3</span> The Definition of Postural Control</a>
-  <ul>
-  <li><a href="#there-is-no-single-system-for-postural-control" id="toc-there-is-no-single-system-for-postural-control" class="nav-link" data-scroll-target="#there-is-no-single-system-for-postural-control">There Is No Single System for Postural Control</a></li>
-  <li><a href="#regulation-of-muscle-force" id="toc-regulation-of-muscle-force" class="nav-link" data-scroll-target="#regulation-of-muscle-force">Regulation of Muscle Force</a></li>
-  <li><a href="#sensing-posture" id="toc-sensing-posture" class="nav-link" data-scroll-target="#sensing-posture">Sensing Posture</a></li>
-  </ul></li>
-  <li><a href="#evidence-of-posture-control" id="toc-evidence-of-posture-control" class="nav-link" data-scroll-target="#evidence-of-posture-control"><span class="header-section-number">1.4</span> Evidence of Posture Control</a>
-  <ul>
-  <li><a href="#postural-strategies" id="toc-postural-strategies" class="nav-link" data-scroll-target="#postural-strategies">Postural Strategies</a></li>
-  <li><a href="#ankle-hip-and-step-strategies" id="toc-ankle-hip-and-step-strategies" class="nav-link" data-scroll-target="#ankle-hip-and-step-strategies">Ankle, Hip, and Step Strategies</a></li>
-  </ul></li>
-  <li><a href="#assessing-posture-control" id="toc-assessing-posture-control" class="nav-link" data-scroll-target="#assessing-posture-control"><span class="header-section-number">1.5</span> Assessing Posture Control</a></li>
+  <li><a href="#installing-the-tutorial-package" id="toc-installing-the-tutorial-package" class="nav-link active" data-scroll-target="#installing-the-tutorial-package"><span class="header-section-number">B.1</span> Installing the tutorial package</a></li>
+  <li><a href="#opening-the-tutorials" id="toc-opening-the-tutorials" class="nav-link" data-scroll-target="#opening-the-tutorials"><span class="header-section-number">B.2</span> Opening the tutorials</a></li>
+  <li><a href="#how-the-tutorials-relate-to-the-textbook" id="toc-how-the-tutorials-relate-to-the-textbook" class="nav-link" data-scroll-target="#how-the-tutorials-relate-to-the-textbook"><span class="header-section-number">B.3</span> How the tutorials relate to the textbook</a></li>
+  <li><a href="#tutorial-a2-processing-raw-cog-data" id="toc-tutorial-a2-processing-raw-cog-data" class="nav-link" data-scroll-target="#tutorial-a2-processing-raw-cog-data"><span class="header-section-number">B.4</span> Tutorial A2 — Processing Raw CoG Data</a></li>
+  <li><a href="#tutorial-a3-visualising-stabilometric-data" id="toc-tutorial-a3-visualising-stabilometric-data" class="nav-link" data-scroll-target="#tutorial-a3-visualising-stabilometric-data"><span class="header-section-number">B.5</span> Tutorial A3 — Visualising Stabilometric Data</a></li>
+  <li><a href="#tutorial-a4-merging-and-transforming-data" id="toc-tutorial-a4-merging-and-transforming-data" class="nav-link" data-scroll-target="#tutorial-a4-merging-and-transforming-data"><span class="header-section-number">B.6</span> Tutorial A4 — Merging and Transforming Data</a></li>
+  <li><a href="#tutorial-a5-sample-size-and-statistical-power" id="toc-tutorial-a5-sample-size-and-statistical-power" class="nav-link" data-scroll-target="#tutorial-a5-sample-size-and-statistical-power"><span class="header-section-number">B.7</span> Tutorial A5 — Sample Size and Statistical Power</a></li>
+  <li><a href="#tutorial-a6-computing-two-group-tests" id="toc-tutorial-a6-computing-two-group-tests" class="nav-link" data-scroll-target="#tutorial-a6-computing-two-group-tests"><span class="header-section-number">B.8</span> Tutorial A6 — Computing Two-Group Tests</a></li>
+  <li><a href="#tutorial-a7-computing-repeated-measures-anova" id="toc-tutorial-a7-computing-repeated-measures-anova" class="nav-link" data-scroll-target="#tutorial-a7-computing-repeated-measures-anova"><span class="header-section-number">B.9</span> Tutorial A7 — Computing Repeated-Measures ANOVA</a></li>
+  <li><a href="#tutorial-a8-anthropometric-normalisation-of-cog-speed" id="toc-tutorial-a8-anthropometric-normalisation-of-cog-speed" class="nav-link" data-scroll-target="#tutorial-a8-anthropometric-normalisation-of-cog-speed"><span class="header-section-number">B.10</span> Tutorial A8 — Anthropometric Normalisation of CoG Speed</a></li>
+  <li><a href="#example-data-and-reproducibility" id="toc-example-data-and-reproducibility" class="nav-link" data-scroll-target="#example-data-and-reproducibility"><span class="header-section-number">B.11</span> Example data and reproducibility</a></li>
+  <li><a href="#relationship-to-the-course-assignments" id="toc-relationship-to-the-course-assignments" class="nav-link" data-scroll-target="#relationship-to-the-course-assignments"><span class="header-section-number">B.12</span> Relationship to the course assignments</a></li>
+  <li><a href="#package-versions-and-updates" id="toc-package-versions-and-updates" class="nav-link" data-scroll-target="#package-versions-and-updates"><span class="header-section-number">B.13</span> Package versions and updates</a></li>
+  <li><a href="#using-the-tutorials-in-other-courses" id="toc-using-the-tutorials-in-other-courses" class="nav-link" data-scroll-target="#using-the-tutorials-in-other-courses"><span class="header-section-number">B.14</span> Using the tutorials in other courses</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/11_physiology_of_posture_control.html">Part 1: Smart Posture</a></li><li class="breadcrumb-item"><a href="../chapters/11_physiology_of_posture_control.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/a1_ethical_considerations.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/a2_interactive_r_tutorials.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Interactive R Tutorials</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Physiology of Human Standing Posture</span></h1>
+<h1 class="title"><span id="sec-a2" class="quarto-section-identifier">Appendix B — Interactive R Tutorials</span></h1>
   <div class="quarto-categories">
     <div class="quarto-category">Biomedical Engineering</div>
     <div class="quarto-category">Applied Statistics</div>
@@ -385,265 +399,380 @@ div.csl-indent {
 </header>
 
 
-<p>There are two main reasons for selecting human posture control as the experimental paradigm used throughout this course.</p>
+<p>This textbook is accompanied by a set of interactive R tutorials designed to transform the concepts developed throughout the book into reproducible data-analysis workflows.</p>
+<p>The tutorials were originally developed for the <em>Experimental Design in Biomedical Engineering</em> course at Politecnico di Torino, but they are publicly available and can be used independently by any reader. They run locally in RStudio and combine guided examples, editable code exercises, hints, solutions, quizzes, and realistic example datasets, based on stabilometric data collected with smartphones (see <a href="13_phyphox_posture_experiment.html" class="quarto-xref"><span>Chapter 3</span></a>).</p>
+<p>The tutorials are distributed through the public R package <a href="https://github.com/taian-vieira/ExpDesignBioEngTutorials" target="_blank"><code>ExpDesignBioEngTutorials</code></a>.</p>
+<p>The intended learning progression is:</p>
+<pre class="text"><code>Textbook
+Understand the concepts
+        ↓
+Interactive tutorial
+Practise with guided examples
+        ↓
+Independent analysis
+Apply the workflow to your own data</code></pre>
+<p>For students enrolled in the course, Moodle provides the official assignment instructions, deadlines, grading criteria, and submission activities. Readers using this book independently do not need access to Moodle in order to use the tutorials.</p>
+<p><br>
+</p>
+<section id="installing-the-tutorial-package" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="installing-the-tutorial-package"><span class="header-section-number">B.1</span> Installing the tutorial package</h2>
+<p>The tutorials are distributed as an R package hosted on GitHub.</p>
+<p>The stable version associated with this edition of the textbook can be installed from R with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"taian-vieira/ExpDesignBioEngTutorials@v1.0.0"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">upgrade =</span> <span class="st">"never"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>After installation, restart RStudio.</p>
+<p>Because the repository is public, installing the package does not require a GitHub account, a Personal Access Token (PAT), or a local Git configuration.</p>
+<p>The package source, release history, and documentation are available at:</p>
+<p><a href="https://github.com/taian-vieira/ExpDesignBioEngTutorials" target="_blank">https://github.com/taian-vieira/ExpDesignBioEngTutorials</a></p>
+<p><br>
+</p>
+</section>
+<section id="opening-the-tutorials" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="opening-the-tutorials"><span class="header-section-number">B.2</span> Opening the tutorials</h2>
+<p>After restarting RStudio, open the <strong>Tutorial</strong> tab (cf. <a href="#fig-a2-1" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>), normally located in the upper-right pane. The tutorials installed with <code>ExpDesignBioEngTutorials</code> should appear there.</p>
+<div id="fig-a2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-a2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../include/images/a2-1_tutorial-screen.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-a2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.1: Tutorial tab, where all installed tutorials can be found.
+</figcaption>
+</figure>
+</div>
+<p>The available tutorials can also be listed from the R Console:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A tutorial can be launched directly from the Console. For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A2"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Replace <code>"A2"</code> with <code>"A3"</code>, <code>"A4"</code>, …, <code>"A8"</code> to launch another tutorial.</p>
+<p><br>
+</p>
+</section>
+<section id="how-the-tutorials-relate-to-the-textbook" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="how-the-tutorials-relate-to-the-textbook"><span class="header-section-number">B.3</span> How the tutorials relate to the textbook</h2>
+<p>The tutorial labels A2–A8 reflect the assignment sequence used in the <em>Experimental Design in Biomedical Engineering</em> course. Outside the course, the tutorials can be completed simply as a sequence of guided learning activities.</p>
+<p>Each tutorial focuses on a specific stage of the experimental-data workflow, using stabilometric data as example.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tutorial</th>
+<th>Main learning focus</th>
+<th>Closely related textbook material</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A2</strong></td>
+<td>Process raw CoG recordings and construct a stabilometric data frame</td>
+<td>R foundations, file organisation, importing data, and automated raw-data processing</td>
+</tr>
+<tr class="even">
+<td><strong>A3</strong></td>
+<td>Visualise stabilometric data using <code>ggplot2</code></td>
+<td>Data presentation and graphical representation</td>
+</tr>
+<tr class="odd">
+<td><strong>A4</strong></td>
+<td>Merge participant information and derive new variables</td>
+<td>Data manipulation and preparation</td>
+</tr>
+<tr class="even">
+<td><strong>A5</strong></td>
+<td>Calculate sample size and statistical power</td>
+<td>Statistical power, Type I and Type II errors, and sample-size planning</td>
+</tr>
+<tr class="odd">
+<td><strong>A6</strong></td>
+<td>Compute paired and independent two-group tests</td>
+<td>Two-group designs and hypothesis testing</td>
+</tr>
+<tr class="even">
+<td><strong>A7</strong></td>
+<td>Compute repeated-measures ANOVA</td>
+<td>Repeated-measures designs, main effects, and interactions</td>
+</tr>
+<tr class="odd">
+<td><strong>A8</strong></td>
+<td>Examine anthropometric associations and normalisation</td>
+<td>Regression, covariates, and adjusted group comparisons</td>
+</tr>
+</tbody>
+</table>
+<p>The tutorials are intended to complement, rather than replace, the explanations in the textbook. The book develops the rationale, equations, assumptions, and interpretation of each method, while the tutorials provide a guided environment in which the corresponding workflow can be implemented in R.</p>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a2-processing-raw-cog-data" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="tutorial-a2-processing-raw-cog-data"><span class="header-section-number">B.4</span> Tutorial A2 — Processing Raw CoG Data</h2>
+<p>The A2 tutorial reproduces a realistic raw-data workflow in which recordings are organised by participant and experimental condition.</p>
+<p>Readers learn to:</p>
+<ul>
+<li>navigate a structured collection of participant folders;</li>
+<li>identify individual raw recordings;</li>
+<li>import Phyphox data and metadata into R;</li>
+<li>use a supplied function to process CoG recordings;</li>
+<li>create one processed observation;</li>
+<li>iterate over multiple files;</li>
+<li>validate the resulting data frame;</li>
+<li>export the complete dataset to Excel.</li>
+</ul>
+<p>A central goal of the tutorial is to illustrate the transition from raw time-series recordings to an analysis-ready data frame.</p>
+<p>The example dataset is deliberately smaller than a full experimental dataset, but its directory structure and workflow mimic those used in a real analysis project. The first assignment (A1), indeed, requires students to upload experimental CoG data collected with their smartphone as outlined in <a href="13_phyphox_posture_experiment.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A2"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Transfer to your own project">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Transfer to your own project
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The tutorial uses controlled example data. After completing it, the intended next step is to reproduce the same logic in an independent RStudio Project containing your own recordings or another suitably structured dataset.</em></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a3-visualising-stabilometric-data" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="tutorial-a3-visualising-stabilometric-data"><span class="header-section-number">B.5</span> Tutorial A3 — Visualising Stabilometric Data</h2>
+<p>The A3 tutorial introduces the layered structure of <code>ggplot2</code> through a guided boxplot example.</p>
+<p>Readers progressively learn to:</p>
+<ul>
+<li>translate a research question into plotting decisions;</li>
+<li>identify the observations and variables required for a graph;</li>
+<li>create a boxplot;</li>
+<li>overlay individual observations using jitter;</li>
+<li>map colour and fill to categorical variables;</li>
+<li>adjust box widths and point positions;</li>
+<li>control category order and axis tick marks;</li>
+<li>add meaningful labels and physical units;</li>
+<li>save publication-ready figures.</li>
+</ul>
+<p>The tutorial also distinguishes between mapping a graphical property to a variable inside <code>aes()</code> and setting a constant graphical property outside <code>aes()</code>.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A3"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a4-merging-and-transforming-data" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="tutorial-a4-merging-and-transforming-data"><span class="header-section-number">B.6</span> Tutorial A4 — Merging and Transforming Data</h2>
+<p>The A4 tutorial focuses on combining information originating from different sources and preparing an integrated dataset for statistical analysis.</p>
+<p>Readers learn to:</p>
+<ul>
+<li>inspect two data frames before merging them;</li>
+<li>identify the variable that uniquely links observations across datasets;</li>
+<li>merge stabilometric data with participant information;</li>
+<li>verify that observations have been matched correctly;</li>
+<li>derive a new numerical variable from existing columns;</li>
+<li>inspect and validate the resulting data frame.</li>
+</ul>
+<p>This tutorial reinforces the principle that statistical analysis should begin only after the structure and integrity of the dataset have been checked.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A4"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a5-sample-size-and-statistical-power" class="level2" data-number="B.7">
+<h2 data-number="B.7" class="anchored" data-anchor-id="tutorial-a5-sample-size-and-statistical-power"><span class="header-section-number">B.7</span> Tutorial A5 — Sample Size and Statistical Power</h2>
+<p>The A5 tutorial develops the relationship between effect size, variability, sample size, significance level, and statistical power.</p>
+<p>Readers learn to:</p>
+<ul>
+<li>identify the quantities required for a sample-size calculation;</li>
+<li>estimate the sample size required to detect a meaningful effect;</li>
+<li>calculate the statistical power associated with an available sample;</li>
+<li>interpret how changes in effect size, variability, and sample size influence power.</li>
+</ul>
+<p>Where appropriate, the tutorial contrasts calculations developed explicitly from statistical principles with results obtained using dedicated R functions.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A5"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a6-computing-two-group-tests" class="level2" data-number="B.8">
+<h2 data-number="B.8" class="anchored" data-anchor-id="tutorial-a6-computing-two-group-tests"><span class="header-section-number">B.8</span> Tutorial A6 — Computing Two-Group Tests</h2>
+<p>The A6 tutorial develops the logic of paired and independent two-group comparisons directly from the underlying equations.</p>
+<p>Readers learn to:</p>
+<ul>
+<li>distinguish paired from independent designs;</li>
+<li>formulate the null and alternative hypotheses;</li>
+<li>compute the components of the corresponding t statistic;</li>
+<li>understand the role of variability and sample size;</li>
+<li>interpret the resulting test statistic and p-value.</li>
+</ul>
+<p>The emphasis is on understanding how the test is constructed rather than treating a built-in hypothesis-testing function as a black box.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A6"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a7-computing-repeated-measures-anova" class="level2" data-number="B.9">
+<h2 data-number="B.9" class="anchored" data-anchor-id="tutorial-a7-computing-repeated-measures-anova"><span class="header-section-number">B.9</span> Tutorial A7 — Computing Repeated-Measures ANOVA</h2>
+<p>The A7 tutorial extends the same computational reasoning to repeated-measures analysis of variance.</p>
+<p>Readers first analyze one repeated factor and then extend the workflow to a design involving two repeated factors.</p>
+<p>The tutorial guides readers through:</p>
+<ul>
+<li>partitioning variability into the relevant sums of squares;</li>
+<li>computing mean squares and F statistics;</li>
+<li>distinguishing subject-related variability from experimental effects;</li>
+<li>interpreting main effects;</li>
+<li>interpreting interactions between repeated factors.</li>
+</ul>
+<p>The objective is to make the structure of ANOVA transparent before relying on higher-level modelling functions.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A7"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="tutorial-a8-anthropometric-normalisation-of-cog-speed" class="level2" data-number="B.10">
+<h2 data-number="B.10" class="anchored" data-anchor-id="tutorial-a8-anthropometric-normalisation-of-cog-speed"><span class="header-section-number">B.10</span> Tutorial A8 — Anthropometric Normalisation of CoG Speed</h2>
+<p>The A8 tutorial examines how an apparent between-group difference in postural sway may be influenced by anthropometric characteristics.</p>
+<p>Readers learn to:</p>
+<ul>
+<li>examine associations between CoG speed and anthropometric variables;</li>
+<li>fit and interpret simple and multiple regression models;</li>
+<li>decide whether an anthropometric variable is meaningfully associated with the outcome;</li>
+<li>remove relevant linear trends when appropriate;</li>
+<li>compare unadjusted and adjusted data;</li>
+<li>interpret whether a group difference persists after accounting for anthropometry.</li>
+</ul>
+<p>The tutorial therefore connects regression analysis with the broader problem of interpreting group differences in the presence of potentially relevant covariates.</p>
+<p>Launch the tutorial with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A8"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"ExpDesignBioEngTutorials"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br>
+</p>
+</section>
+<section id="example-data-and-reproducibility" class="level2" data-number="B.11">
+<h2 data-number="B.11" class="anchored" data-anchor-id="example-data-and-reproducibility"><span class="header-section-number">B.11</span> Example data and reproducibility</h2>
+<p>The tutorials use example datasets distributed with the package.</p>
+<p>These datasets are designed to reproduce the structure of realistic experimental workflows while remaining small enough for guided practice. In particular:</p>
+<ul>
+<li>A2 includes a miniature project containing participant folders, raw recordings, metadata, and supporting functions;</li>
+<li>later tutorials use structured example datasets that reproduce the variables and experimental factors required for the corresponding analyses;</li>
+<li>tutorial data are independent of the submissions produced by students enrolled in the course;</li>
+<li>all examples can be completed without access to Moodle.</li>
+</ul>
+<p>The tutorials follow a <em>transfer-oriented</em> learning strategy:</p>
 <ol type="1">
-<li>Studying the control of bipedal standing posture is of major social and clinical relevance.</li>
-<li>Posture-related data can be collected relatively easily, providing an ideal framework for applying the statistical methods presented in this course.</li>
+<li>understand the workflow using controlled example data;</li>
+<li>practice each step interactively;</li>
+<li>reproduce the same reasoning in an independent analysis project.</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="This chapter...">
+<p>This distinction is important. Completing a tutorial demonstrates the workflow, but meaningful learning occurs when the same logic can subsequently be applied to a new dataset.</p>
+</section>
+<section id="relationship-to-the-course-assignments" class="level2" data-number="B.12">
+<h2 data-number="B.12" class="anchored" data-anchor-id="relationship-to-the-course-assignments"><span class="header-section-number">B.12</span> Relationship to the course assignments</h2>
+<p>The tutorial labels A2–A8 correspond to the assignment sequence used in the <em>Experimental Design in Biomedical Engineering</em> course.</p>
+<p>For students enrolled in the course, Moodle remains the authoritative source for:</p>
+<ul>
+<li>assignment requirements;</li>
+<li>deadlines;</li>
+<li>assessment criteria;</li>
+<li>submission procedures;</li>
+<li>penalties associated with incomplete or incorrect submissions.</li>
+</ul>
+<p>The interactive tutorials themselves are <em>not graded</em>. They are strongly recommended guided learning activities designed to prepare students for the corresponding assignments.</p>
+<p>Readers using this textbook independently do not need access to Moodle. Each tutorial can be completed using the example data distributed with the package and may subsequently be adapted to other datasets, teaching activities, or research projects.</p>
+</section>
+<section id="package-versions-and-updates" class="level2" data-number="B.13">
+<h2 data-number="B.13" class="anchored" data-anchor-id="package-versions-and-updates"><span class="header-section-number">B.13</span> Package versions and updates</h2>
+<p>This edition of the textbook refers to version <strong>1.0.0</strong> of <code>ExpDesignBioEngTutorials</code>.</p>
+<p>The installed version can be checked with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"ExpDesignBioEngTutorials"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For students formally enrolled in the course, the version specified in Moodle should always be used.</p>
+<p>Independent readers may consult the GitHub repository for more recent releases:</p>
+<p><a href="https://github.com/taian-vieira/ExpDesignBioEngTutorials/releases" target="_blank">https://github.com/taian-vieira/ExpDesignBioEngTutorials/releases</a></p>
+<p>A newer release may contain corrections, improved exercises, or additional documentation. When reproducibility is important, install an explicit tagged version rather than the current development branch.</p>
+<p><br>
+</p>
+</section>
+<section id="using-the-tutorials-in-other-courses" class="level2" data-number="B.14">
+<h2 data-number="B.14" class="anchored" data-anchor-id="using-the-tutorials-in-other-courses"><span class="header-section-number">B.14</span> Using the tutorials in other courses</h2>
+<p>The tutorials and example data can also be used outside the original course.</p>
+<p>An instructor may, for example:</p>
+<ul>
+<li>adopt the tutorials as guided laboratory activities;</li>
+<li>use only a subset of the A2–A8 sequence;</li>
+<li>combine the tutorials with locally developed assignments;</li>
+<li>use the example datasets for demonstrations;</li>
+<li>ask students to transfer the workflows to independent experimental data.</li>
+</ul>
+<p>The tutorial package is publicly available from GitHub. Reuse should follow the licence specified in the repository.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Suggested use for independent readers">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>This chapter…
+<span class="screen-reader-only">Tip</span>Suggested use for independent readers
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>…provides the physiological basis for understanding the sensory-motor components involved in the control of human standing posture.</em></p>
+<p><em>A useful sequence is to read the relevant textbook chapter first, complete the corresponding interactive tutorial, and then reproduce the workflow with a dataset of your own.</em></p>
+<p><em>The tutorials are most valuable when they are used as a bridge between understanding a method and applying it independently.</em></p>
 </div>
 </div>
-<p><br>
-</p>
-<section id="why-study-posture-control" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="why-study-posture-control"><span class="header-section-number">1.1</span> Why Study Posture Control?</h2>
-<p>Although some individuals exhibit exceptional balance abilities, others struggle to stand upright without external support. A limited ability to control standing posture compromises the performance of everyday activities and increases the risk of unintentionally coming to rest on the ground—that is, of falling.</p>
-<p>Not surprisingly, the World Health Organization identifies falls as the second leading cause of unintentional injury deaths worldwide.</p>
-<p>Falls occur more frequently in older adults. Even when not severe enough to require medical attention, falls may have important psychological consequences. For example, <a href="https://academic.oup.com/ageing/article-lookup/doi/10.1093/ageing/26.3.189">Vellas and colleagues</a> <span class="citation" data-cites="vellas97">[<a href="references.html#ref-vellas97" role="doc-biblioref">1</a>]</span> reported that approximately one-third of older adults develop a fear of falling after experiencing a fall.</p>
-<p>While falls may result from environmental factors, there also appears to be a substantial intrinsic component associated with postural control. <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736%2812%2961263-X/fulltext">Robinovitch and coworkers</a> <span class="citation" data-cites="robinovitch13">[<a href="references.html#ref-robinovitch13" role="doc-biblioref">2</a>]</span> conducted a large observational study in Canadian long-term care facilities and reported that a considerable proportion of falls were attributable to internal causes rather than external hazards.</p>
-<p>Importantly, this evidence does not imply a direct causal effect of age. Aging alone does not appear to reduce postural stability below the threshold associated with falling (<a href="#fig-1-1-1" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>). <a href="https://journals.humankinetics.com/view/journals/jab/15/1/article-p64.xml">Shupert and Horak</a> <span class="citation" data-cites="shupert99">[<a href="references.html#ref-shupert99" role="doc-biblioref">3</a>]</span> proposed that aging accounts for only a modest decline in postural stability. However, pathological conditions affecting the sensory-motor system<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> may accelerate this decline and substantially increase fall risk.</p>
-<div id="fig-1-1-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_1/ch_1/1-1-1_age-and-balance.png" class="img-fluid figure-img" style="width:80.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.1: Plausible model explaining how pathologies may accelerate the decline of postural stability with age. Figure created based on the age-model reported by Shuppert and Horak <span class="citation" data-cites="shupert99">[<a href="references.html#ref-shupert99" role="doc-biblioref">3</a>]</span>
-</figcaption>
-</figure>
-</div>
-<p>Understanding the mechanisms underlying falls is not the only reason for studying posture control. Postural control is a ubiquitous requirement of daily life. Without it, we would be unable to perform actions as simple as sitting, standing, walking, catching a ball, swimming, or reading a book. Unlike voluntary movements of the upper limbs, however, postural control operates largely outside conscious awareness. We rarely think about the postural requirements imposed by a task, yet these requirements must constantly be met.</p>
-<p><br>
-</p>
-</section>
-<section id="meeting-postural-demands-provides-evidence-of-postural-control" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="meeting-postural-demands-provides-evidence-of-postural-control"><span class="header-section-number">1.2</span> Meeting Postural Demands Provides Evidence of Postural Control</h2>
-<p>Consider holding a large box while standing. Upper-limb muscles must generate sufficient force to support the box, with the finger flexors and elbow flexors playing a primary role. At the same time, the box imposes substantial postural demands. Its weight generates forward-rotating moments about the ankle, hip, and trunk joints. If these moments were not compensated for, the body would be pushed forward by gravity and a fall could occur.</p>
-<p>Our sensory-motor system continuously meets these demands. Consequently, muscles that are not directly involved in holding the box are activated to preserve stability, often without entering conscious awareness.</p>
-<p>The need for postural control lies at the foundation of motor development. Following <a href="#fig-1-1-2" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>, inspired by the work of <a href="https://catalog.nlm.nih.gov/discovery/fulldisplay/alma9912898823406676/01NLM_INST:01NLM_INST">Shumway-Cook and Wollacott</a> <span class="citation" data-cites="shumway-cook07">[<a href="references.html#ref-shumway-cook07" role="doc-biblioref">4</a>]</span>, control of head posture in space, typically achieved around two months of age, develops before effective trunk control emerges. As coordinated control of the head and trunk matures, new functional skills such as sitting and crawling become possible. Independent standing represents a later developmental milestone, requiring coordinated activation of numerous muscles across multiple body segments.</p>
-<p>Thus, the development of posture can be viewed as a progressive maturation of both segmental control and inter-segmental coordination.</p>
-<div id="fig-1-1-2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_1/ch_1/1-1-2_posture-development.png" class="img-fluid figure-img" style="width:80.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.2: Maturation of the inter-segmental control of posture. AI-generated illustration created with ChatGPT (OpenAI), 2026.
-</figcaption>
-</figure>
-</div>
-<p><br>
-</p>
-</section>
-<section id="the-definition-of-postural-control" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="the-definition-of-postural-control"><span class="header-section-number">1.3</span> The Definition of Postural Control</h2>
-<p>Posture refers to the configuration of body segments in space. Postural control can therefore be defined as the <strong>maintenance of the position and orientation of body segments relative to one another and to the environment</strong>.</p>
-<p>It is useful to distinguish posture from balance. Posture describes body configuration, whereas balance (or postural stability) refers to the ability to maintain the body’s center of mass within the limits imposed by the base of support. Postural control encompasses the processes through which both posture and balance are achieved.</p>
-<p>Postural control is highly dynamic and depends on task demands, environmental conditions, and individual characteristics.</p>
-<p>Consider the task of <em>reading a book while standing</em>. Upper-limb muscles are required to hold the book in a comfortable reading position, whereas lower-limb and trunk muscles are required to maintain the upright stance. The postural demands associated with this task change according to:</p>
-<ul>
-<li><strong>Task:</strong> reading while seated imposes different requirements on the lower limbs and trunk.</li>
-<li><strong>Environment:</strong> reading while standing on a moving bus increases stability demands because external perturbations must be compensated for.</li>
-<li><strong>Individual:</strong> individuals with impaired postural control may not be able to read comfortably while standing.</li>
-</ul>
-<p>While the first two aspects are associated with external factors, the latter is intrinsic to the individual and reflects that person’s ability to control posture.</p>
-<p><br>
-</p>
-<section id="there-is-no-single-system-for-postural-control" class="level3">
-<h3 class="anchored" data-anchor-id="there-is-no-single-system-for-postural-control">There Is No Single System for Postural Control</h3>
-<p>Postural control does not rely on a single physiological system. Rather, it emerges from the coordinated interaction of multiple sensory and motor systems.</p>
-<p>Physiological receptors provide information about body position, movement, and orientation. Muscles act as mechanical actuators, generating forces and moments that stabilize the body. Neural structures integrate sensory information and coordinate the activation of appropriate muscles in response to changing demands.</p>
-<p>Several theories have been proposed to explain how these processes are organized. A detailed discussion of such theories is beyond the scope of this course. Instead, our goal is to provide the physiological background necessary for understanding how orientation-related signals can be measured and analyzed experimentally.</p>
-<p>The following sections provide a brief overview of the motor and sensory components involved in postural control.</p>
-<p><br>
-</p>
-</section>
-<section id="regulation-of-muscle-force" class="level3">
-<h3 class="anchored" data-anchor-id="regulation-of-muscle-force">Regulation of Muscle Force</h3>
-<p>Active muscle force production is essential for maintaining upright posture. Force generation results from a cascade of electrochemical events occurring within the neuromuscular system.</p>
-<p>At the cellular level, force is generated through interactions between the protein filaments actin and myosin within muscle fibers. These interactions are triggered by action potentials. When action potentials generated in and propagated along a motoneuron reach the neuromuscular junction, action potentials are subsequently generated within the muscle fibers it innervates.</p>
-<p>These muscle-fiber action potentials propagate along the membrane and trigger contraction of individual sarcomeres, the fundamental contractile units of skeletal muscle. Tension rises rapidly following excitation and gradually declines as the membrane returns to its resting state.</p>
-<p>The force response elicited by a single action potential is known as a twitch. A twitch is characterized by a relatively rapid contraction phase followed by a slower relaxation phase (<a href="#fig-1-1-3" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). Depending on the muscle considered, the complete twitch response may last several hundred milliseconds.</p>
-<div id="fig-1-1-3" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_1/ch_1/1-1-3_single-twitch.gif" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.3: Schematic animation illustrating the generation of muscle force in response to a single motorneuron action potential.
-</figcaption>
-</figure>
-</div>
-<p>By itself, the functional utility of a single twitch is limited. To meet the force requirements associated with posture and movement, the nervous system regulates force through two primary mechanisms.</p>
-<p><strong>Temporal Summation (Rate Coding).</strong> Force can be increased by reducing the interval between successive action potentials. As the discharge rate of a motoneuron increases, individual twitches overlap and sum, producing progressively larger forces (cf. <a href="#fig-1-1-4" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>).</p>
-<div id="fig-1-1-4" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="columns">
-<div class="column" style="width:50%;">
-<div style="text-align: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../include/images/part_1/ch_1/1-1-4-1_single-twitch-low-rate.gif" class="img-fluid figure-img"></p>
-<figcaption>Low discharge rate</figcaption>
-</figure>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div style="text-align: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../include/images/part_1/ch_1/1-1-4-2_tetanus.gif" class="img-fluid figure-img"></p>
-<figcaption>High discharge rate</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.4: Force response to trains of action potentials generated at different rates.
-</figcaption>
-</figure>
-</div>
-<p><strong>Spatial Summation (Recruitment).</strong> Force can also be increased by recruiting additional motoneurons. Because each motoneuron activates a set of muscle fibers, with motoneuron and the served muscle fibers being collectively known as a single motor unit, recruitment increases the number of fibers contributing to force production (cf. <a href="#fig-1-1-5" class="quarto-xref">Figure&nbsp;<span>1.5</span></a>).</p>
-<div id="fig-1-1-5" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_1/ch_1/1-1-5_recruitment.gif" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.5: Example of force modulation in response to the recruitment of motorneurons
-</figcaption>
-</figure>
-</div>
-<p>Together, rate coding and recruitment provide the nervous system with powerful mechanisms for regulating muscle force over a wide range of functional demands.</p>
-<p><br>
-</p>
-</section>
-<section id="sensing-posture" class="level3">
-<h3 class="anchored" data-anchor-id="sensing-posture">Sensing Posture</h3>
-<p>Generating force is not sufficient for controlling posture. The nervous system must also determine when, where, and how much force should be applied. This requires continuous information about body position and orientation.</p>
-<p>Before discussing the sensory systems involved in postural control, it is useful to consider the simple analogy shown in <a href="#fig-1-1-6" class="quarto-xref">Figure&nbsp;<span>1.6</span></a>. Imagine a child playing with an articulated doll and attempting to place it in a standing position. The child first manipulates the doll’s limbs and trunk until the desired posture is achieved. At this stage, the orientation goal has been met: the body segments have been arranged in the intended configuration.</p>
-<p>The child then releases the doll and observes whether it remains standing. If the doll falls, the posture must be adjusted and the process repeated. In this way, achieving a stable standing posture becomes a trial-and-error process. Visual information allows the child to determine whether the desired posture has been maintained, while the hands provide the forces required to modify the orientation of the doll’s segments.</p>
-<div id="fig-1-1-6" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_1/ch_1/1-1-6_doll-analogy.png" class="img-fluid figure-img" style="width:70.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.6: Analogy for understanding the key aspects involved in posture control, from sensing to acting. AI-generated illustration created with ChatGPT (OpenAI), 2026.
-</figcaption>
-</figure>
-</div>
-<p>Although human postural control is vastly more sophisticated, the same fundamental principles apply. The nervous system must</p>
-<ul>
-<li>continuously estimate the orientation of body segments in space through sensory signals that provide information about body orientation and movement.</li>
-<li>coordinate the contraction of synergistic muscles to preserve stability.</li>
-</ul>
-<p>The main difference is that, rather than relying solely on vision and conscious trial-and-error, the body integrates information from multiple sensory systems and automatically adjusts muscle activity to meet postural demands.</p>
-<p>Three major sensory systems contribute to postural control:</p>
-<ul>
-<li><strong>Proprioceptive system</strong>, which provides information about joint position, muscle length, muscle force, and segment orientation. Based on the proprioceptive feedback, the nervous system is informed about the relative position and orientation of segments.</li>
-<li><strong>Vestibular system</strong>, which provides information about head motion and orientation relative to gravity.</li>
-<li><strong>Visual system</strong>, which provides information about the position and movement of the body relative to the surrounding environment.</li>
-</ul>
-<p>Postural control depends on the integration of these sensory signals. The relative contribution of each source varies according to task demands and environmental conditions. For example, visual information becomes particularly important when navigating complex environments, whereas proprioceptive information is critical when standing on stable ground. The importance of each of these sensory channels, as well as to evaluate them, will be covered in the following chapter.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><em>Like the child in <a href="#fig-1-1-6" class="quarto-xref">Figure&nbsp;<span>1.6</span></a>, the nervous system must: 1) achieve a desired orientation of body segments and; 2) maintain that orientation against gravity.</em></p>
-<p><em>Sensory information (vision, proprioception, vestibular) provides feedback, and motor actions generate the forces needed to preserve stability.</em></p>
-</div>
-</div>
-<p><br>
-</p>
-</section>
-</section>
-<section id="evidence-of-posture-control" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="evidence-of-posture-control"><span class="header-section-number">1.4</span> Evidence of Posture Control</h2>
-<p>Even though there is no specific physiological system dedicated to the control of posture, the existence of distinct postural strategies is well established. These strategies, defined as coordinated patterns of activation across groups of synergistic muscles, support the notion that postural control is an intrinsic component of the sensory-motor system. Evidence for postural strategies stems primarily from perturbation studies, in which systematic or random external disturbances are applied to the standing body.</p>
-<p><br>
-</p>
-<section id="postural-strategies" class="level3">
-<h3 class="anchored" data-anchor-id="postural-strategies">Postural Strategies</h3>
-<p>The classic experiments conducted by Lewis Nashner provided pivotal contributions to our understanding of postural control. <a href="https://link.springer.com/article/10.1007/BF00237855">Nashner</a> <span class="citation" data-cites="nashner97">[<a href="references.html#ref-nashner97" role="doc-biblioref">5</a>]</span> observed that specific and reproducible sequences of muscle activation emerged in response to perturbations applied to the support surface. For example, forward translation of the support surface resulted in a disto-proximal sequence of muscle activation, beginning with the tibialis anterior and followed by the quadriceps muscles. Perturbations in the opposite direction elicited a temporally similar sequence of responses in the posterior muscles.</p>
-<p>A legitimate question arises: was this coordinated muscle activity simply the result of stretch reflexes triggered sequentially as muscles were progressively stretched by the perturbation, starting from the most distal muscles? Or did it reflect an internally organized postural strategy, generated in response to a predictable perturbation?</p>
-<p>In his study, Nashner <span class="citation" data-cites="nashner97">[<a href="references.html#ref-nashner97" role="doc-biblioref">5</a>]</span> addressed this question by applying both translational and rotational perturbations of the support surface. Because rotational perturbations primarily stretched the ankle dorsiflexor muscles, only these muscles would be expected to respond if stretch reflexes alone accounted for the postural corrections observed during surface translation. Instead, Nashner observed that the sequential disto-proximal response was largely invariant to the type of perturbation, suggesting that such inter-segmental coordination of muscle activity is a hallmark of postural control.</p>
-<p>The postural strategy reported by Nashner has proven to be clinically relevant. For example, it has successfully distinguished healthy individuals from patients with neurological disorders. As reported by <a href="https://www.sciencedirect.com/science/article/abs/pii/0022510X9290111W">Horak and colleagues</a> <span class="citation" data-cites="horak92">[<a href="references.html#ref-horak92" role="doc-biblioref">6</a>]</span>, neurological patients respond to translational surface perturbations by stiffening the ankle and hip joints through muscle co-contraction<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p><br>
-</p>
-</section>
-<section id="ankle-hip-and-step-strategies" class="level3">
-<h3 class="anchored" data-anchor-id="ankle-hip-and-step-strategies">Ankle, Hip, and Step Strategies</h3>
-<p>Depending on the characteristics of the perturbation and the support surface, different postural strategies may be employed (cf. <a href="#fig-1-1-7" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>).</p>
-<p>When perturbations are small and the support surface is stable, muscles are activated in a disto-proximal sequence. Ankle muscles are activated first, followed by hip and trunk muscles. As a consequence, the body moves as a relatively rigid segment, resembling an inverted pendulum pivoted around the ankle joints. The direction of motion, forward or backward, depends on the direction and nature of the perturbation. <em>This pendular movement of the body around the ankle characterizes the <strong>ankle strategy</strong></em> (panel 1 in <a href="#fig-1-1-7" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>).</p>
-<p>When standing on a narrow or compliant support surface, fast responses are required to preserve stability. Ankle-generated corrections are intrinsically slow and may become ineffective. In these circumstances, the coordinated pattern of muscle activation reverses direction, proceeding from proximal to distal muscles. As a result, movement occurs predominantly around the hip joint. <em>The forward and backward motion of the trunk about the hip joint, achieved through a proximo-distal pattern of muscle activation, defines the <strong>hip strategy</strong></em> (panel 2 in <a href="#fig-1-1-7" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>).</p>
-<p>Finally, perturbations may exceed the corrective capabilities of both the ankle and hip strategies. In such cases, stability is restored by changing the base of support through a step. <em>The <strong>step strategy</strong> is characterized by a movement of one or both legs in the direction of the perturbation, to avoid falling</em> (panel 3 in <a href="#fig-1-1-7" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>).</p>
-<div id="fig-1-1-7" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-1-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../include/images/part_1/ch_1/1-1-7_postural-strategies.png" class="img-fluid figure-img" style="width:90.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-1-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.7: Well-established postural strategies used to preserve stability. AI-generated illustration created with ChatGPT (OpenAI), 2026.
-</figcaption>
-</figure>
-</div>
-<p><br>
-</p>
-</section>
-</section>
-<section id="assessing-posture-control" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="assessing-posture-control"><span class="header-section-number">1.5</span> Assessing Posture Control</h2>
-<p>While perturbation-based experiments have greatly contributed to our understanding of postural stabilization mechanisms, postural control is most commonly assessed during quiet standing.</p>
-<p>Because postural control relies on continuously estimating body orientation in space, many experimental studies focus on measuring variables related to body sway and segment orientation. These measurements provide indirect information about the sensory-motor processes underlying posture control and will form the basis of the experimental analyses developed in the following chapters.</p>
 
 
-<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-vellas97" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">VELLAS BJ, WAYNE SJ, ROMERO LJ, BAUMGARTNER RN, GARRY PJ. Fear of falling and restriction of mobility in elderly fallers. Age and Ageing 1997;26:189–93. <a href="https://doi.org/10.1093/ageing/26.3.189">https://doi.org/10.1093/ageing/26.3.189</a>.</div>
-</div>
-<div id="ref-robinovitch13" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Robinovitch SN, Feldman F, Yang Y, Schonnop R, Leung PM, Sarraf T, et al. Video capture of the circumstances of falls in elderly people residing in long-term care: An observational study. The Lancet 2013;381:47–54. <a href="https://doi.org/10.1016/s0140-6736(12)61263-x">https://doi.org/10.1016/s0140-6736(12)61263-x</a>.</div>
-</div>
-<div id="ref-shupert99" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Shupert CL, Horak FB. Adaptation of postural control in normal and pathologic aging: Implications for fall prevention programs. Journal of Applied Biomechanics 1999;15:64–74. <a href="https://doi.org/10.1123/jab.15.1.64">https://doi.org/10.1123/jab.15.1.64</a>.</div>
-</div>
-<div id="ref-shumway-cook07" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Shumway-Cook A, Woollacott MH. Motor control : Translating research into clinical practice. 3rd ed. Philadelphia: Lippincott Williams &amp; Wilkins; 2007.</div>
-</div>
-<div id="ref-nashner97" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Nashner LM. Fixed patterns of rapid postural responses among leg muscles during stance. Experimental Brain Research 1977;30. <a href="https://doi.org/10.1007/bf00237855">https://doi.org/10.1007/bf00237855</a>.</div>
-</div>
-<div id="ref-horak92" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Horak FB, Nutt JG, Nashner LM. Postural inflexibility in parkinsonian subjects. Journal of the Neurological Sciences 1992;111:46–58. <a href="https://doi.org/10.1016/0022-510x(92)90111-w">https://doi.org/10.1016/0022-510x(92)90111-w</a>.</div>
-</div>
-</div>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p><em>it comprises physiological receptors for sensing and neuromuscular actutators, motor units, for force production.</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><em>simultaneous contraction of muscles producing forces in opposite directions across a joint.</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1639,14 +1768,11 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/0_introduction.html" class="pagination-link" aria-label="Introduction to Experimental Design">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to Experimental Design</span>
+      <a href="../chapters/a1_ethical_considerations.html" class="pagination-link" aria-label="Ethical Considerations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/12_stabilometry.html" class="pagination-link" aria-label="Stabilometry">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stabilometry</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

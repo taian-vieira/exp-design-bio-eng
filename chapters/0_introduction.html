@@ -324,6 +324,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/a2_interactive_r_tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Interactive R Tutorials</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -404,8 +410,8 @@ div.csl-indent {
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p><strong>Lifestyle is a confounder because:</strong></p>
-<div id="webex-42ecd3f3e70c9599bda816442665b828" class="webex-radiogroup" data-answer="bwJJU0gDSgI4">
-<label><input type="radio" autocomplete="off" name="42ecd3f3e70c9599bda816442665b828"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="42ecd3f3e70c9599bda816442665b828"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="42ecd3f3e70c9599bda816442665b828"><span><em>people drinking coffee are physically inactive</em></span></label><label><input type="radio" autocomplete="off" name="42ecd3f3e70c9599bda816442665b828"><span><em>rest heart rate depends on lifestyle</em></span></label>
+<div id="webex-0a5464f15f65af5a4eeab7bfb63ca88c" class="webex-radiogroup" data-answer="a1EZBBoESgBo">
+<label><input type="radio" autocomplete="off" name="0a5464f15f65af5a4eeab7bfb63ca88c"><span><em>people drinking coffee are physically inactive</em></span></label><label><input type="radio" autocomplete="off" name="0a5464f15f65af5a4eeab7bfb63ca88c"><span><em>exercising is beneficial to our health</em></span></label><label><input type="radio" autocomplete="off" name="0a5464f15f65af5a4eeab7bfb63ca88c"><span><em>coffee affects our mood</em></span></label><label><input type="radio" autocomplete="off" name="0a5464f15f65af5a4eeab7bfb63ca88c"><span><em>rest heart rate depends on lifestyle</em></span></label>
 </div>
 </div>
 </div>
@@ -1269,6 +1275,11 @@ window.onload = function() {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

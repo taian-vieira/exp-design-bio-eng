@@ -378,6 +378,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/a2_interactive_r_tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Interactive R Tutorials</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -839,8 +845,8 @@ Table&nbsp;6.1: Interactive table illustrating how a data frame looks.
 </figcaption>
 <div aria-describedby="tbl-2-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e1f96af30ff93fd3902d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e1f96af30ff93fd3902d">{"x":{"filter":"none","vertical":false,"data":[["observation  1","observation  2","observation  3","observation  4","observation  5"],["Sarah","Rob","Ted","Jessica","John"],["female","male","male","female","male"],[31,25,28,47,30],[6.1,5.2,5.7,7.1,6.3],[false,false,false,true,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th><\/th>\n      <th>Subject<\/th>\n      <th>Gender<\/th>\n      <th>Age<\/th>\n      <th>$v_x \\text{ (m/s)}$<\/th>\n      <th>Parkinsonian<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"c..observation..1....observation..2....observation..3....observation..4...","targets":0},{"name":"c..Sarah....Rob....Ted....Jessica....John..","targets":1},{"name":"structure.c.1L..2L..2L..1L..2L...levels...c..female....male....class....factor..","targets":2},{"name":"c.31L..25L..28L..47L..30L.","targets":3},{"name":"c.6.1..5.2..5.7..7.1..6.3.","targets":4},{"name":"c.FALSE..FALSE..FALSE..TRUE..FALSE.","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b7760fe1d098a9c4d516" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b7760fe1d098a9c4d516">{"x":{"filter":"none","vertical":false,"data":[["observation  1","observation  2","observation  3","observation  4","observation  5"],["Sarah","Rob","Ted","Jessica","John"],["female","male","male","female","male"],[31,25,28,47,30],[6.1,5.2,5.7,7.1,6.3],[false,false,false,true,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th><\/th>\n      <th>Subject<\/th>\n      <th>Gender<\/th>\n      <th>Age<\/th>\n      <th>$v_x \\text{ (m/s)}$<\/th>\n      <th>Parkinsonian<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","ordering":false,"columnDefs":[{"className":"dt-center","targets":"_all"},{"width":"25%","targets":"_all"},{"name":"c..observation..1....observation..2....observation..3....observation..4...","targets":0},{"name":"c..Sarah....Rob....Ted....Jessica....John..","targets":1},{"name":"structure.c.1L..2L..2L..1L..2L...levels...c..female....male....class....factor..","targets":2},{"name":"c.31L..25L..28L..47L..30L.","targets":3},{"name":"c.6.1..5.2..5.7..7.1..6.3.","targets":4},{"name":"c.FALSE..FALSE..FALSE..TRUE..FALSE.","targets":5}],"drawCallback":"function(settings) {MathJax.typeset();}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.drawCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -1789,6 +1795,11 @@ window.onload = function() {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

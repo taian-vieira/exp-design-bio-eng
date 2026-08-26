@@ -353,6 +353,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Ethical Considerations</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/a2_interactive_r_tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Interactive R Tutorials</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -404,7 +410,7 @@ window.Quarto = {
 
 
 <p>This part of the course provides students with the opportunity to work with their own experimental data. The selected experimental paradigm is postural control. Briefly, postural sway data will be collected under different standing conditions and subsequently used as a benchmark for applying the statistical methods presented later in the course.</p>
-<p>As discussed in <a href="12_stabilometry.html" class="quarto-xref"><span>Chapter 2</span></a>, stabilometry is considered the gold standard technique for assessing postural sway. Stabilometric analysis is based on changes in the position of the body’s center of pressure (CoP), which are estimated from ground reaction forces.</p>
+<p>As discussed in @-stabilometry, stabilometry is considered the gold standard technique for assessing postural sway. Stabilometric analysis is based on changes in the position of the body’s center of pressure (CoP), which are estimated from ground reaction forces.</p>
 <p>Collecting stabilometric data during class would be impractical, particularly for a large group of students. Therefore, taking advantage of the widespread availability of smartphones, this course adopts a smartphone-based approach for acquiring postural sway data.</p>
 <p>Although students are free to use any application they consider appropriate, all practical activities in this course will rely on the PhyPhox initiative.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="This chapter ...">
@@ -483,7 +489,7 @@ h \approx 0.55 \times b_\text{h}
 <div class="callout-body-container callout-body">
 <p><em>Two important assumptions underlie the use of <a href="#eq-cog-from-smartphone" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> to estimate postural sway from smartphone orientation.</em></p>
 <p><em>First, body rotations are assumed to be sufficiently small for the approximation</em> <span class="math inline">\(sin \theta \approx \theta\)</span> <em>to remain valid.</em></p>
-<p><em>Second, the smartphone must be held in portrait orientation, with its <span class="math inline">\(z\)</span> axis aligned with the direction of gravity (see <a href="#fig-1-3-2" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</em></p>
+<p><em>ond, the smartphone must be held in portrait orientation, with its <span class="math inline">\(z\)</span> axis aligned with the direction of gravity (see <a href="#fig-1-3-2" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</em></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled" title="Validity of the assumptions">
@@ -1424,6 +1430,11 @@ window.onload = function() {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
