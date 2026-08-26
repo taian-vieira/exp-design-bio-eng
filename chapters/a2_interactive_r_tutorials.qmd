@@ -2,7 +2,7 @@
 
 This textbook is accompanied by a set of interactive R tutorials designed to transform the concepts developed throughout the book into reproducible data-analysis workflows.
 
-The tutorials were originally developed for the *Experimental Design in Biomedical Engineering* course at Politecnico di Torino, but they are publicly available and can be used independently by any reader. They run locally in RStudio and combine guided examples, editable code exercises, hints, solutions, quizzes, and realistic example datasets, based on stabilometric data collected with smartphones (see #sec-ch13).
+The tutorials were originally developed for the *Experimental Design in Biomedical Engineering* course at Politecnico di Torino, but they are publicly available and can be used independently by any reader. They run locally in RStudio and combine guided examples, editable code exercises, hints, solutions, quizzes, and realistic example datasets, based on stabilometric data collected with smartphones (see @sec-ch13).
 
 The tutorials are distributed through the public R package [`ExpDesignBioEngTutorials`](https://github.com/taian-vieira/ExpDesignBioEngTutorials){target="_blank"}.
 
@@ -54,7 +54,7 @@ The package source, release history, and documentation are available at:
 
 After restarting RStudio, open the **Tutorial** tab (cf. @fig-a2-1), normally located in the upper-right pane. The tutorials installed with `ExpDesignBioEngTutorials` should appear there.
 
-![Tutorial tab: where all installed tutorials can be found.](/include/images/a2-1_tutorial-screen.png){#fig-a2-1 width=70%}
+![Tutorial tab, where all installed tutorials can be found.](/include/images/a2-1_tutorial-screen.png){#fig-a2-1 width=70%}
 
 The available tutorials can also be listed from the R Console:
 
@@ -118,7 +118,7 @@ Readers learn to:
 
 A central goal of the tutorial is to illustrate the transition from raw time-series recordings to an analysis-ready data frame.
 
-The example dataset is deliberately smaller than a full experimental dataset, but its directory structure and workflow mimic those used in a real analysis project. The first assignment (A1), indeed, requires students to upload experimental CoG data collected with their smartphone as outlined in #sec-ch13.
+The example dataset is deliberately smaller than a full experimental dataset, but its directory structure and workflow mimic those used in a real analysis project. The first assignment (A1), indeed, requires students to upload experimental CoG data collected with their smartphone as outlined in @sec-ch13.
 
 Launch the tutorial with:
 

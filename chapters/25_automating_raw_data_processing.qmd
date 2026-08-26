@@ -4,12 +4,12 @@ In @sec-ch24, we saw how to use R to compute metrics for assessing postural sway
 
 Briefly, this chapter covers:
 
--   [Data Organization](@sec-organizing-cog-raw-data), discussing the importance of organizing files and scripts.
--   [Looping Over Files](@sec-looping), processing raw data by iterating over all available files.
--   [Creating R Scripts](@sec-rscripts), placing the complete code in a standalone text file (*R script*) that can be run in RStudio.
--   [Custom Functions in R](@sec-rfunctions), making code simpler and more readable with custom functions.
+-   [Data Organization](#sec-organizing-cog-raw-data), discussing the importance of organizing files and scripts.
+-   [Looping Over Files](#sec-looping), processing raw data by iterating over all available files.
+-   [Creating R Scripts](#sec-rscripts), placing the complete code in a standalone text file (*R script*) that can be run in RStudio.
+-   [Custom Functions in R](#sec-rfunctions), making code simpler and more readable with custom functions.
 
-By the end of this chapter, students should be able to create a [data frame](@sec-dataframes) containing all *variables* of interest, including the test conditions and the *CoG-related variables*. @tbl-2-5-1 outlines the structure of the *data frame* to be created after processing the raw CoG data.
+By the end of this chapter, students should be able to create a [data frame](#sec-dataframes) containing all *variables* of interest, including the test conditions and the *CoG-related variables*. @tbl-2-5-1 outlines the structure of the *data frame* to be created after processing the raw CoG data.
 
 :::{.dataTable-wrapper .small-text}
 ```{r}
@@ -80,7 +80,7 @@ Select **Existing Directory** and then choose the `project` directory containing
 
 ![Project directory containing the newly created `.Rproj` file.](/include/images/part_2/ch_5/2-5-3_r_project_folder_with_rproj_file.png){#fig-2-5-3 width=95%}
 
-We will not discuss the details of an **R Project** here^[*For more information, see the Posit documentation available* [*here*](https://docs.posit.co/ide/user/ide/guide/code/projects.html).]. The important point is that *whenever you open the `.Rproj` file in RStudio, the corresponding project directory is automatically set as the current Working Directory* (see the [Files](@sec-files) section in @sec-ch22). You can verify this by querying the current Working Directory with the [`getwd()`](https://rdrr.io/r/base/getwd.html) function.
+We will not discuss the details of an **R Project** here^[*For more information, see the Posit documentation available* [*here*](https://docs.posit.co/ide/user/ide/guide/code/projects.html).]. The important point is that *whenever you open the `.Rproj` file in RStudio, the corresponding project directory is automatically set as the current Working Directory* (see the [Files](#sec-files) section in @sec-ch22). You can verify this by querying the current Working Directory with the [`getwd()`](https://rdrr.io/r/base/getwd.html) function.
 
 ```{r, results="hide"}
 getwd()
@@ -124,7 +124,7 @@ list.files(file.path("data", "s_020966"))
 
 Notice that the [`file.path()`](https://rdrr.io/r/base/file.path.html) function is used to combine `data` and `s_020966`. This function automatically uses the correct path separator for the operating system on which the code is running, making the script portable across Windows, macOS, and Linux. As expected, four `xls` files are listed (see @fig-2-5-1).
 
-We are now ready to automate access to the four `xls` files generated according to the PhyPhox tutorial described in @sec-ch13. These files contain the raw CoG data, and each of them will be processed following the procedures introduced in the chapter [Plotting and Processing Raw Data](@sec-ch24).
+We are now ready to automate access to the four `xls` files generated according to the PhyPhox tutorial described in @sec-ch13. These files contain the raw CoG data, and each of them will be processed following the procedures introduced in the chapter [Plotting and Processing Raw Data](#sec-ch24).
 
 \
 
@@ -172,7 +172,7 @@ Inside the **inner loop**, we use the [`cat()`](https://rdrr.io/r/base/cat.html)
 
 This approach is not ideal because it requires manually specifying the names of all participant folders and files. Moreover, not every participant necessarily has four `xls` files. For example, data acquisition may have been interrupted or a participant may have withdrawn before completing all experimental conditions.
 
-A more robust approach is to obtain the folder and file names directly using the [`list.dirs()`](https://rdrr.io/r/base/list.files.html) and [`list.files()`](https://rdrr.io/r/base/list.files.html) functions, provided that the data are organized as described in [Organizing CoG Raw Data](@sec-organizing-cog-raw-data) (see @fig-2-5-1).
+A more robust approach is to obtain the folder and file names directly using the [`list.dirs()`](https://rdrr.io/r/base/list.files.html) and [`list.files()`](https://rdrr.io/r/base/list.files.html) functions, provided that the data are organized as described in [Organizing CoG Raw Data](#sec-organizing-cog-raw-data) (see @fig-2-5-1).
 
 ```{r}
 sub_folders <- list.dirs("data", recursive = FALSE, full.names = FALSE) # directories inside the project folder
@@ -228,7 +228,7 @@ df_cog <- data.frame(
 str(df_cog)
 ```
 
-The `subject` column is initialized by calling the [`character()`](https://rdrr.io/r/base/character.html) function with `n` elements. The `eyes` and `standing_on` columns are initialized as **factors** using the [`factor()`](https://rdrr.io/r/base/factor.html) function, with `n` missing entries and the appropriate factor levels (see the [**Factors**](@sec-factor) section). Finally, the five CoG-related variables are initialized as numeric vectors of type [`double()`](https://rdrr.io/r/base/double.html), each containing `n` zeros.
+The `subject` column is initialized by calling the [`character()`](https://rdrr.io/r/base/character.html) function with `n` elements. The `eyes` and `standing_on` columns are initialized as **factors** using the [`factor()`](https://rdrr.io/r/base/factor.html) function, with `n` missing entries and the appropriate factor levels (see the [**Factors**](#sec-factor) section). Finally, the five CoG-related variables are initialized as numeric vectors of type [`double()`](https://rdrr.io/r/base/double.html), each containing `n` zeros.
 
 Inside the **inner loop**, we can now populate `df_cog` as each file is processed. For every observation, we must determine the values of the eight variables (columns) listed in @tbl-2-5-1. We begin by extracting information about the participant and the experimental condition.
 
@@ -344,13 +344,13 @@ In the previous section, we populated the first three columns of the `df_cog` *d
 The procedures required to compute these variables from the smartphone orientation data were presented in detail in @sec-ch24. Inside the nested loops, we therefore need to perform the following processing steps:
 
 - **Pre-processing the sway data**
-    - [Trimming](@sec-trimming-sway-data): removing the initial transient and standardizing the number of CoG samples;
-    - [Demeaning](@sec-demeaning-sway-data): removing the mean CoG position, which is not of practical interest.
+    - [Trimming](#sec-trimming-sway-data): removing the initial transient and standardizing the number of CoG samples;
+    - [Demeaning](#sec-demeaning-sway-data): removing the mean CoG position, which is not of practical interest.
 
 - **Computing the CoG metrics**
-    - [Elliptic Area](@sec-compute-ea);
-    - [Mean CoG Speed](@sec-computing-v) in the frontal and sagittal planes;
-    - [CoG Standard Deviation](@sec-computing-sigma) in the frontal and sagittal planes.
+    - [Elliptic Area](#sec-compute-ea);
+    - [Mean CoG Speed](#sec-computing-v) in the frontal and sagittal planes;
+    - [CoG Standard Deviation](#sec-computing-sigma) in the frontal and sagittal planes.
 
 So far, we have entered our code directly in the **R Console**. We will now create an **R script**, where all processing steps required to compute the CoG variables will be stored.
 
@@ -447,7 +447,7 @@ Alternatively, you can source a script using keyboard shortcuts:
 - **Source** (`r knitr::asis_output("mac: \U2318 + \U21E7 + S; windows: Ctrl + Shift + S")`)
 - **Source with Echo** (`r knitr::asis_output("mac: \U2318 + \U21E7 + \U21B5; windows: Ctrl + Shift + Enter")`)
 
-Try it yourself. Source the `main.R` script after copying the code [provided above](@sec-main-script), then inspect the first six columns of `df_cog`:
+Try it yourself. Source the `main.R` script after copying the code [provided above](#sec-main-script), then inspect the first six columns of `df_cog`:
 
 ```{r}
 df_cog[, 1:6]
@@ -567,7 +567,7 @@ for (i in sub_folders){ # outer loop (over subjects' folders)
 df_cog <- df_cog[1:count, ] # keeping only count observations
 ```
 
-To use `compute_cog_metrics()` in the [`main.R`](@sec-rscripts) script, we need to modify `main.R` accordingly.
+To use `compute_cog_metrics()` in the [`main.R`](#sec-rscripts) script, we need to modify `main.R` accordingly.
 
 The resulting `main.R` script is shorter, cleaner, and easier to maintain. Notice that `cog_functions.R` must be sourced near the beginning of `main.R` so that the function used to compute the CoG metrics is loaded into the current R session before it is called.
 
@@ -587,7 +587,7 @@ df_cog[, 1:4]
 
 ## Exercise: Putting It All Together
 
-Using the approach presented in this chapter---updating `df_cog` [by value](@sec-update-by-value)---modify the `compute_cog_metrics()`  function to:
+Using the approach presented in this chapter---updating `df_cog` [by value](#sec-update-by-value)---modify the `compute_cog_metrics()`  function to:
 
 - compute the remaining four CoG variables (Mean CoG Speed and Standard Deviation in both the $x$ and $y$ directions);
 

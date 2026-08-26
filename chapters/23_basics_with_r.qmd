@@ -50,7 +50,7 @@ The variable just created also appears in the *Environment* tab (@fig-2-3-1). To
 
 ## Functions
 
-Functions work as they do in other programming languages: they are blocks of code that execute when called by the user. Built-in functions are not shown in the workspace, whereas custom functions created by the user are. We will return to custom functions [later on](@sec-rfunctions) in this tutorial.
+Functions work as they do in other programming languages: they are blocks of code that execute when called by the user. Built-in functions are not shown in the workspace, whereas custom functions created by the user are. We will return to custom functions [later on](#sec-rfunctions) in this tutorial.
 
 Available functions and their documentation can be inspected under the *Packages* and *Help* tabs.
 
@@ -270,7 +270,7 @@ Also notice how clearly the [`str()`](https://rdrr.io/r/utils/str.html) *functio
 
 ## Data Frames {#sec-dataframes}
 
-A **data frame** is another R structure for organizing data. Instead of describing it alongside the other structures covered in the [previous section](@sec-datastructures), it is presented in a stand-alone section. This is because *data frames* are the most common data organization structure used in R for statistical analysis.
+A **data frame** is another R structure for organizing data. Instead of describing it alongside the other structures covered in the [previous section](#sec-datastructures), it is presented in a stand-alone section. This is because *data frames* are the most common data organization structure used in R for statistical analysis.
 
 *Data frames* are tabular structures---that is, they organize data in two dimensions. Rows correspond to *observations*, while columns store the *variables*^[*The meaning of **variable** here should not be confused with the meaning of an object in R. Here, **variable** refers to the characteristic or attribute describing the observed or measured data.*] associated with each *observation*.
 
@@ -398,7 +398,7 @@ In this course, [PhyPhox](https://phyphox.org/) is used to collect CoG data (cf 
 
 The first step is to identify the folder where the raw data of interest are stored. For now, we are working with an example of CoG data, which you can download and find inside [this compressed here](/include/download/phyphox_data.zip){download="phyphox_data.zip"}. 
 
-**Unzip the downloaded file and place its contents inside a folder named `phyphox_data`, in your Working Directory** (cf. [**Files**](@sec-files) section in the previous Chapter).
+**Unzip the downloaded file and place its contents inside a folder named `phyphox_data`, in your Working Directory** (cf. [**Files**](#sec-files) section in the previous Chapter).
 
 ```{r, results=FALSE}
 my_wd <- getwd() # this command retrieves my working directory my_wd
@@ -424,7 +424,7 @@ list.files(file.path(my_wd, "phyphox_data", "standing_eyes_open"))
 
 ### Loading CoG data into R workspace {#sec-loading-data}
 
-To import CoG data into R, we may proceed interactively by right-clicking on the `csv` (or `xls`) file under the **Files** tab. Two options appear: `View File` and `Import Dataset...` (Figure @fig-2-3-2). By clicking on `View File`, a preview of the data is shown in the [Source Pane](@sec-panel1) if it is a `csv` file. If it is an `xls` file, R opens the file in *Excel*.
+To import CoG data into R, we may proceed interactively by right-clicking on the `csv` (or `xls`) file under the **Files** tab. Two options appear: `View File` and `Import Dataset...` (Figure @fig-2-3-2). By clicking on `View File`, a preview of the data is shown in the [Source Pane](#sec-panes) if it is a `csv` file. If it is an `xls` file, R opens the file in *Excel*.
 
 ![Interactive data import.](/include/images/part_2/2-3-2_interactive_data_import.png){#fig-2-3-2}
 

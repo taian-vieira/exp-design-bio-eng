@@ -6,7 +6,7 @@ postural control. Briefly, postural sway data will be collected under
 different standing conditions and subsequently used as a benchmark for
 applying the statistical methods presented later in the course.
 
-As discussed in @sec-stabilometry, stabilometry is considered the gold
+As discussed in @-stabilometry, stabilometry is considered the gold
 standard technique for assessing postural sway. Stabilometric analysis
 is based on changes in the position of the body's center of pressure
 (CoP), which are estimated from ground reaction forces.
@@ -118,7 +118,7 @@ orientation.*
 *First, body rotations are assumed to be sufficiently small for the
 approximation* $sin \theta \approx \theta$ *to remain valid.*
 
-*Second, the smartphone must be held in portrait orientation, with its
+*ond, the smartphone must be held in portrait orientation, with its
 $z$ axis aligned with the direction of gravity (see @fig-1-3-2).*
 :::
 

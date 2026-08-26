@@ -39,7 +39,7 @@ Start by following the two steps indicated on the [Posit website](https://posit.
 
 \
 
-## RStudio IDE
+## RStudio IDE{#sec-panes}
 
 After R and RStudio have been correctly installed, RStudio can be launched. The RStudio IDE interface should then appear, with four main **panes**, as shown in @fig-2-2-1.
 
@@ -51,11 +51,10 @@ After R and RStudio have been correctly installed, RStudio can be launched. The 
 
 ### [**Pane 1**]{style="color: lightpink"}
 
-:::{#sec-panel1}
 This pane may not appear when RStudio is launched for the first time. It displays readable files, such as txt, md, Rmd, qmd, css, json, tex, yml files, among others. Of particular interest are **R files**, which are plain-text files containing executable R code. We will return to R files in @sec-ch24.
 
 Briefly, the [Source Pane]{style="color: lightpink"} is where users can view and edit code-related files.
-:::
+
 \
 
 ### [**Pane 2**]{style="color: lightskyblue;"}
