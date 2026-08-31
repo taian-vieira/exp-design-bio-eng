@@ -428,7 +428,7 @@ To import CoG data into R, we may proceed interactively by right-clicking on the
 
 ![Interactive data import.](/include/images/part_2/2-3-2_interactive_data_import.png){#fig-2-3-2}
 
-By clicking on `Import Dataset...`, a dialog may appear asking the user to install a package for importing the data, if the package is not already installed. If the required package is available, a window opens with useful and self-explanatory information on the data import procedure (Figure \@ref(fig:figure-2-3-3)).
+By clicking on `Import Dataset...`, a dialog may appear asking the user to install a package for importing the data, if the package is not already installed. If the required package is available, a window opens with useful and self-explanatory information on the data import procedure (@fig-2-3-3).
 
 ![Interactive data import.](/include/images/part_2/2-3-3_import_excel_data.png){#fig-2-3-3}
 
