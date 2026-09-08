@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you want to cite this online Quarto book, please cite it as below."
+authors:
+  - family-names: "Vieira"
+    given-names: "Taian M"
+    orcid: "https://orcid.org/0000-0002-6239-7301"
+title: "Experimental Design in Biomedical Engineering"
+type: book
+repository-code: "https://github.com/taian-vieira/exp-design-bio-eng"
+url: "https://taian-vieira.github.io/exp-design-bio-eng/"
+abstract: "An open-access textbook and resource focused on experimental design principles applied to biomedical engineering contexts."
+keywords:
+  - bioengineering
+  - experimental-design
+  - quarto-book
+  - open-education
